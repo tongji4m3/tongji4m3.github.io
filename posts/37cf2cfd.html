@@ -1,0 +1,1984 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Redis集群, tongji4m3&#39;s Blog">
+    <meta name="description" content="你日渐平庸，甘于平庸，将继续平庸。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="baidu-site-verification" content="code-MyLOF51Lns" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="google-site-verification" content="cb_eRUNfSOmCVjXFsefzdRthA-wzRyT6ws4hOMuQyUA" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Redis集群 | tongji4m3&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">tongji4m3&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">tongji4m3&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            你日渐平庸，甘于平庸，将继续平庸。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/tongji4m3" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/tongji4m3" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Redis集群</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+                                <span class="chip bg-color">主从复制</span>
+                            </a>
+                        
+                            <a href="/tags/Sentinel/">
+                                <span class="chip bg-color">Sentinel</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%9B%86%E7%BE%A4/">
+                                <span class="chip bg-color">集群</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Redis/" class="post-category">
+                                Redis
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-11-29
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    16k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    55 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h4 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h4><p>被复制的服务器称为主服务器，对主服务器进行复制的服务器称为从服务器</p>
+<p>进行复制中的主从服务器双方的数据库将保存相同的数据</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>支持主从复制，主机会自动将数据同步到从机，可以进行读写分离。减轻主数据库的压力</li>
+<li>一主多从，「主数据库(master)可以读也可以写(read/write)，从数据库仅读(only read)」。</li>
+<li>主从一定程度上解决了单机版并发量大，导致请求延迟或者redis宕机服务停止的问题。</li>
+<li>从数据库分担主数据库的读压力，若是主数据库是只写模式，那么实现读写分离，主数据库就没有了读压力了。</li>
+<li>另一方面解决了单机版单点故障的问题，若是主数据库挂了，那么从数据库可以随时顶上来，综上来说，主从模式一定程度上提高了系统的可用性和性能，是实现哨兵和集群的基础。</li>
+<li>主从同步以异步方式进行同步，期间Redis仍然可以响应客户端提交的查询和更新的请求。</li>
+</ul>
+<h6 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h6><p>比如数据的一致性问题，假如主数据库写操作完成，那么他的数据会被复制到从数据库，若是还没有即使复制到从数据库，读请求又来了，此时读取的数据就不是最新的数据。</p>
+<p>若是从主同步的过程网络出故障了，导致主从同步失败，也会出现问题数据一致性的问题。</p>
+<p>主从模式不具备自动容错和恢复的功能，一旦主数据库，从节点晋升为主数据库的过程需要人为操作，维护的成本就会升高，并且主节点的写能力、存储能力都会受到限制。</p>
+<h2 id="旧版复制功能的实现"><a href="#旧版复制功能的实现" class="headerlink" title="旧版复制功能的实现"></a>旧版复制功能的实现</h2><ul>
+<li><strong>同步操作</strong>（sync）<strong>：</strong>用于将从服务器的数据库状态<strong>更新至</strong>主服务器当前所处的数据库状态</li>
+<li><strong>命令传播操作</strong>（command propagate）<strong>：</strong>则用于在主服务器的数据库状态被修改，导致主从服务器的数据库状态出现不一致时，让主从服务器的数据库<strong>重新回到一致状态</strong></li>
+</ul>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><ul>
+<li><p><strong>概念：</strong>当客户端向从服务器发送SLAVEOF命令，要求从服务器复制主服务器时，从服务器首先需要执行同步操作，也即是，<strong>将从服务器的数据库状态更新至主服务器当前所处的数据库状态</strong></p>
+</li>
+<li><p><strong>SYNC命令：</strong></p>
+<p>  从服务器对主服务器的同步操作需要通过向主服务器发送SYNC命令来完成，以下是SYNC命令的执行步骤：</p>
+<ul>
+<li>①从服务器向主服务器<strong>发送SYNC命令</strong></li>
+<li>②收到SYNC命令的主服务器<strong>执行BGSAVE命令，在后台生成一个RDB文件</strong>，并使用一 个缓冲区记录从现在开始执行的所有写命令</li>
+<li>③当主服务器的BGSAVE命令执行完毕时，主服务器会将BGSAVE命令生成的<strong>RDB文件发送给从服务器</strong>，从服务器<strong>接收并载入</strong>这个RDB文件，将自己的数据库状态更新至主服务器 执行BGSAVE命令时的数据库状态</li>
+<li>④主服务器将记录在缓冲区里面的所有写命令发送给从服务器，从服务器执行这些写 命令，将自己的数据库状态更新至主服务器数据库当前所处的状态</li>
+</ul>
+</li>
+<li><p>下图展示了SYNC命令执行期间，主从服务器的通信过程：</p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201105150863.png" alt="20191201105150863"></p>
+<h4 id="命令传播"><a href="#命令传播" class="headerlink" title="命令传播"></a>命令传播</h4><ul>
+<li>在同步操作执行完毕之后，主从服务器两者的数据库将达到一致状态，但这种一致并不是一成不变的，每当主服务器执行客户端发送的写命令时，主服务器的数据库就有可能会被修改，并<strong>导致主从服务器状态不再一致</strong></li>
+<li>为了让主从服务器再次回到一致状态，<strong>主服务器需要对从服务器执行命令传播操作：</strong>主 服务器会将自己执行的写命令，也即是造成主从服务器不一致的那条写命令，发送给从服务器执行，当从服务器执行了相同的写命令之后，主从服务器将再次回到一致状态</li>
+<li>例如，主服务器执行了DEL k3的命令，那么主服务器将向从服务器发送相同的命令DEL k3，当从服务器执行完这个命令之后，主从服务器将再次回到一致状态，现在主从服务器两者的数据库都不再包含键k3了。</li>
+</ul>
+<h4 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h4><p>旧版复制功能在处理断线重复制情况时低效</p>
+<p>在Redis中，<strong>从服务器对主服务器的复制可以分为以下两种情况：</strong></p>
+<ul>
+<li><strong>初次复制：</strong>从服务器以前没有复制过任何主服务器，或者从服务器当前要复制的主服务 器和上一次复制的主服务器不同。</li>
+<li><strong>断线后重复制：</strong>处于命令传播阶段的主从服务器因为网络原因而中断了复制，但从服务 器通过自动重连接重新连上了主服务器，并继续复制主服务器</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201105727757.png" alt="20191201105727757"></p>
+<p><strong>为什么网络断开之后重新复制效率低，以上面的演示案例为例：</strong></p>
+<ul>
+<li>主从服务器在时间T0至时间T10086中一直处于一致状态，这两个服务器保存的数据<strong>大部分都是相同的</strong></li>
+<li>从服务器想要将自己更新至主服务器当前所处的状态，<strong>真正需要的是主从服务器连接中断期间</strong>，主服务器新添加的k10087、k10088、k10089三个键的数据</li>
+<li>可惜的是，旧版复制功能并没有利用以上列举的两点条件，而是继续让主服务器生成并向从服务器发送包含键k1至键k10089的RDB文件，但实际上RDB文件包含的键k1至键k10086的数据对于从服务器来说都是不必要的</li>
+</ul>
+<p>主从服务器断开的时 间越短，主服务器在断线期间执行的写命令就越少，而执行少量写命令所产生的数据量通常比整个数据库的数据量要少得多，在这种情况下，为了让从服务器补足一小部分缺失的数 据，<strong>却要让主从服务器重新执行一次SYNC命令，这种做法无疑是非常低效的</strong></p>
+<h2 id="新版复制功能的实现"><a href="#新版复制功能的实现" class="headerlink" title="新版复制功能的实现"></a>新版复制功能的实现</h2><ul>
+<li>为了解决旧版复制功能在处理断线重复制情况时的低效问题，Redis从2.8版本开始，<strong>使用PSYNC命令代替SYNC命令</strong>来执行复制时的同步操作</li>
+<li><strong>PSYNC命令具有完整重同步（full resy nchronization）和部分重同步（partial resynchronization）两种模式：</strong><ul>
+<li><strong>完整重同步：</strong>用于处理初次复制情况：完整重同步的执行步骤和SYNC命令的执行步 骤基本一样，它们都是通过让主服务器创建并发送RDB文件，以及向从服务器发送保存在缓冲区里面的写命令来进行同步</li>
+<li><strong>部分重同步：</strong>则用于处理断线后重复制情况：当从服务器在断线后重新连接主服务器时，如果条件允许，主服务器可以将主从服务器连接断开期间执行的写命令发送给从服务器，从服务器只要接收并执行这些写命令，就可以将数据库更新至主服务器当前所处的状态</li>
+</ul>
+</li>
+<li>PSYNC命令的部分重同步模式<strong>解决了旧版复制功能在处理断线后重复制时出现的低效情况</strong></li>
+</ul>
+<p><strong>执行部分重同步所需的资源比起执行SYNC命令所需的资源要少得多</strong>，完成同步的速度也快得多。执行SYNC命令需要生成、传送和载入整个RDB文件，而部分重同步只需要将从服务器缺少的写命令发送给从服务器执行就可以了</p>
+<h2 id="部分重同步的实现"><a href="#部分重同步的实现" class="headerlink" title="部分重同步的实现"></a>部分重同步的实现</h2><p><strong>同步功能由以下三个部分构成：</strong></p>
+<ul>
+<li>主服务器的复制偏移量（replication offset）和从服务器的复制偏移量</li>
+<li>主服务器的复制积压缓冲区（replication backlog）</li>
+<li>服务器的运行ID（run ID）</li>
+</ul>
+<h4 id="复制偏移量"><a href="#复制偏移量" class="headerlink" title="复制偏移量"></a>复制偏移量</h4><ul>
+<li><p>执行复制的双方——主服务器和从服务器会<strong>分别维护一个复制偏移量：</strong></p>
+<ul>
+<li>主服务器每次向从服务器传播N个字节的数据时，就将自己的复制偏移量的值加上N</li>
+<li>从服务器每次收到主服务器传播来的N个字节的数据时，就将自己的复制偏移量的值加上N</li>
+</ul>
+</li>
+<li><p>通过对比主从服务器的复制偏移量，</p>
+<p>  <strong>程序可以很容易地知道主从服务器是否处于一致状态：</strong></p>
+<ul>
+<li>如果主从服务器处于一致状态，那么主从服务器两者的偏移量总是相同的</li>
+<li>相反，如果主从服务器两者的偏移量并不相同，那么说明主从服务器并未处于一致状态</li>
+</ul>
+</li>
+</ul>
+<p>在下图所示的例子中，主从服务器的复制偏移量的值都为10086</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121350757.png"></p>
+<p>如果这时主服务器向三个从服务器传播长度为33字节的数据，那么主服务器的复制偏移量将更新为10086+33=10119，而三个从服务器在接收到主服务器传播的数据之后，也会将复制偏移量更新为10119</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121359413.png" alt="img"></p>
+<h4 id="复制积压缓冲区"><a href="#复制积压缓冲区" class="headerlink" title="复制积压缓冲区"></a>复制积压缓冲区</h4><ul>
+<li>复制积压缓冲区是由主服务器维护的一个<strong>固定长度（fixed-size）先进先出（FIFO）队列</strong>，默认大小为1MB</li>
+<li>当主服务器进行命令传播时，它不仅会将写命令发送给所有从服务器，还会<strong>将写命令入队到复制积压缓冲区里面</strong>，如下图所示：</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121909779.png" alt="img"></li>
+<li>因此，主服务器的复制积压缓冲区里面会保存着一部分最近传播的写命令，并且复制积压缓冲区会<strong>为队列中的每个字节记录相应的复制偏移量</strong></li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121943503.png" alt="img"></li>
+<li>当从服务器重新连上主服务器时，从服务器会通过PSYNC命令<strong>将自己的复制偏移量offset发送给主服务器</strong>，主服务器会根据这个复制偏移量来决定对从服务器执行何种同步操 作：<ul>
+<li>如果offset偏移量之后的数据（也即是偏移量offset+1开始的数据）<strong>仍然存在于复制积压缓冲区里面</strong>，那么主服务器将对从服务器执行部分重同步操作</li>
+<li>相反，如果offset偏移量之后的数据<strong>已经不存在于复制积压缓冲区</strong>，那么主服务器将对从服务器执行完整重同步操作</li>
+</ul>
+</li>
+</ul>
+<p><strong>演示案例：</strong></p>
+<ul>
+<li>回到之前上面图片所展示的断线后重连接例子：</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121522212.png" alt="img"></li>
+<li>当从服务器A断线之后，它立即重新连接主服务器，并<strong>向主服务器发送PSYNC命令，报告自己的复制偏移量为10086</strong></li>
+<li>主服务器收到从服务器发来的PSYNC命令以及偏移量10086之后，主服务器将<strong>检查偏移量10086之后的数据是否存在于复制积压缓冲区里面</strong>，结果发现<strong>这些数据仍然存在</strong>，于是主服务器向从服务器发送+CONTINUE回复，表示数据同步将以部分重同步模式来进行</li>
+<li>接着主服务器会将复制积压缓冲区10086偏移量之后的<strong>所有数据（偏移量为10087至 10119）都发送给从服务器</strong></li>
+<li>从服务器只要接收这33字节的缺失数据，就可以回到与主服务器一致的状态，如下图所示</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201122209306.png" alt="img"></li>
+</ul>
+<h4 id="服务器运行ID"><a href="#服务器运行ID" class="headerlink" title="服务器运行ID"></a>服务器运行ID</h4><ul>
+<li><p>除了复制偏移量和复制积压缓冲区之外，</p>
+<p>  <strong>实现部分重同步还需要用到服务器运行ID（run ID）：</strong></p>
+<ul>
+<li>每个Redis服务器，不论主服务器还是从服务，都会有自己的运行ID</li>
+<li>运行ID在服务器启动时自动生成，由40个随机的十六进制字符组成，例如 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3</li>
+</ul>
+</li>
+<li><p>当从服务器对主服务器<strong>进行初次复制时</strong>，主服务器会<strong>将自己的运行ID传送给从服务器</strong>， 而从服务器则会将<strong>这个运行ID保存起来</strong></p>
+</li>
+<li><p>当从服务器断线并重新连上一个主服务器时，<strong>从服务器将向当前连接的主服务器发送之前保存的运行ID：</strong></p>
+<ul>
+<li>如果从服务器保存的运行ID和当前连接的主服务器的<strong>运行ID相同</strong>，那么说明从服务器 断线之前复制的就是当前连接的这个主服务器，主服务器可以继续尝试执行部分重同步操 作</li>
+<li>相反地，如果从服务器保存的运行ID和当前连接的主服务器的<strong>运行ID并不相同</strong>，那么 说明从服务器断线之前复制的主服务器并不是当前连接的这个主服务器，主服务器将对从服务器执行完整重同步操作</li>
+</ul>
+</li>
+<li><p>举个例子，假设从服务器原本正在复制一个运行ID为 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3的主服务器，那么在网络断开，从服务器重新连 接上主服务器之后，从服务器将向主服务器发送这个运行ID，主服务器根据自己的运行ID是 否53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3来判断是执行部分重同步还是执行完整重同步</p>
+</li>
+</ul>
+<h2 id="PSYNC命令的实现"><a href="#PSYNC命令的实现" class="headerlink" title="PSYNC命令的实现"></a>PSYNC命令的实现</h2><h4 id="PSYNC命令的调用方法有两种："><a href="#PSYNC命令的调用方法有两种：" class="headerlink" title="PSYNC命令的调用方法有两种："></a>PSYNC命令的调用方法有两种：</h4><ul>
+<li><p>如果从服务器<strong>以前没有复制过任何主服务器，或者之前执行过SLAVEOF no one命令：</strong>那么从服务器在开始一次新的复制时将向主服务器发送PSYNC ? -1命令，主动请求主服务器<strong>进行完整重同步</strong>（因为这时不可能执行部分重同步）</p>
+</li>
+<li><p>如果从服务器<strong>已经复制过某个主服务器</strong></p>
+<p>  ，那么从服务器在开始一次新的复制时将向主服务器发送PSYNC <runid> <offset>命令：</p>
+<ul>
+<li>其中runid是上一次复制的主服务器的运行 ID，而offset则是从服务器当前的复制偏移量</li>
+<li>接收到这个命令的主服务器会<strong>通过这两个参数来判断应该对从服务器执行哪种同步操作</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="接收到PSYNC命令的主服务器会向从服务器返回以下三种回复的其中一种："><a href="#接收到PSYNC命令的主服务器会向从服务器返回以下三种回复的其中一种：" class="headerlink" title="接收到PSYNC命令的主服务器会向从服务器返回以下三种回复的其中一种："></a>接收到PSYNC命令的主服务器会向从服务器返回以下三种回复的其中一种：</h4><ul>
+<li>如果<strong>主服务器返回+FULLRESYNC  回复</strong>，那么<strong>表示主服务器将与从服务器执行完整重同步操作：</strong>其中runid是这个主服务器的运行ID，从服务器会将这个ID保存起 来，在下一次发送PSYNC命令时使用；而offset则是主服务器当前的复制偏移量，从服务器 会将这个值作为自己的初始化偏移量</li>
+<li>如果<strong>主服务器返回+CONTINUE回复</strong>，那么表示<strong>主服务器将与从服务器执行部分重同步操作</strong>，从服务器只要等着主服务器将自己缺少的那部分数据发送过来就可以了</li>
+<li>如果<strong>主服务器返回-ERR回复</strong>，那么表示主服务器的版本低于Redis 2.8，<strong>它识别不了PSYNC命令</strong>，从服务器将向主服务器发送SYNC命令，并与主服务器执行完整同步操作</li>
+</ul>
+<h4 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h4><ul>
+<li>下面的流程图总结了PSYNC命令执行完整重同步和部分重同步时可能遇上的情况：</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201123546284.png" alt="img"></li>
+</ul>
+<h4 id="演示案例"><a href="#演示案例" class="headerlink" title="演示案例"></a>演示案例</h4><p>为了熟悉PSYNC命令的用法，让我们来看一个完整的复制——网络中断——重复制例 子</p>
+<ul>
+<li>首先，假设有两个Redis服务器，它们的版本都是Redis 2.8，其中主服务器的地址为 127.0.0.1:6379，从服务器的地址为127.0.0.1:12345</li>
+<li>如果客户端向从服务器发送命令SLAVEOF 127.0.0.1 6379，并且假设从服务器是第一次 执行复制操作，那么从服务器将向主服务器发送PSYNC ? -1命令，请求主服务器执行完整重 同步操作</li>
+<li>主服务器在收到完整重同步请求之后，将在后台执行BGSAVE命令，并向从服务器返回 +FULLRESYNC 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3 10086回复，其中 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3是主服务器的运行ID，而10086则是主服务器当 前的复制偏移量</li>
+<li>假设完整重同步成功执行，并且主从服务器在一段时间之后仍然保持一致，但是在复制 偏移量为20000的时候，主从服务器之间的网络连接中断了，这时从服务器将重新连接主服 务器，并再次对主服务器进行复制。</li>
+<li>因为之前曾经对主服务器进行过复制，所以从服务器将向主服务器发送命令PSYNC 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3 20000，请求进行部分重同步</li>
+<li>主服务器在接收到从服务器的PSYNC命令之后，首先对比从服务器传来的运行 ID53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3和主服务器自身的运行ID，结果显示该ID和 主服务器的运行ID相同，于是主服务器继续读取从服务器传来的偏移量20000，检查偏移量 为20000之后的数据是否存在于复制积压缓冲区里面，结果发现数据仍然存在</li>
+<li>确认运行ID相同并且数据存在之后，主服务器将向从服务器返回+CONTINUE回复，表 示将与从服务器执行部分重同步操作，之后主服务器会将保存在复制积压缓冲区20000偏移 量之后的所有数据发送给从服务器，主从服务器将再次回到一致状态</li>
+</ul>
+<h2 id="复制的实现"><a href="#复制的实现" class="headerlink" title="复制的实现"></a>复制的实现</h2><h4 id="步骤1-设置主服务器的地址和端口"><a href="#步骤1-设置主服务器的地址和端口" class="headerlink" title="步骤1:设置主服务器的地址和端口"></a>步骤1:设置主服务器的地址和端口</h4><p>当客户端向从服务器发送以下命令时:<code>SLAVEOF 127.0.0.1 6379</code></p>
+<p>从服务器首先要做的就是将客户端给定的主服务器IP地址127.0.0.1以及端口6379<strong>保存到服务器状态的masterhost属性和masterport属性里面</strong></p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> redisServer
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span> masterhost<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//主服务器的地址</span>
+    <span class="token keyword">int</span> masterport<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//主服务器的端口号</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p><strong>SLAVEOF命令是一个异步命令</strong>，在完成masterhost属性和masterport属性的设置工作之 后，从服务器将向发送SLAVEOF命令的客户端返回OK，表示复制指令已经被接收，而<strong>实际的复制工作将在OK返回之后才真正开始执行</strong></p>
+<h4 id="步骤2-建立套接字连接"><a href="#步骤2-建立套接字连接" class="headerlink" title="步骤2:建立套接字连接"></a>步骤2:建立套接字连接</h4><ul>
+<li>在SLAVEOF命令执行之后，从服务器将根据命令所设置的IP地址和端口，<strong>创建连向主服务器的套接字连接</strong>，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131155414.png" alt="img"></p>
+<ul>
+<li>如果<strong>从服务器创建的套接字能成功连接（connect）到主服务器</strong>，那么从服务器将为这个套接字关联一个专门<strong>用于处理复制工作的文件事件处理器</strong>，这个处理器将负责执行后续的复制工作，比如接收RDB文件，以及接收主服务器传播来的写命令，诸如此类</li>
+<li>而<strong>主服务器在接受（accept）从服务器的套接字连接之后</strong>，将为该套接字创建相应的客户端状态，并将从服务器看作是一个连接到主服务器的客户端来对待，这时从服务器将同时具有服务器（server）和客户端（client）两个身份：从服务器可以向主服务器发送命令请求，而主服务器则会向从服务器返回命令回复，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131243941.png" alt="img"></p>
+<ul>
+<li>因为复制工作接下来的几个步骤都会以从服务器向主服务器发送命令请求的形式来进 行，所以<strong>理解“从服务器是主服务器的客户端”这一点非常重要</strong></li>
+</ul>
+<h4 id="步骤3-发送PING命令"><a href="#步骤3-发送PING命令" class="headerlink" title="步骤3:发送PING命令"></a>步骤3:发送PING命令</h4><ul>
+<li>从服务器成为主服务器的客户端之后，做的第一件事就是<strong>向主服务器发送一个PING命令</strong>，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131333757.png" alt="img"></p>
+<ul>
+<li><strong>这个PING命令有两个作用：</strong><ul>
+<li>虽然主从服务器成功建立起了套接字连接，但双方并未使用该套接字进行过任何通信， 通过发送PING命令可以<strong>检查套接字的读写状态是否正常</strong></li>
+<li>因为复制工作接下来的几个步骤都必须在主服务器可以正常处理命令请求的状态下才能进行，通过发送PING命令可以<strong>检查主服务器能否正常处理命令请求</strong></li>
+</ul>
+</li>
+<li><strong>从服务器在发送PING命令之后将遇到以下三种情况的其中一种：</strong><ul>
+<li>如果主服务器向从服务器返回了一个命令回复，但从服务器却<strong>不能在规定的时限 （timeout）内读取出命令回复的内容</strong>，那么表示主从服务器之间的网络连接状态不佳，不能 继续执行复制工作的后续步骤。当出现这种情况时，从服务器<strong>断开并重新创建</strong>连向主服务器 的套接字</li>
+<li>如果主服务器<strong>向从服务器返回一个错误</strong>，那么表示主服务器暂时没办法处理从服务器的命令请求，不能继续执行复制工作的后续步骤。当出现这种情况时，<strong>从服务器断开并重新创建连向主服务器的套接字</strong>。比如说，如果主服务器正在处理一个超时运行的脚本，那么当从 服务器向主服务器发送PING命令时，从服务器将收到主服务器返回的BUSY Redisis busy running a script.You can only call SCRIPT KILL or SHUTDOWN NOSAVE.错误</li>
+<li>如果从服务器<strong>读取到”PONG”回复</strong>，那么表示主从服务器之间的网络连接状态正常，并 且主服务器可以正常处理从服务器（客户端）发送的命令请求，在这种情况下，从服务器可 以继续执行复制工作的下个步骤</li>
+</ul>
+</li>
+<li>下面的流程图总结了从服务器在发送PING命令时可能遇到的情况，以及各个情况的处理方式</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131558981.png" alt="img"></p>
+<h4 id="步骤4-身份验证"><a href="#步骤4-身份验证" class="headerlink" title="步骤4:身份验证"></a>步骤4:身份验证</h4><ul>
+<li><p>从服务器在收到主服务器返回的”PONG”回复之后，</p>
+<p>  <strong>下一步要做的就是决定是否进行身份验证：</strong></p>
+<ul>
+<li>如果从服务器设置了masterauth选项，那么进行身份验证</li>
+<li>如果从服务器没有设置masterauth选项，那么不进行身份验证</li>
+</ul>
+</li>
+<li><p>在需要进行身份验证的情况下，<strong>从服务器将向主服务器发送一条AUTH命令</strong>，命令的<strong>参数为从服务器masterauth选项的值</strong></p>
+</li>
+<li><p>举个例子，如果从服务器masterauth选项的值为10086，那么从服务器将向主服务器发送 命令AUTH 10086，如下图所示</p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131632595.png" alt="img"></p>
+<h4 id="步骤5-发送端口信息"><a href="#步骤5-发送端口信息" class="headerlink" title="步骤5:发送端口信息"></a>步骤5:发送端口信息</h4><ul>
+<li>在身份验证步骤之后，从服务器将执行命令REPLCONF listening-port ， <strong>向主服务器发送从服务器的监听端口号</strong></li>
+<li>例如在我们的例子中，从服务器的监听端口为12345，那么从服务器将<strong>向主服务器发送命令REPLCONF listening-port 12345</strong>，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/2019120113200247.png" alt="img"></p>
+<h4 id="步骤6-同步"><a href="#步骤6-同步" class="headerlink" title="步骤6:同步"></a>步骤6:同步</h4><ul>
+<li><p>在这一步，从服务器将向主服务器发送PSYNC命令，*<strong>*执行同步操作**</strong>，并<strong>将自己的数据库更新至主服务器数据库当前所处的状态</strong></p>
+</li>
+<li><p>值得一提的是，在同步操作执行之前，只有从服务器是主服务器的客户端，但是</p>
+<p>  <strong>在执行同步操作之后，主服务器也会成为从服务器的客户端：</strong></p>
+<ul>
+<li>如果PSYNC命令执行的是<strong>完整重同步操作</strong>，那么主服务器需要成为从服务器的客户 端，才能将保存在缓冲区里面的写命令发送给从服务器执行。</li>
+<li>如果PSYNC命令执行的是<strong>部分重同步操作</strong>，那么主服务器需要成为从服务器的客户 端，才能向从服务器发送保存在复制积压缓冲区里面的写命令</li>
+</ul>
+</li>
+<li><p>因此，在同步操作执行之后，<strong>主从服务器双方都是对方的客户端</strong>，它们可以互相向对方发送命令请求，或者互相向对方返回命令回复，如下图所示：</p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/2019120113224549.png" alt="img"></p>
+<ul>
+<li>正因为主服务器成为了从服务器的客户端，所以主服务器才可以通过发送写命令来改变从服务器的数据库状态，不仅同步操作需要用到这一点，这也是主服务器对从服务器执行命 令传播操作的基础</li>
+</ul>
+<h4 id="步骤7-命令传播"><a href="#步骤7-命令传播" class="headerlink" title="步骤7:命令传播"></a>步骤7:命令传播</h4><ul>
+<li>当完成了同步之后，<strong>主从服务器就会进入命令传播阶段</strong>，这时主服务器只要一直将自己执行的写命令发送给从服务器，而从服务器只要一直接收并执行主服务器发来的写命令，就<strong>可以保证主从服务器一直保持一致了</strong></li>
+</ul>
+<h2 id="心跳检测"><a href="#心跳检测" class="headerlink" title="心跳检测"></a>心跳检测</h2><ul>
+<li>在命令传播阶段，从服务器默认会<strong>以每秒一次的频率</strong>，向主服务器发送命令：</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">REPLCONF ACK <span class="token operator">&lt;</span>replication_offset<span class="token operator">></span>
+//其中replication_offset是从服务器当前的复制偏移量</code></pre>
+<ul>
+<li><strong>发送REPLCONF ACK命令对于主从服务器有三个作用：</strong><ul>
+<li>①检测主从服务器的网络连接状态</li>
+<li>②辅助实现min-slaves选项</li>
+<li>③检测命令丢失</li>
+</ul>
+</li>
+</ul>
+<h4 id="检测主从服务器的网络连接状态（lag标志）"><a href="#检测主从服务器的网络连接状态（lag标志）" class="headerlink" title="检测主从服务器的网络连接状态（lag标志）"></a>检测主从服务器的网络连接状态（lag标志）</h4><ul>
+<li>主从服务器可以通过发送和接收REPLCONF ACK命令<strong>来检查两者之间的网络连接是否正常：</strong>如果主服务器<strong>超过一秒钟没有收到</strong>从服务器发来的REPLCONF ACK命令，那么主服务器就知道主从服务器之间的连接出现问题了</li>
+<li>通过向主服务器发送<strong>INFO replication命令</strong>，在列出的<strong>从服务器列表的lag一栏中</strong>，我们可以看到相应从服务器最后一次向主服务器发送REPLCONF ACK命令<strong>距离现在过了多少秒。</strong>在一般情况下，<strong>lag的值应该在0秒或者1秒之间跳动</strong>，如果超过1秒的话，那么说明主从 服务器之间的连接出现了故障。</li>
+</ul>
+<h4 id="辅助实现min-slaves配置选项"><a href="#辅助实现min-slaves配置选项" class="headerlink" title="辅助实现min-slaves配置选项"></a>辅助实现min-slaves配置选项</h4><ul>
+<li>Redis的<strong>min-slaves-to-write和min-slaves-max-lag两个选项</strong>可以<strong>防止主服务器在不安全的情况下执行写命令</strong></li>
+<li>举个例子，如果我们向主服务器提供以下设置：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201132859439.png" alt="img"></p>
+<ul>
+<li>那么在<strong>从服务器的数量少于3个，或者三个从服务器的延迟（lag）值都大于或等于10秒时</strong>，主服务器将<strong>拒绝执行写命令</strong>，这里的延迟值就是上面提到的INFO replication命令的lag 值</li>
+</ul>
+<h4 id="检测命令丢失"><a href="#检测命令丢失" class="headerlink" title="检测命令丢失"></a>检测命令丢失</h4><p>如果因为网络故障，<strong>主服务器传播给从服务器的写命令在半路丢失</strong>，那么当从服务器向主服务器发送REPLCONF ACK命令时，主服务器将<strong>发觉</strong>从服务器当前的复制偏移量少于自己的复制偏移量，然后主服务器就会根据从服务器提交的复制偏移量，在复制积压缓冲区里 面找到从服务器缺少的数据，并<strong>将这些数据重新发送给从服务器</strong></p>
+<h4 id="演示案例-1"><a href="#演示案例-1" class="headerlink" title="演示案例"></a>演示案例</h4><ul>
+<li>举个例子，假设有两个处于一致状态的主从服务器，它们的复制偏移量都是200，如下图所示</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201133107682.png" alt="img"></p>
+<ul>
+<li>如果这时主服务器执行了命令SET key value（协议格式的长度为33字节），将自己的复 制偏移量更新到了233，并尝试向从服务器传播命令SET key value，但这条命令却因为网络 故障而在传播的途中丢失，那么主从服务器之间的复制偏移量就会出现不一致，主服务器的 复制偏移量会被更新为233，而从服务器的复制偏移量仍然为200，如下图所示</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201133127229.png" alt="img"></p>
+<ul>
+<li>在这之后，当从服务器向主服务器发送REPLCONF ACK命令的时候，主服务器会察觉 从服务器的复制偏移量依然为200，而自己的复制偏移量为233，这说明复制积压缓冲区里面 复制偏移量为201至233的数据（也即是命令SET key value）在传播过程中丢失了，于是主服 务器会再次向从服务器传播命令SET key value，从服务器通过接收并执行这个命令可以将自 己更新至主服务器当前所处的状态，如下图所示</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201133147307.png" alt="img"></p>
+<h1 id="Redis哨兵"><a href="#Redis哨兵" class="headerlink" title="Redis哨兵"></a>Redis哨兵</h1><h2 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h2><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><p>哨兵模式是主从的升级版，因为主从的出现故障后，不会自动恢复，需要人为干预。</p>
+<p>在主从的基础上，实现哨兵模式就是为了监控主从的运行状况，对主从的健壮进行监控，就好像哨兵一样，只要有异常就发出警告，对异常状况进行处理。</p>
+<p>总的概括来说，哨兵模式有以下的优点(功能点)：</p>
+<ul>
+<li>「监控」：监控master和slave是否正常运行，以及哨兵之间也会相互监控</li>
+<li>「自动故障恢复」：当master出现故障的时候，会自动选举一个slave作为master顶上去。</li>
+<li>哨兵模式是主从模式的升级版，所以在系统层面提高了系统的可用性和性能、稳定性。当master宕机的时候，能够自动进行故障恢复，需不要人为的干预。</li>
+<li>哨兵与哨兵之间、哨兵与master之间能够进行及时的监控，心跳检测，及时发现系统的问题，这都是弥补了主从的缺点。</li>
+</ul>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p>哨兵一主多从的模式同样也会遇到写的瓶颈，已经存储瓶颈，若是master宕机了，故障恢复的时间比较长，写的业务就会受到影响。</p>
+<p>增加了哨兵也增加了系统的复杂度，需要同时维护哨兵模式。</p>
+<h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>Sentinel（哨岗、哨兵）是<strong>Redis的高可用性（high availability）解决方案：</strong>由一个或多个Sentinel实例（instance）组成的Sentinel系统（system）可以<strong>监视任意多个</strong>主服务器，以及这些主服务器属下的所有从服务器，并在被监视的<strong>主服务器进入下线状态时</strong>，自动将下线主服务器属下的某个从服务器<strong>升级为新的主服务器</strong>，然后由新的主服务器代替已下线的主服务器继续处理命令请求</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201213815316.png" alt="img"></p>
+<ul>
+<li>根据上面的图片，假设这时，主服务器server1进入下线状态，那么从服务器server2、server3、server4对 主服务器的复制操作将被中止，并且Sentinel系统会察觉到server1已下线，如下图所示（下线的服务器用虚线表示）</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201214010487.png" alt="img"></p>
+<ul>
+<li><p>当server1的<strong>下线时长超过用户设定的下线时长上限时</strong>，Sentinel系统就会对server1执行<strong>故障转移</strong></p>
+<p>  操作：</p>
+<ul>
+<li>首先，Sentinel系统会挑选server1属下的其中一个从服务器，并将这个被选中的从服务器升级为新的主服务器</li>
+<li>之后，Sentinel系统会向server1属下的所有从服务器发送新的复制指令，让它们成为新的主服务器的从服务器，当所有从服务器都开始复制新的主服务器时，故障转移操作执行完毕</li>
+<li>另外，Sentinel还会继续监视已下线的server1，并在它重新上线时，将它设置为新的主服务器的从服务器</li>
+</ul>
+</li>
+<li><p>举个例子，下图展示了Sentinel系统<strong>将server2升级为新的主服务器</strong>，并让服务器server3和server4成为server2的从服务器的过程</p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201214149843.png" alt="img"></p>
+<ul>
+<li>之后，如果server1<strong>重新上线的话</strong>，它将被Sentinel系统<strong>降级为server2的从服务器</strong>，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201214154597.png" alt="img"></p>
+<h2 id="启动并初始化Sentinel"><a href="#启动并初始化Sentinel" class="headerlink" title="启动并初始化Sentinel"></a>启动并初始化Sentinel</h2><p>启动<code>Sentinel</code>会执行以下操作：</p>
+<ol>
+<li>初始化服务器</li>
+<li>将普通Redis服务器使用的代码替换成<code>Sentinel</code>专用代码</li>
+<li>初始化<code>Sentinel</code>状态</li>
+<li>根据给定的配置文件,初始化<code>Sentinel</code>的监视主服务器列表</li>
+<li>创建连向主服务器的网络连接</li>
+</ol>
+<h4 id="初始化Sentinel状态"><a href="#初始化Sentinel状态" class="headerlink" title="初始化Sentinel状态"></a>初始化Sentinel状态</h4><p>在应用了Sentinel的专用代码之后，接下来，服务器会初始化一个<strong>sentinel.c/sentinelState结构</strong>（后面简称“Sentinel状态”），这个结构<strong>保存了服务器中所有和Sentinel功能有关的状态</strong> （服务器的一般状态仍然由redis.h/redisServer结构保存）</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> sentinelState <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//当前纪元，用于实现故障转移</span>
+    uint64_t current_epoch<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//保存了所有被这个sentinel 监视的主服务器</span>
+    dict <span class="token operator">*</span>masters<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//略</span>
+<span class="token punctuation">}</span> sentinel<span class="token punctuation">;</span></code></pre>
+<h4 id="初始化Sentinel状态的masters属性"><a href="#初始化Sentinel状态的masters属性" class="headerlink" title="初始化Sentinel状态的masters属性"></a>初始化Sentinel状态的masters属性</h4><p>Sentinel状态中的<strong>masters字典记录了所有被Sentinel监视的主服务器的相关信息</strong>，其中：</p>
+<ul>
+<li><strong>字典的键</strong>是被监视主服务器的名字</li>
+<li><strong>字典的值</strong>则是被监视主服务器对应的sentinel.c/<strong>sentinelRedisInstance结构</strong></li>
+</ul>
+<ul>
+<li>每个sentinelRedisInstance结构（后面简称“实例结构”）<strong>代表一个被Sentinel监视的Redis服务器实例</strong>（instance），这个实例可以是<strong>主服务器、从服务器，或者另外一个Sentinel</strong></li>
+</ul>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> sentinelRedisInstance <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//标识值，记录了实例的类型，以及该实例的当前状态</span>
+    <span class="token keyword">int</span> flags<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//实例的名字</span>
+    <span class="token comment" spellcheck="true">//主服务器的名字由用户在配置文件中设置</span>
+    <span class="token comment" spellcheck="true">//从服务器以及Sentinel 的名字由Sentinel 自动设置</span>
+    <span class="token comment" spellcheck="true">//格式为ip:port ，例如"127.0.0.1:26379"</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//实例的运行ID</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>runid<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//配置纪元，用于实现故障转移</span>
+    uint64_t config_epoch<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//实例的地址</span>
+    sentinelAddr <span class="token operator">*</span>addr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> sentinelRedisInstance<span class="token punctuation">;</span></code></pre>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> sentinelAddr
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span> ip<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> port<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h6><ul>
+<li>对Sentinel状态的初始化将引发对masters字典的初始化，而masters字典的初始化是<strong>根据被载入的Sentinel配置文件</strong>来进行的</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201220900699.png" alt="img"></p>
+<h4 id="创建连向主服务器的网络连接"><a href="#创建连向主服务器的网络连接" class="headerlink" title="创建连向主服务器的网络连接"></a>创建连向主服务器的网络连接</h4><ul>
+<li><p>初始化Sentinel的最后一步是创建连向被监视主服务器的网络连接，<strong>Sentinel将成为主服务器的客户端</strong>，它可以向主服务器发送命令，并从命令回复中获取相关的信息</p>
+</li>
+<li><p>对于每个被Sentinel监视的主服务器来说，Sentinel会</p>
+<p>  <strong>创建两个连向主服务器的异步网络连接：</strong></p>
+<ul>
+<li>一个是<strong>命令连接</strong>，这个连接专门用于向主服务器发送命令，并接收命令回复</li>
+<li>另一个是<strong>订阅连接</strong>，这个连接专门用于订阅主服务器的<strong>sentinel</strong>:hello频道</li>
+</ul>
+</li>
+</ul>
+<h2 id="获取主服务器的信息"><a href="#获取主服务器的信息" class="headerlink" title="获取主服务器的信息"></a>获取主服务器的信息</h2><ul>
+<li><p>Sentinel默认会以<strong>每十秒一次的频率</strong>，通过命令连接向被监视的主服务器发送INFO命令，并通过分析INFO命令的回复来<strong>获取主服务器的当前信息</strong></p>
+</li>
+<li><p>通过分析主服务器返回的INFO命令回复，<strong>Sentinel可以获取以下两方面的信息：</strong></p>
+<ul>
+<li>一方面是<strong>关于主服务器本身的信息</strong>，包括run_id域记录的服务器运行ID，以及role域记录的服务器角色</li>
+<li>另一方面是关于主服务器属下<strong>所有从服务器的信息</strong>，每个从服务器都由一个”slave”字符 串开头的行记录，每行的ip=域记录了从服务器的IP地址，而port=域则记录了从服务器的端 口号。根据这些IP地址和端口号，Sentinel无须用户提供从服务器的地址信息，就可以自动发现从服务器</li>
+</ul>
+</li>
+<li><p><strong>根据run_id域和role域记录的信息，Sentinel将对主服务器的实例结构进行更新</strong>，例如， 主服务器重启之后，它的运行ID就会和实例结构之前保存的运行ID不同，Sentinel检测到这 一情况之后，就会对实例结构的运行ID进行更新</p>
+</li>
+<li><p>Sentinel在分析INFO命令中包含的从服务器信息时，<strong>会检查从服务器对应的实例结构是否已经存在于slaves字典：</strong></p>
+<ul>
+<li>如果<strong>从服务器对应的实例结构已经存在</strong>，那么Sentinel对从服务器的实例结构进行更新</li>
+<li>如果<strong>从服务器对应的实例结构不存在</strong>，那么说明这个从服务器是新发现的从服务器， Sentinel会在slaves字典中为这个从服务器新创建一个实例结构</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201223205478.png" alt="img"></p>
+<h2 id="获取从服务器信息"><a href="#获取从服务器信息" class="headerlink" title="获取从服务器信息"></a>获取从服务器信息</h2><ul>
+<li>当Sentinel发现主服务器有新的从服务器出现时，Sentinel除了会为这个新的<strong>从服务器创建相应的实例结构之外</strong>，Sentinel还会创建连接到从服务器的<strong>命令连接和订阅连接</strong></li>
+<li>举个例子，对于上面那张图所示的主从服务器关系来说，Sentinel将对slave0、slave1和 slave2三个从服务器分别创建命令连接和订阅连接，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/2019120122373496.png" alt="img"></p>
+<p><strong>根据INFO命令的回复，Sentinel会提取出以下信息：</strong></p>
+<ul>
+<li>从服务器的运行ID run_id</li>
+<li>从服务器的角色role</li>
+<li>主服务器的IP地址master_host，以及主服务器的端口号master_port</li>
+<li>主从服务器的连接状态master_link_status</li>
+<li>从服务器的优先级slave_priority</li>
+<li>从服务器的复制偏移量slave_repl_offset</li>
+</ul>
+<h2 id="Sentinel向主服务器和从服务器发送信息"><a href="#Sentinel向主服务器和从服务器发送信息" class="headerlink" title="Sentinel向主服务器和从服务器发送信息"></a>Sentinel向主服务器和从服务器发送信息</h2><p>在默认情况下，Sentinel会以<strong>每两秒一次的频率</strong>，通过命令连接向所有被监视的<strong>主服务器和从服务器</strong>发送命令</p>
+<p>对于监视同一个服务器的多个Sentinel来说，<strong>一个Sentinel发送的信息会被其他Sentinel接收到</strong>，这些信息会被用于更新其他Sentinel对发送信息Sentinel的认知，也会被用于更新其他Sentinel对被监视服务器的认知。</p>
+<h2 id="Sentinel接收服务器和从服务器的频道信息"><a href="#Sentinel接收服务器和从服务器的频道信息" class="headerlink" title="Sentinel接收服务器和从服务器的频道信息"></a>Sentinel接收服务器和从服务器的频道信息</h2><p>当一个Sentinel从<strong>sentinel</strong>:hello频道收到一条信息时，Sentinel会对这条信息进行分 析，<strong>提取出信息中的Sentinel IP地址、Sentinel端口号、Sentinel运行ID等八个参数，并进行以下检查：</strong></p>
+<ul>
+<li>如果信息中记录的Sentinel运行ID和接收信息的Sentinel的<strong>运行ID相同</strong>，那么说明这条信 息是Sentinel自己发送的，Sentinel将丢弃这条信息，不做进一步处理</li>
+<li>相反地，如果信息中记录的Sentinel运行ID和接收信息的Sentinel的<strong>运行ID不相同</strong>，那么 说明这条信息是监视同一个服务器的其他Sentinel发来的，接收信息的Sentinel将根据信息中的各个参数，<strong>对相应主服务器的实例结构进行更新</strong></li>
+<li>因为一个Sentinel可以通过分析接收到的频道信息来<strong>获知其他Sentinel的存在</strong>，并通过发送频道信息来<strong>让其他Sentinel知道自己</strong>的存在，所以用户在使用Sentinel的时候并不需要提供各个Sentinel的地址信息，监视同一个主服务器的多个Sentinel<strong>可以自动发现对方</strong></li>
+<li>当Sentinel通过频道信息发现一个新的Sentinel时，它不仅会为新Sentinel在sentinels字典中创建相应的实例结构，<strong>还会创建一个连向新Sentinel的命令连接</strong>，而新Sentinel也同样会创建连向这个Sentinel的命令连接，最终监视同一主服务器的<strong>多个Sentinel将形成相互连接的网络：</strong>Sentinel A有连向Sentinel B的命令连接，而Sentinel B也有连向Sentinel A的命令连接</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202184847281.png" alt="img"></p>
+<h2 id="检测主观下线状态"><a href="#检测主观下线状态" class="headerlink" title="检测主观下线状态"></a>检测主观下线状态</h2><ul>
+<li>在默认情况下，Sentinel会<strong>以每秒一次的频率</strong>向所有与它创建了命令连接的实例（<strong>包括主服务器、从服务器、其他Sentinel在内</strong>）发送<strong>PING命令</strong>，并通过实例返回的PING命令回复来判断实例是否在线</li>
+<li>如果配置文件指定Sentinel1的<strong>down-after-milliseconds选项的值为50000毫秒</strong>，那么当主服务器master连续50000毫秒都向Sentinel1<strong>返回无效回复时</strong>， Sentinel1就会将master标记为主观下线</li>
+</ul>
+<h2 id="检测客观下线状态"><a href="#检测客观下线状态" class="headerlink" title="检测客观下线状态"></a>检测客观下线状态</h2><ul>
+<li>当Sentinel将一个主服务器判断为主观下线之后，为了确认这个主服务器是否真的下线 了，它会<strong>向同样监视这一主服务器的其他Sentinel进行询问</strong>，看它们是否也认为主服务器已经进入了下线状态（可以是主观下线或者客观下线）。当Sentinel从其他Sentinel那里<strong>接收到足够数量的已下线判断之后</strong>，Sentinel就会将从服务器判定为客观下线，并对主服务器<strong>执行故障转移操作</strong></li>
+</ul>
+<h2 id="选取领头Sentinel"><a href="#选取领头Sentinel" class="headerlink" title="选取领头Sentinel"></a>选取领头Sentinel</h2><ul>
+<li><p>当一个主服务器被判断为客观下线时，监视这个下线主服务器的<strong>各个Sentinel会进行协商</strong>，选举出一个领头Sentinel，并由领头Sentinel<strong>对下线主服务器执行故障转移操作</strong></p>
+</li>
+<li><p>1.<strong>所有在线的Sentinel都有被选为领头Sentinel的资格</strong>，换句话说，监视同一个主服务器的 多个在线Sentinel中的任意一个都有可能成为领头Sentinel</p>
+</li>
+<li><p>2.每次进行领头Sentinel选举之后，<strong>不论选举是否成功，所有Sentinel的配置纪元 （configuration epoch）的值都会自增一次</strong>。配置纪元实际上就是一个计数器，并没有什么特别的</p>
+</li>
+<li><p>3.在一个配置纪元里面，<strong>所有Sentinel都有一次将某个Sentinel设置为局部领头Sentinel的机会</strong>，并且局部领头一旦设置，在这个配置每个发现主服务器进入客观下线的Sentinel都会要求其他Sentinel将自己设置为局部领头Sentinel</p>
+</li>
+<li><p>4.当一个Sentinel（源Sentinel）向另一个Sentinel（目标Sentinel）发送<strong>SENTINEL ismaster-down-by-addr命令</strong>，并且命令中的runid参数不是*符号而是源Sentinel的运行ID时，这<strong>表示源Sentinel要求目标Sentinel将前者设置为后者的局部领头Sentinel</strong></p>
+</li>
+<li><p>5.Sentinel设置局部领头Sentinel的规则是先到先得：<strong>最先向目标Sentinel发送设置要求的源Sentinel将成为目标Sentinel的局部领头</strong>Sentinel，而<strong>之后接收到的所有设置要求都会被目标Sentinel拒绝</strong></p>
+</li>
+<li><p>6.目标Sentinel在接收到SENTINEL is-master-down-by-addr命令之后，<strong>将向源Sentinel返回 一条命令回复，</strong>回复中的leader_runid参数和leader_epoch参数分别<strong>记录了目标Sentinel的局部领头Sentinel的运行ID和配置纪元</strong></p>
+</li>
+<li><p>7.源Sentinel在接收到目标Sentinel返回的命令回复之后，<strong>会检查回复中leader_epoch参数的值和自己的配置纪元是否相同</strong>，如果相同的话，那么源Sentinel继续取出回复中的 leader_runid参数，如果leader_runid参数的值和源Sentinel的运行ID一致，那么表示目标 Sentinel将源Sentinel设置成了局部领头Sentinel</p>
+</li>
+<li><p>8.如果<strong>有某个Sentinel被半数以上的Sentinel设置成了局部领头Sentinel，那么这个Sentinel成为领头Sentinel</strong>。举个例子，在一个由10个Sentinel组成的Sentinel系统里面，只要有大于等于 10/2+1=6个Sentinel将某个Sentinel设置为局部领头Sentinel，那么被设置的那个Sentinel就会成 为领头Sentine</p>
+</li>
+<li><p>9.因为领头Sentinel的产生需要半数以上Sentinel的支持，并且每个Sentinel在每个配置纪元里面只能设置一次局部领头Sentinel，<strong>所以在一个配置纪元里面，只会出现一个领头 Sentinel</strong></p>
+</li>
+<li><p>10.如果在给定时限内，<strong>没有一个Sentinel被选举为领头Sentinel</strong>，那么各个Sentinel将在一段时间之后<strong>再次进行选举</strong>，直到选出领头Sentinel为止</p>
+</li>
+</ul>
+<h2 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h2><ul>
+<li>在选举产生出领头Sentinel之后，领头Sentinel将对已下线的主服务器<strong>执行故障转移操作</strong></li>
+<li><strong>该操作包含下面3个步骤：</strong><ul>
+<li>①在已下线主服务器属下的所有从服务器里面，挑选出一个从服务器，并将其转换为主服务器</li>
+<li>②让已下线主服务器属下的所有从服务器改为复制新的主服务器</li>
+<li>③将已下线主服务器设置为新的主服务器的从服务器，当这个旧的主服务器重新上线 时，它就会成为新的主服务器的从服务器</li>
+</ul>
+</li>
+</ul>
+<h4 id="选出新的主服务器"><a href="#选出新的主服务器" class="headerlink" title="选出新的主服务器"></a>选出新的主服务器</h4><ul>
+<li>故障转移操作第一步要做的就是<strong>在已下线主服务器属下的所有从服务器中</strong>，挑选出一个状态良好、数据完整的从服务器，然后向这个从服务器发送<strong>SLAVEOF no one命令</strong>，将这个<strong>从服务器转换为主服务器</strong></li>
+</ul>
+<h6 id="演示案例-2"><a href="#演示案例-2" class="headerlink" title="演示案例"></a>演示案例</h6><ul>
+<li>下图展示了在一次故障转移操作中，领头Sentinel向<strong>被选中的从服务器server2</strong>发送SLAVEOF no one命令的情形：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193156859.png" alt="img"></p>
+<ul>
+<li>在发送SLAVEOF no one命令之后，领头Sentinel会以每秒一次的频率（平时是每十秒一 次），向被升级的从服务器<strong>发送INFO命令，</strong>并观察命令回复中的角色（role）信息，<strong>当被升级服务器的role从原来的slave变为master时</strong>，领头Sentinel就知道被选中的从服务器已经顺利升级为主服务器了</li>
+</ul>
+<h4 id="修改从服务器的复制目标"><a href="#修改从服务器的复制目标" class="headerlink" title="修改从服务器的复制目标"></a>修改从服务器的复制目标</h4><ul>
+<li>当新的主服务器出现之后，领头Sentinel下一步要做的就是，让已下线主服务器属下的<strong>所有从服务器去复制新的主服务器</strong>，这一动作可以<strong>通过向从服务器发送SLAVEOF命令来实现</strong></li>
+</ul>
+<h6 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h6><ul>
+<li>下图展示了在故障转移操作中，领头Sentinel向已下线主服务器server1的两个从服务器server3和server4发送SLAVEOF命令，让<strong>它们复制新的主服务器server2的例子</strong></li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193616934.png" alt="img"></p>
+<ul>
+<li>下图展示了<strong>server3和server4成为server2的从服务器之后</strong>，各个服务器以及领头Sentinel的样子</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193633254.png" alt="img"></p>
+<h4 id="将旧的主服务器变为从服务器"><a href="#将旧的主服务器变为从服务器" class="headerlink" title="将旧的主服务器变为从服务器"></a>将旧的主服务器变为从服务器</h4><ul>
+<li>故障转移操作最后要做的是，<strong>将已下线的主服务器设置为新的主服务器的从服务器</strong>。比如说，下图就展示了被领头Sentinel设置为从服务器之后，服务器server1的样子</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193748287.png" alt="img"></p>
+<ul>
+<li>因为旧的主服务器已经下线，所以这种设置是保存在server1对应的实例结构里面的，当 server1重新上线时，<strong>Sentinel就会向它发送SLAVEOF命令，让它成为server2的从服务器</strong></li>
+<li>例如，下图就展示了server1重新上线并成为server2的从服务器的例子</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193757739.png" alt="img"></p>
+<h1 id="Redis集群"><a href="#Redis集群" class="headerlink" title="Redis集群"></a>Redis集群</h1><h6 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h6><p>最后，Cluster是真正的集群模式了，哨兵解决和主从不能自动故障恢复的问题，但是同时也存在难以扩容以及单机存储、读写能力受限的问题，并且集群之前都是一台redis都是全量的数据，这样所有的redis都冗余一份，就会大大消耗内存空间。</p>
+<p>集群模式实现了Redis数据的分布式存储，实现数据的分片，每个redis节点存储不同的内容，并且解决了在线的节点收缩(下线)和扩容(上线)问题。</p>
+<p>集群模式真正意义上实现了系统的高可用和高性能，但是集群同时进一步使系统变得越来越复杂，接下来我们来详细的了解集群的运作原理。</p>
+<p>集群模式是一个无中心的架构模式，将数据进行分片，分布到对应的槽中，每个节点存储不同的数据内容，通过路由能够找到对应的节点负责存储的槽，能够实现高效率的查询。</p>
+<p>并且集群模式增加了横向和纵向的扩展能力，实现节点加入和收缩，集群模式是哨兵的升级版，哨兵的优点集群都有。</p>
+<h6 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h6><p>缓存的最大问题就是带来数据一致性问题，在平衡数据一致性的问题时，兼顾性能与业务要求，大多数都是以最终一致性的方案进行解决，而不是强一致性。</p>
+<p>并且集群模式带来节点数量的剧增，一个集群模式最少要6台机，因为要满足半数原则的选举方式，所以也带来了架构的复杂性。</p>
+<p>slave只充当冷备，并不能缓解master的读的压力。</p>
+<h4 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h4><ul>
+<li><p>Redis Cluster是去中心化的，例如一个集群由三个Redis节点组成，每个节点负责整个集群的一部分数据。这三个节点就相互连接组成一个对等的集群，他们之间通过一种特殊的二进制协议交互集群信息。</p>
+</li>
+<li><p>所有数据划分为16384个槽位，每个节点负责其中一部分槽位，槽位的信息存储在每个节点中</p>
+</li>
+<li><p>客户端为了可以直接定位到某个具体的key所在的节点，需要缓存槽位相关信息，这样才可以准确快速地定位到相应的节点。同时因为可能会存在客户端与服务器存储槽位的信息不一致的情况。还需要纠正机制来实现槽位信息的校验调整</p>
+</li>
+<li><p>当客户端向一个错误的节点发出了指令后，该节点会发现指令的key所在的槽位并不归自己管理，这时他会向客户端发送一个特殊的跳转指令携带目标操作的节点地址，告诉客户端去连接这个节点以获取数据</p>
+</li>
+<li><pre><code>  GET x
+  -MOVED 3999 127.0.0.1:6381
+  //MOVED的一个参数3999是key对应的槽位编号，后面是目标节点的地址。
+  //MOVED指令前面有一个减号，表示该指令是一个错误消息
+  //客户端收到MOVED指令后，要立即纠正本地的槽位映射表。
+  //后续所有key将使用新的槽位映射表</code></pre>
+</li>
+</ul>
+<ul>
+<li><h4 id="理解-1"><a href="#理解-1" class="headerlink" title="理解"></a>理解</h4></li>
+</ul>
+<p>在Redis主从复制中介绍过利用主从节点实现读写分离来扩展主节点的数据读取能力，那么当主节点的写入能力成为瓶颈时，集群便是性能扩展的解决方案之一。Redis Cluster是Redis的分布式解决方案，在3.0版本正式推出，有效地解决了Redis分布式方面的需求。当遇到单机内存、并发、流量等瓶颈时，可以采用Cluster架构方案达到负载均衡的目的。集群设计，本质上来讲是把数据存储在不同的数据节点上，这些节点可以独立的向外提供服务，那么需要解决的最重要几个问题是</p>
+<ul>
+<li>当新的写入数据到达时，该数据应该存储在哪台机器上。即数据分布问题</li>
+<li>当新的查询请求到达时，我们该如何知道这部分数据存储在哪个机器节点上。即查询路由问题。</li>
+<li>当新的节点加入时，我们该如何重新分配数据，让新的节点也对外提供服务。当有节点退出时，我们该如何把存在该节点上的数据分配到其他机器上，让其他机器来提供这部分数据的服务。即集群的扩缩容问题。</li>
+<li>当有节点因故障而不能提供服务时，如何能保证该集群仍然能正常向外提供服务。即高可用问题。</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>对于分布式存储，数据分区规则是核心问题之一，Redis集群中使用的是虚拟槽/虚拟桶分区，使用CRC16函数计算每个键的哈希值，并把所有的键划分到16384个桶中。数据存储在各个结点之后，当客户端访问键时，需要能够知道键所在的节点地址，Redis集群没有采用代理的方案，而是每个节点都保存集群中槽的负责节点信息，客户端可连接任意一个节点，当该节点发现客户端请求的键并不由自己负责时，会向客户端返回重定向，重定向中包含着负责该键的节点地址信息。同路由信息一样，Redis的集群元数据信息也是存储在各个节点上，并使用Gossip协议来完成集群的元数据同步。每个集群节点会每100ms向部分节点随机传输自己视角下的N/10个节点的信息，同时Redis集群节点会努力保证自己与其他的所有节点每node_timeout/2时间内至少通信一次。</p>
+<h4 id="数据分布"><a href="#数据分布" class="headerlink" title="数据分布"></a>数据分布</h4><p>分布式数据库首先要解决地把整个数据集按照分区规则映射到多个节点地问题。即把数据集划分到多个节点上，每个节点负责整体数据的一个子集。如下图所示：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-17d40b36ede8d8c4a3309306370f09f7_1440w.jpg" alt="img"></p>
+<p>分布式存储数据分区</p>
+<p>Redis采用了虚拟桶分区方法，使用分散度良好地哈希函数把所有的数据均匀地哈希到K个桶中。具体实现中，Redis使用CRC16函数计算键的哈希值并把所有键分到16384个桶中，键的桶编号计算方法如下所示。每个桶<strong>只能</strong>由一个主节点存储，但一个主节点可以负责多个桶。Redis集群中，数据的迁移都是以桶为单位的，集群的扩缩容等价为桶在不同节点间的移动。</p>
+<pre class=" language-text"><code class="language-text">HASH_SLOT = CRC16(key) mod 16384
+//默认对key值使用crc16算法进行hash，得到一个整数值，然后用这个整数值对16384进行取模得到具体槽位</code></pre>
+<h4 id="查询路由"><a href="#查询路由" class="headerlink" title="查询路由"></a>查询路由</h4><p>基于上述的分区方法，集群中的数据存储可能如下图所示。我们有5个节点，每个节点平均存储大约3273个桶（即16384/5）。那么当我们要进行一个键值的查询时，给定一个key，我们如何知道该key的值存储在哪个机器节点上呢？即我们需要一个查询路由，该路由根据给定的key，返回存储该键值的机器地址。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-1fe6033d4997d85449ce6764251923e1_1440w.jpg" alt="img">5个节点，每个节点负责一部分桶</p>
+<p>常规的实现方式便是采用如下图所示的代理方案，即采用一个中央节点（比如HDFS中的NameNode）来管理所有的元数据，但是这样的方案带来的最大问题就是代理节点很容易成为访问的瓶颈，当读写并发量高的时候，代理节点会严重的拖慢整个系统的性能。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-936c9a100eda3f1a2c79c10901134180_1440w.jpg" alt="img">采用代理的方案实现路由</p>
+<p>Redis没有选择使用代理，而是客户端直接连接每个节点。Redis的每个节点中都存储着如下所示的整个集群的状态，集群状态中一个重要的信息就是<strong>每个桶的负责节点</strong>。在具体的实现中，Redis用一个大小固定为CLUSTER_SLOTS的clusterNode数组 slots来保存每个桶的负责节点。在集群模式下，Redis接收任何键相关命令时首先<strong>计算键对应的桶编号，再根据桶找出所对应的节点</strong>，如果节点是自身，则处理键命令；否则回复MOVED重定向错误，<strong>通知客户端请求正确的节点，这个过程称为MOVED重定向</strong>。重定向信息包含了键所对应的桶以及负责该桶的节点地址，根据这些信息客户端就可以向正确的节点发起请求。</p>
+<p>这样的话，假设集群中有N个主节点存储数据，那么客户端要查询一个键时，一次就恰好访问到正确节点的概率只有1/N。有(N-1)/N的概率是要请求两次的，第一次随机连接一个节点获得正确的节点地址，第二次从正确的节点中获取数据。当请求并发量比较大时，我们就会浪费大量的节点处理时间。一种较好的方案是在客户端把ClusterState中的slots数据信息缓存起来，这样每次客户端计算出对应的桶之后，根据本地的缓存获得正确的节点位置。这样便可以避免大量不必要的重复请求。当然，如果集群发生了扩缩容或者failover导致客户端缓存的信息过期时，客户端只需要在访问节点得到<strong>MOVED</strong>重定向时，重新更新下本地的缓存信息即可。这种缓存slots信息的客户端就是<strong>Smart Client</strong>。</p>
+<h4 id="集群扩容"><a href="#集群扩容" class="headerlink" title="集群扩容"></a>集群扩容</h4><p>当集群中发生扩缩容时会发生桶的迁移，比如当节点A正在把桶334迁移到节点B，那么在迁移完成之前，桶334的一部分数据存在节点A，一部分数据存在节点B。<strong>在迁移完成之前，集群中的所有节点都仍然会认为桶334由节点A负责</strong>。所以当访问桶334中的数据时，请求会被统一路由到节点A，如果A发现客户端访问的键并不在本地存储（可能已经被迁移到了节点B，或者该键之前就不存在），那么节点A就会向客户端返回<strong>ASK重定向</strong>。ASK重定向同样会返回<strong>槽值和节点B的地址</strong>，客户端会根据ASK返回的重定向地址向B发起请求，看看新节点存不存在数据。对客户端来说，MOVED和ASK重定向的区别在于，<strong>当客户端收到MOVED重定向时会选择更新本地的缓存，但是接收到ASK重定向并不会更新本地缓存。</strong>当节点A和节点B完成了桶334的迁移之后，<strong>节点B会向整个集群广播自己目前负责的桶的信息，之后整个集群的其他节点就会认为桶334由B负责，此时如果客户端再向节点A访问桶334的数据，那么节点A就会返回MOVED重定向。</strong>即ASK重定向只会在数据迁移的时候发生，同时客户端接收到ASK重定向之后并不会更新本地缓存。</p>
+<p>ASK指令只是用来临时纠正槽位的，不会刷新槽位映射关系表，不影响后续指令。</p>
+<h4 id="集群节点通信"><a href="#集群节点通信" class="headerlink" title="集群节点通信"></a>集群节点通信</h4><p><strong>集群中所有节点的状态以及桶-节点映射关系构成集群的元数据</strong>，许多分布式存储系统的元数据管理是采用专门的元数据管理节点的，比如HDFS中的Name Node，但是<strong>Redis集群的元数据是保存在各个Redis节点。如果元数据保存在各个节点上，我们需要解决的最重要的问题是如何保证各个节点的元数据一致性。</strong>第一种方法便是每个节点都向其他所有的节点广播自己的元数据内容及元数据版本。每个节点接收到其他节点的元数据之后，如果发现接收到的数据版本比本地的版本更新，便用接收到的数据来更新本地的数据。这样做的好处，便是元数据同步的速度会很快，一旦一个节点的元数据修改，只要网络不断，可以很快的向其他节点同步数据，但是这样带来的坏处就是通信量的剧增。所有集群中的N个节点构成了一个全连接图，那么如果每个节点每100ms进行一次全局广播，那么每一次广播都会广播N^2条信息，这将占据大量的带宽。</p>
+<p>Redis采用<strong>Gossip通信协议来进行集群元数据的同步</strong>。Gossip协议的主要职责就是信息交换。信息交换的载体就是节点彼此发送的Gossip消息。每个Redis都会保存自己视角下的集群中其他节点的状态信息，具体实现中所有的节点信息都存储在clusterNode结构体中。那么使用Gossip协议，集群中的每个节点，每次会随机向几个节点传输自己视角下的集群其他节点状态。如果每次都传输所有的节点状态数据，那么数据体量又会过于庞大，于是Redis集群采用的最终的信息同步方式是： 一个大小为N的集群的每一个节点每次向随机K个其他节点传输自己视角下的随机M个节点的状态。其中M和K都远远小于N。</p>
+<p>虽然Gossip协议的信息交换机制具有天然的分布式特性，但它是有成本的。由于内部需要频繁地进行节点信息交换，而ping/pong消息会携带当前节点和其他M个节点的状态数据，势必会加重带宽和计算的负担。Redis集群内节点通信采用固定频率（定时任务每秒执行10次）。因此节点每次选择需要通信的节点列表变得非常重要。通信节点K选择过大虽然可以做到信息及时交换但成本过高。节点选择K过小会降低集群内所有节点彼此信息交换频率，从而影响故障判定、新节点发现等需求的速度。因此Redis集群的Gossip协议需要兼顾信息交换实时性和成本开销。既然M和N最重要，那么我们就需要知道如何确定M和K的值，以及如何选出K个通信节点以及M个传输状态节点。</p>
+<h4 id="容错"><a href="#容错" class="headerlink" title="容错"></a>容错</h4><p>Redis Cluster可以为每个主节点设置若干个从节点，当主节点发生故障时，集群会自动将其中某个从节点提升为主节点。如果某个主节点没有从节点，那么当他发生故障时，集群将完全处于不可用状态。</p>
+<h4 id="可能下线（PFail）与确认下线（Fail"><a href="#可能下线（PFail）与确认下线（Fail" class="headerlink" title="可能下线（PFail）与确认下线（Fail)"></a>可能下线（PFail）与确认下线（Fail)</h4><p>因为Cluster是去中心化的，一个节点认为某个节点失联了并不代表所有的节点都认为他失联了，所以集群还得经过一次协商的过程。只有大多数节点都认定某个节点失联了，集群才认为该节点需要进行主从切换来容错。</p>
+<p>Redis集群节点采用Gossip协议来广播自己的状态以及改变整个集群的认知。比如一个节点发现某个节点失联了（Possibly Fail），他会将这条信息向整个集群广播，其他节点就可以收到这点的失联信息。</p>
+<p>如果收到了某个节点失联的节点数量达到了集群的大多数，就可以标记该失联节点为确认下线状态。然后向整个集群广播，强迫其他节点也接收该节点已经下线的事实，并立即对该失联节点进行主从切换。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">tongji4m3</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tongji4m3.club/posts/37cf2cfd.html">https://tongji4m3.club/posts/37cf2cfd.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">tongji4m3</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+                                    <span class="chip bg-color">主从复制</span>
+                                </a>
+                            
+                                <a href="/tags/Sentinel/">
+                                    <span class="chip bg-color">Sentinel</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%9B%86%E7%BE%A4/">
+                                    <span class="chip bg-color">集群</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'b3l6kB5FAaRmQL4rJm9sKfxz-gzGzoHsz',
+        appKey: 'T26ixt4nAVDxB4V3gvBDUzP6',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '留下你的足迹吧~'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/ca057823.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="集合基础">
+                        
+                        <span class="card-title">集合基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            集合基础知识，包括集合安全、迭代器机制(快速失败、安全失败机制)、LRU算法等
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E9%9B%86%E5%90%88/" class="post-category">
+                                    Java集合
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%9B%86%E5%90%88%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">集合安全</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%9C%BA%E5%88%B6/">
+                        <span class="chip bg-color">迭代器机制</span>
+                    </a>
+                    
+                    <a href="/tags/LRU%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">LRU算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/83265645.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="Redis设计机制">
+                        
+                        <span class="card-title">Redis设计机制</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            包括缓存（缓存穿透、缓存击穿、缓存雪崩）、过期键删除策略、RDB/AOF持久化等。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Redis/" class="post-category">
+                                    Redis
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BC%93%E5%AD%98/">
+                        <span class="chip bg-color">缓存</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/">
+                        <span class="chip bg-color">持久化</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/">
+                        <span class="chip bg-color">删除策略</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1,h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1,h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">tongji4m3</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">138.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "09";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/tongji4m3" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="javascript:void(0)" class="tooltipped"  data-tooltip="微信联系我:tongji4m3" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="javascript:void(0)" class="tooltipped"  data-tooltip="QQ联系我: 1254931237" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+
+
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

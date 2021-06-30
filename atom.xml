@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>tongji4m3&#39;s Blog</title>
+  
+  <subtitle>tongji4m3</subtitle>
+  <link href="https://tongji4m3.club/atom.xml" rel="self"/>
+  
+  <link href="https://tongji4m3.club/"/>
+  <updated>2021-06-08T03:35:00.503Z</updated>
+  <id>https://tongji4m3.club/</id>
+  
+  <author>
+    <name>tongji4m3</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AQS相关</title>
+    <link href="https://tongji4m3.club/posts/6ab5c4a5.html"/>
+    <id>https://tongji4m3.club/posts/6ab5c4a5.html</id>
+    <published>2021-06-07T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.503Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;阻塞队列&quot;&gt;&lt;a href=&quot;#阻塞队列&quot; class=&quot;headerlink&quot; title=&quot;阻塞队列&quot;&gt;&lt;/a&gt;阻塞队列&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java多线程" scheme="https://tongji4m3.club/categories/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+    <category term="AQS" scheme="https://tongji4m3.club/tags/AQS/"/>
+    
+    <category term="阻塞队列" scheme="https://tongji4m3.club/tags/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/"/>
+    
+    <category term="并发" scheme="https://tongji4m3.club/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Netty</title>
+    <link href="https://tongji4m3.club/posts/1c6ba3e2.html"/>
+    <id>https://tongji4m3.club/posts/1c6ba3e2.html</id>
+    <published>2021-05-26T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.524Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;线程模型&quot;&gt;&lt;a href=&quot;#线程模型&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机网络" scheme="https://tongji4m3.club/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="开源框架" scheme="https://tongji4m3.club/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    <category term="线程模型" scheme="https://tongji4m3.club/tags/%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="设计模式" scheme="https://tongji4m3.club/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>锁</title>
+    <link href="https://tongji4m3.club/posts/d6e0ce95.html"/>
+    <id>https://tongji4m3.club/posts/d6e0ce95.html</id>
+    <published>2021-05-14T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.511Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;ReentrantLock&quot;&gt;&lt;a href=&quot;#ReentrantLock&quot; class=&quot;headerlink&quot; title=&quot;ReentrantLock&quot;&gt;&lt;/a&gt;ReentrantLock&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java多线程" scheme="https://tongji4m3.club/categories/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+    <category term="ReentrantLock" scheme="https://tongji4m3.club/tags/ReentrantLock/"/>
+    
+    <category term="锁" scheme="https://tongji4m3.club/tags/%E9%94%81/"/>
+    
+    <category term="AQS" scheme="https://tongji4m3.club/tags/AQS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络编程基础</title>
+    <link href="https://tongji4m3.club/posts/adcb768c.html"/>
+    <id>https://tongji4m3.club/posts/adcb768c.html</id>
+    <published>2021-05-04T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.700Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;基本套接字编程&quot;&gt;&lt;a href=&quot;#基本套接字编程&quot; class=&quot;headerlink&quot; title=&quot;基本套接字编程&quot;&gt;&lt;/a&gt;基本套接字编程&lt;/h1&gt;&lt;h2 id=&quot;TCP原理&quot;&gt;&lt;a href=&quot;#TCP原理&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机网络" scheme="https://tongji4m3.club/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="IO模型" scheme="https://tongji4m3.club/tags/IO%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="epoll" scheme="https://tongji4m3.club/tags/epoll/"/>
+    
+    <category term="NIO" scheme="https://tongji4m3.club/tags/NIO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>内存模型</title>
+    <link href="https://tongji4m3.club/posts/e6493c73.html"/>
+    <id>https://tongji4m3.club/posts/e6493c73.html</id>
+    <published>2021-04-04T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.509Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;JMM&quot;&gt;&lt;a href=&quot;#JMM&quot; class=&quot;headerlink&quot; title=&quot;JMM&quot;&gt;&lt;/a&gt;JMM&lt;/h1&gt;&lt;h2 id=&quot;对象内存布局&quot;&gt;&lt;a href=&quot;#对象内存布局&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java多线程" scheme="https://tongji4m3.club/categories/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+    <category term="volatile" scheme="https://tongji4m3.club/tags/volatile/"/>
+    
+    <category term="synchronized" scheme="https://tongji4m3.club/tags/synchronized/"/>
+    
+    <category term="CAS" scheme="https://tongji4m3.club/tags/CAS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线程基础</title>
+    <link href="https://tongji4m3.club/posts/b9f6280b.html"/>
+    <id>https://tongji4m3.club/posts/b9f6280b.html</id>
+    <published>2021-03-01T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.514Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;线程&quot;&gt;&lt;a href=&quot;#线程&quot; class=&quot;headerlink&quot; title=&quot;线程&quot;&gt;&lt;/a&gt;线程&lt;/h1&gt;&lt;h2 id=&quot;创建线程&quot;&gt;&lt;a href=&quot;#创建线程&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java多线程" scheme="https://tongji4m3.club/categories/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+    <category term="线程" scheme="https://tongji4m3.club/tags/%E7%BA%BF%E7%A8%8B/"/>
+    
+    <category term="ThreadLocal" scheme="https://tongji4m3.club/tags/ThreadLocal/"/>
+    
+    <category term="线程池" scheme="https://tongji4m3.club/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>类加载机制</title>
+    <link href="https://tongji4m3.club/posts/cd1d308.html"/>
+    <id>https://tongji4m3.club/posts/cd1d308.html</id>
+    <published>2021-02-26T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.521Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java虚拟机" scheme="https://tongji4m3.club/categories/Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    
+    
+    <category term="双亲委派模型" scheme="https://tongji4m3.club/tags/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="生命周期" scheme="https://tongji4m3.club/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+    <category term="类加载器" scheme="https://tongji4m3.club/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>垃圾收集器</title>
+    <link href="https://tongji4m3.club/posts/6158ee9c.html"/>
+    <id>https://tongji4m3.club/posts/6158ee9c.html</id>
+    <published>2021-02-15T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.516Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;判定对象消亡&quot;&gt;&lt;a href=&quot;#判定对象消亡&quot; class=&quot;headerlink&quot; title=&quot;判定对象消亡&quot;&gt;&lt;/a&gt;判定对象消亡&lt;/h1&gt;&lt;h2 id=&quot;引用计数算法&quot;&gt;&lt;a href=&quot;#引用计数算法&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java虚拟机" scheme="https://tongji4m3.club/categories/Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    
+    
+    <category term="引用" scheme="https://tongji4m3.club/tags/%E5%BC%95%E7%94%A8/"/>
+    
+    <category term="算法" scheme="https://tongji4m3.club/tags/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="垃圾收集器" scheme="https://tongji4m3.club/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>运行时数据区</title>
+    <link href="https://tongji4m3.club/posts/11595de.html"/>
+    <id>https://tongji4m3.club/posts/11595de.html</id>
+    <published>2021-01-31T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.518Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;内存区域&quot;&gt;&lt;a href=&quot;#内存区域&quot; class=&quot;headerlink&quot; title=&quot;内存区域&quot;&gt;&lt;/a&gt;内存区域&lt;/h1&gt;&lt;h2 id=&quot;运行时数据区域&quot;&gt;&lt;a href=&quot;#运行时数据区域&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java虚拟机" scheme="https://tongji4m3.club/categories/Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    
+    
+    <category term="运行时数据区" scheme="https://tongji4m3.club/tags/%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/"/>
+    
+    <category term="异常" scheme="https://tongji4m3.club/tags/%E5%BC%82%E5%B8%B8/"/>
+    
+    <category term="工具" scheme="https://tongji4m3.club/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>装饰者模式</title>
+    <link href="https://tongji4m3.club/posts/a708a60d.html"/>
+    <id>https://tongji4m3.club/posts/a708a60d.html</id>
+    <published>2021-01-29T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.528Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;装饰者模式&quot;&gt;&lt;a href=&quot;#装饰者模式&quot; class=&quot;headerlink&quot; title=&quot;装饰者模式&quot;&gt;&lt;/a&gt;装饰者模式&lt;/h1&gt;&lt;h2 id=&quot;理解&quot;&gt;&lt;a href=&quot;#理解&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="设计模式" scheme="https://tongji4m3.club/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="架构" scheme="https://tongji4m3.club/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="IO" scheme="https://tongji4m3.club/tags/IO/"/>
+    
+    <category term="装饰者模式" scheme="https://tongji4m3.club/tags/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>代理模式</title>
+    <link href="https://tongji4m3.club/posts/7b510e10.html"/>
+    <id>https://tongji4m3.club/posts/7b510e10.html</id>
+    <published>2021-01-13T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.631Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;代理模式&quot;&gt;&lt;a href=&quot;#代理模式&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="设计模式" scheme="https://tongji4m3.club/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="架构" scheme="https://tongji4m3.club/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="静态代理" scheme="https://tongji4m3.club/tags/%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86/"/>
+    
+    <category term="动态代理" scheme="https://tongji4m3.club/tags/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单例模式</title>
+    <link href="https://tongji4m3.club/posts/f1601c3e.html"/>
+    <id>https://tongji4m3.club/posts/f1601c3e.html</id>
+    <published>2021-01-02T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.527Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;单例模式&quot;&gt;&lt;a href=&quot;#单例模式&quot; class=&quot;headerlink&quot; title=&quot;单例模式&quot;&gt;&lt;/a&gt;单例模式&lt;/h1&gt;&lt;h2 id=&quot;应用&quot;&gt;&lt;a href=&quot;#应用&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="设计模式" scheme="https://tongji4m3.club/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="volatile" scheme="https://tongji4m3.club/tags/volatile/"/>
+    
+    <category term="枚举" scheme="https://tongji4m3.club/tags/%E6%9E%9A%E4%B8%BE/"/>
+    
+    <category term="单例模式" scheme="https://tongji4m3.club/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Map集合</title>
+    <link href="https://tongji4m3.club/posts/5b59a61f.html"/>
+    <id>https://tongji4m3.club/posts/5b59a61f.html</id>
+    <published>2020-12-27T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.526Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;HashMap&quot;&gt;&lt;a href=&quot;#HashMap&quot; class=&quot;headerlink&quot; title=&quot;HashMap&quot;&gt;&lt;/a&gt;HashMap&lt;/h1&gt;&lt;h2 id=&quot;概览&quot;&gt;&lt;a href=&quot;#概览&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java集合" scheme="https://tongji4m3.club/categories/Java%E9%9B%86%E5%90%88/"/>
+    
+    
+    <category term="HashMap" scheme="https://tongji4m3.club/tags/HashMap/"/>
+    
+    <category term="ConcurrentHashMap" scheme="https://tongji4m3.club/tags/ConcurrentHashMap/"/>
+    
+    <category term="Set" scheme="https://tongji4m3.club/tags/Set/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>List集合</title>
+    <link href="https://tongji4m3.club/posts/cf90fc03.html"/>
+    <id>https://tongji4m3.club/posts/cf90fc03.html</id>
+    <published>2020-12-14T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.523Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;ArrayList&quot;&gt;&lt;a href=&quot;#ArrayList&quot; class=&quot;headerlink&quot; title=&quot;ArrayList&quot;&gt;&lt;/a&gt;ArrayList&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java集合" scheme="https://tongji4m3.club/categories/Java%E9%9B%86%E5%90%88/"/>
+    
+    
+    <category term="ArrayList" scheme="https://tongji4m3.club/tags/ArrayList/"/>
+    
+    <category term="LinkedList" scheme="https://tongji4m3.club/tags/LinkedList/"/>
+    
+    <category term="CopyOnWriteArrayList" scheme="https://tongji4m3.club/tags/CopyOnWriteArrayList/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>集合基础</title>
+    <link href="https://tongji4m3.club/posts/ca057823.html"/>
+    <id>https://tongji4m3.club/posts/ca057823.html</id>
+    <published>2020-12-03T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.520Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java集合" scheme="https://tongji4m3.club/categories/Java%E9%9B%86%E5%90%88/"/>
+    
+    
+    <category term="集合安全" scheme="https://tongji4m3.club/tags/%E9%9B%86%E5%90%88%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="迭代器机制" scheme="https://tongji4m3.club/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%9C%BA%E5%88%B6/"/>
+    
+    <category term="LRU算法" scheme="https://tongji4m3.club/tags/LRU%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis集群</title>
+    <link href="https://tongji4m3.club/posts/37cf2cfd.html"/>
+    <id>https://tongji4m3.club/posts/37cf2cfd.html</id>
+    <published>2020-11-28T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.697Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;主从复制&quot;&gt;&lt;a href=&quot;#主从复制&quot; class=&quot;headerlink&quot; title=&quot;主从复制&quot;&gt;&lt;/a&gt;主从复制&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Redis" scheme="https://tongji4m3.club/categories/Redis/"/>
+    
+    
+    <category term="主从复制" scheme="https://tongji4m3.club/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"/>
+    
+    <category term="Sentinel" scheme="https://tongji4m3.club/tags/Sentinel/"/>
+    
+    <category term="集群" scheme="https://tongji4m3.club/tags/%E9%9B%86%E7%BE%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis设计机制</title>
+    <link href="https://tongji4m3.club/posts/83265645.html"/>
+    <id>https://tongji4m3.club/posts/83265645.html</id>
+    <published>2020-11-13T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.640Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Redis简介&quot;&gt;&lt;a href=&quot;#Redis简介&quot; class=&quot;headerlink&quot; title=&quot;Redis简介&quot;&gt;&lt;/a&gt;Redis简介&lt;/h1&gt;&lt;p&gt;它支持多种类型的数据结构，如 字符串（strings）， 散列（hashes），</summary>
+        
+      
+    
+    
+    
+    <category term="Redis" scheme="https://tongji4m3.club/categories/Redis/"/>
+    
+    
+    <category term="缓存" scheme="https://tongji4m3.club/tags/%E7%BC%93%E5%AD%98/"/>
+    
+    <category term="持久化" scheme="https://tongji4m3.club/tags/%E6%8C%81%E4%B9%85%E5%8C%96/"/>
+    
+    <category term="删除策略" scheme="https://tongji4m3.club/tags/%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis数据结构</title>
+    <link href="https://tongji4m3.club/posts/85682d75.html"/>
+    <id>https://tongji4m3.club/posts/85682d75.html</id>
+    <published>2020-10-31T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.636Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;底层数据结构&quot;&gt;&lt;a href=&quot;#底层数据结构&quot; class=&quot;headerlink&quot; title=&quot;底层数据结构&quot;&gt;&lt;/a&gt;底层数据结构&lt;/h1&gt;&lt;h2 id=&quot;简单动态字符串&quot;&gt;&lt;a href=&quot;#简单动态字符串&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Redis" scheme="https://tongji4m3.club/categories/Redis/"/>
+    
+    
+    <category term="数据结构" scheme="https://tongji4m3.club/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="对象" scheme="https://tongji4m3.club/tags/%E5%AF%B9%E8%B1%A1/"/>
+    
+    <category term="开源框架" scheme="https://tongji4m3.club/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL慢查询与优化</title>
+    <link href="https://tongji4m3.club/posts/1cb7ab34.html"/>
+    <id>https://tongji4m3.club/posts/1cb7ab34.html</id>
+    <published>2020-10-26T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.638Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;慢日志&quot;&gt;&lt;a href=&quot;#慢日志&quot; class=&quot;headerlink&quot; title=&quot;慢日志&quot;&gt;&lt;/a&gt;慢日志&lt;/h1&gt;&lt;pre class=&quot; language-mysql&quot;&gt;&lt;code class=&quot;language-mysql&quot;&gt;SHOW</summary>
+        
+      
+    
+    
+    
+    <category term="MySQL" scheme="https://tongji4m3.club/categories/MySQL/"/>
+    
+    
+    <category term="优化" scheme="https://tongji4m3.club/tags/%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="explain" scheme="https://tongji4m3.club/tags/explain/"/>
+    
+    <category term="慢查询" scheme="https://tongji4m3.club/tags/%E6%85%A2%E6%9F%A5%E8%AF%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL事务</title>
+    <link href="https://tongji4m3.club/posts/f91535f.html"/>
+    <id>https://tongji4m3.club/posts/f91535f.html</id>
+    <published>2020-10-12T16:00:00.000Z</published>
+    <updated>2021-06-08T03:35:00.633Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;事务概述&quot;&gt;&lt;a href=&quot;#事务概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="MySQL" scheme="https://tongji4m3.club/categories/MySQL/"/>
+    
+    
+    <category term="锁" scheme="https://tongji4m3.club/tags/%E9%94%81/"/>
+    
+    <category term="事务" scheme="https://tongji4m3.club/tags/%E4%BA%8B%E5%8A%A1/"/>
+    
+    <category term="MVCC" scheme="https://tongji4m3.club/tags/MVCC/"/>
+    
+  </entry>
+  
+</feed>
