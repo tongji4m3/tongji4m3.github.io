@@ -22,9 +22,9 @@
             
             <tag> 数据结构 </tag>
             
-            <tag> Redis </tag>
-            
             <tag> 数据库 </tag>
+            
+            <tag> Redis </tag>
             
         </tags>
       
@@ -194,9 +194,9 @@
       
         <tags>
             
-            <tag> 数据库 </tag>
-            
             <tag> 索引 </tag>
+            
+            <tag> 数据库 </tag>
             
             <tag> 事务 </tag>
             
