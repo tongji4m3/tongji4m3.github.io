@@ -93,14 +93,14 @@
   </url>
   
   <url>
-    <loc>https://tongji4m3.club/contact/index.html</loc>
+    <loc>https://tongji4m3.club/categories/index.html</loc>
     
     <lastmod>2021-07-02</lastmod>
     
   </url>
   
   <url>
-    <loc>https://tongji4m3.club/categories/index.html</loc>
+    <loc>https://tongji4m3.club/contact/index.html</loc>
     
     <lastmod>2021-07-02</lastmod>
     
@@ -298,7 +298,7 @@
   </url>
   
   <url>
-    <loc>https://tongji4m3.club/tags/%E7%B4%A2%E5%BC%95/</loc>
+    <loc>https://tongji4m3.club/tags/Redis/</loc>
     <lastmod>2021-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -312,14 +312,14 @@
   </url>
   
   <url>
-    <loc>https://tongji4m3.club/tags/%E4%BA%8B%E5%8A%A1/</loc>
+    <loc>https://tongji4m3.club/tags/%E7%B4%A2%E5%BC%95/</loc>
     <lastmod>2021-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://tongji4m3.club/tags/Redis/</loc>
+    <loc>https://tongji4m3.club/tags/%E4%BA%8B%E5%8A%A1/</loc>
     <lastmod>2021-08-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
