@@ -1,0 +1,2753 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java虚拟机, tongji4m3&#39;s Blog">
+    <meta name="description" content="你日渐平庸，甘于平庸，将继续平庸。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="baidu-site-verification" content="code-MyLOF51Lns" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="google-site-verification" content="cb_eRUNfSOmCVjXFsefzdRthA-wzRyT6ws4hOMuQyUA" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Java虚拟机 | tongji4m3&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">tongji4m3&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">tongji4m3&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            你日渐平庸，甘于平庸，将继续平庸。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/tongji4m3" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/tongji4m3" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java虚拟机</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/">
+                                <span class="chip bg-color">内存区域</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                                <span class="chip bg-color">垃圾回收</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
+                                <span class="chip bg-color">类加载机制</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Java%E7%9B%B8%E5%85%B3/" class="post-category">
+                                Java相关
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-05-21
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    21.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    78 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Java内存区域"><a href="#Java内存区域" class="headerlink" title="Java内存区域"></a>Java内存区域</h1><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210724132632369.png" alt="image-20210724132632369"></p>
+<h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><ul>
+<li>当前线程所执行字节码的行号指示器，字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令</li>
+<li>多线程是通过线程轮流切换、分配处理器执行时间的方式来实现的。某一刻，一个处理器只会执行一个线程中的指令。为了线程切换后能够恢复到正确的执行位置，每条线程都需要一个独立的程序计数器</li>
+<li>即线程私有的内存</li>
+<li>Java方法，则记录正在执行的虚拟机字节码指令的地址；Native方法，则计数器值为空</li>
+<li>唯一一个没有OutOfMemoryError情况的区域</li>
+</ul>
+<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><ul>
+<li>线程私有，生命周期与线程相同</li>
+<li>虚拟机栈描述的是Java方法执行的线程内存模型：每个方法被执行的时候，JVM都会创建一个栈帧，用于存储局部变量表、操作数栈、动态连接、方法出口等信息。每个方法被调用直到执行完毕的过程，就对应一个栈帧从入栈到出栈的过程</li>
+</ul>
+<p><strong>栈帧</strong></p>
+<ul>
+<li>局部变量表<ul>
+<li>存储编译器可知的数据：基本数据类型、对象引用、returnAddress类型（指向一条字节码指令的地址）</li>
+<li>以局部变量槽存储，其中64位的long和double占用两个变量槽</li>
+<li>所需的内存空间在编译期间完成分配，进入一个方法时，这个方法需要在栈帧中分配多大的局部变量空间完全确定</li>
+</ul>
+</li>
+<li>操作数栈</li>
+<li>动态连接</li>
+<li>方法出口</li>
+</ul>
+<p><strong>异常</strong></p>
+<ul>
+<li>StackOverflowError异常：线程请求的栈深度大于虚拟机所允许的深度</li>
+<li>OutOfMemoryError异常<ul>
+<li>如果虚拟机栈容量允许动态扩展，当栈扩展时无法申请到足够的内存时</li>
+<li>HotSpot栈容量不允许动态扩展，所以不会由于虚拟机栈无法动态扩展而导致OOM，只要线程申请栈空间成功就不会OOM，但是申请时就失败则仍然会OOM</li>
+</ul>
+</li>
+</ul>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><ul>
+<li>虚拟机栈是为JVM执行Java方法（字节码）服务，本地方法栈是为了使用Native方法服务</li>
+<li>HotSpot虚拟机把虚拟机栈，本地方法栈合二为一了</li>
+</ul>
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><ul>
+<li>Java堆是被所有线程共享的一块内存区域，在JVM启动时创建，用于存放对象实例</li>
+<li>几乎所有对象实例都在这里分配内存<ul>
+<li>所有的对象实例以及数组都应在堆上分配</li>
+<li>由于逃逸分析技术，一些优化手段如栈上分配、标量替换等，使得对象实例都分配在堆上不是这么绝对</li>
+</ul>
+</li>
+<li>是垃圾收集器管理的内存区域</li>
+<li>从分配内存的角度看，所有线程共享的Java堆可以划分出多个线程私有的分配缓冲区以提升对象分配时的效率：Thread Local Allocation Buffer(TLAB)</li>
+<li>可以处于物理上不连续的内存空间中，但在逻辑上是连续的。但对于大对象，例如数组对象，多数虚拟机都处于实现简单、存储高效的考虑，可能要求连续的内存空间</li>
+<li>Java堆通常是可扩展的，通过参数-Xms、-Xmx设定</li>
+<li>如果堆中没有内存完成实例分配，并且堆无法扩展，则抛出OOM异常</li>
+</ul>
+<p><strong>字符串常量池</strong></p>
+<p>和String最相关的是字符串池（String Pool），它和运行时常量池是两个完全不同的存储区域，字符串常量池是全局共享的。字符串调用String.intern()方法后，其引用就存放在String Pool中。</p>
+<p>jdk1.8中 字符串常量池是在堆里面。</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><ul>
+<li>是各个线程共享的内存区域</li>
+<li>存储已被虚拟机加载的类型信息（包括类的名称、方法信息、字段信息）、常量、静态变量、即时编译器编译后的代码缓存数据等</li>
+<li>《Java虚拟机规范》对方法区的约束是非常宽松的，它可以不需要连续的内存空间，可以选择固定大小或可扩展，甚至可以选择不进行垃圾回收</li>
+<li>内存回收目标主要是针对常量池的回收和类型的卸载</li>
+<li>方法区无法满足新的内存分配需求时，抛出OOM异常</li>
+</ul>
+<p><strong>运行时常量池</strong></p>
+<ul>
+<li>运行时常量池是方法区的一部分</li>
+<li>除了保存Class文件中描述的符号引用，还会把由符号引用翻译出来的直接引用也存储在运行时常量池中</li>
+<li>与Class文件常量池区别是具备动态性。即常量不一定只有编译期产生，即并不是预置于Class文件中常量池的内容才能进入方法区运行时常量池，运行期间也可以把新的常量放入池中，例如String的intern()方法。</li>
+<li>无法满足新的内存分配需求时，抛出OOM异常</li>
+</ul>
+<p>运行时常量池是方法区的一部分，是一块内存区域。Class 文件常量池将在类加载后进入方法区的运行时常量池中存放。一个类加载到 JVM 中后对应一个运行时常量池，运行时常量池相对于 Class 文件常量池来说具备动态性，Class 文件常量只是一个静态存储结构，里面的引用都是符号引用。而运行时常量池可以在运行期间将符号引用解析为直接引用。可以说运行时常量池就是用来索引和查找字段和方法名称和描述符的。给定任意一个方法或字段的索引，通过这个索引最终可得到该方法或字段所属的类型信息和名称及描述符信息，这涉及到方法的调用和字段获取。</p>
+<p>当一个类被加载之后，类信息就存储在非堆的方法区中。在方法区中，有一块叫做<strong>运行时常量池（Runtime Constant Pool）</strong>,它是每个类私有的，每个class文件中的“常量池”被加载器加载之后就映射存放在这</p>
+<p><strong>class文件信息</strong></p>
+<ul>
+<li>类的版本、字段、方法、接口等</li>
+<li>常量池表：存放编译期生成的各种字面量与符号引用，在类加载后存放到方法区的运行时常量池中</li>
+</ul>
+<p>Class 文件常量池指的是编译生成的 class 字节码文件，其结构中有一项是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池中存放。</p>
+<p>这里的字面量是指字符串字面量和声明为 final 的（基本数据类型）常量值，这些字符串字面量除了类中所有双引号括起来的字符串(包括方法体内的)，还包括所有用到的类名、方法的名字和这些类与方法的字符串描述、字段(成员变量)的名称和描述符；声明为final的常量值指的是成员变量，不包含本地变量，本地变量是属于方法的。这些都在常量池的 UTF-8 表中(逻辑上的划分)；</p>
+<p>符号引用，就是指指向 UTF-8 表中向这些字面量的引用，包括类和接口的全限定名(包括包路径的完整名)、字段的名称和描述符、方法的名称和描述符。只不过是以一组符号来描述所引用的目标，和内存并无关，所以称为符号引用，直接指向内存中某一地址的引用称为直接引用；</p>
+<p><strong>元空间</strong></p>
+<ul>
+<li>元空间” 和 “方法区”，一个是HotSpot 的具体实现技术，一个是JVM规范的抽象定义；</li>
+<li>类型信息全部移到元空间中</li>
+<li>元空间是使用本地内存（Native Memory）实现的，也就是说它的内存是不在虚拟机内的，所以可以理论上物理机器还有多个内存就可以分配，而不用再受限于JVM本身分配的内存了</li>
+</ul>
+<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><ul>
+<li>不是运行时数据区的一部分，但是频繁使用到，也会OOM</li>
+<li>NIO引入了基于管道与缓冲区的IO方式，可以使用Native函数库直接分配堆外内存</li>
+<li>直接内存的分配不会受到堆的大小限制，但受到本机总内存限制</li>
+</ul>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><ul>
+<li>能否在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析、初始化过。没有则执行类加载过程</li>
+<li>在类加载通过后，为新生对象分配内存空间，类加载完成时即可确定对象所需的内存大小。为对象分配内存空间相当于把一块固定大小的内存块从Java堆中划分出来<ul>
+<li><strong>堆中内存分配</strong><ul>
+<li>绝对规整则采用<strong>指针碰撞</strong>，所有被使用过的内存都被放在一边，空闲的内存在另一边，中间放这一个指针作为分界点的指示器。分配内存就是把那个指针向空闲空间方向挪动一段和对象内存大小相等的距离</li>
+<li>否则<strong>空闲列表</strong>：空闲链表记录哪块内存块是可用的。在分配时从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录</li>
+<li>是否规整由所采用的垃圾收集器是否带有空间压缩整理（Compact）的能力决定：Serial、ParNew带压缩整理、CMS基于清除（Sweep）算法，不带压缩整理</li>
+</ul>
+</li>
+<li><strong>分配内存有并发性</strong><ul>
+<li>例如仅仅修改一个指针所指向的位置，在并发情况下也不是线程安全的，可能出现正在给对象A分配内存，指针还没来得及修改，对象B又同时使用原来的指针来分配内存的情况</li>
+<li>可以对分配内存空间的动作进行同步处理，采用<strong>CAS配上失败重试</strong>来保证更新操作的原子性</li>
+<li>或把内存分配的动作按照线程划分在不同的空间之中进行，即每个线程在堆中预先分配一小块内存，称为本地线程分配缓存<strong>TLAB</strong>，哪个线程需要分配内存，就在他的TLAB中分配，本地缓冲区用完才需要同步锁定。</li>
+</ul>
+</li>
+<li>为分配到的内存空间（不包括对象头）都初始化为零值，保证了对象的实例字段在代码中可以不赋初始值即可使用</li>
+</ul>
+</li>
+<li>对对象进行相应设置（存放在对象头中）：例如这个对象是哪个类的实例、如何能找到类的元数据信息、对象的哈希码（延后到真正调用Object::HashCode()方法才计算）、对象的GC分代年龄</li>
+<li>此时Class文件的<init>方法还没有执行，所有字段都为默认的零值。所以要执行构造函数<init>()方法，按照程序员的意愿对对象进行初始化</li>
+</ul>
+<h3 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h3><ul>
+<li>对象头(Header)<ul>
+<li><strong>Mark Word</strong><ul>
+<li>存储自身的运行时数据，如HashCode、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳</li>
+<li>在32位和64位（未开启压缩指针）虚拟机中分别位32比特和64比特</li>
+<li>有着动态定义的数据结构，根据对象的状态复用自己的存储空间</li>
+</ul>
+</li>
+<li><strong>类型指针</strong><ul>
+<li>指向对象的类型元数据的指针</li>
+<li>查找对象的元数据信息并不一定要经过对象本身</li>
+</ul>
+</li>
+<li><strong>记录数组长度的数据</strong><ul>
+<li>虚拟机可以通过元数据信息确定Java对象的大小，但是如果数组的长度不确定，无法通过元数据信息推断数组的大小</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实例数据（Instance Data)<ul>
+<li>对象真正存储的有效信息，即定义的各种类型的字段内容</li>
+<li>无论是从父类继承的还是子类中定义的都记录</li>
+<li>存储顺序策略<ul>
+<li>longs/doubles、ints、shorts、chars、bytes/booleans、oops（Ordinary Object Pointers）</li>
+<li>相同宽度的字段分配在一起存放</li>
+<li>满足上面情况下，父类中定义的变量在子类之前</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对齐填充（Padding）<ul>
+<li>对象起始地址必须是8字节的整数倍</li>
+<li>对象头已经是8字节的整数倍了（1倍或两倍）</li>
+</ul>
+</li>
+</ul>
+<h3 id="对象访问定位"><a href="#对象访问定位" class="headerlink" title="对象访问定位"></a>对象访问定位</h3><ul>
+<li>通过栈上的reference数据来操作堆上的具体对象</li>
+<li>访问堆对象具体位置<ul>
+<li>句柄访问<ul>
+<li>划分一部分为句柄池</li>
+<li>reference中存储对象的句柄地址</li>
+<li>句柄中包含对象实例数据和类型数据各自具体的地址</li>
+<li>存储的是稳定句柄地址，对象移动只改变句柄，不需要改变reference</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210724135519423.png" alt="image-20210724135519423"></li>
+</ul>
+</li>
+<li>直接指针访问<ul>
+<li>reference中直接存储对象地址</li>
+<li>速度更快，节省了一次指针定位的时间开销</li>
+<li>HotSpot采用直接指针访问</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210724135542539.png" alt="image-20210724135542539"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="异常演示"><a href="#异常演示" class="headerlink" title="异常演示"></a>异常演示</h2><h3 id="Java堆异常"><a href="#Java堆异常" class="headerlink" title="Java堆异常"></a>Java堆异常</h3><p>只要不断创建对象，并且保证GC Roots到对象之间有可达路径来避免垃圾回收机制清除这些对象，总容量触及最大堆容量限制即OOM</p>
+<p>设置堆最小值 -Xms参数和堆最大值参数 -Xmx一样即可避免堆自动扩展</p>
+<p>-XX:+HeapDumpOnOutOfMemoryError 可以让虚拟机再出现内存溢出异常时Dump出当前内存堆存储快照以便事后分析</p>
+<pre><code>-Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>tongji<span class="token punctuation">.</span>test<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HeapOOM</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">OOMObject</span><span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span>OOMObject<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">OOMObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java">Exception in thread <span class="token string">"main"</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>OutOfMemoryError<span class="token operator">:</span> Java heap space</code></pre>
+<p><strong>处理方法</strong></p>
+<ul>
+<li>通过内存映像分析工具对Dump出来的堆存储快照进行分析</li>
+<li>首先确认内存中导致OOM的对象是否有必要存在，即是出现内存泄漏，还是内存溢出<ul>
+<li>内存泄漏，则查看泄漏对象到GC Roots的引用链，找到泄漏对象是通过怎样的引用路径、与哪些GC Roots相关联，才导致垃圾收集器无法回收他们</li>
+<li>内存溢出，则内存中对象确实是必须存活的，就应该检查堆参数设置（-Xms -Xmx），与机器内存对比，是否有向上调整的空间，再从代码中检查是否存在某些对象生命周期过长、持有状态时间过长、存储结构设置不合理等，尽量减少程序运行期的内存消耗</li>
+</ul>
+</li>
+</ul>
+<h3 id="虚拟机栈和本地方法栈溢出"><a href="#虚拟机栈和本地方法栈溢出" class="headerlink" title="虚拟机栈和本地方法栈溢出"></a>虚拟机栈和本地方法栈溢出</h3><p><strong>原理</strong></p>
+<ul>
+<li>线程请求的栈深度大于虚拟机所允许的深度抛出StackOverflowError异常，例如调用的方法太多（递归）</li>
+<li>如果虚拟机栈容量允许动态扩展，当栈扩展时无法申请到足够的内存时抛出OutOfMemoryError异常<ul>
+<li>HotSpot栈容量不允许动态扩展，所以不会由于虚拟机栈无法动态扩展而导致OOM，只要线程申请栈空间成功就不会OOM，但是申请时就失败则仍然会OOM</li>
+<li>否则线程运行时不会因为扩展而导致内存溢出，只会因为栈容量无法容纳新的栈帧导致StackOverflowError异常</li>
+</ul>
+</li>
+<li>写一个死递归程序触发</li>
+</ul>
+<p><strong>实验</strong></p>
+<ul>
+<li>使用-Xss减少栈内存容量</li>
+<li>定义大量本地变量，增大次方法帧中本地变量表的长度</li>
+<li>无论是栈帧太大还是虚拟机容量太小，当新的栈帧内存无法分配时，抛出的都是StackOverflowError异常</li>
+<li>有明确的错误栈帧可供分析，栈深度达到1000-2000完全没问题，对于正常的方法调用完全足够了</li>
+</ul>
+<p><strong>使用-Xss减少栈内存容量</strong></p>
+<pre><code>-Xss128k</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>tongji<span class="token punctuation">.</span>test<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StackSOF</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> stackLength <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">stackLeak</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        stackLength<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token function">stackLeak</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        StackSOF oom <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StackSOF</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            oom<span class="token punctuation">.</span><span class="token function">stackLeak</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"stack length:"</span><span class="token operator">+</span>oom<span class="token punctuation">.</span>stackLength<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre><code>stack length:985
+java.lang.StackOverflowError</code></pre>
+<p><strong>定义大量本地变量，增大次方法帧中本地变量表的长度</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>tongji<span class="token punctuation">.</span>test<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StackSOF</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> stackLength <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">stackLeak</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">long</span> unused0<span class="token punctuation">,</span> unused1<span class="token punctuation">,</span> unused2<span class="token punctuation">,</span> unused3<span class="token punctuation">;</span>
+        <span class="token keyword">long</span> unused10<span class="token punctuation">,</span> unused11<span class="token punctuation">,</span> unused12<span class="token punctuation">,</span> unused13<span class="token punctuation">;</span>
+        <span class="token keyword">long</span> unused20<span class="token punctuation">,</span> unused21<span class="token punctuation">,</span> unused22<span class="token punctuation">,</span> unused23<span class="token punctuation">;</span>
+        stackLength<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token function">stackLeak</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        unused0 <span class="token operator">=</span> unused1 <span class="token operator">=</span> unused2 <span class="token operator">=</span> unused3 <span class="token operator">=</span>
+                unused10 <span class="token operator">=</span> unused11 <span class="token operator">=</span> unused12 <span class="token operator">=</span> unused13 <span class="token operator">=</span>
+                        unused20 <span class="token operator">=</span> unused21 <span class="token operator">=</span> unused22 <span class="token operator">=</span> unused23 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        StackSOF oom <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StackSOF</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            oom<span class="token punctuation">.</span><span class="token function">stackLeak</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"stack length:"</span> <span class="token operator">+</span> oom<span class="token punctuation">.</span>stackLength<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre><code>stack length:311
+java.lang.StackOverflowError</code></pre>
+<h3 id="方法区和运行时常量池的溢出"><a href="#方法区和运行时常量池的溢出" class="headerlink" title="方法区和运行时常量池的溢出"></a>方法区和运行时常量池的溢出</h3><ul>
+<li>基本思路是运行时产生大量的类去填满方法区直到溢出为止</li>
+<li>许多框架如Spring，都会使用CGLib这类字节码技术，当增强的类越多，就需要越大的方法区以保证动态生成的新类型可以载入内存</li>
+<li>方法区是常见的内存溢出异常，因为一个类如果要被垃圾收集器回收，要达成的条件比较苛刻。在经常运行生成大量动态类的应用场景中，就应该特别关注这些类的回收状况</li>
+<li>JDK8后，使用了元空间，正常的动态创建新类型的测试用例很难迫使虚拟机产生方法区的溢出异常了</li>
+<li>-XX:MaxMetaspaceSize设置元空间最大值，默认是-1，即不限制，或者说只限制与本地内存大小</li>
+<li>-XX:MetaspaceSize指定元空间初始空间大小，以字节为单位，达到该值则触发垃圾收集进行类型卸载</li>
+<li>-XX:MinMetaspaceFreeRatio在垃圾收集之后控制最小的元空间剩余容量百分比，可以减少因为元空间不足导致的垃圾收集的频率</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>tongji<span class="token punctuation">.</span>test<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>cglib<span class="token punctuation">.</span>proxy<span class="token punctuation">.</span>Enhancer<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>cglib<span class="token punctuation">.</span>proxy<span class="token punctuation">.</span>MethodInterceptor<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>cglib<span class="token punctuation">.</span>proxy<span class="token punctuation">.</span>MethodProxy<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>Method<span class="token punctuation">;</span>
+
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JavaMethodAreaOOM</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">OOMObject</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Enhancer enhancer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Enhancer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            enhancer<span class="token punctuation">.</span><span class="token function">setSuperclass</span><span class="token punctuation">(</span>OOMObject<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            enhancer<span class="token punctuation">.</span><span class="token function">setUseCache</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            enhancer<span class="token punctuation">.</span><span class="token function">setCallback</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">MethodInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token annotation punctuation">@Override</span>
+                <span class="token keyword">public</span> Object <span class="token function">intercept</span><span class="token punctuation">(</span>Object o<span class="token punctuation">,</span> Method method<span class="token punctuation">,</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> objects<span class="token punctuation">,</span> MethodProxy methodProxy<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> methodProxy<span class="token punctuation">.</span><span class="token function">invokeSuper</span><span class="token punctuation">(</span>objects<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="本地直接内存溢出"><a href="#本地直接内存溢出" class="headerlink" title="本地直接内存溢出"></a>本地直接内存溢出</h3><ul>
+<li>容量大小通过-XX:MaxDirectMemorySize指定,默认与Java堆最大值(-Xmx)一致</li>
+<li>由直接内存溢出明显特征是Heap Dump中看不见什么异常情况,如果发现内存溢出后Dump文件很小,而又使用了DirectMemory(如NIO),则可以重点检查下直接内存方面的原因</li>
+<li>通过反射获取Unsafe类，并不断分配内存给静态常量</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>tongji<span class="token punctuation">.</span>test<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> sun<span class="token punctuation">.</span>misc<span class="token punctuation">.</span>Unsafe<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span>Field<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DirectMemoryOOM</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> _1MB <span class="token operator">=</span> <span class="token number">1024</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> IllegalAccessException <span class="token punctuation">{</span>
+        Field unsafeField <span class="token operator">=</span> Unsafe<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        unsafeField<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Unsafe unsafe <span class="token operator">=</span> <span class="token punctuation">(</span>Unsafe<span class="token punctuation">)</span> unsafeField<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            unsafe<span class="token punctuation">.</span><span class="token function">allocateMemory</span><span class="token punctuation">(</span>_1MB<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java">Exception in thread <span class="token string">"main"</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>OutOfMemoryError
+    at sun<span class="token punctuation">.</span>misc<span class="token punctuation">.</span>Unsafe<span class="token punctuation">.</span><span class="token function">allocateMemory</span><span class="token punctuation">(</span>Native Method<span class="token punctuation">)</span>
+    at com<span class="token punctuation">.</span>tongji<span class="token punctuation">.</span>test<span class="token punctuation">.</span>DirectMemoryOOM<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span>DirectMemoryOOM<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">)</span></code></pre>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><h2 id="基础故障处理工具"><a href="#基础故障处理工具" class="headerlink" title="基础故障处理工具"></a>基础故障处理工具</h2><ul>
+<li>这些命令行工具大多仅是一层薄包装，真正的功能代码是实现在JDK的工具类库里</li>
+<li>借助这些工具类库，应用程序部署生产环境后，开发者可以选择直接在应用程序中提供功能强大的监控分析功能</li>
+</ul>
+<h3 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h3><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608769939_1.png" alt="img"></p>
+<ul>
+<li>JVM Process Status</li>
+<li>虚拟机进程状况工具</li>
+<li>是使用频率最高的JDK命令行工具</li>
+<li>列出正在运行的虚拟机进程</li>
+<li>显示虚拟机执行主类名称（main()方法所在的类）、这些进程的本地虚拟机唯一ID（LVMID） Local Virtual Machine Identifier</li>
+<li>其他JDK工具需要他查询到的LVMID来确定要监控的是哪一个虚拟机进程</li>
+<li>对于本地虚拟机进程，LVMID与PID一致；ps指令也可以查询到虚拟机进程的LVMID，但如果同时启动多个虚拟机进程，则必须依赖jps命令显示主类的功能</li>
+</ul>
+<p><strong>参数</strong></p>
+<p>jps -l</p>
+<p>输出主类的全名，如果进程执行的是JAR包，则输出JAR的路径</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608770201_2.png" alt="img"></p>
+<p>jps -v</p>
+<p>输出虚拟机进程启动时的JVM参数</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608770291_3.png" alt="img"></p>
+<h3 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h3><ul>
+<li>虚拟机统计信息监视工具</li>
+<li>JVM Statistics Monitoring Tool</li>
+<li>用于监视虚拟机各种运行状态信息的命令行工具</li>
+<li>显示本地或远程虚拟机进程中的类加载，内存，垃圾回收，即时编译器等运行时数据</li>
+<li>在只提供控制台环境的服务器，他是运行期定位虚拟机性能问题的常用工具</li>
+</ul>
+<p><strong>参数</strong></p>
+<ul>
+<li><p>jstat [ option vmid [interval [s|ms] [count] ] ]</p>
+</li>
+<li><p>本地虚拟机进程，则VMID与LVMID一致</p>
+</li>
+<li><p>interval和count代表查询间隔和次数，忽略则只查询一次</p>
+</li>
+<li><p>例如 jstat -gc 4218 250 5</p>
+<ul>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608770710_4.png" alt="img"></li>
+</ul>
+</li>
+<li><p>jstat -gcutil 4218</p>
+<ul>
+<li>输出已使用空间占总空间百分比</li>
+<li>Eden使用了78.74%，S0为空，S1使用32.88%</li>
+<li>老年代（O）使用了61.65%</li>
+<li>元空间（M）使用了94.75</li>
+<li>程序运行以来Minor GC（YGC）发生了603次，用了4.85s</li>
+<li>发生Full GC(FGC)5次，用了1.611s</li>
+<li>所有GC总耗时（GCT）为6.462s</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608770952_6.png" alt="img"></li>
+</ul>
+</li>
+</ul>
+<h3 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h3><ul>
+<li>Java内存映像工具</li>
+<li>Memory Map for Java</li>
+<li>jmap -dump:live,format=b,file=a.log 4218<ul>
+<li>用于生成堆转储快照</li>
+<li>再把生成的a.log进行分析</li>
+</ul>
+</li>
+<li>jmap -heap 4218<ul>
+<li>显示Java堆详细详细，如使用哪种回收器，参数配置，分代情况等</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608772363_7.png" alt="img"></li>
+</ul>
+</li>
+</ul>
+<h3 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h3><ul>
+<li>Java堆栈跟踪工具</li>
+<li>Stack Trace for Java</li>
+<li>用于生成虚拟机当前时刻的线程快照<ul>
+<li>即当前虚拟机内每一条线程正在执行的方法堆栈的集合</li>
+<li>目的是定位线程出现长时间停顿的原因</li>
+<li>如线程间死锁、死循环、请求外部资源导致的长时间挂起等</li>
+<li>线程出现停顿时，通过jstack来查看各个线程的调用堆栈，就可以获知没有响应的线程到底在后台做什么事情，或者等待什么资源</li>
+</ul>
+</li>
+<li>jstack -l 4218 ：-l 除堆栈外，显示关于锁的附加信息<ul>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608772914_8.png" alt="img"></li>
+</ul>
+</li>
+</ul>
+<h2 id="可视化故障处理工具"><a href="#可视化故障处理工具" class="headerlink" title="可视化故障处理工具"></a>可视化故障处理工具</h2><h3 id="JConsole"><a href="#JConsole" class="headerlink" title="JConsole"></a>JConsole</h3><ul>
+<li>Java监视与管理控制台</li>
+<li>通过JDK/bin命令下的jconsole.exe启动JConsole</li>
+<li>他会自动搜索出本机运行的所有虚拟机进程，即完成jps的功能</li>
+</ul>
+<h4 id="内存监控"><a href="#内存监控" class="headerlink" title="内存监控"></a>内存监控</h4><ul>
+<li>相当于可视化的jstat命令</li>
+<li>用于监视被收集器管理的虚拟机内存</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//-Xms100m -Xmx100m -XX:+UseSerialGC</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//内存占位符对象,一个OOM大约64KB</span>
+    <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">OOMObject</span> <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> placeholder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">64</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">fillHeap</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException <span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span>OOMObject<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//让监视曲线变化更加明显</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">OOMObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span><span class="token function">gc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException <span class="token punctuation">{</span>
+        <span class="token function">fillHeap</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<ul>
+<li>Eden区的运行趋势呈折现状</li>
+<li>整个堆曲线平滑向上增长</li>
+<li>在System.GC后，Eden与Survivor区被清空，但是老年代的保持峰值，说明被填充进堆中的数据在System.gc（）后仍然存活</li>
+<li>在System.gc();时，list对象仍然处于作用域之内，就不会回收，如果把System.gc();移动到方法外调用即可回收掉全部内存</li>
+</ul>
+<h4 id="线程监控"><a href="#线程监控" class="headerlink" title="线程监控"></a>线程监控</h4><ul>
+<li>相当于jstack，遇到线程停顿的时候用</li>
+</ul>
+<p><strong>案例</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//线程死循环演示</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">createBusyThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//第12行</span>
+
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"testBusyThread"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//线程锁等待演示</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">createLockThread</span><span class="token punctuation">(</span><span class="token keyword">final</span> Object lock<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>lock<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                        lock<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"testLockThread"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
+        BufferedReader bufferedReader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bufferedReader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">createBusyThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bufferedReader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Object object <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">createLockThread</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<ul>
+<li>首先在线程页签中选择main线程<ul>
+<li>堆栈追踪显示BufferedReader的readBytes()方法正在等待System.in的键盘输入</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608775371_11.png" alt="img"></li>
+</ul>
+</li>
+<li>接着监控testBusyThread线程<ul>
+<li>他一直在执行空循环</li>
+<li>一直在第14行停留，即while(true)</li>
+<li>线程为Runnable状态，而且没有归还线程执行令牌的动作，所以会在空循环耗尽操作系统分配给他的执行时间，直到线程切换为止</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608775349_10.png" alt="img"></li>
+</ul>
+</li>
+<li>testLockThread<ul>
+<li>在等待lock对象的notify()或notifyAll()方法的出现</li>
+<li>处于WAITING状态，在重新唤醒前不会被分配执行时间</li>
+<li>处于正常的活锁等待，lock对象的notify()或notifyAll()方法被调用这个线程便能继续执行</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608775531_12.png" alt="img"></li>
+</ul>
+</li>
+</ul>
+<p><strong>死锁案例</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">SynAddRunnable</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> a<span class="token punctuation">,</span> b<span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token function">SynAddRunnable</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">=</span> a<span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>b <span class="token operator">=</span> b<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SynAddRunnable</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SynAddRunnable</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>根本原因是Integer.valueOf()会对[-128,127]对象进行缓存，如果valueOf()传入的参数在范围内，则直接返回缓存中的对象</p>
+<p>假设线程A在两个synchronized块之间发生了一次线程切换，就会出现线程A等待线程B持有的Integer.valueOf(1),线程B又在等待被线程A持有的Integer.valueOf(2)</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1608776488_13.png" alt="img"></p>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="回收区域"><a href="#回收区域" class="headerlink" title="回收区域"></a>回收区域</h3><p>Java内存运行时数据区中的程序计数器、虚拟机栈、本地方法栈这三个区域随线程而生，随线程而灭，栈中栈帧随着方法的进入和退出而有条不紊地执行着入栈和出栈的操作</p>
+<p>每一个栈帧中分配多少内存基本上是在类结构确定下来时就已知的，因此这几个区域的内存分配与回收都具备确定性。在这几个区域就不需要过多考虑如何回收的问题，当方法结束或线程结束时，内存就自然跟随着回收了</p>
+<p>而Java堆和方法区这两个区域则有着很显著的不确定性：一个接口的多个实现类需要的内存可能会不一样，一个方法所执行的不同条件分支所需要的内存也可能不一样，只有处于运行期间，我们才能知道程序究竟会创建哪些对象，创建多少个对象，这部分的内存分配和回收是动态的。垃圾收集器所关注的正是这部分内存该如何管理</p>
+<h3 id="对象存活"><a href="#对象存活" class="headerlink" title="对象存活"></a>对象存活</h3><p>垃圾收集器在对堆进行回收前，需要确定对象存活还是死去。死去就是不可能在被任何途径使用的对象</p>
+<h4 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h4><p>在对象中添加一个引用计数器，每当一个地方引用它时，计数器值加一；当引用失效时，计数器值减一，任何时刻计数器为0的对象是不可能再被使用的</p>
+<p>无法解决循环引用的问题，即实际上这两个对象已经不可能被访问了，但因为它们互相引用着对方，导致它们的引用计数都不为零，引用计数算法就无法回收它们</p>
+<h4 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h4><ul>
+<li>通过一系列称为GC Roots的根对象作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走过的路径称为引用链</li>
+<li>如果从GC Roots到某个对象不可达，则将把他们判定为可回收对象</li>
+</ul>
+<h4 id="GC-Roots"><a href="#GC-Roots" class="headerlink" title="GC Roots"></a>GC Roots</h4><ul>
+<li>在虚拟机栈(栈帧中的局部变量表)中引用的对象，例如各个线程被调用的方法堆栈中使用到的参数，局部变量，临时变量</li>
+<li>在方法区中类静态属性引用的对象，Java类的引用类型静态变量</li>
+<li>在方法区中常量引用的对象，例如字符串常量池(String Table)里的引用</li>
+<li>在本地方法栈中JNI(即Native方法)引用的对象</li>
+<li>虚拟机内部的引用，如基本数据对应的Class对象、常驻的异常对象如NullPointException、OutOfMemoryError、系统类加载器</li>
+<li>被同步锁（synchronized）持有的对象</li>
+<li>反映虚拟机内部情况的本地代码缓存等</li>
+<li>分代收集和局部回收（Partial GC）。如果只针对Java堆中某块区域发起垃圾收集时（如只针对新生代的垃圾收集），这个区域里的对象有可能被位于堆中其他区域的对象所引用。需要将关联区域的对象也一并加入到GC Roots集合中</li>
+</ul>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><ul>
+<li>如果reference类型的数据中存储的数值代表的是另外一块内存的起始地址，那么该reference数据是代表某个对象的引用</li>
+<li>类似Object object = new Object();</li>
+<li>只要强引用关系还存在，垃圾回收器就永远不会回收掉被引用的对象</li>
+</ul>
+<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><ul>
+<li>用来描述一些还有用，但非必要的对象</li>
+<li>只被软引用（SoftReference）关联着的对象，在系统将要发生内存溢出异常之前，会将这些对象纳入回收范围进行二次回收</li>
+<li>如果这次回收还没有足够的内存，才会抛出内存溢出异常</li>
+<li>缓存功能，一类对象，当内存空间足够时，能保存在内存中，如果内存空间在进行垃圾收集时仍然非常紧张，则可以抛弃这些对象</li>
+</ul>
+<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><ul>
+<li>弱引用也是用来描述那些非必须的对象，但是它的强度被软引用更弱</li>
+<li>只能生存到下一次垃圾收集发生为止</li>
+<li>当垃圾收集器开始工作时，无论内存是否充足，都会回收掉只被弱引用关联的对象</li>
+</ul>
+<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><ul>
+<li>又称幽灵引用或幻影引用，是最弱的一种引用关系</li>
+<li>一个对象是否有虚引用完全不会对其生命周期构成影响，也无法通过虚引用获取一个对象实例</li>
+<li>为一个对象设置虚引用关联的唯一目的是为了能在这个对象被回收时收到一个系统通知</li>
+</ul>
+<h3 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h3><ul>
+<li>主要回收废弃的常量和不再使用的类型</li>
+<li>回收常量池，例如已经没有任何字符串对象引用常量池中的“java”常量，且虚拟机中也没有其他地方引用这个字面量，如果此时进行内存回收，而且确实有必要，则该常量将被系统清理出常量池</li>
+<li>回收类。在大量使用反射、动态代理、CGLib等字节码框架、动态生成JSP以及OSGi这类频繁自定义类加载器的场景，通常需要JVM具备类型卸载的能力<ul>
+<li>该类的所有的实例都已经被回收，Java堆中不存在该类及其任何派生子类的实例</li>
+<li>加载该类的类加载器已经被回收，除非是精心设计的可替换类加载器的场景，否则很难达成</li>
+<li>该类对应的Class对象没有在任何地方被引用，无法在任何地方通过反射访问这个类的方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><p>介绍的算法均属于追踪式垃圾收集</p>
+<h3 id="分代收集理论"><a href="#分代收集理论" class="headerlink" title="分代收集理论"></a>分代收集理论</h3><p><strong>分代收集</strong></p>
+<ul>
+<li>弱分代假说：绝大多数对象都是朝生夕灭</li>
+<li>强分代假说：熬过越多次垃圾收集过程的对象就越难消亡</li>
+<li>跨代引用假说：跨代引用相对于同代引用来说仅占极少数</li>
+</ul>
+<p><strong>设计原则</strong></p>
+<ul>
+<li>将Java堆划分出不同的区域，根据回收对象年龄（即熬过垃圾收集的次数）分配到不同的区域中存储</li>
+<li>如果一个区域中大多数对象都是朝生夕灭，难以熬过垃圾收集过程的话，那么把它们集中放在一起，每次回收只关注如何保留少量存活而不是去标记那些大量将要被回收的对象，就能以较低的代价回收到大量的空间</li>
+<li>如果剩下的都是难以消亡的对象，那把他们集中放在一起，虚拟机便可以用较低频率来回收这个区域</li>
+<li>划分不同区域后，垃圾收集器可以每次只回收其中一部分区域，根据不同区域安排与里面存储对象存亡特征相匹配的垃圾收集算法</li>
+</ul>
+<p><strong>新生代</strong></p>
+<ul>
+<li>每次垃圾收集时都有大批对象死去，而每次回收后存活的少量对象，将会逐步晋身到老年代中存放</li>
+<li>但是对象不是孤立的，对象之间会存在跨代引用。如果只进行Minor GC，但新生代对象可能被老年代引用，为了找出存活对象，不得不再固定GC Roots之外，再额外遍历整个老年代中所有对象来确保可达性分析结果的正确性。这样无疑会对内存回收带来很大的负担</li>
+<li>跨代引用假说：跨代引用相对于同代引用来说仅占极少数。因为存在互相引用关系的两个对象，是应该倾向于同时生存或同时消亡的</li>
+<li>依据假说，不应为了少量的跨带引用去扫描整个老年代，只需要在新生代上建立一个全局的数据结构（记忆集），这个结构把老年代分成若干小块，标识出老年代哪一块内存会存在跨带引用。此后Minor GC，只有包含了跨带引用的小块内存里的对象才会被加入GC Roots中进行扫描</li>
+</ul>
+<p><strong>术语</strong></p>
+<ul>
+<li>Minor GC/Young GC：指目标只是新时代的垃圾收集</li>
+<li>Major GC/Old GC：指目标只是老年代的垃圾收集。目前只有CMS会单独收集老年代</li>
+<li>Mixed GC：只有G1收集器</li>
+<li>Full GC：收集整个Java堆和方法区的垃圾收集</li>
+</ul>
+<h3 id="垃圾收集算法-1"><a href="#垃圾收集算法-1" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h4><ul>
+<li>首先标记出所有需要回收的对象，在标记完成后，统一回收掉所有被标记的对象</li>
+<li>标记过程就是对象是否属于垃圾的判定过程</li>
+<li>执行效率不稳定，如果Java堆中包含大量对象，而且其中大部分是需要被回收的，这时必须进行大量标记和清除操作。标记和清除两个过程的执行效率都随对象数量增长而降低</li>
+<li>会产生大量不连续的内存碎片，导致之后程序运行过程中需要分配较大对象时无法找到足够的连续内存而不得不触发另一次垃圾收集动作</li>
+</ul>
+<h4 id="标记-复制算法-针对新生代"><a href="#标记-复制算法-针对新生代" class="headerlink" title="标记-复制算法(针对新生代)"></a>标记-复制算法(针对新生代)</h4><ul>
+<li>半区复制，将可用内存按容量划分成大小相等的两块，每次只使用其中一块，如果这一块内存用完了，就将存活的对象复制到另外一块上，再把已使用过的内存空间清理掉</li>
+<li>对于多数对象是可回收的情况，算法需要复制的只是占少数的存活对象，无碎片空间问题。代价是可用内存缩小为原来一半</li>
+<li>新时代中的对象有98%熬不过第一轮收集。针对具备朝生夕灭特点的对象，提出了一种更优化的半区复制分代策略。Appel式回收（HotSpot虚拟机的Serial、ParNew等新生代收集器均采用这种策略设计新生代的内存布局）<ul>
+<li>把新生代分为Eden，和Survivor0，Survivor1区，大小为8:1:1</li>
+<li>每次分配内存只使用Eden和Survivor0区</li>
+<li>发生垃圾收集时，将Eden和Survivor0中存活对象一次性复制到Survivor1区</li>
+<li>然后直接清理掉Eden区和已使用过的那块Survivor空间</li>
+<li>当Survivor空间不足以容纳一次Minor GC之后存活的对象，就通过分配担保机制直接进入老年代</li>
+</ul>
+</li>
+</ul>
+<h4 id="标记-整理算法-针对老年代"><a href="#标记-整理算法-针对老年代" class="headerlink" title="标记-整理算法(针对老年代)"></a>标记-整理算法(针对老年代)</h4><ul>
+<li>先标记，然后让所有存活对象都向内存空间一端移动，然后直接清理掉边界以外的内存</li>
+<li>移动存活对象并更新所有引用这些对象的地方是一种极为负重的操作，并且对象移动操作必须暂停用户应用程序才能进行(Stop the World)</li>
+<li>但如果不管空间碎片化问题，可能需要分区空闲分配链表来解决内存分配问题，则直接影响应用程序的吞吐量</li>
+<li>关注吞吐量的Parallel Scavenge基于标记-整理</li>
+<li>关注延迟的CMS基于标记-清除：暂时容忍内存碎片的存在，在空间碎片过多影响到对象分配时，再采用标记整理算法收集一次，以获得规整的内存空间</li>
+</ul>
+<h2 id="HotSpot算法细节"><a href="#HotSpot算法细节" class="headerlink" title="HotSpot算法细节"></a>HotSpot算法细节</h2><h3 id="根节点枚举"><a href="#根节点枚举" class="headerlink" title="根节点枚举"></a>根节点枚举</h3><ul>
+<li>固定可作为GC Roots的节点主要是全局性的引用(例如常量或类静态属性)与执行上下文(例如堆栈中的本地变量表)</li>
+<li>所有收集器在根节点枚举这一步骤都是必须暂停用户线程的。现在可达性分析算法耗时最长的查找引用链的过程已经可以做到和用户线程一起并发，但根节点枚举始终还是必须在一个能保障一致性的快照中才得以进行。在整个枚举期间，执行子系统看起来就像是冻结在某个时间点上</li>
+<li>用户线程停顿之后，不需要一个不漏地检查完所有执行上下文和全局的引用位置。可以使用一组称为OopMap的数据结构直接得到哪些地方存在着对象引用。</li>
+<li>一旦类加载完成，HotSpot就会把对象内什么偏移量上是什么类型的数据计算出来。在即时编译中也会在特定位置记录下栈里和寄存器里哪些位置是引用。这样收集器在扫描时就可以直接得知这些信息了，并不需要真正一个不漏地从方法区等GC Roots开始查找</li>
+</ul>
+<h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><ul>
+<li>通过OopMap，HotSpot可以快速完成GC Roots的枚举。但导致OopMap内容变化的指令非常多，不可能每条指令都生成OopMap，只是在特定的地方记录了这些位置，即安全点</li>
+<li>用户程序执行时并非在代码指令流的任意位置都能停顿下来开始垃圾收集，而是强制要求必须执行到达安全点才能够暂停</li>
+<li>安全点的选择一般是以能否让程序长时间执行的特征为标准选定的，一般是指令序列的复用，例如方法调用、循环跳转、异常跳转等才会产生安全点</li>
+<li>还要考虑如何让垃圾收集发生时让所有线程都跑到最近的安全点，并停顿</li>
+<li>抢先式中断<ul>
+<li>在垃圾收集发生时，系统首先把所有线程中断，如果发现用户线程中断地方不再安全点上，就恢复线程继续执行，让它一会再中断，直到跑到安全点。</li>
+<li>几乎没有虚拟机使用</li>
+</ul>
+</li>
+<li>主动式中断<ul>
+<li>设置一个标志位，各个线程执行过程中不停地主动轮询这个标志，一旦发现标志为真就自己在最近的安全点上主动中断挂起</li>
+<li>使用内存保护陷阱的方式，把轮询操作精简到只有一条汇编指令</li>
+<li>仅通过一条汇编指令就完成安全点轮询和触发线程中断</li>
+</ul>
+</li>
+</ul>
+<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><ul>
+<li>如果用户线程处于Sleep状态或Blocked状态，即没有分配处理器时间。此时线程无法响应虚拟机的中断请求，不能再走到安全的地方去中断挂起自己。虚拟机也显然不可能持续等待线程重新被激活分配处理器时间</li>
+<li>安全区域是指能够确保某一段程序代码中，引用关系不会发生改变，因此，在这个区域从任意地方开始垃圾收集都是安全的</li>
+<li>当用户线程执行到安全区域里面的代码，首先标识自己已经进入了安全区域，这段时间如果发生垃圾收集JVM不会管这些已经声明在安全区域里面的代码。当要离开安全区域时，它要检查JVM是否完成了根节点枚举，如果完成则继续执行，如果没完成，则一直等待直到收到可以离开安全区域的信号为止</li>
+</ul>
+<h3 id="记忆集和卡表"><a href="#记忆集和卡表" class="headerlink" title="记忆集和卡表"></a>记忆集和卡表</h3><ul>
+<li>为解决对象跨带引用的问题，使用记忆集来避免把整个老年代加入GC Roots的扫描范围</li>
+<li>记忆集是一种用来记录从非收集区域指向收集区域的指针集合的数据结构，最简单是用非收集区域中所有含跨带引用的对象数组来实现，但是空间占用太高</li>
+<li>收集者只需要通过记忆集判断出某一块非收集区域是否存在有指向收集区域的指针即可，可以选择更为粗犷的记录粒度来节省记忆集的存储和维护成本</li>
+</ul>
+<p><strong>卡表（card table)</strong></p>
+<ul>
+<li>每个记录精确到一块内存区域，该区域内有对象含有跨带引用</li>
+<li>卡表是记忆集的一种具体实现</li>
+<li>使用字节数组，因为速度上现在计算机硬件是按字节编址</li>
+<li><blockquote>
+<p>CARD_TABLE[this.address &gt;&gt; 9] = 0</p>
+</blockquote>
+</li>
+<li>每一个元素都对应着其标识的内存区域中一块特定大小的内存块</li>
+<li>一个卡页（512字节）的内存中通常不止包含一个对象，只要里面有一个存在跨带指针，就置为1，元素变脏。</li>
+<li>在垃圾收集时，只要筛选出卡表中变脏的元素，就能知道哪些卡页内存块中有跨带指针，就加入GC Roots</li>
+</ul>
+<p><strong>写屏障</strong></p>
+<ul>
+<li>解决了如何使用记忆集来缩减GC Roots扫描范围的问题，但还没有解决卡表元素如何维护的问题，例如它们何时变脏、谁让它们变脏</li>
+<li>变脏时间点应该发生在有其他分代区域中对象引用本区域对象时，即变脏时间点原则上应该发生在引用类型字段赋值的那一刻</li>
+<li>所以问题变为如何在对象赋值的那一刻去更新维护卡表。如果是解释执行的字节码，虚拟机负责每条字节码指令的执行，有充足的介入空间。但是如果是即时编译，即时编译后的代码已经是纯粹的机器指令流了，这就必须找到一个在机器码层面的手段，把维护卡表的动作放在每一个赋值操作之中</li>
+<li>在HotSpot中是使用写屏障技术维护卡表状态，写屏障可以看作是虚拟机层面对“引用类型赋值”这个动作的AOP切面，在引用对象赋值时产生一个环绕通知，供程序执行额外的操作。也就是说赋值的前后都在写屏障的覆盖范畴内，在赋值前的部分的写屏障叫做写前屏障，在赋值后的则叫做写后屏障，应用了写后屏障</li>
+<li>应用写后屏障后，虚拟机就会为所有的赋值操作生成相应的指令，一旦收集器在写屏障中增加了更新卡表操作，无论更新的是不是老年代对新生代对象的引用，每次只要对引用进行更新，就会产生额外的开销</li>
+<li>伪共享问题<ul>
+<li>缓存系统以缓存行为单位存储，如果多个线程修改互相独立的变量，而这些变量恰好在共享同一个缓存行，就彼此影响</li>
+<li>可以先检查卡表标记，只有当卡表元素没有被标记时才标记为变脏</li>
+</ul>
+</li>
+</ul>
+<h3 id="并发的可达性分析"><a href="#并发的可达性分析" class="headerlink" title="并发的可达性分析"></a>并发的可达性分析</h3><ul>
+<li>主流垃圾收集器都是依靠可达性分析算法来判断对象是否是存活的，理论要求全过程都基于一个能保障一致性的快照中才能够进行分析。这意味着必须全程冻结用户线程的运行</li>
+<li>在根节点枚举中，由于GC Roots较少，并且经过各种优化技巧（如OopMap）的加持下，它带来的停顿已经非常短暂而且相对固定（不随堆容量成正比例关系了）</li>
+<li>但是从GC Roots再继续往下遍历对象图的时间与堆容量成正比</li>
+</ul>
+<p><strong>三色标记法</strong></p>
+<p>为什么必须在一个能保障一致性的快照上才能进行对象图的遍历？</p>
+<p>引入三色标记法，把遍历对象图过程中遇到的对象，按照是否访问过这个条件标记为以下三种颜色：</p>
+<ul>
+<li><strong>白色</strong>：表示对象尚未被垃圾收集器访问过。如果分析结束的阶段，仍然是白色的对象，即代表不可达</li>
+<li><strong>黑色</strong>：表示对象已经被垃圾收集器访问过，且这个对象的所有引用都已经被扫描过。黑色的对象代表已经扫描过，它是安全存活的，如果有其他引用指向了黑色对象，无须重新扫描一遍</li>
+<li><strong>灰色</strong>：代表对象已经被垃圾收集器访问过，但这个对象上至少存在一个引用还没有被扫描过</li>
+</ul>
+<p>扫描过程，其实就是对象图上一股以灰色为波峰从黑向白推进的过程</p>
+<p>如果用户线程与收集器是并发工作的，收集器在对象图上标记颜色，同时用户线程在修改引用关系（即修改对象图的结构）</p>
+<ul>
+<li><p>两种可能：</p>
+<ul>
+<li>把原本消亡的对象误标记为存活，可以接受。只是产生了逃过本次收集的浮动垃圾</li>
+<li>把原本存活的对象误标记为消亡，非常致命</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20201021160219159.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>当且仅当以下两个条件同时满足时，会产生对象消亡问题：</p>
+<ul>
+<li>赋值器插入了一条或多条从黑色对象到白色对象的新引用。</li>
+<li>赋值器删除了全部从灰色对象到该白色对象的直接或间接引用</li>
+</ul>
+</li>
+<li><p>两种解决，破坏两个条件之一即可。</p>
+<ul>
+<li><strong>增量更新</strong>。破坏第一个条件，当黑色对象插入新的指向白色对象的引用关系时，就将这个新插入的引用记录下来，等并发扫描结束之后，再将这些记录过的引用关系中的黑色对象为根，重新扫描一遍。理解为当黑色对象一旦插入了指向白色对象的引用后，它就变回灰色对象。</li>
+<li><strong>原始快照</strong>。破坏第二个条件，当灰色对象要删除指向白色对象的引用关系时，就将这个要删除的引用关系记录下来，在并发扫描结束之后，再将这些记录过的引用关系中的灰色对象为根，重新扫描一次。理解为无论引用对象删除与否，都会按照刚刚开始扫描的那一刻的对象图快照来进行搜索。</li>
+</ul>
+</li>
+</ul>
+<p>以上无论是对引用关系记录的插入还是删除，虚拟机的记录操作都是通过写屏障实现的。在HotSpot虚拟机中，增量更新和原始快照都有实际应用。</p>
+<p>CMS是基于增量更新做并发标记的，G1是使用原始快照实现的</p>
+<h2 id="经典垃圾收集器"><a href="#经典垃圾收集器" class="headerlink" title="经典垃圾收集器"></a>经典垃圾收集器</h2><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/abcd.png" alt="img"></p>
+<h3 id="Young-generation"><a href="#Young-generation" class="headerlink" title="Young generation"></a>Young generation</h3><h4 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210724202330966.png" alt="image-20210724202330966"></p>
+<ul>
+<li>单线程工作的收集器</li>
+<li>在进行垃圾收集时，必须先暂停其他所有线程，直到它收集结束</li>
+<li>客户端模式下默认的新生代收集器，简单而高效</li>
+<li>对于内存资源受限的环境下，是所有收集器里额外内存消耗最小的</li>
+<li>对于单核处理器或核心较少的环境，由于没有线程交互的开销，可以获得最高的单线程收集效率</li>
+</ul>
+<h4 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210724203133995.png" alt="image-20210724203133995"></p>
+<ul>
+<li>是Serial收集器的多线程并行版本，同时使用多条线程进行垃圾收集</li>
+<li>除了Serial收集器，只有它能和CMS收集器配合。到了JDK9中，ParNew和CMS只能相互搭配使用了，并且该组合已经不再是官方推荐的服务端模式下的收集器解决方案了。基本相当于ParNew合并入CMS，成为它专门处理新生代的组成部分</li>
+<li>在单线程环境下不比Serial收集器好</li>
+<li>也是需要STW，只是多线程一起并发收集罢了</li>
+</ul>
+<p><strong>并行：</strong>描述的是多条垃圾收集器线程之间的关系，说明同一时间有多条这样的线程在协同工作，通常默认此时的用户线程处于等待状态</p>
+<p><strong>并发：</strong>描述的是垃圾收集器线程与用户线程之间的关系，说明同一时间垃圾收集器线程与用户线程都在运行。由于用户线程并未被冻结，所以程序仍然能响应服务请求</p>
+<h4 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h4><ul>
+<li>同样基于标记-复制算法，同样并行收集的多线程收集器</li>
+<li>目标是达到一个可控制的吞吐量（即处理器用于运行用户代码的时间与处理器总消耗时间的比值），称作吞吐量优先收集器</li>
+<li>停顿时间越短就越适合需要与用户交互或需要保证服务响应质量的程序，良好的响应速度能提升用户体验</li>
+<li>而高吞吐量则可以最高效率地利用处理器资源，尽快完成程序的运算任务，主要适合在后台运算而不需要太多交互的分析任务</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210724203444260.png" alt="image-20210724203444260"></p>
+<ul>
+<li>可以达到一个可控制的吞吐量，即处理器用于运行用户代码的时间/处理器总消耗时间</li>
+<li>垃圾收集的自适应调节策略：虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整参数以提供最合适的停顿时间或最大吞吐量</li>
+</ul>
+<h3 id="Tenured-generation"><a href="#Tenured-generation" class="headerlink" title="Tenured generation"></a>Tenured generation</h3><h4 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210725141414016.png" alt="image-20210725141414016"></p>
+<ul>
+<li>单线程收集器，使用标记-整理算法</li>
+<li>供客户端模式使用</li>
+<li>可作为CMS收集器发生失败时的后备预案</li>
+<li>可以配合Parallel Scavenge收集器</li>
+</ul>
+<h4 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210725141536530.png" alt="image-20210725141536530"></p>
+<ul>
+<li>支持多线程并发收集</li>
+<li>使用标记-整理算法</li>
+<li>是Parallel Scavenge收集器的老年代版本。吞吐量优先收集器有了比较好的组合：Parallel Scavenge收集器+ Parallel Old收集器</li>
+</ul>
+<h4 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h4><ul>
+<li>Concurrent Mark Sweep</li>
+<li>以最短回收停顿时间为目标的收集器</li>
+<li>并发收集，低停顿</li>
+<li>基于标记-清除算法</li>
+<li>互联网网站等Java项目通常较为关注服务的响应速度，希望系统停顿时间尽可能短，以给用户带来良好的交互体验</li>
+<li>由于在整个过程中耗时最长的并发标记和并发清除阶段中，垃圾收集器线程都可以与用户线程一起工作，所以总的来说，CMS收集器的内存回收过程是与用户线程一起并发执行的</li>
+</ul>
+<p><strong>步骤</strong></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/Rc4defd801698e946aa0b9bc91d8fc4f6"></p>
+<ul>
+<li>初始标记：标记一下GC Roots能直接关联的对象，速度很快。需要STW</li>
+<li>并发标记：从GC Roots的直接关联对象开始遍历整个对象图的过程，耗时较长，但不需要停顿用户线程</li>
+<li>重新标记：需要STW，修改并发标记期间，因用户线程继续运作而导致标记产生变动的那一部分对象的标记记录，使用增量更新</li>
+<li>并发清除：可以与用户线程同时并发的，清理删除掉标记阶段判断的已经死亡的对象，不需要移动存活对象。时间较长</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li><strong>对处理器资源非常敏感</strong><ul>
+<li>并发阶段，虽然不会导致用户线程停顿，但会因为占用一部分线程导致应用程序变慢，降低总吞吐量</li>
+</ul>
+</li>
+<li>无法处理浮动垃圾<ul>
+<li>由于垃圾收集阶段用户线程需要持续运行，程序运行自然还会伴随有新的垃圾对象产生，而且这些垃圾对象是出现在标记过程结束之后，CMS无法在当次收集中处理掉他们，只好留待下一次垃圾收集时再清理掉，即浮动垃圾。</li>
+<li>而且用户线程需要持续运行，所以需要预留足够的内存空间给用户线程使用，因此不能等到老年代几乎完全被填满了再进行收集，必须预留一部分空间供并发收集时的程序运行使用(默认92%)</li>
+<li>如果运行期间预留的内存无法满足程序分配新对象的需要，可能出现Concurrent Mode Failure(并发失败)。则不得不启动后背方案：冻结用户线程的执行，临时启用Serial Old收集器来进行老年代的垃圾收集</li>
+</ul>
+</li>
+<li>基于标记清除算法，会产生大量的空间碎片：空间碎片过多时，将会给大对象分配带来很大麻烦，往往出现老年代还有很多剩余空间，但无法找到足够大的连续空间来分配给当前对象，不得不提前Full GC</li>
+</ul>
+<h3 id="Garbage-First收集器"><a href="#Garbage-First收集器" class="headerlink" title="Garbage First收集器"></a>Garbage First收集器</h3><ul>
+<li>面向局部收集，基于Region的内存布局，全功能垃圾收集器</li>
+<li>主要面向服务器应用，JDK9中是服务器模式下默认的垃圾收集器</li>
+<li>建立停顿时间模型，支持指定一个长度为M毫秒的时间片段内，消耗在垃圾收集上的时间大概率不超过N毫秒</li>
+<li>之前的垃圾收集器，垃圾收集的目标要么是整个新生代，要么是整个老年代，要么是整个Java堆（Full GC）。而G1可以面对堆内存如何部分来组成回收集。</li>
+<li>Mixed GC模式：面向堆的任何部分来组成回收集，衡量哪块内存中存放的垃圾数量最多，回收收益最大</li>
+</ul>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><ul>
+<li>把连续的Java堆划分为多个大小相等的独立区域，每个Region可以扮演新生代的Eden、Survivor或老年代空间。收集器能够对扮演不同角色的Region采用不同的策略去处理</li>
+<li>有一类特殊的Humongous区域，专门存储大对象：大小超过Region容量一半的对象、超过了整个Region区域的超级大对象放在连续的Humongous区域、把Humongous区域看作老年代</li>
+<li>虽然仍然保留了新生代和老年代的概念，但它们不是固定的了，都是一系列区域（不需要连续）的动态集合。G1将Region作为单位回收的最小单元，每次回收Region的整数倍</li>
+<li>让G1去跟踪各个Region里面垃圾的价值大小（价值就是回收所获得的空间大小以及回收所需时间的经验值）然后在后台维护一个优先级列表，每次根据用户设定允许的收集停顿时间，优先处理回收价值收益最大的region</li>
+</ul>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><ul>
+<li><p>跨Region引用对象</p>
+<ul>
+<li>每个Region都维护自己的记忆集，记录别的Region指向自己的指针，并标记这些指针分别在哪些卡页的范围之内</li>
+<li>G1的记忆集本质上是是一个哈希表，Key是别的Region起始地址，Value是卡表索引号集合</li>
+<li>至少要耗费堆的10%-20%额外内存来维持收集器工作</li>
+</ul>
+</li>
+<li><p>并发</p>
+<ul>
+<li>并发标记阶段，需要保证收集线程与用户线程互不干扰地运行。首先要解决的是用户线程改变对象引用关系时，不打破原有对象图结构。使用原始快照（SATB）算法</li>
+<li>在回收过程中，新创建对象的内存分配问题。程序要继续运行肯定会持续有新对象创建。G1未新对象创建设计两个指针，名为TAMS(Top at Mark Start)，把Region中一部分空间划分出来用于并发回收过程中的新对象分配，新分配对象必须在两个指针位置以上。G1默认在这个地址上的对象是被隐式标记过的，即默认这些对象是存活的，如果内存回收速度赶不上内存分配速度，也要STW的Full GC。</li>
+</ul>
+</li>
+<li><p>建立可靠的停顿预测模型</p>
+<ul>
+<li>用户通过参数指定的停顿时间只意味着垃圾收集发生之前的期望值，为了满足用户期望，G1的停顿预测模型是以衰减均值为理论基础实现的。在垃圾收集时，G1会记录每个Region的回收耗时、记忆集中脏卡数量等各个可测量的步骤花费的成本，计算统计信息。通过这些信息预测现在开始回收的话，由哪些Region组成回收集才可以在不超过期望停顿时间的约束下获得最高收益</li>
+</ul>
+</li>
+<li><p>衰减均值：比普通平均值更容易收到新数据的影响，衰减平均值更准确的代表最近的平均状态。即Region的统计状态越新越能决定其回收价值</p>
+</li>
+</ul>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul>
+<li>初始标记<ul>
+<li>标记GC Roots能直接关联到的对象</li>
+<li>修改TAMS指针的值，让下一阶段用户线程并发运行时，能正确的在可用Region上分配新对象</li>
+<li>需要停顿线程，但耗时短，而且是借用Minor GC同步完成的，没有额外停顿</li>
+</ul>
+</li>
+<li>并发标记<ul>
+<li>堆中对象的可达性分析，递归扫描整个堆中对象图</li>
+<li>耗时长，能与用户线程并发执行</li>
+<li>处理在SATB记录下的在并发时有引用变动的对象</li>
+</ul>
+</li>
+<li>最终标记<ul>
+<li>对用户线程做另一个短暂暂停，处理并发阶段结束后遗留下来的最后那少量的SATB记录（原始快照）</li>
+</ul>
+</li>
+<li>筛选回收<ul>
+<li>更新Region的统计数据</li>
+<li>对Region的回收价值和成本排序</li>
+<li>根据用户所期望的停顿时间制定回收计划</li>
+<li>把决定回收的Region的存活对象复制到空Region中，清理旧Region的全部空间</li>
+<li>由于涉及到存活对象的移动，必须STW，由多条垃圾收集器线程并发完成</li>
+</ul>
+</li>
+</ul>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210725144336555.png" alt="image-20210725144336555"></p>
+<ul>
+<li>G1除了并发标记外，其他阶段也要完全暂停用户线程，即它不是纯粹追求低延迟。是在延迟可控的情况下获得尽可能高的吞吐量</li>
+<li>G1可以由用户指定期望的停顿时间，可以使得G1在不同应用场景下取得关注吞吐量和关注延迟之间的最佳平衡</li>
+<li>如果停顿时间过短，会导致每次筛选出来的回收集只占堆内存很小一部分，最终占满堆引发Full GC降低性能，停顿时间设置在100-300ms之间比较合理</li>
+<li>G1整体是基于<strong>标记-整理</strong>的，但是从局部（两个Region之间）是基于<strong>标记-复制</strong>的。不会产生内存空间碎片，收集后能提供规整的可用内存。有利于程序长时间运行，在程序为大对象分配内存时不容易因无法找到连续内存空间而提前触发下一次收集</li>
+</ul>
+<hr>
+<ul>
+<li><p>每个Region都需要维护一份卡表，使得G1的记忆集可能会占整个堆的20%内存空间</p>
+</li>
+<li><p>使用写后屏障进行卡表维护操作，并且使用写前屏障来跟踪并发时的指针变化，实现SATB算法</p>
+</li>
+<li><p>小内存上CMS大概率优于G1（6-8GB为平衡点）</p>
+</li>
+</ul>
+<h2 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h2><ul>
+<li>自动内存管理主要是解决：自动给对象分配内存、自动回收分配给对象的内存</li>
+<li>对象的内存分配：大部分堆上分配，极小部分经过即时编译后拆散为标量类型并间接栈上分配</li>
+<li>新生对象通常分配新生代，少数情况（对象大小超过阈值）直接分配老年代</li>
+<li>实验环境：HotSpot、客户端模式、Serial+Serial Old</li>
+</ul>
+<h3 id="对象优先在Eden分配"><a href="#对象优先在Eden分配" class="headerlink" title="对象优先在Eden分配"></a>对象优先在Eden分配</h3><ul>
+<li>大多数情况下，对象在Eden区分配，如果Eden区没有足够空间分配，将发起Minor GC</li>
+<li>MinGC中，如果Survivor放不下Eden存活的，则通过对象担保机制，把存活的放入老年代</li>
+<li>-Xms20M -Xmx20M：堆大小20M，不可扩展；-Xmn10M：10MB分配给新生代</li>
+<li>-XX:SurvivorRatio=8：Eden：Survivor = 8：1，新生代总可用区间9216KB(Eden+一个Survivor)</li>
+<li>-XX:+PrintGCDetails</li>
+</ul>
+<pre><code>VM参数:
+-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:SurvivorRatio=8 
+-XX:+PrintGCDetails</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span><span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> _1MB <span class="token operator">=</span> <span class="token number">1024</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> allocation1， allocation2， allocation3， allocation4<span class="token punctuation">;</span>
+        allocation1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">2</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        allocation2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">2</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        allocation3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">2</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        allocation4 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">4</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//出现Minor GC</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>Allocation Failure<span class="token punctuation">)</span> <span class="token punctuation">[</span>DefNew<span class="token operator">:</span> 8159K<span class="token operator">-</span><span class="token operator">></span><span class="token function">626K</span><span class="token punctuation">(</span>9216K<span class="token punctuation">)</span>， <span class="token number">0.0041610</span> secs<span class="token punctuation">]</span> 8159K<span class="token operator">-</span><span class="token operator">></span><span class="token function">6770K</span><span class="token punctuation">(</span>19456K<span class="token punctuation">)</span>， <span class="token number">0.0042168</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span>， real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+Heap
+ def <span class="token keyword">new</span> <span class="token class-name">generation</span>   total 9216K， used 4888K <span class="token punctuation">[</span><span class="token number">0x00000000fec00000</span>， <span class="token number">0x00000000ff600000</span>， <span class="token number">0x00000000ff600000</span><span class="token punctuation">)</span>
+  eden space 8192K，  <span class="token number">52</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000fec00000</span>， <span class="token number">0x00000000ff029840</span>， <span class="token number">0x00000000ff400000</span><span class="token punctuation">)</span>
+  from space 1024K，  <span class="token number">61</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff500000</span>， <span class="token number">0x00000000ff59c960</span>， <span class="token number">0x00000000ff600000</span><span class="token punctuation">)</span>
+  to   space 1024K，   <span class="token number">0</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff400000</span>， <span class="token number">0x00000000ff400000</span>， <span class="token number">0x00000000ff500000</span><span class="token punctuation">)</span>
+ tenured generation   total 10240K， used 6144K <span class="token punctuation">[</span><span class="token number">0x00000000ff600000</span>， <span class="token number">0x0000000100000000</span>， <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
+   the space 10240K，  <span class="token number">60</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff600000</span>， <span class="token number">0x00000000ffc00030</span>， <span class="token number">0x00000000ffc00200</span>， <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
+ Metaspace       used 3253K， capacity 4496K， committed 4864K， reserved 1056768K
+  <span class="token keyword">class</span> <span class="token class-name">space</span>    used 353K， capacity 388K， committed 512K， reserved 1048576K
+
+Process finished with exit code <span class="token number">0</span></code></pre>
+<h3 id="大对象直接进入老年代"><a href="#大对象直接进入老年代" class="headerlink" title="大对象直接进入老年代"></a>大对象直接进入老年代</h3><ul>
+<li>大对象就是需要连续内存空间的Java对象</li>
+<li>很长的字符串或者元素数量很庞大的数组</li>
+<li>在程序中避免出现一群朝生夕灭的短命大对象。他容易导致内存明明还有不少空间就提前触发了垃圾收集，以获取足够的连续空间才能安置好他们</li>
+<li>当复制对象时，大对象意味着高额的内存复制开销。所以可设置参数，指定大于设定值的对象直接在老年代分配，避免在Eden区以及两个Survivor区来回复制，产生大量的内存复制操作</li>
+<li>-XX:PretenureSizeThreshold=3145728</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token operator">-</span>XX<span class="token operator">:</span>PretenureSizeThreshold<span class="token operator">=</span><span class="token number">3145728</span> 
+<span class="token operator">-</span>verbose<span class="token operator">:</span>gc <span class="token operator">-</span>Xms20M <span class="token operator">-</span>Xmx20M <span class="token operator">-</span>Xmn10M <span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>UseSerialGC 
+<span class="token operator">-</span>XX<span class="token operator">:</span>SurvivorRatio<span class="token operator">=</span><span class="token number">8</span> <span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>PrintGCDetails</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span><span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> _1MB <span class="token operator">=</span> <span class="token number">1024</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> allocation1<span class="token punctuation">;</span>
+        allocation1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">4</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//直接分配在老年代</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java">Heap
+ def <span class="token keyword">new</span> <span class="token class-name">generation</span>   total 9216K， used 2015K <span class="token punctuation">[</span><span class="token number">0x00000000fec00000</span>， <span class="token number">0x00000000ff600000</span>， <span class="token number">0x00000000ff600000</span><span class="token punctuation">)</span>
+  eden space 8192K，  <span class="token number">24</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000fec00000</span>， <span class="token number">0x00000000fedf7e90</span>， <span class="token number">0x00000000ff400000</span><span class="token punctuation">)</span>
+  from space 1024K，   <span class="token number">0</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff400000</span>， <span class="token number">0x00000000ff400000</span>， <span class="token number">0x00000000ff500000</span><span class="token punctuation">)</span>
+  to   space 1024K，   <span class="token number">0</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff500000</span>， <span class="token number">0x00000000ff500000</span>， <span class="token number">0x00000000ff600000</span><span class="token punctuation">)</span>
+ tenured generation   total 10240K， used 4096K <span class="token punctuation">[</span><span class="token number">0x00000000ff600000</span>， <span class="token number">0x0000000100000000</span>， <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
+   the space 10240K，  <span class="token number">40</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff600000</span>， <span class="token number">0x00000000ffa00010</span>， <span class="token number">0x00000000ffa00200</span>， <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
+ Metaspace       used 3210K， capacity 4496K， committed 4864K， reserved 1056768K
+  <span class="token keyword">class</span> <span class="token class-name">space</span>    used 352K， capacity 388K， committed 512K， reserved 1048576K</code></pre>
+<h3 id="长期存活的对象将进入老年代"><a href="#长期存活的对象将进入老年代" class="headerlink" title="长期存活的对象将进入老年代"></a>长期存活的对象将进入老年代</h3><ul>
+<li>每个对象对象头定义了一个对象年龄计数器</li>
+<li>对象通常在Eden区诞生，如果经过第一次Minor GC仍然存活，并且能被Survivor容纳，则被移动到Survivor空间中，并且年龄设置为1。对象在Survivor区每熬过一次Minor GC，年龄+1。增长到15时，就会被晋升到老年代（晋升阈值通过-XX:MaxTenuringThreshold设置）</li>
+<li>例如当-XX:MaxTenuringThreshold设置为1时，allocation1在第二次GC发生时进入老年代</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>PrintTenuringDistribution <span class="token operator">-</span>XX<span class="token operator">:</span>MaxTenuringThreshold<span class="token operator">=</span><span class="token number">1</span> 
+<span class="token operator">-</span>verbose<span class="token operator">:</span>gc <span class="token operator">-</span>Xms20M <span class="token operator">-</span>Xmx20M <span class="token operator">-</span>Xmn10M <span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>UseSerialGC 
+<span class="token operator">-</span>XX<span class="token operator">:</span>SurvivorRatio<span class="token operator">=</span><span class="token number">8</span> <span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>PrintGCDetails</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> _1MB <span class="token operator">=</span> <span class="token number">1024</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> allocation1， allocation2， allocation3<span class="token punctuation">;</span>
+        allocation1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span>_1MB <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//什么时候进入老年代决定于-XX:MaxTenuringThreshold设置</span>
+        allocation2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">4</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        allocation3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">4</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        allocation3 <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        allocation3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">4</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>Allocation Failure<span class="token punctuation">)</span> <span class="token punctuation">[</span>DefNew
+Desired survivor size <span class="token number">524288</span> bytes， <span class="token keyword">new</span> <span class="token class-name">threshold</span> <span class="token function">1</span> <span class="token punctuation">(</span>max <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token operator">-</span> age   <span class="token number">1</span><span class="token operator">:</span>     <span class="token number">886440</span> bytes，     <span class="token number">886440</span> total
+<span class="token operator">:</span> 6367K<span class="token operator">-</span><span class="token operator">></span><span class="token function">865K</span><span class="token punctuation">(</span>9216K<span class="token punctuation">)</span>， <span class="token number">0.0055780</span> secs<span class="token punctuation">]</span> 6367K<span class="token operator">-</span><span class="token operator">></span><span class="token function">4961K</span><span class="token punctuation">(</span>19456K<span class="token punctuation">)</span>， <span class="token number">0.0056123</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span>， real<span class="token operator">=</span><span class="token number">0.01</span> secs<span class="token punctuation">]</span> 
+<span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>Allocation Failure<span class="token punctuation">)</span> <span class="token punctuation">[</span>DefNew
+Desired survivor size <span class="token number">524288</span> bytes， <span class="token keyword">new</span> <span class="token class-name">threshold</span> <span class="token function">1</span> <span class="token punctuation">(</span>max <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token operator">-</span> age   <span class="token number">1</span><span class="token operator">:</span>        <span class="token number">680</span> bytes，        <span class="token number">680</span> total
+<span class="token operator">:</span> 5045K<span class="token operator">-</span><span class="token operator">></span><span class="token function">0K</span><span class="token punctuation">(</span>9216K<span class="token punctuation">)</span>， <span class="token number">0.0012428</span> secs<span class="token punctuation">]</span> 9141K<span class="token operator">-</span><span class="token operator">></span><span class="token function">4958K</span><span class="token punctuation">(</span>19456K<span class="token punctuation">)</span>， <span class="token number">0.0012696</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span>， real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+Heap
+ def <span class="token keyword">new</span> <span class="token class-name">generation</span>   total 9216K， used 4235K <span class="token punctuation">[</span><span class="token number">0x00000000fec00000</span>， <span class="token number">0x00000000ff600000</span>， <span class="token number">0x00000000ff600000</span><span class="token punctuation">)</span>
+  eden space 8192K，  <span class="token number">51</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000fec00000</span>， <span class="token number">0x00000000ff022a70</span>， <span class="token number">0x00000000ff400000</span><span class="token punctuation">)</span>
+  from space 1024K，   <span class="token number">0</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff400000</span>， <span class="token number">0x00000000ff4002a8</span>， <span class="token number">0x00000000ff500000</span><span class="token punctuation">)</span>
+  to   space 1024K，   <span class="token number">0</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff500000</span>， <span class="token number">0x00000000ff500000</span>， <span class="token number">0x00000000ff600000</span><span class="token punctuation">)</span>
+ tenured generation   total 10240K， used 4958K <span class="token punctuation">[</span><span class="token number">0x00000000ff600000</span>， <span class="token number">0x0000000100000000</span>， <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
+   the space 10240K，  <span class="token number">48</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff600000</span>， <span class="token number">0x00000000ffad7800</span>， <span class="token number">0x00000000ffad7800</span>， <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
+ Metaspace       used 3286K， capacity 4496K， committed 4864K， reserved 1056768K
+  <span class="token keyword">class</span> <span class="token class-name">space</span>    used 357K， capacity 388K， committed 512K， reserved 1048576K</code></pre>
+<h3 id="动态对象年龄判断"><a href="#动态对象年龄判断" class="headerlink" title="动态对象年龄判断"></a>动态对象年龄判断</h3><p>如果在Survivor空间中相同年龄所有对象大小的总和大于Survovor空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代</p>
+<pre class=" language-java"><code class="language-java"><span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>PrintTenuringDistribution <span class="token operator">-</span>XX<span class="token operator">:</span>MaxTenuringThreshold<span class="token operator">=</span><span class="token number">1</span> 
+<span class="token operator">-</span>verbose<span class="token operator">:</span>gc <span class="token operator">-</span>Xms20M <span class="token operator">-</span>Xmx20M <span class="token operator">-</span>Xmn10M <span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>UseSerialGC 
+<span class="token operator">-</span>XX<span class="token operator">:</span>SurvivorRatio<span class="token operator">=</span><span class="token number">8</span> <span class="token operator">-</span>XX<span class="token operator">:</span><span class="token operator">+</span>PrintGCDetails</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> _1MB <span class="token operator">=</span> <span class="token number">1024</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> allocation1， allocation2， allocation3， allocation4<span class="token punctuation">;</span>
+        allocation1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span>_1MB <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//allocation1 + allocation2 大于 survivor空间的一半了</span>
+        allocation2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span>_1MB <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        allocation3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">4</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        allocation4 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">4</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        allocation4 <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        allocation4 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">4</span> <span class="token operator">*</span> _1MB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>Allocation Failure<span class="token punctuation">)</span> <span class="token punctuation">[</span>DefNew
+Desired survivor size <span class="token number">524288</span> bytes， <span class="token keyword">new</span> <span class="token class-name">threshold</span> <span class="token function">1</span> <span class="token punctuation">(</span>max <span class="token number">15</span><span class="token punctuation">)</span>
+<span class="token operator">-</span> age   <span class="token number">1</span><span class="token operator">:</span>    <span class="token number">1048576</span> bytes，    <span class="token number">1048576</span> total
+<span class="token operator">:</span> 6623K<span class="token operator">-</span><span class="token operator">></span><span class="token function">1024K</span><span class="token punctuation">(</span>9216K<span class="token punctuation">)</span>， <span class="token number">0.0039616</span> secs<span class="token punctuation">]</span> 6623K<span class="token operator">-</span><span class="token operator">></span><span class="token function">5234K</span><span class="token punctuation">(</span>19456K<span class="token punctuation">)</span>， <span class="token number">0.0040033</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span>， real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+<span class="token punctuation">[</span><span class="token function">GC</span> <span class="token punctuation">(</span>Allocation Failure<span class="token punctuation">)</span> <span class="token punctuation">[</span>DefNew
+Desired survivor size <span class="token number">524288</span> bytes， <span class="token keyword">new</span> <span class="token class-name">threshold</span> <span class="token function">15</span> <span class="token punctuation">(</span>max <span class="token number">15</span><span class="token punctuation">)</span>
+<span class="token operator">-</span> age   <span class="token number">1</span><span class="token operator">:</span>        <span class="token number">176</span> bytes，        <span class="token number">176</span> total
+<span class="token operator">:</span> 5204K<span class="token operator">-</span><span class="token operator">></span><span class="token function">0K</span><span class="token punctuation">(</span>9216K<span class="token punctuation">)</span>， <span class="token number">0.0011999</span> secs<span class="token punctuation">]</span> 9414K<span class="token operator">-</span><span class="token operator">></span><span class="token function">5234K</span><span class="token punctuation">(</span>19456K<span class="token punctuation">)</span>， <span class="token number">0.0012304</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span>Times<span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span>， real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+Heap
+ def <span class="token keyword">new</span> <span class="token class-name">generation</span>   total 9216K， used 4234K <span class="token punctuation">[</span><span class="token number">0x00000000fec00000</span>， <span class="token number">0x00000000ff600000</span>， <span class="token number">0x00000000ff600000</span><span class="token punctuation">)</span>
+  eden space 8192K，  <span class="token number">51</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000fec00000</span>， <span class="token number">0x00000000ff0227f0</span>， <span class="token number">0x00000000ff400000</span><span class="token punctuation">)</span>
+  from space 1024K，   <span class="token number">0</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff400000</span>， <span class="token number">0x00000000ff4000b0</span>， <span class="token number">0x00000000ff500000</span><span class="token punctuation">)</span>
+  to   space 1024K，   <span class="token number">0</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff500000</span>， <span class="token number">0x00000000ff500000</span>， <span class="token number">0x00000000ff600000</span><span class="token punctuation">)</span>
+ tenured generation   total 10240K， used 5234K <span class="token punctuation">[</span><span class="token number">0x00000000ff600000</span>， <span class="token number">0x0000000100000000</span>， <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
+   the space 10240K，  <span class="token number">51</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ff600000</span>， <span class="token number">0x00000000ffb1c9a0</span>， <span class="token number">0x00000000ffb1ca00</span>， <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
+ Metaspace       used 3247K， capacity 4496K， committed 4864K， reserved 1056768K
+  <span class="token keyword">class</span> <span class="token class-name">space</span>    used 353K， capacity 388K， committed 512K， reserved 1048576K</code></pre>
+<h3 id="空间分配担保"><a href="#空间分配担保" class="headerlink" title="空间分配担保"></a>空间分配担保</h3><ul>
+<li>在Minor GC前，检查老年代最大可用连续空间是否大于新生代的所有对象空间，如果成立，则这次Minor GC安全。否则要看是否允许担保失败。如果允许，则检查老年代最大可用连续空间是否大于历次晋升到老年代的平均大小，如果大于，将尝试进行一次Minor GC。如果小于，或者不允许担保，则Full GC。</li>
+<li>新生代中，只使用一个Survivor空间来作为轮换备份。当出现大量对象在Minor GC后仍然存活的情况，需要老年代进行分配担保，就把Survivor无法容纳的对象直接送入老年代，担保前提是老年代本身有容纳这些对象的剩余空间。</li>
+<li>但一共有多少对象会在这次回收中存活下来在实际回收完成之前是无法明确知道的，只能取之前每一次回收晋升老年代对象容量的平均大小作为经验值，与老年代的剩余空间进行比较，决定是否进行Full GC来让老年代腾出更多空间</li>
+<li>担保失败则又得Full GC，绕的圈子最大，但一般打开，避免Full GC过于频繁</li>
+<li>在JDK7及之后。不能设置参数影响空间分配担保策略。只要老年代最大可用连续空间大于新生代的所有对象空间，或者大于历次晋升到老年代的平均大小，就进行Minor GC，负责Full GC（相当于一定会冒险）</li>
+</ul>
+<h3 id="总体流程"><a href="#总体流程" class="headerlink" title="总体流程"></a>总体流程</h3><p>首先，新增一个新对象，如果对象很大，直接进入老年代。如果不大，进入eden，如果eden区不够 ，进行minor GC。</p>
+<p>在发生Minor GC时，虚拟机会检测检查老年代最大可用连续空间是否大于新生代的所有对象空间，如果大于则进行Minor GC。如果小于，则査看是否允许担保失败：如果允许，则查看老年代最大可用连续空间是否大于历次晋升到老年代的平均大小。如果大于那只会进行Minor GC :如果不允许，或者小于，则进行Full GC。</p>
+<p>minor GC将这次的eden和survior放入另一个survior。</p>
+<p>如果在Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代。</p>
+<p>如果对象超过年龄了，进入老年代。</p>
+<p>如果对象进入老年代后内存不够，进行Full GC。</p>
+<h1 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h1><p>把我们编写的程序编译成为二进制本地机器码已经不是唯一的选择，很多语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式</p>
+<p>Class文件是一组以8个字节为基础单位的二进制流</p>
+<h2 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h2><p>主要存放字面量和符号引用</p>
+<ul>
+<li><strong>字面量</strong>：类似常量，如文本字符串、被声明为final的常量值</li>
+<li><strong>符号引用</strong>：<ul>
+<li>包</li>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法的名称和描述符</li>
+</ul>
+</li>
+</ul>
+<p>Java代码在进行Javac编译时，没有连接的步骤，而是在虚拟机加载Class文件的时候进行动态连接。也就是说，在Class文件中不会保存各个方法、字段最终在内存中的布局信息，这些字段、方法的符号引用不经过虚拟机在运行期转换的话是无法得到真正的内存入口地址。也就无法直接被虚拟机使用的。</p>
+<p>当虚拟机做类加载时，将会从常量池获得对应的符号引用，再在类创建时或运行时解析、翻译到具体的内存地址中</p>
+<p>在Class文件中描述的各类信息，最终都需要加载到虚拟机中之后才能被运行和使用。而虚拟机如何加载这些Class文件，Class文件中的信息进入到虚拟机后会发生什么变化，则涉及到类加载机制</p>
+<h1 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h1><ul>
+<li>JVM把描述类的数据从Class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这个过程就是类加载机制</li>
+<li>在Java中，类型的加载、连接和初始化过程都是在程序运行时完成的。动态扩展的语言特性就是依赖于运行期动态加载和动态连接，例如编写一个面向接口的程序，可以等到运行时再指定其实际的实现类</li>
+<li>Class文件并非特指某个存在于具体磁盘中的文件，而是一串二进制字节流，无论其以何种形式存在，包括但不限于磁盘文件、网络、数据库、内存或动态产生</li>
+</ul>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<li>解析阶段某些情况可以再初始化阶段之后才开始（为了支持运行时绑定特性）</li>
+<li>这些阶段通常相互交叉地混合进行，会在一个阶段执行的过程中调用、激活另一个阶段</li>
+</ul>
+<h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><ul>
+<li>通过一个类的全限定名获取定义此类的二进制字节流<ul>
+<li>从ZIP压缩包中读取，JAR的基础</li>
+<li>从网络中读取，Web Applet</li>
+<li>运行时计算生成，动态代理技术</li>
+<li>从加密文件中获取，防Class文件被反编译的保护措施</li>
+</ul>
+</li>
+<li>将这个字节流所代表的静态存储结构转换为方法区的运行时数据结构</li>
+<li>在Java堆内存中实例化生成一个代表该类的Class对象，作为方法区这个类的各种数据的访问入口</li>
+</ul>
+<p>加载阶段，可以使用Java虚拟机里内置的引导类加载器来完成，也可以由用户自定义的类加载器去完成，开发人员通过定义自己的类加载器去控制字节流的获取方式（重写一个类加载器的findClass()或loadClass()方法），实现根据自己的想法来赋予应用程序获取运行代码的动态性</p>
+<p>加载阶段结束后，Java虚拟机外部的二进制字节流就按照虚拟机所设定的格式存储在方法区之中了，类型数据妥善放置在方法区之后，会在Java堆内存中实例化一个Class类的对象，这个对象将作为程序访问方法区中的类型数据的外部接口</p>
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><ul>
+<li>目的是确保Class文件的字节流中包含的信息符合全部约束要求，保证这些信息被当作代码运行后不会危害虚拟机自身的安全</li>
+<li>文件格式验证<ul>
+<li>验证字节流是否符合Class文件格式的规范，并能被当前版本的虚拟机处理</li>
+<li>保证输入的字节流能正确地解析并存储于方法区之内，格式上符合描述一个Java类型信息的要求</li>
+<li>基于二进制字节流进行的</li>
+<li>后面的三个验证阶段全部基于方法区的存储结构了</li>
+</ul>
+</li>
+<li>元数据验证<ul>
+<li>对字节码描述的信息进行语义分析</li>
+<li>是否有父类（除Object应都有父类）</li>
+<li>是否继承了final类</li>
+<li>是否实现了父类或接口要求实现的所有方法</li>
+<li>类中字段、方法是否与父类产生矛盾</li>
+</ul>
+</li>
+<li>字节码验证<ul>
+<li>通过数据流分析和控制流分析，确定程序语义是合法的、符合逻辑的</li>
+<li>对类的方法体（Class文件中的Code属性）进行校验分析</li>
+<li>保证被校验类的方法在运行时不会做出危害虚拟机安全的行为</li>
+<li>保证任何跳转指令都不会跳转到方法体之外的字节码指令</li>
+<li>保证类型转换都是有效的</li>
+</ul>
+</li>
+<li>符号引用验证<ul>
+<li>发生在符号引用转化为直接引用的时候，即解析阶段</li>
+<li>验证该类是否缺少或被禁止访问他依赖的某些外部类、方法、字段等</li>
+<li>验证符合引用中通过字符串描述的全限定名称是否能找到对应的类</li>
+<li>验证在指定类中是否存在符合方法的字段描述及简单名称所描述的方法和字段</li>
+<li>符号引用中类、字段、方法的可访问性</li>
+</ul>
+</li>
+</ul>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><ul>
+<li>正式为类中静态变量分配内存并设置初始值</li>
+<li>概念上这些变量都是放在方法区中进行分配，但是方法区是逻辑上的概念。JDK8后，类变量随着Class对象一起存放在Java堆中</li>
+<li>不包括实例变量，实例变量会在对象实例化时随对象一起分配在java堆中</li>
+<li>如果字段属性表中存在ConstantValue属性，则直接被初始化为ConstantValue属性所指定的初始值，例如public static final int value = 123;</li>
+</ul>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><ul>
+<li>将常量池内的符号引用转换为直接引用的过程</li>
+<li>虚拟机可以对第一次解析的结果进行缓存，譬如在运行时直接引用常量池中的记录，并把常量标识为已解析状态，避免重复解析</li>
+<li><strong>符号引用</strong>。以一组符合来描述所引用的目标，可以是任何形式的字面量。符号引用与JVM的内存布局无关，引用的目标不一定是已加载到虚拟机内存的内容</li>
+<li><strong>直接引用</strong>。直接引用是可以直接指向目标的指针、相对偏移量或者句柄，和JVM实现的内存布局相关，引用的目标必定已经在虚拟机内存中</li>
+</ul>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><ul>
+<li><p>直到初始化阶段，JVM真正执行类中编写的Java代码，将主导权移交给应用程序</p>
+</li>
+<li><p>在准备阶段时，变量已经赋过一次系统要求的初始零值，而在初始化阶段，则会根据程序员通过程序编码制定的主观计划去初始化类变量和其他资源，</p>
+</li>
+<li><p>初始化阶段即执行类构造器<clinit>的过程，是编译器自动生成的方法。是由编译器自动收集类中的所有类变量的赋值动作和静态语句块中语句合并而成的。收集的顺序由在源文件出现的顺序决定</p>
+</li>
+<li><p><clinit>不需要显式调用父类构造器，虚拟机保证父类的已经执行完毕，因此JVM第一个被执行的<clinit>方法肯定是Object。父类的<code>&lt;clinit&gt;()</code>先执行，所以父类中定义的静态语句块优先于之类的变量赋值操作</p>
+</li>
+<li><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Parent</span> <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> A <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">static</span><span class="token punctuation">{</span>
+            A <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">SubClass</span> <span class="token keyword">extends</span> <span class="token class-name">Parent</span><span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> B <span class="token operator">=</span> A<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>SubClass<span class="token punctuation">.</span>B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//２</span></code></pre>
+</li>
+<li><p><clinit>()不是必须的，如果没有静态语句块和对变量的赋值操作，就不生成</p>
+</li>
+<li><p>虚拟机保证一个类的<clinit>()在多线程环境中被正确加锁同步，如果多个线程同时去初始化一个类，那么只有其中一个线程去执行这个类的<clinit>()方法，其他线程都需要阻塞等待</p>
+</li>
+</ul>
+<p><strong>立即初始化情况</strong></p>
+<p>有且只有六种情况，也称为对一个类型进行主动引用：</p>
+<ul>
+<li>遇到new、getstatic、putstatic、invokestatic字节码指令时<ul>
+<li>使用new实例化对象</li>
+<li>读取一个类型的静态字段（已在编译期把结果放入常量池的静态字段除外）</li>
+<li>调用一个类型的静态方法</li>
+</ul>
+</li>
+<li>使用reflect包对类型进行反射调用</li>
+<li>初始化类，发现父类还没有进行过初始化</li>
+<li>JVM启动时，指定执行主类则JVM会先初始化这个主类</li>
+<li>使用动态语言支持，使用MethodHandle，并且这个方法句柄对应的类没有进行过初始化</li>
+<li>接口定义了默认方法（default方法)，该接口的实现类初始化，则该接口也要初始化</li>
+</ul>
+<p><strong>被动引用</strong></p>
+<p>除上面主动引用的情况外，所有引用类型的方式都不会触发初始化</p>
+<p><strong>例子1</strong></p>
+<ul>
+<li><p>对于静态字段，只有直接定义这个字段的类才会被初始化</p>
+</li>
+<li><p>通过其子类来引用父类中定义的静态字段，只会触发其父类的初始化而不会触发子类的初始化</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SuperClass</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> value <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"SuperClass init!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SubClass</span> <span class="token keyword">extends</span> <span class="token class-name">SuperClass</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"SubClass init!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>SubClass<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/*
+SuperClass init!
+        123
+*/</span></code></pre>
+</li>
+</ul>
+<p><strong>例子2</strong></p>
+<ul>
+<li>SuperClass[] superClasses = new SuperClass[10];</li>
+<li>没有触发SuperClass的初始化</li>
+<li>触发了[SuperClass的初始化<ul>
+<li>由虚拟机自动生成的</li>
+<li>直接继承Object的子类</li>
+<li>由newarray字节码触发</li>
+<li>代表了元素类型为SuperClass的一维数组</li>
+<li>数组越界则抛出ArrayIndexOutOfBoundsException</li>
+</ul>
+</li>
+</ul>
+<p><strong>例子3</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConstClass</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"ConstClass init"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String HELLO <span class="token operator">=</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>ConstClass<span class="token punctuation">.</span>HELLO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//hello world</span></code></pre>
+<ul>
+<li>常量在编译阶段会存入调用类的常量池中，本质没有引用到定义常量的类，因此不会触发定义常量的类的初始化</li>
+<li>编译阶段的常量传播优化，将常量的值直接存储到Main类的常量池中，对他的引用全部转为对自身常量池的引用</li>
+<li>Main的Class文件没有ConstClass的符号引用入口，这两个类在编译成Class文件后不存在任何关系了</li>
+<li>当一个类在初始化时，要求其父类全部都已经初始化过了，但是一个接口在初始化时，并不要求其父接口全部都完成了初始化，只有在真正使用到父接口时候才会初始化</li>
+</ul>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><ul>
+<li>类加载器：通过一个类的全限定名来获取描述该类的二进制字节流</li>
+<li>对于任意一个类，都必须由他的类加载器和这个类的本身一同确立他的唯一性。每一个类加载器，都拥有一个独立的类名称空间。比较两个类是否相等，只有他们在同一个类加载器下才有意义，否则就算他们来自同一个Class文件，被同一个虚拟机加载，只要他们类加载器不同，他们就不是同一个类。所指的相等，包括equals()方法，instanceof关键字的判断</li>
+<li>假如有两个相同的类，一个由虚拟机的应用程序类加载器所加载，一个由我们自定义的类加载器加载的，虽然它们来自同一个Class文件，但JVM中它们仍然是两个相互独立的类，做对象所属类型检查时的结果为false（object instanceof ObjectClass）</li>
+<li>保持着三层类加载器、双亲委派的类加载结构</li>
+</ul>
+<h3 id="启动类加载器（Bootstrap-ClassLoader）"><a href="#启动类加载器（Bootstrap-ClassLoader）" class="headerlink" title="启动类加载器（Bootstrap ClassLoader）"></a>启动类加载器（Bootstrap ClassLoader）</h3><ul>
+<li>使用C++语言实现，是虚拟机自身的一部分，负责加载<JAVA_HOME>\lib目录</li>
+<li>启动类加载器无法被Java程序直接引用，如果需要把加载请求委派给启动类加载器处理，则用null代替</li>
+</ul>
+<h3 id="其他所有的类加载器"><a href="#其他所有的类加载器" class="headerlink" title="其他所有的类加载器"></a>其他所有的类加载器</h3><ul>
+<li><p>由Java语言实现，独立在虚拟机外部，全部继承抽象类java.lang.ClassLoader</p>
+</li>
+<li><p>扩展类加载器(Extension ClassLoader)</p>
+<ul>
+<li>负责加载<JAVA_HOME>\lib\ext目录下类库</li>
+<li>是一种Java系统类库的扩展机制，允许用户将具有通用性的类库放置在ext目录里以扩展Java SE的功能</li>
+</ul>
+</li>
+<li><p>应用程序类加载器(Application ClassLoader)</p>
+<ul>
+<li>也称为系统类加载器。</li>
+<li>负责加载用户类路径（ClassPath)上所有的类库。如果没有定义自己的类加载器，则它就是程序默认的类加载器</li>
+</ul>
+</li>
+</ul>
+<h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210725162444082.png" alt="image-20210725162444082"></p>
+<h3 id="双亲委派模型概念"><a href="#双亲委派模型概念" class="headerlink" title="双亲委派模型概念"></a>双亲委派模型概念</h3><ul>
+<li>除了顶层的启动类加载器，其余的类加载器都应有自己的父类加载器，通常使用组合关系来复用父加载器的代码</li>
+<li>如果一个类加载器收到类加载的请求，他首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到最顶层的启动类加载器中，只有当父加载器反馈自己无法完成这个加载请求（他的搜索范围中没有找到所需的类），子加载器才会尝试自己去完成加载</li>
+<li>好处是类随着他的类加载器一起具备了一种带有优先级的层次关系。例如Object类，无论哪个类加载器去加载他，都会委派到启动类加载器进行执行，因此Object类在不同的类加载器环境下都能保证是同一个类。如果没有双亲委派模型，用户自定义java.lang.Object类，系统就会出现多个不同的Object类，代码将一片混乱</li>
+<li>先检查请求加载的类型是否已经被加载过，若没有则调用父类加载器的loadClass()方法，若父类加载器为空则默认使用启动类加载器作为父类加载器，如果父类加载器加载失败，抛出异常了，才调用自己的findClass()方法尝试进行加载</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">protected</span> Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> <span class="token function">loadClass</span><span class="token punctuation">(</span>String name， <span class="token keyword">boolean</span> resolve<span class="token punctuation">)</span> <span class="token keyword">throws</span> ClassNotFoundException
+<span class="token punctuation">{</span>
+    Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> c <span class="token operator">=</span> <span class="token function">findLoadedClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 首先，检查是否已经被类加载器加载过</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>parent <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 存在父加载器，递归的交由父加载器</span>
+                c <span class="token operator">=</span> parent<span class="token punctuation">.</span><span class="token function">loadClass</span><span class="token punctuation">(</span>name， <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                c <span class="token operator">=</span> <span class="token function">findBootstrapClassOrNull</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 直到最上面的Bootstrap类加载器</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ClassNotFoundException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 如果父类加载器抛出ClassNotFoundException</span>
+            <span class="token comment" spellcheck="true">// f说明父类加载器无法完成加载请求</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 在父类加载器无法加载时， 再调用自身的findClass方法来进行类加载</span>
+            c <span class="token operator">=</span> <span class="token function">findClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="打破双亲委派机制"><a href="#打破双亲委派机制" class="headerlink" title="打破双亲委派机制"></a>打破双亲委派机制</h3><h4 id="重写loadclass方法"><a href="#重写loadclass方法" class="headerlink" title="重写loadclass方法"></a>重写loadclass方法</h4><p>打破双亲委派机制，即在类加载的时候不是传递到父类加载器中加载，而是由自己加载。</p>
+<p>此时需要自定义一个类加载器，继承ClassLoader类，然后重写父类的findClass方法和loadClass方法。</p>
+<p>这里最主要的是重写loadclass方法，因为双亲委派机制的实现都是通过这个方法实现的，先找父加载器进行加载，如果父加载器无法加载再由自己来进行加载，源码里会直接找到根加载器，重写了这个方法以后就能自己定义加载的方式了</p>
+<h4 id="线程上下文类加载器"><a href="#线程上下文类加载器" class="headerlink" title="线程上下文类加载器"></a>线程上下文类加载器</h4><p>第二次破坏是由于这个模型自身的缺陷导致的，如果有基础类型又要调用回用户的代码怎么办？</p>
+<p>通过给当前线程设置上下文类加载器，就可以实现父类加载器去请求子类加载器完成类加载的行为。这种行为实际上是打通了双亲委派模型的层次结构来逆向使用类加载器。已经违背了双亲委派模型的一般性原则</p>
+<h4 id="OSGi实现模块化热部署"><a href="#OSGi实现模块化热部署" class="headerlink" title="OSGi实现模块化热部署"></a>OSGi实现模块化热部署</h4><p>第三次是由于用户对程序动态性的追求导致的。代码热替换、模块热部署等，机器不用重启，只要部署上就能用。说白了就是希望Java程序能像鼠标一样，接上了不用重启机器就能使用</p>
+<p>OSGi实现模块化热部署的关键则是它自定义的类加载器机制的实现。每一个程序模块(Bundle)都有一个自己的类加载器，当需要更换一个Bundle时，就把Bundle连同类加载器一起换掉以实现代码的热替换。</p>
+<p>在OSGi幻境下，类加载器不再是双亲委派模型中的树状结构，而是进一步发展为更加复杂的网状结构</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">tongji4m3</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tongji4m3.club/posts/515d78b5.html">https://tongji4m3.club/posts/515d78b5.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">tongji4m3</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/">
+                                    <span class="chip bg-color">内存区域</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                                    <span class="chip bg-color">垃圾回收</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
+                                    <span class="chip bg-color">类加载机制</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'b3l6kB5FAaRmQL4rJm9sKfxz-gzGzoHsz',
+        appKey: 'T26ixt4nAVDxB4V3gvBDUzP6',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '留下你的足迹吧~'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/81e7b834.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/10.jpg" class="responsive-img" alt="Java网络编程">
+                        
+                        <span class="card-title">Java网络编程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            网络编程，包括IO模型、select、poll、epoll函数、Java IO、零拷贝等
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/IO%E6%A8%A1%E5%9E%8B/">
+                        <span class="chip bg-color">IO模型</span>
+                    </a>
+                    
+                    <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+                        <span class="chip bg-color">IO多路复用</span>
+                    </a>
+                    
+                    <a href="/tags/epoll/">
+                        <span class="chip bg-color">epoll</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/4509351.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="Java集合">
+                        
+                        <span class="card-title">Java集合</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Java集合，包括List、HashMap、ConcurrentHashMap、HashSet的源码分析、迭代器等
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E7%9B%B8%E5%85%B3/" class="post-category">
+                                    Java相关
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/HashMap/">
+                        <span class="chip bg-color">HashMap</span>
+                    </a>
+                    
+                    <a href="/tags/LRU/">
+                        <span class="chip bg-color">LRU</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">源码分析</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1,h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1,h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">tongji4m3</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">251.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "09";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/tongji4m3" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="javascript:void(0)" class="tooltipped"  data-tooltip="微信联系我:tongji4m3" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="javascript:void(0)" class="tooltipped"  data-tooltip="QQ联系我: 1254931237" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+
+
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

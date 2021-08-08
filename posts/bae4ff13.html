@@ -1,0 +1,3201 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Redis, tongji4m3&#39;s Blog">
+    <meta name="description" content="你日渐平庸，甘于平庸，将继续平庸。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="baidu-site-verification" content="code-MyLOF51Lns" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="google-site-verification" content="cb_eRUNfSOmCVjXFsefzdRthA-wzRyT6ws4hOMuQyUA" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Redis | tongji4m3&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">tongji4m3&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">tongji4m3&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            你日渐平庸，甘于平庸，将继续平庸。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/tongji4m3" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/tongji4m3" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Redis</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">数据结构</span>
+                            </a>
+                        
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                <span class="chip bg-color">数据库</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-07-28
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    37.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    134 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Redis数据结构"><a href="#Redis数据结构" class="headerlink" title="Redis数据结构"></a>Redis数据结构</h1><h2 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h2><h3 id="简单动态字符串"><a href="#简单动态字符串" class="headerlink" title="简单动态字符串"></a>简单动态字符串</h3><h4 id="SDS简介"><a href="#SDS简介" class="headerlink" title="SDS简介"></a>SDS简介</h4><ul>
+<li>使用<strong>简单动态字符串</strong>(simple dynamic string SDS)作为默认字符串</li>
+<li>c字符串只作为字符串字面量，用在无需对字符串值进行修改的地方</li>
+<li>包含字符串值的键值对在底层都是用SDS实现的</li>
+</ul>
+<h4 id="SDS的定义"><a href="#SDS的定义" class="headerlink" title="SDS的定义"></a>SDS的定义</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> sdshdr
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> len<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//记录buf数组中已使用字节的数量 为字符串长度</span>
+    <span class="token keyword">int</span> free<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//未使用的数量</span>
+    <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//字节数组，用来保存字符串</span>
+<span class="token punctuation">}</span></code></pre>
+<ol>
+<li>buf数组以空字符结尾，且最后的空字符不算在len里面</li>
+<li>该空字符由SDS函数自动完成，对SDS用户透明</li>
+</ol>
+<h4 id="SDS与C字符串的区别"><a href="#SDS与C字符串的区别" class="headerlink" title="SDS与C字符串的区别"></a>SDS与C字符串的区别</h4><h5 id="获取字符串长度所需复杂度从O-N-降低到​O-1-​"><a href="#获取字符串长度所需复杂度从O-N-降低到​O-1-​" class="headerlink" title="获取字符串长度所需复杂度从O(N)降低到​O(1)​"></a>获取字符串长度所需复杂度从O(N)降低到​O(1)​</h5><h5 id="杜绝了缓冲区溢出"><a href="#杜绝了缓冲区溢出" class="headerlink" title="杜绝了缓冲区溢出"></a>杜绝了缓冲区溢出</h5><p>例如c进行字符串拼接，需要假设已经为字符串分配了足够的内存以容纳要拼接的字符串，否则就会溢出。<br><strong>SDS空间分配策略</strong>完全杜绝了发生缓冲区溢出的可能性。当要对SDS进行修改时，会先检查空间是否满足修改所需的要求，如果不满足，则会自动将<strong>SDS的空间扩展</strong>，然后再执行实际的修改操作</p>
+<h5 id="减少修改字符串时带来的内存重分配次数"><a href="#减少修改字符串时带来的内存重分配次数" class="headerlink" title="减少修改字符串时带来的内存重分配次数"></a>减少修改字符串时带来的内存重分配次数</h5><p>C字符串底层实现总是一个N+1个字符长的数组，每次对该数组进行增加或缩短，总要进行一次<strong>内存重分配</strong>操作。如果是增长，则要内存重分配扩展底层数组的空间大小。如果是缩短，则执行操作后，需要内存重分配来释放空间，避免内存泄漏。</p>
+<p>Redis通过<strong>未使用空间</strong>解除了字符串长度和底层数组长度之间的关联</p>
+<h6 id="空间预分配"><a href="#空间预分配" class="headerlink" title="空间预分配"></a>空间预分配</h6><p>用于优化SDS的字符串增长操作，在扩展SDS空间之前，会先检查未使用的空间是否足够，如果足够，则直接使用未使用空间，无需进行内存重分配。</p>
+<p>在对一个SDS进行修改，并且需要对SDS进行空间扩展时，不仅为SDS分配修改所需要的空间，还会分配额外的未使用空间。</p>
+<p>如果修改后 SDS.len &lt; 1MB，程序会分配给和len一样的长度给free</p>
+<p>如果修改后 SDS.len &gt;= 1MB，程序会分配1MB给free</p>
+<h6 id="惰性空间释放"><a href="#惰性空间释放" class="headerlink" title="惰性空间释放"></a>惰性空间释放</h6><p>用于优化SDS字符串缩短操作：不立即回收缩短后多出来的字节，而是用free记录。避免了缩短字符串时所需的内存重分配操作，并且为将来可能的增长提供了优化</p>
+<p>API也让我们在需要时，真正释放SDS的未使用空间，不用担心惰性空间释放策略会造成内存浪费</p>
+<h5 id="二进制安全"><a href="#二进制安全" class="headerlink" title="二进制安全"></a>二进制安全</h5><ol>
+<li>C字符串并且符合特定的编码，并且除字符串的末尾外，不能包含空字符，使得他只能保存文本数据</li>
+<li>Redis以处理二进制的方式处理SDS存放在buf数组的数据，使用len而不是空字符判断字符串是否结束。所以他可以保存<strong>任意格式</strong>的二进制数据。</li>
+</ol>
+<h5 id="兼容部分C字符串函数"><a href="#兼容部分C字符串函数" class="headerlink" title="兼容部分C字符串函数"></a>兼容部分C字符串函数</h5><p>SDS保存数据的末尾总是为空字符，所以让那些保存文本数据的SDS可以重用一部分&lt;string.h&gt;库’定义的函数</p>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>被广泛用于实现Redis的各种功能，如列表键，发布与订阅，慢查询，监视器等等</p>
+<h4 id="链表和链表节点的实现"><a href="#链表和链表节点的实现" class="headerlink" title="链表和链表节点的实现"></a>链表和链表节点的实现</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> listNode
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> listNode <span class="token operator">*</span> prev<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> listNode <span class="token operator">*</span> next<span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>listNode<span class="token punctuation">;</span></code></pre>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> list
+<span class="token punctuation">{</span>
+    listNode <span class="token operator">*</span>head<span class="token punctuation">;</span>
+    listNode <span class="token operator">*</span>tail<span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> len<span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span>dup<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//节点值的复制函数</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>free<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span> ptr<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//节点值的释放函数</span>
+    <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>match<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span> ptr，<span class="token keyword">void</span> <span class="token operator">*</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//节点值的对比函数</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="特性总结"><a href="#特性总结" class="headerlink" title="特性总结"></a>特性总结</h4><ul>
+<li>双端、无环、带表头和表尾指针、带链表长度计数器</li>
+<li>多态：可以保存各种不同类型的值</li>
+</ul>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>Redis的数据库底层就是用字典实现的</p>
+<p>字典也是<strong>哈希键</strong>的底层实现之一</p>
+<h4 id="字典的实现"><a href="#字典的实现" class="headerlink" title="字典的实现"></a>字典的实现</h4><p>字典采用哈希表作为底层实现，一个哈希表可以有多个哈希表节点，每个节点保存了一个键值对</p>
+<p>每个字典带有<strong>两个哈希表</strong>，一个平时使用，一个仅仅在rehash时使用</p>
+<h4 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> dictht
+<span class="token punctuation">{</span>
+    dictEntry <span class="token operator">*</span><span class="token operator">*</span> table<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//哈希表数组</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> size<span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> sizemask<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//哈希表大小掩码，用于计算索引值 总=size-1</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> used<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>dictht<span class="token punctuation">;</span></code></pre>
+<p>sizemask和哈希值一起决定一个键应该放到table数组里面的哪个索引上</p>
+<h4 id="哈希表节点"><a href="#哈希表节点" class="headerlink" title="哈希表节点"></a>哈希表节点</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> dictEntry
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span>key<span class="token punctuation">;</span>
+    <span class="token keyword">union</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">void</span> <span class="token operator">*</span>val<span class="token punctuation">;</span>
+        uint64_t u64<span class="token punctuation">;</span>
+        int64_t s64<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> v<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> dictEntry <span class="token operator">*</span> next<span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>dictEntry<span class="token punctuation">;</span></code></pre>
+<p>值可以是应该指针，或者是应该uint64_t类型的整数，或是一个int64_t整数</p>
+<p>next属性指向另一个哈希表节点的指针，可以将多个哈希值相同的键值对连接在一起，以解决键冲突</p>
+<h4 id="字典-1"><a href="#字典-1" class="headerlink" title="字典"></a>字典</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> dict
+<span class="token punctuation">{</span>
+    dicType <span class="token operator">*</span> type<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//类型特定函数</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span> privdata<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//私有数据</span>
+    ditcht ht<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//哈希表</span>
+
+    <span class="token keyword">int</span> rehashidx<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//rehash索引，当rehash不再进行时，值为-1</span>
+<span class="token punctuation">}</span>dict<span class="token punctuation">;</span></code></pre>
+<ol>
+<li>type，privdata属性是针对不同类型的键值对，为创建多态字典而设置的</li>
+<li>每个dicType结构保存了一簇用于操作特定类型键值对的函数</li>
+<li>privdata属性保存了需要传给那些类型特定函数的可选参数</li>
+<li>ht数组中，每个项都是<strong>ditcht哈希表</strong>，一般只使用ht[0]，ht[1]只会在ht[0]进行rehash时使用</li>
+<li>rehashidx记录rehash目前的进度</li>
+</ol>
+<h4 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h4><p>程序先通过键计算哈希值hash，在计算索引(hash &amp; sizemask)，再根据索引将包含新键值对的哈希表节点放到哈希表数组的指定索引上</p>
+<h4 id="解决键冲突"><a href="#解决键冲突" class="headerlink" title="解决键冲突"></a>解决键冲突</h4><p>用链地址法，多个分配到同一个索引的节点用单向链表连接起来。且用<strong>头插法</strong>，将新节点添加到链表的表头位置 </p>
+<h4 id="rehash"><a href="#rehash" class="headerlink" title="rehash"></a>rehash</h4><h5 id="时机"><a href="#时机" class="headerlink" title="时机"></a>时机</h5><ol>
+<li>若没有在执行BGSAVE或BGREWRITEAOF命令，则哈希表负载因子大于等于1时rehash</li>
+<li>若在执行BGSAVE或BGREWRITEAOF命令，则哈希表负载因子大于等于5时rehash</li>
+<li>load_factor=ht[0].used / ht[0].size</li>
+<li>以上的不同是因为，执行那两个命令时，Redis需要创建当前服务器进程的<strong>子进程</strong>，在子进程存在期间，服务器会提高执行扩展操作所需的负载因子，从而京可能避免在子进程存在期间进行哈希表的扩展操作，可以避免不必要的内存写入操作，最大限度地节约内存</li>
+<li>当负载因子小于0.1，则自动进行收缩操作</li>
+</ol>
+<h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><ol>
+<li>为字典的ht[1]哈希表分配空间<ul>
+<li>如果是扩展，则ht[1]大小为第一个大于等于 ht[0].used * 2 的2^n​。</li>
+<li>如果是收缩，则是第一个大于等于 ht[0].used 的2^n​。</li>
+</ul>
+</li>
+<li>将保存在ht[0]的所有键值对rehash到ht[1]上面，即重新计算哈希值和索引值，然后放到ht[1]的指定位置上</li>
+<li>当ht[0]所有的键值对都迁移到了ht[1]，则将ht[1]设置为ht[0]，并且在ht[1]新建一个空哈希表</li>
+</ol>
+<h4 id="渐进式rehash"><a href="#渐进式rehash" class="headerlink" title="渐进式rehash"></a>渐进式rehash</h4><ol>
+<li>rehash时，服务器不是一次就将ht[0]里面的所有键值对全部rehash到ht[1]。而是分多次，<strong>渐进式</strong>地将ht[0]里面的键值对慢慢地rehash到ht[1]</li>
+<li>在执行操作之外，顺带将键值对rehash到ht[1]中，把rehash键值对所需的计算工作均摊到每次对字典的增删改查操作之中。当rehash工作完成后，将rehashidx属性的值加一。所有的键rehash完毕后，rehashidx设置为-1</li>
+<li>在进行渐进式rehash时，字典<strong>同时</strong>使用ht[0]，ht[1]。所以操作同时在两个哈希表中进行，即如果要查找一个键，会先在ht[0]找，没找到就继续到ht[1]中找</li>
+<li>新添加的键值对直接保存到ht[1]中</li>
+</ol>
+<h3 id="跳跃表"><a href="#跳跃表" class="headerlink" title="跳跃表"></a>跳跃表</h3><p>跳表具有如下性质：</p>
+<p>(1) 由很多层结构组成</p>
+<p>(2) 每一层都是一个有序的链表</p>
+<p>(3) 最底层(Level 1)的链表包含所有元素</p>
+<p>(4) 如果一个元素出现在 Level i 的链表中，则它在 Level i 之下的链表也都会出现。</p>
+<p>(5) 每个节点包含两个指针，一个指向同一链表中的下一个元素，一个指向下面一层的元素。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/151153099856214.jpg"></p>
+<p>例子：查找元素 117</p>
+<p>(1) 比较 21， 比 21 大，往后面找</p>
+<p>(2) 比较 37,  比 37大，比链表最大值小，从 37 的下面一层开始找</p>
+<p>(3) 比较 71,  比 71 大，比链表最大值小，从 71 的下面一层开始找</p>
+<p>(4) 比较 85， 比 85 大，从后面找</p>
+<p>(5) 比较 117， 等于 117， 找到了节点。</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* 如果存在 x, 返回 x 所在的节点， 
+ * 否则返回 x 的后继节点 */</span>  
+<span class="token function">find</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>   
+<span class="token punctuation">{</span>  
+    p <span class="token operator">=</span> top<span class="token punctuation">;</span>  
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token operator">-></span>key <span class="token operator">&lt;</span> x<span class="token punctuation">)</span>  
+            p <span class="token operator">=</span> p<span class="token operator">-></span>next<span class="token punctuation">;</span>  
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token operator">-></span>down <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>   
+            <span class="token keyword">return</span> p<span class="token operator">-></span>next<span class="token punctuation">;</span>  
+        p <span class="token operator">=</span> p<span class="token operator">-></span>down<span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>  </code></pre>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>通过在每个节点中维持多个指向其他节点的指针，从而快速访问节点</li>
+<li>查找速度:平均O(log N)，最坏O(N)</li>
+<li>支持顺序性操作</li>
+<li>使用跳跃表作为有序集合键的底层实现之一</li>
+</ul>
+<ul>
+<li><p>因为要进行随机的插入和删除，不便用数组</p>
+</li>
+<li><p>要定位插入位置一般用二分查找</p>
+</li>
+<li><p>层级制，最下面所有元素串起来，每隔几个元素挑选一个代表，再将这几个代表用另外一级指针串起来，然后继续选出二级代表，最后形成金字塔结构</p>
+</li>
+<li><p>插入，先在顶层定位，然后下潜到下一级定位，一直下潜到最底层找到合适的位置，将新元素插入进去</p>
+</li>
+<li><p>随机策略，位于L0层概率为1，兼职L1层概率0.5，到L2层0.25，概率逐层降低</p>
+</li>
+</ul>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><ol>
+<li>每一层都是一个有序的链表，最底层(L1)的链表包含<strong>所有元素</strong></li>
+<li>如果一个元素出现在第 n 层的链表中，则它也出现在第 n-1 层</li>
+<li>搜索先从上层搜索，当前面的元素比target大时，则向下一级搜索(即向着更密集的数据找)</li>
+<li>总体来看从左上往右下寻找</li>
+</ol>
+<h4 id="查找代码"><a href="#查找代码" class="headerlink" title="查找代码"></a>查找代码</h4><p>从每个节点的最高层开始寻找，如果该层forward不为null，并且分值小于score，则跳到下一个节点，即x = x-&gt;level[i].forward，然后如果相等，则返回。如果该层的forward不满足，则遍历自己的下一个层级(level[i-1])的位置。综上就是从左往右，从上往下。</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// 通过分值和对象值获取排位信息，以1为起始值</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token function">zslGetRank</span><span class="token punctuation">(</span>zskiplist <span class="token operator">*</span>zsl， <span class="token keyword">double</span> score， robj <span class="token operator">*</span>o<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    zskiplistNode <span class="token operator">*</span>x<span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> rank <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+
+    x <span class="token operator">=</span> zsl<span class="token operator">-></span>header<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 从最高层依次往下</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> zsl<span class="token operator">-></span>level<span class="token number">-1</span><span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>x<span class="token operator">-></span>level<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>forward <span class="token operator">&amp;&amp;</span>
+            <span class="token punctuation">(</span>x<span class="token operator">-></span>level<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>forward<span class="token operator">-></span>score <span class="token operator">&lt;</span> score <span class="token operator">||</span>
+                <span class="token punctuation">(</span>x<span class="token operator">-></span>level<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>forward<span class="token operator">-></span>score <span class="token operator">==</span> score <span class="token operator">&amp;&amp;</span>
+                <span class="token function">compareStringObjects</span><span class="token punctuation">(</span>x<span class="token operator">-></span>level<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>forward<span class="token operator">-></span>obj，o<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 排位增加</span>
+            rank <span class="token operator">+</span><span class="token operator">=</span> x<span class="token operator">-></span>level<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>span<span class="token punctuation">;</span>
+            x <span class="token operator">=</span> x<span class="token operator">-></span>level<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>forward<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">/* x might be equal to zsl->header， so test if obj is non-NULL */</span>
+        <span class="token comment" spellcheck="true">// 对象和分数值都相等</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>x<span class="token operator">-></span>obj <span class="token operator">&amp;&amp;</span> <span class="token function">equalStringObjects</span><span class="token punctuation">(</span>x<span class="token operator">-></span>obj，o<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> rank<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p><img src="https://tongji4m3.oss-cn-beijing.aliyuncs.com/IMG_20200818_102630.jpg" alt="IMG_20200818_102630"></p>
+<p>level:表中层数最大的节点的层数</p>
+<p>length:节点数量</p>
+<h4 id="跳跃表节点"><a href="#跳跃表节点" class="headerlink" title="跳跃表节点"></a>跳跃表节点</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> zskiplistNode
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> zskiplistNode <span class="token operator">*</span> backward<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//后退指针</span>
+    <span class="token keyword">double</span> score<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//分值</span>
+    robj <span class="token operator">*</span> obj<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//成员对象</span>
+
+    <span class="token keyword">struct</span> zskiplistLevel <span class="token comment" spellcheck="true">//层</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">struct</span> zskiplistNode <span class="token operator">*</span> forward<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//前进指针</span>
+        <span class="token keyword">unsigned</span> <span class="token keyword">int</span> span<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//跨度</span>
+    <span class="token punctuation">}</span> level<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="层"><a href="#层" class="headerlink" title="层"></a>层</h5><p>level数组可以包含多个元素，每个元素都包含一个指向其他节点的指针，来加快访问其他节点的速度</p>
+<p>感觉幂次规律，随机生成一个[1，32]的值作为level数组的大小，即层的高度</p>
+<h5 id="前进指针"><a href="#前进指针" class="headerlink" title="前进指针"></a>前进指针</h5><p>每个层都有一个指向表尾方向的前进指针(level[i].forward)</p>
+<h5 id="跨度"><a href="#跨度" class="headerlink" title="跨度"></a>跨度</h5><p>记录两个节点之间的距离</p>
+<p>指向NULL的所有前进指针的跨度都为0</p>
+<p>跨度实际是用来计算排位的:在查找某个节点过程中，将沿途访问的所有层的跨度累积起来，得到的结果就是目标节点在跳跃表中的排位(即该节点是第几个节点)</p>
+<h5 id="后退指针"><a href="#后退指针" class="headerlink" title="后退指针"></a>后退指针</h5><p>可以先通过跳跃表的tail指针访问表尾节点，然后通过后退指针访问倒数第二个节点…，直到遇到指向NULL的后退指针</p>
+<h5 id="分值和成员"><a href="#分值和成员" class="headerlink" title="分值和成员"></a>分值和成员</h5><ol>
+<li>分值:跳跃表中所有节点都按分值从小到大排序</li>
+<li>成员对象:指向<strong>SDS字符串</strong>对象的指针</li>
+<li>跳跃表中成员对象必须唯一，但是分值可以相同</li>
+<li>分值相同的节点按照成员变量的字典序排序</li>
+</ol>
+<h4 id="跳跃表结构"><a href="#跳跃表结构" class="headerlink" title="跳跃表结构"></a>跳跃表结构</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> zskiplist
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> zskiplistNode <span class="token operator">*</span> header，<span class="token operator">*</span>tial<span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> length<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//表中节点的数量</span>
+    <span class="token keyword">int</span> level<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//表中层数最大的节点的层数</span>
+<span class="token punctuation">}</span> zskiplist<span class="token punctuation">;</span></code></pre>
+<p>使得能O(1)访问表头表尾节点，访问跳跃表长度，获取表中层数最大的节点的层数</p>
+<h3 id="整数集合"><a href="#整数集合" class="headerlink" title="整数集合"></a>整数集合</h3><p>当一个集合只包含整数值元素，并且数量不多时，redis就会采用整数集合作为集合键的底层实现</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> strcut intset
+<span class="token punctuation">{</span>
+    uint32_t encoding<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//编码方式</span>
+    uint32_t length<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//元素数量</span>
+    int8_t contents<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//保存元素的数组</span>
+<span class="token punctuation">}</span></code></pre>
+<p>可以保存类型为 int16_t，int32_t，int64_t的<strong>非重复</strong>整数值，且元素在contents数组中<strong>有序排列</strong></p>
+<h4 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h4><p>每当添加一个新元素到整数集合里面，并且新元素的类型比<strong>现有所有元素类型</strong>都长，需要先对整数集合进行升级，再加入该元素</p>
+<ol>
+<li>根据新元素类型，扩展整数集合底层数组的空间大小，并为新元素分配空间</li>
+<li>将底层数组现有的<strong>所有元素转换</strong>成与新元素相同的类型，并且放置到正确位置上，仍需<strong>保证有序性</strong></li>
+<li>将新元素添加到底层数组里</li>
+</ol>
+<p>每次添加新元素都有可能引起升级，而每次升级都需要对底层数组所有元素进行类型转换，所以添加新元素时间复杂度为O(N)</p>
+<h4 id="升级的好处"><a href="#升级的好处" class="headerlink" title="升级的好处"></a>升级的好处</h4><h5 id="提升灵活性"><a href="#提升灵活性" class="headerlink" title="提升灵活性"></a>提升灵活性</h5><p>整数集合可以通过自动升级底层数组来适应新元素，所以可以将 int16_t、int32_t、int64_t随意地添加到集合中，不必担心类型错误</p>
+<h5 id="节约内存"><a href="#节约内存" class="headerlink" title="节约内存"></a>节约内存</h5><p>既可以让集合能<strong>同时保存三种不同类型</strong>的值，又可以确保升级只在必要时进行</p>
+<h4 id="降级"><a href="#降级" class="headerlink" title="降级"></a>降级</h4><p><strong>不支持</strong>降级操作，即使把之前因为他而升级的元素删除，底层数组还仍然是加入那个元素后的类型</p>
+<h3 id="压缩列表"><a href="#压缩列表" class="headerlink" title="压缩列表"></a>压缩列表</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li><strong>（1）内存空间连续：</strong>ziplist为了提高存储效率，从存储结构上看ziplist更像是一个表(list)，但不是一个链表(linkedlist)。ziplist将每一项数据存放在前后连续的地址空间内，一个ziplist整体占用一大块内存。而普通的双向链表每一项都占用独立的一块内存，各项之间用指针连接，这样会带来大量内存碎片，而且指针也会占用额外内存。</li>
+<li><strong>（2）查询元素：</strong>查找指定的数据项就会性能变得很低，需要进行遍历整个zipList。</li>
+<li><strong>（3）插入和修改：</strong>每次插入或修改引发的重新分配内存(realloc)操作会有更大的概率造成内存拷贝，从而降低性能。跟list一样，一旦发生内存拷贝，内存拷贝的成本也相应增加，因为要拷贝更大的一块数据。</li>
+</ul>
+<p>ziplist提高了存储效率，是内存紧缩的列表，多个数据在一起的连续空间，不擅长修改，在两端pop,push快。</p>
+<h4 id="具体"><a href="#具体" class="headerlink" title="具体"></a>具体</h4><ul>
+<li>压缩列表是列表键和哈希键的底层实现之一</li>
+<li>当一个列表键只包含<strong>少量列表项</strong>，并且每个列表项都是<strong>小整数或较短字符串</strong>，则用压缩列表作为底层实现</li>
+<li>压缩列表是为了<strong>节约内存</strong>而开发的，是由一系列特殊编码的连续内存块组成的<strong>顺序型数据结构</strong><ul>
+<li>zlbytes：记录整个压缩列表所占用的内存字节数，在内存重分配或zlend位置时使用</li>
+<li>zltail：记录压缩列表表尾节点距压缩列表的起始地址有多少字节，通过该偏移量，可无须遍历整个压缩列表就可以确定表尾节点的地址</li>
+<li>zllen：记录了压缩列表包含的节点数量</li>
+<li>entryX：压缩列表包含的各个节点，节点长度由节点包含的内容决定</li>
+<li>zlend：特殊值0xFF，用于标记压缩列表的末端</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207091430874.png" alt="image-20210207091430874"></p>
+<h4 id="压缩列表节点的构成"><a href="#压缩列表节点的构成" class="headerlink" title="压缩列表节点的构成"></a>压缩列表节点的构成</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207091652786.png" alt="image-20210207091652786"></p>
+<h5 id="previous-entry-length"><a href="#previous-entry-length" class="headerlink" title="previous_entry_length"></a>previous_entry_length</h5><ul>
+<li>记录压缩列表<strong>前一个节点</strong>的长度</li>
+<li>通过指针运算，根据当前节点的起始地址得到前一个节点的起始地址</li>
+<li>用于从表尾到表头的遍历：指向表尾节点的指针可以通过压缩列表的起始地址的指针加上zltail得到</li>
+</ul>
+<h5 id="encoding"><a href="#encoding" class="headerlink" title="encoding"></a>encoding</h5><p>记录节点的content属性所保存数据的类型及长度</p>
+<h5 id="content"><a href="#content" class="headerlink" title="content"></a>content</h5><p>负责保存节点的值，值的类型和属性由encoding决定</p>
+<h5 id="连锁更新"><a href="#连锁更新" class="headerlink" title="连锁更新"></a>连锁更新</h5><ul>
+<li><p>每个节点的previous_entry_length属性都记录了前一个节点的长度，如果前一节点长度小于254字节，则previous_entry_length属性用1字节空间保存该长度值，否则需要用5字节空间。</p>
+</li>
+<li><p>如果在压缩列表中，有多个介于[250，153]字节的节点[e1，eN]，记录这些节点的长度只需要1字节长的<strong>previous_entry_length</strong>，所以[e1，eN]所有节点的<strong>previous_entry_length</strong>都是1字节长</p>
+</li>
+<li><p>但如果将一个大于254字节的新节点new加入压缩列表的头节点，则new成为e1的前置节点。而这样e1的<strong>previous_entry_length</strong>属性不足以保存new的长度，所以进行空间重分配，变成5字节大小</p>
+</li>
+<li><p>这样e1的长度大于254字节了，e2的<strong>previous_entry_length</strong>也不足以保存e1的长度，也扩展成5字节大小。这样就进行连续多次空间扩展，即连锁更新</p>
+</li>
+<li><p>删除节点也会引发连锁更新</p>
+</li>
+<li><p>连锁更新在最坏情况下需要对压缩列表进行N次空间重分配操作，每次操作最坏O(N)，所以连锁更新最坏时间复杂度为O(N^2)​.</p>
+</li>
+<li><p>但是发生的机率比较低：</p>
+<ul>
+<li>恰好有多个连续的，长度介于250-153字节的节点的情况并不多见 </li>
+<li>即使出现连锁更新，只要被更新的节点数量不多，就不会对性能有影响</li>
+</ul>
+</li>
+<li><p>所以平均复杂度为O(N)</p>
+</li>
+</ul>
+<h3 id="快速链表"><a href="#快速链表" class="headerlink" title="快速链表"></a>快速链表</h3><ul>
+<li>双向链表便于在表的进行插入和删除节点操作，但是它的内存开销比较大。首先，它在每个节点上除了要保存数据之外，还要额外保存两个指针；其次，双向链表的各个节点是单独的内存块，地址不连续，节点多了容易产生内存碎片。</li>
+<li>ziplist由于是一整块连续内存，所以存储效率很高。但是，它不利于修改操作，每次数据变动都会引发一次内存的内存重新分配(realloc)。特别是当ziplist长度很长的时候，一次realloc可能会导致大批量的数据拷贝，进一步降低性能。</li>
+</ul>
+<p>可见，一个quicklist节点上的ziplist要保持一个合理的长度</p>
+<p><strong>quicklist将 双向链表插入和修改元素不需要移动节点的优点 和 ziplist的存储效率很高优点(一整块连续内存)结合在一起，同时将各自的缺点进行一个折中的处理。</strong></p>
+<h4 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h4><p>链表里用压缩表</p>
+<p>回顾下前面说的 ziplist，ziplist 有哪些特点，内存利用率高，可以从表头快速定位到尾节点，节点可以从后往前找，但是有个缺点，就是从中间插入的效率比较低，需要整体往后移，这个其实是普通数组的优化版，但还是有数组的一些劣势，所以要真的快，是不是可以将链表跟数组真的结合起来。</p>
+<p>假如每个快表节点的 ziplist 只放一个元素，那么其实这就退化成了一个链表，如果 10 个元素放在一个 quicklistNode 的 ziplist 里，那就退化成了一个 ziplist</p>
+<p>quickList 是 zipList 和 linkedList 的混合体，它将 linkedList 按段切分，每一段使用 zipList 来紧凑存储，多个 zipList 之间使用双向指针串接起来。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/1294391-20180827151851500-1561398239.png"></p>
+<h2 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h2><h3 id="字符串对象-String"><a href="#字符串对象-String" class="headerlink" title="字符串对象(String)"></a>字符串对象(String)</h3><ol>
+<li>字符串对象的编码可以是int，raw，embstr</li>
+<li>如果字符串对象保存整数值，且可以用long表示，则会将整数值保存在ptr中，enconding设为int</li>
+<li>如果保存字符串值，并且长度大于39字节，就用<code>SDS</code>保存，并且设为raw</li>
+<li>如果保存字符串值，并且长度小于39字节，就用<code>embstr</code>编码保存，并且设为embstr</li>
+</ol>
+<h5 id="embstr"><a href="#embstr" class="headerlink" title="embstr"></a>embstr</h5><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210724101944436.png" alt="image-20210724101944436"></p>
+<p>专门用来保存短字符串的一种优化编码方式，和SDS差不多<br>不同的是，只调用一次内存分配函数来分配一块连续的空间，空间依次包含redisObject，sdshdr两个结构<br>优点：内存分配与释放次数由两次变为一次；字符串所有的数据保存在一块连续的内存中，更好利用缓存</p>
+<h5 id="编码的转换"><a href="#编码的转换" class="headerlink" title="编码的转换"></a>编码的转换</h5><ol>
+<li>int编码的字符串对象如果操作后保存的不再是整数值，而是字符串值，则编码变为raw</li>
+<li>embstr编码的字符串对象只是可读的，对它执行任何修改命令，都会编程raw</li>
+</ol>
+<p><strong>应用</strong></p>
+<ul>
+<li><p>点赞数量:  incr likes 每操作一 次，就+1，最后可以通过get likes得到最终结果</p>
+</li>
+<li><p>将用户信息使用JSON序列化为字符串，将字符串塞进Redis来缓存</p>
+</li>
+<li><p>如果value是整数，则可以进行自增操作。用于计数器：可以快速实现计数和查询的功能。</p>
+</li>
+<li><pre><code>  // runoobkey 是一个键。 如果键被删除成功，命令执行后输出 (integer) 1，否则将输出 (integer) 0
+  SET runoobkey redis
+  DEL runoobkey</code></pre>
+</li>
+</ul>
+<h3 id="列表对象-List"><a href="#列表对象-List" class="headerlink" title="列表对象(List)"></a>列表对象(List)</h3><p>编码可以是<code>ziplist</code>,<code>linkedlist</code>。ziplist使用压缩列表作为底层实现，linkedlist采用双端链表作为底层实现。每个双端链表节点都保持一个字符串对象（之后使用的是quickList)</p>
+<p>字符串对象是Redis 5种类型的对象中唯一一种会被其他四种对象嵌套的对象</p>
+<h5 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h5><p>使用ziplist编码的情况：</p>
+<ol>
+<li>列表对象保存的所有字符串元素都小于64字节</li>
+<li>列表保存的元素数量小于512</li>
+</ol>
+<p><strong>理解</strong></p>
+<ul>
+<li>相当于LinkedList，是链表不是数组，插入删除快，索引定位慢</li>
+<li>元素较少时会使用一块连续内存存储，即ziplist（压缩列表），所有元素彼此紧挨着一起存储</li>
+<li>元素较多时采用快速链表（quicklist），将多个ziplist使用双向指针串起来使用，既满足快速插入删除，又不会出现太大空间冗余</li>
+</ul>
+<p><strong>应用场景</strong></p>
+<ul>
+<li><p>粉丝列表、文章的评论列表</p>
+</li>
+<li><p>通过 lrange 命令，读取某个闭区间内的元素，可以基于 List 实现分页查询，这个是很棒的一个功能，基于 Redis 实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西，性能高，就一页一页走。</p>
+</li>
+<li><p>消息队列（异步队列）：数据的生产者可以通过Lpush命令从左边插入数据，多个数据消费者，可以使用BRpop命令阻塞的“抢”列表尾部的数据。</p>
+</li>
+<li><pre><code>  LPUSH runoobkey redis
+  LPUSH runoobkey mongodb
+  LPUSH runoobkey mysql
+  LRANGE runoobkey 0 10
+
+  1) &quot;mysql&quot;
+  2) &quot;mongodb&quot;
+  3) &quot;redis&quot;</code></pre>
+</li>
+</ul>
+<h3 id="哈希对象-Hash"><a href="#哈希对象-Hash" class="headerlink" title="哈希对象(Hash)"></a>哈希对象(Hash)</h3><p>编码可以是ziplist、hashtable。</p>
+<p>用ziplist则将键值对压入列表表尾，键值对紧挨一起，键在前，值在后。类似队列</p>
+<p>hashtable编码用字典作为底层实现，字典的每个键与值都是一个字符串对象</p>
+<h5 id="编码转换-1"><a href="#编码转换-1" class="headerlink" title="编码转换"></a>编码转换</h5><p>使用ziplist编码的情况：</p>
+<ol>
+<li>列表对象保存的所有字符串元素都小于64字节</li>
+<li>列表保存的元素数量小于512</li>
+</ol>
+<p><strong>应用</strong></p>
+<pre><code>HMSET runoobkey name &quot;redis tutorial&quot; description &quot;redis basic commands for caching&quot;
+HGETALL runoobkey
+1) &quot;name&quot;
+2) &quot;redis tutorial&quot;
+3) &quot;description&quot;
+4) &quot;redis basic commands for caching&quot;
+5) &quot;likes&quot;
+6) &quot;20&quot;</code></pre>
+<h3 id="集合对象-Set"><a href="#集合对象-Set" class="headerlink" title="集合对象(Set)"></a>集合对象(Set)</h3><p>编码可以是intset、hashtable。</p>
+<p>用intset编码的集合使用整数集合作为底层实现</p>
+<p>用hashtable编码的集合使用字典作为底层实现，每个键是一个字符串对象，而值设为NULL</p>
+<h5 id="编码转换-2"><a href="#编码转换-2" class="headerlink" title="编码转换"></a>编码转换</h5><p>使用intset编码的情况：</p>
+<ol>
+<li>列表对象保存的都是整数值</li>
+<li>列表保存的元素数量小于512</li>
+</ol>
+<pre><code>redis 127.0.0.1:6379&gt; SADD runoobkey redis
+(integer) 1
+redis 127.0.0.1:6379&gt; SADD runoobkey mongodb
+(integer) 1
+redis 127.0.0.1:6379&gt; SADD runoobkey mysql
+(integer) 1
+redis 127.0.0.1:6379&gt; SADD runoobkey mysql
+(integer) 0
+redis 127.0.0.1:6379&gt; SMEMBERS runoobkey
+
+1) &quot;mysql&quot;
+2) &quot;mongodb&quot;
+3) &quot;redis&quot;</code></pre>
+<h3 id="有序集合对象-sorted-set"><a href="#有序集合对象-sorted-set" class="headerlink" title="有序集合对象(sorted set)"></a>有序集合对象(sorted set)</h3><p>有序集合的编码可以是ziplist、skiplist</p>
+<p>用ziplist编码则每个集合元素使用两个紧挨的压缩列表节点来保存，第一个节点保存元素的成员，第二个保存元素的分值。集合元素按分值从小到大进行排序</p>
+<h5 id="用skiplist编码实现"><a href="#用skiplist编码实现" class="headerlink" title="用skiplist编码实现"></a>用skiplist编码实现</h5><p>同时包含一个<strong>字典</strong>和<strong>跳跃表</strong></p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> zset
+<span class="token punctuation">{</span>
+    zskiplist <span class="token operator">*</span>zsl<span class="token punctuation">;</span>
+    dict <span class="token operator">*</span> dict<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> zset<span class="token punctuation">;</span></code></pre>
+<p>zset中的zsl跳跃表按分值从小到大保存了所有集合元素</p>
+<p>每个跳跃表节点中：object属性保存元素的成员，score属性保存元素的分值</p>
+<p>此外，dict中，字典的键保存元素的成员，值保存元素的分值，这样，通过字典可以用O(1)的复杂度查找给定成员的分值</p>
+<p>这两种数据结构都会通过指针来共享相同元素的成员和分值，所以使用跳跃表和字典来保存集合元素不会产生任何重复成员或者分值，不会浪费额外内存</p>
+<p>优点：</p>
+<ul>
+<li>范围操作不需要对字典保存的所有元素进行排序，从O(NlogN)到O(N)</li>
+<li>根据成员查询分值不需要通过跳跃表，复杂度从O(N)降低到O(1)</li>
+</ul>
+<h5 id="编码转换-3"><a href="#编码转换-3" class="headerlink" title="编码转换"></a>编码转换</h5><p>使用ziplist编码的情况：</p>
+<ol>
+<li>有序集合保存的所有元素长度都小于64字节</li>
+<li>有序集合保存的元素数量小于128个</li>
+</ol>
+<p><strong>应用</strong></p>
+<ul>
+<li><p>类似于SortedSet和HashMap的结合体，保证了value的唯一性，每个value有score（排序权重）</p>
+</li>
+<li><p>热搜</p>
+</li>
+<li><p>游戏排名</p>
+</li>
+<li><p>排行榜：榜单维护可能是多方面：按照时间、按照播放量、按照获得的赞数等。</p>
+</li>
+<li><p>微博热搜榜，value是名称，score是热度值</p>
+</li>
+<li><p>粉丝列表，value是粉丝用户ID，score是关注时间</p>
+</li>
+<li><p>学生成绩，value是学生ID，score是考试成绩</p>
+</li>
+</ul>
+<h3 id="对象特性"><a href="#对象特性" class="headerlink" title="对象特性"></a>对象特性</h3><ol>
+<li>基于之前的数据结构创建一个对象系统。包括字符串对象，列表对象，哈希对象，集合对象，有序集合对象五种</li>
+<li>可以在执行命令之前，根据对象类型判断一个对象能否执行给定的命令</li>
+<li>可以针对不同的使用场景，为对象设置多种不同的数据结构实现，从而优化对象在不同场景下的使用效率</li>
+<li>实现基于引用计数的内存回收机制，实现内存共享机制，让多个数据库键共享同一个对象节约内存</li>
+<li>对象带有访问时间记录信息，记录数据库键的空转时间</li>
+</ol>
+<p><strong>理解</strong></p>
+<p>每个键值对都是由对象组成，键总是一个字符串对象，值可以是五种对象中的一种</p>
+<p>如果容器不存在，则先创建一个再进行操作</p>
+<p>如果容器里元素为空，则立刻删除容器，释放内存</p>
+<h4 id="对象的类型和编码"><a href="#对象的类型和编码" class="headerlink" title="对象的类型和编码"></a>对象的类型和编码</h4><p>使用对象来表示数据库的键和值，新创建一个键值对时，会创建两个对象分别代表键和值</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> redisObject
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> type<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//类型</span>
+    <span class="token keyword">unsigned</span> encoding<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//编码</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span> ptr<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//指向底层实现数据结构的指针</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h5><p><code>type</code>属性记录了对象的类型，即五种对象类型之一<br>对于一个键值对，键总是字符串对象，值可以是五种对象类型之一</p>
+<h5 id="编码和底层实现"><a href="#编码和底层实现" class="headerlink" title="编码和底层实现"></a>编码和底层实现</h5><ol>
+<li>对象的ptr指针指向对象的底层实现数据结构，而这些数据结构由对象的encoding属性决定，即之前学习的几种数据结构</li>
+<li>每种类型的对象都至少使用了两种不同的编码</li>
+<li>通过<code>encoding</code>属性来设定使用的编码，极大地提升了灵活性和效率，可以根据不同的使用场景来为一个对象设置不同的编码，从而优化对象在某一场景下的效率</li>
+</ol>
+<h4 id="类型检查和命令多态"><a href="#类型检查和命令多态" class="headerlink" title="类型检查和命令多态"></a>类型检查和命令多态</h4><p>在执行一个类型的特定命令之前，服务器会检查输入数据库键的值对象是否为执行命令所需的指令，如果是，服务器就会对键执行指定的命令。否则将拒绝执行命令，并向客户端返回一个类型错误。</p>
+<p>类型检查是通过<code>redisObject</code>结构的type属性来实现的 </p>
+<h5 id="多态命令的实现"><a href="#多态命令的实现" class="headerlink" title="多态命令的实现"></a>多态命令的实现</h5><p>Redis除了会根据值对象的类型来判断键是否能够执行指定指令之外，还会根据值对象的编码方式，选择正确的命令实现代码来执行命令</p>
+<p>例如，<code>LLEN命令</code>是多态的，只要执行LLEN命令的是列表键，那么无论值对象使用的是ziplist编码还是linkedlist编码，命令都可以正常执行</p>
+<p>DEL，TYPE等命令也是多态命令，无论输入的键是什么类型，这些命令都可以正常执行。区别在于，DEL，TYPE等命令是基于类型的多态，一个命令可以处理多种不同的类型的键，LLen命令是基于编码的多态，一个命令可以同时用于处理多种不同编码</p>
+<h4 id="内存回收"><a href="#内存回收" class="headerlink" title="内存回收"></a>内存回收</h4><p>基于引用计数法实现内存回收机制，通过跟踪对象的引用计数信息，在适当的时候自动释放对象并进行内存回收</p>
+<ol>
+<li>创建对象，引用计数值为1</li>
+<li>对象被新程序使用，引用计数值+1</li>
+<li>对象不被一个程序使用，引用计数值-1</li>
+<li>引用计数值为0时，释放对象占用的内存</li>
+</ol>
+<h4 id="对象共享"><a href="#对象共享" class="headerlink" title="对象共享"></a>对象共享</h4><h5 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h5><p>让多个键共享同一个值对象步骤：</p>
+<ol>
+<li>将数据库键的值指向一个现有的值对象</li>
+<li>将被共享的值对象引用计数值+1</li>
+</ol>
+<h5 id="内置整数"><a href="#内置整数" class="headerlink" title="内置整数"></a>内置整数</h5><p>Redis在初始化服务器时，会创建一万个字符串对象，存储[0,9999]的整数值。如果需要用到这些字符串对象，服务器则会使用这些共享对象，而不会新创建对象。</p>
+<p>这些共享对象不仅仅只有字符串键可以使用，那些在数据结构中嵌套了字符串对象的对象都可以使用这些共享对象</p>
+<h5 id="为什么不共享包含字符串的对象"><a href="#为什么不共享包含字符串的对象" class="headerlink" title="为什么不共享包含字符串的对象"></a>为什么不共享包含字符串的对象</h5><p>只有在共享对象和目标对象完全相同的情况下，程序才会将共享对象用作键的值对象</p>
+<p>一个共享对象保存的值越复杂，则验证共享对象和目标对象是否相同所需的复杂度越高：</p>
+<ol>
+<li>共享对象是整数值的字符串对象，验证操作为<code>O(1)</code></li>
+<li>共享对象是保存字符串值的字符串对象，验证操作为<code>O(N)</code></li>
+<li>共享对象是包含多个值的对象（如列表），验证操作为<code>O(N^2)</code></li>
+</ol>
+<h4 id="对象的空转时间"><a href="#对象的空转时间" class="headerlink" title="对象的空转时间"></a>对象的空转时间</h4><p><code>redisObject</code>结构包含属性lru,记录了对象最后一次被命令程序访问的时间。可用当前时间-键的值对象的lru时间求得空转时间</p>
+<p>可通过设置，使得当服务器占用的内存数超过了，<code>maxmemory</code>的上限时，空转时间较高的那部分键会优先被服务器释放，从而回收内存</p>
+<h2 id="高级数据结构"><a href="#高级数据结构" class="headerlink" title="高级数据结构"></a>高级数据结构</h2><h3 id="位图bitmap"><a href="#位图bitmap" class="headerlink" title="位图bitmap"></a>位图bitmap</h3><p>位图不是特殊的数据结构，它的内容其实就是普通的字符串，也就是 byte 数组</p>
+<p>可以使用get/set 直接获取和设置整个位图的内容，也可以使⽤位图操作 getbit/setbit 等将 byte 数组看成「位数组」来处理。</p>
+<p>位数组会自动扩展，如果设置了某个偏移位置超出了现有的内容范围，就会自动进行零扩充</p>
+<p><strong>应用场景</strong></p>
+<p>用户签到</p>
+<ul>
+<li>有些bool 型数据需要存取，例如用户⼀年的签到记录，签了是 1，没签是0，要记录 365 天</li>
+<li>位图数据结构让每天的签到记录只占据⼀个位，365 天就是 365个位，46 个字节 (⼀个稍长⼀点的字符串) 就可以完全容纳下</li>
+<li>统计和查找<ul>
+<li>bitcount：统计指定范围内1的个数，可以统计用户一共签到多少天 </li>
+<li>bitpos：用于查找指定范围内出现的第一个0或1，从哪天开始第一次签到</li>
+</ul>
+</li>
+</ul>
+<h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><ul>
+<li><p>提供不精确的去重统计方案，标准误差是0.81%</p>
+</li>
+<li><p>不能知道一个值是否在结构中，即不提供 pfcontains功能</p>
+</li>
+<li><p>pfadd 和 pfcount，⼀个是增加计数，⼀个是获取计数。pfadd codehole user1（将用户ID塞进去）；pfcount codehole</p>
+</li>
+<li><p>pfmerge：用于将多个pf计数值累加在一起形成一个新的pf值，例如两个差不多的页面进行合并，需要将页面的UV访问量也合并</p>
+</li>
+<li><p>场景：UV（Unique Visitor） 需要去重，同⼀个用户⼀天之内的多次访问请求只能计数⼀次。</p>
+</li>
+<li><p>实现：计数较小时使用稀疏矩阵存储，占用空间超过阈值，则转成稠密矩阵</p>
+</li>
+</ul>
+<h3 id="Bloom-Filter"><a href="#Bloom-Filter" class="headerlink" title="Bloom Filter"></a>Bloom Filter</h3><p>布隆过滤器是一个很长的二进制向量和一系列随机映射函数。</p>
+<p>优点是空间效率和查询时间都远远超过⼀般的算法</p>
+<p>当⼀个元素被加入集合时，通过K个散列函数将这个元素映射成⼀个位数组中的K 个点，把它们置为1。检索时，我们只要看看这些点是不是都是1就（⼤约）知道集合中有没有它了：如 果这些点有任何⼀个0，则被检元素⼀定不在；如果都是1，则被检元素很可能在。这就是布隆过滤器的基本思想。</p>
+<p>缺点是：</p>
+<ul>
+<li>存在误判，可能要查到的元素并没有在容器中，但是hash之后得到的k个位置上值都是1</li>
+<li>删除困难。⼀个放入容器的元素映射到bit数组的k个位置上是1，删除的时候不能简单的直接置为 0，可能会影响其他元素的判断。</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>在使⽤bloom filter时，绕不过的两点是预估数据量n以及期望的误判率fpp</li>
+<li>在实现bloom filter时，绕不过的两点就是hash函数的选取以及bit数组的大小。</li>
+<li>对于⼀个确定的场景，我们预估要存的数据量为n，期望的误判率为fpp，然后需要计算我们需要的Bit数 组的⼤⼩m，以及hash函数的个数k，并选择hash函数</li>
+<li>一个好的哈希函数要能近似等概率的将字符串映射到各个 Bit。选择k个不同的哈希函数⽐较麻烦，⼀种简单的⽅法是选择⼀个哈希函数，然后送入k个不同的参数。 </li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//项目要导入guava的maven依赖</span>
+<span class="token keyword">package</span> com<span class="token punctuation">.</span>tongji<span class="token punctuation">;</span>
+
+
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>common<span class="token punctuation">.</span>hash<span class="token punctuation">.</span>BloomFilter<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>common<span class="token punctuation">.</span>hash<span class="token punctuation">.</span>Funnels<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * 测试布隆过滤器(可用于redis缓存穿透)
+ * @author tongji4m3
+ */</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestBloomFilter</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">1000000</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*
+    static &lt;T> BloomFilter&lt;T> create(Funnel&lt;? super T> funnel， long expectedInsertions， double fpp， BloomFilter.Strategy strategy)
+    funnel：数据类型(⼀般是调⽤Funnels⼯具类中的)
+    expectedInsertions：期望插入的值的个数
+    fpp 错误率(默认值为0.03)
+    strategy 哈希算法
+
+    numBits，表示存⼀百万个int类型数字，需要的位数为7298440，700多万位。理论上存⼀百万个
+    数，⼀个int是4字节32位，需要481000000=3200万位。如果使⽤HashMap去存，按HashMap50%的
+    存储效率，需要6400万位。可以看出BloomFilter的存储空间很⼩，只有HashMap的1/10左右
+
+    错误率越⼤，所需空间和时间越⼩，错误率越⼩，所需空间和时间越⼤
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> BloomFilter<span class="token operator">&lt;</span>Integer<span class="token operator">></span> bloomFilter <span class="token operator">=</span> BloomFilter<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>Funnels<span class="token punctuation">.</span><span class="token function">integerFunnel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>， total<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//初始化total条数据到过滤器里</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> total<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            bloomFilter<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//匹配已经再过滤器中的值，看是否有匹配不上的</span>
+        <span class="token comment" spellcheck="true">//没有输出，说明只要放进去的，都能匹配上</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> total<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>bloomFilter<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"有坏人逃脱啦~"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">//匹配不在过滤器中的10000个值，有多少匹配出来</span>
+        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> total<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> total <span class="token operator">+</span> <span class="token number">10000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>bloomFilter<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token operator">++</span>count<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//误伤数量: 320 错误率是0.03左右</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"误伤数量: "</span><span class="token operator">+</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h4><p>数据库的id都是1开始然后自增的，那我知道你接⼝是通过id查询的，我就拿负数去查询，这个时候，会发现缓存里面没这个数据，我⼜去数据库查也没有，⼀个请求这样，100个，1000 个，10000个呢？你的DB基本上就扛不住了，如果在缓存里面加上这个，是不是就不存在了，你判断没这个数据就不去查了，直接return⼀个数据为空不就好了嘛。</p>
+<ul>
+<li>海量数据去重</li>
+<li>用于检索一个元素是否在一个集合中</li>
+<li>爬⾍过滤已抓到的url就不再抓，可⽤bloom filter过滤，只会使得爬虫系统错过少量的新页面</li>
+<li>垃圾邮件过滤。Bloom Filter只需要哈希表 1/8到 1/4 的大小</li>
+<li>海量数据去重：不断放入元素到集合中，检索一个元素是否在一个集合中，在则说明重复、推荐去重，即APP会把用户已经看过的内容去掉、能准确过滤掉用户已经看过的内容，那些用户没有看过的新内容，也会过滤掉极小一部分（误判）</li>
+</ul>
+<h1 id="Redis特性"><a href="#Redis特性" class="headerlink" title="Redis特性"></a>Redis特性</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="基本认识"><a href="#基本认识" class="headerlink" title="基本认识"></a>基本认识</h3><p>Remote Dictionary Service(远程词典服务)，是一个存储中间件</p>
+<p>Redis采用的是基于内存的采用的是单进程单线程模型的 KV 数据库，由C语言编写，官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。</p>
+<p>Redis是一个开源的内存中的数据结构存储系统，它可以用作：<strong>数据库、缓存和消息中间件</strong>。</p>
+<p>它支持多种类型的数据结构，如字符串（Strings），散列（Hash），列表（List），集合（Set），有序集合（Sorted Set或者是ZSet）与范围查询，Bitmaps，Hyperloglogs 和地理空间（Geospatial）索引半径查询。<strong>其中常见的数据结构类型有：String、List、Set、Hash、ZSet这5种。</strong></p>
+<p>Redis 内置了复制（Replication），LUA脚本（Lua scripting）， LRU驱动事件（LRU eviction），事务（Transactions） 和不同级别的磁盘持久化（Persistence），并通过 Redis哨兵（Sentinel）和自动分区（Cluster）提供高可用性（High Availability）。</p>
+<h3 id="Redis为什么快"><a href="#Redis为什么快" class="headerlink" title="Redis为什么快"></a>Redis为什么快</h3><ul>
+<li>redis是基于内存的，数据存在内存中，内存的读写速度非常快；它类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)；</li>
+<li>数据结构简单，对数据操作也简单，有高效的数据结构。底层多种数据结构支持不同的数据类型，支持 Redis 存储不同的数据</li>
+<li>采用单线程，避免了不必要的上下文切换和竞争条件，不存在多进程或者多线程导致的切换而消耗 CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；</li>
+<li>redis使用I/O多路复用技术，可以处理并发的连接。非阻塞IO 内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在IO上浪费一点时间。</li>
+</ul>
+<h3 id="Redis和memcached的区别"><a href="#Redis和memcached的区别" class="headerlink" title="Redis和memcached的区别"></a>Redis和memcached的区别</h3><ul>
+<li>Redis 支持复杂的数据结构，拥有更多的数据结构，能支持更丰富的数据操作。如果需要缓存能够支持更复杂的结构和操作</li>
+<li>Redis 提供主从同步机制，以及 Cluster 集群部署能力，能够提供高可用服务</li>
+<li>性能方面，Redis 只使用单核，而 Memcached 可以使用多核，所以平均每一个核上 Redis 在存储小数据时比 Memcached 性能更高。而在 100k 以上的数据中，Memcached 性能要高于 Redis，虽然 Redis 最近也在存储大数据的性能上进行优化，但是比起 Remcached，还是稍有逊色。</li>
+<li>Redis ⽀持持久化，所以 Redis 不仅仅可以⽤作缓存，也可以⽤作 NoSQL 数据库。</li>
+</ul>
+<h3 id="为什么Redis是单线程的"><a href="#为什么Redis是单线程的" class="headerlink" title="为什么Redis是单线程的"></a>为什么Redis是单线程的</h3><p>这里我们一直在强调的单线程，只是在处理我们的网络请求的时候只有一个线程来处理，一个正式的Redis Server运行的时候肯定是不止一个线程的，这里需要大家明确的注意一下！例如Redis进行持久化的时候会以子进程或者子线程的方式执行</p>
+<p> 单线程指的是网络请求模块使用了一个线程（所以不需考虑并发安全性），即一个线程处理所有网络请求，其他模块仍用了多个线程。</p>
+<p> 内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在io上浪费一点时间</p>
+<p><strong>1）不需要各种锁的性能消耗</strong></p>
+<p>Redis的数据结构并不全是简单的Key-Value，还有list，hash等复杂的结构，这些结构有可能会进行很细粒度的操作，比如在很长的列表后面添加一个元素，在hash当中添加或者删除</p>
+<p>一个对象。这些操作可能就需要加非常多的锁，导致的结果是同步开销大大增加。</p>
+<p>总之，在单线程的情况下，就不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗。</p>
+<p><strong>2）单线程多进程集群方案</strong></p>
+<p>单线程的威力实际上非常强大，每核心效率也非常高，多线程自然是可以比单线程有更高的性能上限，但是在今天的计算环境中，即使是单机多线程的上限也往往不能满足需要了，需要进一步摸索的是多服务器集群化的方案，这些方案中多线程的技术照样是用不上的。</p>
+<p><strong>所以单线程、多进程的集群不失为一个时髦的解决方案。</strong></p>
+<p><strong>3）CPU消耗</strong></p>
+<p>采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU。</p>
+<p>但是如果CPU成为Redis瓶颈，或者不想让服务器其他CUP核闲置，那怎么办？</p>
+<p>可以考虑多起几个Redis进程，Redis是key-value数据库，不是关系数据库，数据之间没有约束。只要客户端分清哪些key放在哪个Redis进程上就可以了。</p>
+<h3 id="Redis单线程的优劣势"><a href="#Redis单线程的优劣势" class="headerlink" title="Redis单线程的优劣势"></a>Redis单线程的优劣势</h3><p><strong>单进程单线程优势</strong></p>
+<ol>
+<li>代码更清晰，处理逻辑更简单</li>
+<li>不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗</li>
+<li>不存在多进程或者多线程导致的切换而消耗CPU</li>
+</ol>
+<p><strong>单进程单线程弊端</strong></p>
+<ol>
+<li>无法发挥多核CPU性能，不过可以通过在单机开多个Redis实例来完善；</li>
+</ol>
+<h3 id="为什么快"><a href="#为什么快" class="headerlink" title="为什么快"></a>为什么快</h3><p>Redis 是跑在单线程中的，所有的操作都是按照顺序线性执行的，但是由于读写操作等待用户输入或输出都是阻塞的，所以 I/O 操作在一般情况下往往不能直接返回，这会导致某一文件的 I/O 阻塞导致整个进程无法对其它客户提供服务，而  <strong>I/O 多路复用</strong> 就是为了解决这个问题而出现的。</p>
+<p>redis的io模型主要是基于epoll实现的，不过它也提供了 select和kqueue的实现，默认采用epoll。</p>
+<ul>
+<li>优先选择时间复杂度为O(1)的IO复用函数作为底层实现，例如epoll</li>
+<li>以select系统调用为保底，时间复杂度O(N)</li>
+<li>基于react设计模式监听IO事件</li>
+</ul>
+<p>多路I/O复用模型是利用 select、poll、epoll 可以同时监察多个流的 I/O 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有 I/O 事件时，就从阻塞态中唤醒，于是程序就会轮询一遍所有的流（epoll 是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流，这种做法就避免了大量的无用操作。</p>
+<p><strong>这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。</strong>采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络 IO 的时间消耗），且 Redis 在内存中操作数据的速度非常快，也就是说内存内的操作不会成为影响Redis性能的瓶颈，主要由以上几点造就了 Redis 具有很高的吞吐量。</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="服务器中的数据库"><a href="#服务器中的数据库" class="headerlink" title="服务器中的数据库"></a>服务器中的数据库</h3><pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> redisServer
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> dbnum<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//服务器的数据库数量</span>
+    redisDb <span class="token operator">*</span>db<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//一个数组，保存着服务器中的所有数据库 默认16</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h3><p>每个Redis客户端都有个目标数据库，每当客户端执行数据库读写命令时，目标数据库就成为这些命令的操作对象.默认目标数据库为0号数据库</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> redisClient
+<span class="token punctuation">{</span>
+    redisDb <span class="token operator">*</span> db<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//记录客户端当前使用的数据库</span>
+<span class="token punctuation">}</span>redisClient<span class="token punctuation">;</span></code></pre>
+<h3 id="数据库键空间"><a href="#数据库键空间" class="headerlink" title="数据库键空间"></a>数据库键空间</h3><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> redisDb
+<span class="token punctuation">{</span>
+    dict <span class="token operator">*</span>dict<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据库键空间，保存着数据库中的所有键值对</span>
+<span class="token punctuation">}</span> redisDb<span class="token punctuation">;</span></code></pre>
+<p>键空间的键是一个字符串对象，值可以是字符串对象，列表对象，哈希表对象，集合对象，有序集合对象</p>
+<p>所有针对数据库的操作，都是通过对键空间字典进行操作实现的</p>
+<h4 id="添加新键"><a href="#添加新键" class="headerlink" title="添加新键"></a>添加新键</h4><p>就是将新键值对添加到键空间字典里面</p>
+<h4 id="读写键空间时的维护操作"><a href="#读写键空间时的维护操作" class="headerlink" title="读写键空间时的维护操作"></a>读写键空间时的维护操作</h4><ul>
+<li>在读取一个键后(读写操作都要对键进行读取)，服务器会根据键是否存在来更新服务器的键空间命中次数</li>
+<li>在读取一个键后，会更新LRU时间，可以计算键的闲置时间</li>
+<li>在读取一个键若发现该键已过期，则会先删除过期键</li>
+<li>在对被监视的键进行修改后，会标记为脏，让事务程序注意该键已经被修改</li>
+</ul>
+<h2 id="缓存问题"><a href="#缓存问题" class="headerlink" title="缓存问题"></a>缓存问题</h2><h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>查询某个Key对应的数据，Redis缓存中没有相应的数据，则直接到数据库中查询。数据库中也不存在要查询的数据，则数据库会返回空，而Redis也不会缓存这个空结果。这就造成每次通过这样的Key去查询数据都会直接到数据库中查询，Redis不会缓存空结果。这就造成了缓存穿透的问题。</p>
+<p>一些恶意的请求会故意查询不存在的 key，请求量很大，就会对后端系统造成很大的压力。这就叫做缓存穿透。</p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><ol>
+<li>采用布隆过滤器，将所有可能存在的数据哈希到一个足够大的bitmap中，一个一定不存在的数据会被这个bitmap拦截掉，从而避免了对底层存储系统的查询压力。</li>
+<li>如果一个查询返回的数据为空（不管是数据不存在，还是系统故障），我们仍然把这个空结果进行缓存，但它的过期时间会很短，最长不超过五分钟。</li>
+<li>根据明显错误的key在逻辑层就就行验证。</li>
+<li>分析用户行为，是否为故意请求或者爬虫、攻击者。针对用户访问做限制。</li>
+</ol>
+<h3 id="缓存击穿-1"><a href="#缓存击穿-1" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><p>缓存在某个时间点过期的时候，恰好在这个时间点对这个Key有大量的并发请求过来，这些请求发现缓存过期一般都会从后端DB加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把后端DB压垮。</p>
+<p>缓存击穿，是指一个key非常热点，在不停的扛着大并发，大并发集中对这一个点进行访问，当这个key在失效的瞬间，持续的大并发就穿破缓存，直接请求数据库，好像蛮力击穿一样。</p>
+<p>击穿和穿透不同，穿透的意思是想法绕过redis去使得数据库崩掉。而击穿你可以理解为正面刚击穿，这种通常为大量并发对一个key进行大规模的读写操作。<strong>这个key在缓存失效期间大量请求数据库</strong>，对数据库造成太大压力使得数据库崩掉。就比如在秒杀场景下10000块钱的mac和100块的mac这个100块的那个订单肯定会被抢到爆，不断的请求(当然具体秒杀有自己处理方式这里只是举个例子)。所以缓存击穿就是针对某个常用key大量请求导致数据库崩溃。</p>
+<h4 id="使用互斥锁"><a href="#使用互斥锁" class="headerlink" title="使用互斥锁"></a>使用互斥锁</h4><p>在缓存失效的时候（判断拿出来的值为空），不是立即去load db，而是先使用缓存工具的某些带成功操作返回值的操作（比如Redis的SETNX）去set一个mutex key，当操作返回成功时，再进行load db的操作并回设缓存；否则，就重试整个get缓存的方法。</p>
+<p>在访问key之前，采用SETNX（set if not exists）来设置另一个短期key来锁住当前key的访问，访问结束再删除该短期key。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> String <span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      String value <span class="token operator">=</span> redis<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">==</span> null<span class="token punctuation">)</span> 
+      <span class="token punctuation">{</span> 
+          <span class="token comment" spellcheck="true">//代表缓存值过期</span>
+          <span class="token comment" spellcheck="true">//设置3min的超时，防止del操作失败的时候，下次缓存过期一直不能load db</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>redis<span class="token punctuation">.</span><span class="token function">setnx</span><span class="token punctuation">(</span>key_mutex， <span class="token number">1</span>， <span class="token number">3</span> <span class="token operator">*</span> <span class="token number">60</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> 
+          <span class="token punctuation">{</span>  
+              <span class="token comment" spellcheck="true">//代表设置成功</span>
+              value <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              redis<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>key， value， expire_secs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              redis<span class="token punctuation">.</span><span class="token function">del</span><span class="token punctuation">(</span>key_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> 
+          <span class="token keyword">else</span> 
+          <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//这个时候代表同时候的其他线程已经load db并回设到缓存了，这时候重试获取缓存值即可</span>
+              <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//重试</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span> 
+    <span class="token keyword">else</span> 
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> value<span class="token punctuation">;</span>      
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span></code></pre>
+<h4 id="热点key永不过期"><a href="#热点key永不过期" class="headerlink" title="热点key永不过期"></a>热点key永不过期</h4><h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>大量的key设置了相同的过期时间，导致在缓存在同一时刻全部失效，造成瞬时DB请求量大、压力骤增，引起雪崩。</p>
+<ul>
+<li>在缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个 key 只允许一个线程查询数据和写缓存，其他线程等待。</li>
+<li>做二级缓存，A1 为原始缓存，A2 为拷贝缓存，A1 失效时，可以访问 A2，A1 缓存失效时间设置为短期，A2 设置为长期</li>
+<li>可以给缓存设置过期时间时加上一个随机值时间，使得每个key的过期时间分布开来，不会集中在同一时刻失效。</li>
+<li>热点数据可以考虑不失效</li>
+</ul>
+<h2 id="过期键删除策略"><a href="#过期键删除策略" class="headerlink" title="过期键删除策略"></a>过期键删除策略</h2><h3 id="过期键实现"><a href="#过期键实现" class="headerlink" title="过期键实现"></a>过期键实现</h3><h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><ol>
+<li>EXPIRE 设置过期时间，单位为秒</li>
+<li>PEXPIRE 设置过期时间，单位为毫秒</li>
+<li>EXPIREAT 设置过期时间为秒数时间戳</li>
+<li>PEXPIREAT 设置过期时间为毫秒数时间戳</li>
+</ol>
+<p>最后都是转换为PEXPIREAT来执行的</p>
+<h4 id="保存过期时间"><a href="#保存过期时间" class="headerlink" title="保存过期时间"></a>保存过期时间</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> redisDb
+<span class="token punctuation">{</span>
+    dict <span class="token operator">*</span>dict<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据库键空间，保存着数据库中的所有键值对</span>
+    dict <span class="token operator">*</span>expires<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//保存了数据库中所有键的过期时间，过期字典</span>
+    <span class="token comment" spellcheck="true">//key是一个指针，指向键空间某个键</span>
+    <span class="token comment" spellcheck="true">//value为long long类型的过期时间，一个毫秒精度的UNIX时间戳</span>
+<span class="token punctuation">}</span> redisDb<span class="token punctuation">;</span></code></pre>
+<p>键空间的键和过期字典的键都指向同一个键对象，不会出现任何重复对象，也不会浪费任何空间</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">PEXPIREAT</span><span class="token punctuation">(</span>key，expire_time_in_ms<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token comment" spellcheck="true">#如果给定的键不存在键空间，那么不能设置过期时间</span>
+    <span class="token keyword">if</span> key <span class="token operator">not</span> <span class="token keyword">in</span> redisDb<span class="token punctuation">.</span>dict<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">0</span>
+    <span class="token comment" spellcheck="true">#在过期字典中关联键和过期时间</span>
+    redisDb<span class="token punctuation">.</span>expires<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> expire_time_in_ms
+    <span class="token comment" spellcheck="true"># 过期时间设置成功</span>
+    <span class="token keyword">return</span> <span class="token number">1</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="移除过期时间"><a href="#移除过期时间" class="headerlink" title="移除过期时间"></a>移除过期时间</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">PERSIST</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">#如果给定的键不存在或没设置过期时间，那么直接返回</span>
+     <span class="token keyword">if</span> key <span class="token operator">not</span> <span class="token keyword">in</span> redisDb<span class="token punctuation">.</span>expires<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">0</span>
+    <span class="token comment" spellcheck="true">#移除过期字典中给定键的键值对关联</span>
+    redisDb<span class="token punctuation">.</span>expires<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#移除成功</span>
+    <span class="token keyword">return</span> <span class="token number">1</span></code></pre>
+<h3 id="计算并返回剩余生存时间"><a href="#计算并返回剩余生存时间" class="headerlink" title="计算并返回剩余生存时间"></a>计算并返回剩余生存时间</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">PTTL</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">#如果给定的键不存在数据库</span>
+    <span class="token keyword">if</span> key <span class="token operator">not</span> <span class="token keyword">in</span> redisDb<span class="token punctuation">.</span>dict<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">2</span>
+    <span class="token comment" spellcheck="true">#尝试获取过期时间</span>
+    <span class="token comment" spellcheck="true">#没有则为None</span>
+    expire_time_in_ms<span class="token operator">=</span>redisDb<span class="token punctuation">.</span>expires<span class="token punctuation">.</span>get<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> expire_time_in_ms <span class="token keyword">is</span> None<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+    <span class="token comment" spellcheck="true"># 获取当前时间时间戳</span>
+    now_ms<span class="token operator">=</span>get_current_unix_timestamp_in_ms<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>expire_time_in_ms <span class="token operator">-</span> now_ms<span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">TTL</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    ttl_in_ms <span class="token operator">=</span> PTTL<span class="token punctuation">(</span>key<span class="token punctuation">)</span>    
+    <span class="token keyword">if</span> ttl_in_ms<span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">:</span>        <span class="token operator">//</span>处理为<span class="token operator">-</span><span class="token number">2</span>，<span class="token operator">-</span><span class="token number">1</span>的异常情况        
+        <span class="token keyword">return</span> ttl_in_ms   
+    <span class="token keyword">else</span><span class="token punctuation">:</span>        <span class="token comment" spellcheck="true">#将毫秒转为秒        </span>
+        <span class="token keyword">return</span> ms_to_sec<span class="token punctuation">(</span>ttl_in_ms<span class="token punctuation">)</span>    </code></pre>
+<h3 id="过期键的判断"><a href="#过期键的判断" class="headerlink" title="过期键的判断"></a>过期键的判断</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">is_expired</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    <span class="token comment" spellcheck="true">#尝试获取过期时间    #没有则为None    </span>
+    expire_time_in_ms<span class="token operator">=</span>redisDb<span class="token punctuation">.</span>expires<span class="token punctuation">.</span>get<span class="token punctuation">(</span>key<span class="token punctuation">)</span>        
+    <span class="token keyword">if</span> expire_time_in_ms <span class="token keyword">is</span> None<span class="token punctuation">:</span>        
+        <span class="token keyword">return</span> <span class="token boolean">False</span>        
+    <span class="token comment" spellcheck="true"># 获取当前时间时间戳    </span>
+    now_ms<span class="token operator">=</span>get_current_unix_timestamp_in_ms<span class="token punctuation">(</span><span class="token punctuation">)</span>        
+    <span class="token keyword">if</span>  now_ms<span class="token operator">></span>expire_time_in_ms<span class="token punctuation">:</span>        
+        <span class="token keyword">return</span> <span class="token boolean">True</span> <span class="token comment" spellcheck="true"># 已过期    </span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>        
+        <span class="token keyword">return</span> <span class="token boolean">False</span></code></pre>
+<h3 id="定时删除"><a href="#定时删除" class="headerlink" title="定时删除"></a>定时删除</h3><ul>
+<li><p>在设置键的过期时间的同时，创建一个定时器，让定时器在键的过期时间来临时，立即执行对键的删除操作</p>
+</li>
+<li><p>可以保证过期键会尽可能快地被删除，并释放过期键所占用的内存</p>
+</li>
+<li><p>对CPU时间最不友好，在内存不紧张而CPU非常紧张的情况下，将CPU时间用在删除和当前任务无关的过期键上，对服务器的响应时间和吞吐量造成影响</p>
+</li>
+<li><p>不太现实</p>
+</li>
+</ul>
+<h3 id="惰性删除"><a href="#惰性删除" class="headerlink" title="惰性删除"></a>惰性删除</h3><ul>
+<li><p>每次取出键都会检查是否过期，过期则删除</p>
+</li>
+<li><p>只有在取出键时才会对键进行过期检查，对CPU时间最友好</p>
+</li>
+<li><p>对内存最不友好：如果一个键已过期，而这个键又仍然保留在数据库中，那么只要这个过期键不被删除，他所占用的内存就不会释放。</p>
+</li>
+<li><p>会导致内存泄漏，无用的垃圾数据占用了大量内存。如日志，当不再使用时，会大量积压在数据库，用户以为自动删除了，其实还存在，则它们不会被删除，所占用的内存就不会释放。</p>
+</li>
+</ul>
+<h3 id="定期删除"><a href="#定期删除" class="headerlink" title="定期删除"></a>定期删除</h3><ul>
+<li>每隔一段时间进行检查，删除里面的过期键</li>
+<li>通过限制删除操作执行的时长和频率来减少删除操作对CPU时间的影响；定期删除策略有效减少了因为过期键而带来的内存浪费。是前两种的整合与折中。</li>
+<li>必须合理地设置删除操作的执行时间和执行效率：太频繁或执行时间太长会退化为定时删除策略，反之则出现浪费内存的情况</li>
+</ul>
+<h3 id="Redis过期键删除策略"><a href="#Redis过期键删除策略" class="headerlink" title="Redis过期键删除策略"></a>Redis过期键删除策略</h3><p>配合使用<strong>惰性删除</strong>和<strong>定期删除</strong>两种</p>
+<h4 id="惰性删除策略的实现"><a href="#惰性删除策略的实现" class="headerlink" title="惰性删除策略的实现"></a>惰性删除策略的实现</h4><p>所有读写数据库的Redis命令在执行之前都会调用expireIfNeeded函数对输入键进行检查，如果输入键已过期，则将输入键从数据库中删除</p>
+<p>采用expireIfNeeded函数，如果过期则将键删除。就像过滤器，在命令真正执行前，过滤掉过期的输入键，避免命令接触到过期键</p>
+<p>所以每个命令的实现函数必须能同时处理键存在和不存在两种情况</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207104150550.png" alt="image-20210207104150550"></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207104206293.png" alt="image-20210207104206293"></p>
+<h4 id="定期删除策略实现"><a href="#定期删除策略实现" class="headerlink" title="定期删除策略实现"></a>定期删除策略实现</h4><p>每当Redis服务器周期性操作serverCron函数执行时，activeExpireCycle函数就会被调用，它在规定的时间内，分多次遍历服务器中的各个数据库，从数据库的expires字典中随机检查一部分键的过期时间，并删除其中的过期键</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 默认每次检查的数据库数量</span>
+DEFAULT_DB_NUMBERS <span class="token operator">=</span> <span class="token number">16</span>
+<span class="token comment" spellcheck="true"># 默认每个数据库检查的键数量</span>
+DEFAULT_KEY_NUMBERS <span class="token operator">=</span> <span class="token number">20</span>
+<span class="token comment" spellcheck="true"># 全局变量，记录检查进度</span>
+<span class="token comment" spellcheck="true"># 如果当前的activeExpireCycle函数在遍历10号数据库时返回了，那么下次activeExpireCycle函数时，将从11号数据库开始查找并删除过期键</span>
+current_db <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token comment" spellcheck="true"># 函数每次运行时，都从一定数量的数据库中取出一定数量的随机键进行检查，并删除其中的过期键</span>
+<span class="token keyword">def</span> <span class="token function">activeExpireCycle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    <span class="token comment" spellcheck="true"># 初始化要检查的数据库数量    </span>
+    <span class="token comment" spellcheck="true"># 以服务器的数据库数量为主    </span>
+    <span class="token keyword">if</span> serer<span class="token punctuation">.</span>dbnum <span class="token operator">&lt;</span> DEFAULT_DB_NUMBERS<span class="token punctuation">:</span>        
+        db_numbers <span class="token operator">=</span> serer<span class="token punctuation">.</span>dbnum    
+     <span class="token keyword">else</span><span class="token punctuation">:</span>        
+        db_numbers <span class="token operator">=</span> DEFAULT_DB_NUMBERS    
+    <span class="token comment" spellcheck="true">#遍历每个数据库    </span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>db_numbers<span class="token punctuation">)</span><span class="token punctuation">:</span>        
+        <span class="token comment" spellcheck="true">#如果current_db=服务器的数据库数量        </span>
+        <span class="token comment" spellcheck="true">#则表示已经遍历了服务器的所有数据库一次        </span>
+        <span class="token comment" spellcheck="true">#将current_db=重置为0，开始新一轮        </span>
+        <span class="token keyword">if</span> current_db<span class="token operator">==</span>server<span class="token punctuation">.</span>dbnum<span class="token punctuation">:</span>            
+            current_db<span class="token operator">=</span><span class="token number">0</span>                
+
+        <span class="token comment" spellcheck="true">#获取当前要处理的数据库        </span>
+        redisDb<span class="token operator">=</span>server<span class="token punctuation">.</span>db<span class="token punctuation">[</span>current_db<span class="token punctuation">]</span>                
+        <span class="token comment" spellcheck="true">#指向下一个要处理的数据库        </span>
+        current_db<span class="token operator">+=</span><span class="token number">1</span>                
+        <span class="token comment" spellcheck="true">#检查数据库的键        </span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>DEFAULT_KEY_NUMBERS<span class="token punctuation">)</span><span class="token punctuation">:</span>            
+            <span class="token comment" spellcheck="true">#如果数据库中没有一个键带有过期时间，则跳过该数据库            </span>
+            <span class="token keyword">if</span> redisDb<span class="token punctuation">.</span>expires<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">:</span> <span class="token keyword">break</span>                        
+            <span class="token comment" spellcheck="true">#随机获取一个带过期时间的键            </span>
+            key_with_ttl<span class="token operator">=</span>redisDb<span class="token punctuation">.</span>expires<span class="token punctuation">.</span>get_random_key<span class="token punctuation">(</span><span class="token punctuation">)</span>                        
+            <span class="token keyword">if</span> is_expired<span class="token punctuation">(</span>key_with_ttl<span class="token punctuation">)</span><span class="token punctuation">:</span> delete_key<span class="token punctuation">(</span>key_with_ttl<span class="token punctuation">)</span>                                      <span class="token comment" spellcheck="true"># 已到达时间上限，停止处理            </span>
+            <span class="token keyword">if</span> reach_time_limit<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">return</span> </code></pre>
+<h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><p>在单机环境中，应用是在同一进程下的，只需要保证单进程多线程环境中的线程安全性，通过 JAVA 提供的 volatile、ReentrantLock、synchronized 以及 concurrent 并发包下一些线程安全的类等就可以做到。</p>
+<p>一个应用往往会部署在多台机器上（多节点），在某些场景中，多个进程必须以互斥的方式独占共享资源。因此需要使用分布式锁</p>
+<p>分布式锁，顾名思义，就是分布式项目开发中用到的锁，可以用来控制分布式系统之间同步访问共享资源，一般来说，分布式锁需要满足的特性有这么几点：</p>
+<p>1、互斥性：在任何时刻，对于同一条数据，只有一台应用可以获取到分布式锁；</p>
+<p>2、高可用性：在分布式场景下，一小部分服务器宕机不影响正常使用，这种情况就需要将提供分布式锁的服务以集群的方式部署；</p>
+<p>3、防止锁超时：如果客户端没有主动释放锁，服务器会在一段时间之后自动释放锁，防止客户端宕机或者网络不可达时产生死锁；</p>
+<p>4、独占性：加锁解锁必须由同一台服务器进行，也就是锁的持有者才可以释放锁，不能出现你加的锁，别人给你解锁了；</p>
+<h3 id="setnx（set-if-not-exists"><a href="#setnx（set-if-not-exists" class="headerlink" title="setnx（set if not exists)"></a>setnx（set if not exists)</h3><pre><code>SETNX key value</code></pre>
+<p>SET if Not eXists(如果不存在，则 SET)</p>
+<p>命令在设置成功时返回 1 ，设置失败时返回 0 。</p>
+<p>用来实现Redis锁机制，一个进程进来占坑，用完后再调用del指令释放坑</p>
+<p>只在键 key 不存在的情况下，将键 key 的值设置为 value 。若键 key 已经存在， 则 SETNX 命令不做任何动作。</p>
+<p><strong>中间代码异常</strong></p>
+<p>如果逻辑执行到中间出现异常，可能导致del指令没有被调用，就会陷入死锁，锁永远得不到释放</p>
+<p>可以再拿到锁以后再给锁加上一个过期时间，比如5s，这样即使中间出现异常也可以保证5s后锁会自动释放</p>
+<pre class=" language-redis"><code class="language-redis">setnx tongji4m3 true
+expire tongji4m3 5del tongji4m3</code></pre>
+<p><strong>expire异常</strong></p>
+<p>如果在setnx和expire之间服务器出现问题，导致expire得不到执行，也会死锁</p>
+<p>根源在于setnx和expire不是一条原子指令，但又不能用事务解决，因为expire依赖与setnx的执行结果，如果setnx没抢到锁，expire是不应该执行的，而事务没有if-else分支逻辑</p>
+<p>Redis支持set指令的扩展参数，使得setnx和expire指令可以一起执行，形成原子指令</p>
+<pre><code>SET key value [EX seconds] [PX milliseconds] [NX|XX]
+set tongji4m3 true ex 5 nx
+NX:只在键不存在时， 才对键进行设置操作。XX:只在键已经存在时， 才对键进行设置操作。</code></pre>
+<p>将值 <code>value</code> 关联到 <code>key</code> ，并将 <code>key</code> 的生存时间设为 <code>seconds</code> (以秒为单位)。</p>
+<p>如果 <code>key</code> 已经存在，<code>setex</code>命令将覆写旧值。</p>
+<p>有小伙伴肯定会疑惑万一set value 成功 set time失败，那不就傻了么，这啊Redis官网想到了。</p>
+<p><code>setex</code>是一个原子性(atomic)操作，关联值和设置生存时间两个动作会在同一时间内完成。</p>
+<p>单机加锁或synchronized就够了</p>
+<p>但如果线程挂了,那锁就一直在那无法得到释放，后面的线程也永远得不到锁，又死锁了。</p>
+<p>setex设置一个过期时间，就算线程1挂了，也会在失效时间到了，自动释放。</p>
+<p><strong>超时问题</strong></p>
+<p>如果在加锁和释放锁之间的逻辑执行得太长，以至于超出了锁的超时限制，会导致第一个线程持有的锁过期了而临界区的逻辑还没执行完</p>
+<p>Redis分布式锁不能用于较长时间的任务</p>
+<p>将set指令的value参数设置为随机数，释放锁时先匹配随机数是否一致，然后再删除key，确保当前线程持有的锁不会被其他线程释放，除非这个锁是因为过期了而被服务器自己释放的</p>
+<p>但是匹配value和删除key不是一个原子操作，需要要Lua脚本处理，他保证多个指令的原子性执行</p>
+<h2 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h2><h3 id="RDB持久化（Redis-DataBase）"><a href="#RDB持久化（Redis-DataBase）" class="headerlink" title="RDB持久化（Redis DataBase）"></a>RDB持久化（Redis DataBase）</h3><h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><p><strong>SAVE指令</strong>会阻塞Redis服务器进程，直到RDB文件创建完毕为止，在服务器进程阻塞期间，服务器不能处理任何命令请求，所以当Save命令正在执行时，客户端发送的所有命令请求都会被阻塞</p>
+<p><strong>BGSAVE命令</strong>会派生出一个子进程，由它负责创建RDB文件，服务器进程(父进程)继续处理命令请求。</p>
+<p>1、在BGSAVE命令执行期间，客户端发送的SAVE命令会被服务器拒绝。服务器禁止SAVE与BGSAVE同时执行是为了避免父进程和子进程同时指向两个rdbSave调用，防止产生竞争条件。</p>
+<p>2、同样的道理，在BGSAVE执行期间，客户端的BGSAVE命令也会被服务器拒绝。</p>
+<p>3、另外，对于AOF持久化命令BGREWRITEAOF与BGSAVE也同样是互斥关系，如果BGSAVE正在执行，则BGREWRITEAOF命令会被延迟到BGSAVE执行完毕之后；而BGREWRITEAOF命令执行时，服务器会拒绝BGSAVE命令的执行。</p>
+<p>4、而事实上，因为BGREWRITEAOF命令与BGSAVE两个命令的实际工作都是由子进程执行，所以这两个命令在操作方面并没有冲突的地方，不能同时执行只是性能方面的考虑–并发处两个子进程，并且这两个子进程同时对磁盘进行大量读写。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">SAVE</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    <span class="token comment" spellcheck="true">#创建RDB文件    </span>
+    rdbSave（）    
+
+<span class="token keyword">def</span> <span class="token function">BGSAVE</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    <span class="token comment" spellcheck="true"># 创建子进程    </span>
+    pid<span class="token operator">=</span>fork<span class="token punctuation">(</span><span class="token punctuation">)</span>        
+
+    <span class="token keyword">if</span> pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>        
+        <span class="token comment" spellcheck="true"># 子进程负责创建RDB文件        </span>
+        rdbSave（）        
+        <span class="token comment" spellcheck="true"># 完成之后向父进程发送信号        </span>
+        signal_parent<span class="token punctuation">(</span><span class="token punctuation">)</span>    
+    <span class="token keyword">elif</span> pid<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">:</span>        
+        <span class="token comment" spellcheck="true"># 父进程继续处理命令请求，并通过轮询等待子进程的信号        </span>
+        handle_request_and_wait_signal<span class="token punctuation">(</span><span class="token punctuation">)</span>    
+    <span class="token keyword">else</span><span class="token punctuation">:</span>        
+        <span class="token comment" spellcheck="true"># 处理出错情况        </span>
+        handle_fork_error<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h4 id="载入"><a href="#载入" class="headerlink" title="载入"></a>载入</h4><ul>
+<li>RDB文件的载入工作是服务器启动时自动进行的，只要Redis服务器在启动时检测到RDB文件存在，就会自动载入RDB文件</li>
+<li>如果服务器开启了AOF持久化功能，则优先使用AOF文件还原数据库状态</li>
+<li>只有未开启AOF持久化功能，才会使用RDB文件还原数据库状态</li>
+<li>服务器在载入RDB文件时会一直处于阻塞状态，直到载入工作完成</li>
+</ul>
+<h4 id="自动间隔性保存"><a href="#自动间隔性保存" class="headerlink" title="自动间隔性保存"></a>自动间隔性保存</h4><p>服务器每隔一段时间自动执行一次BGSAVE命令，可以设置多个保存条件，只要任意一个条件被满足，服务器就会执行BGSAVE指令</p>
+<pre class=" language-c"><code class="language-c">save <span class="token number">900</span> <span class="token number">1</span>
+save <span class="token number">300</span> <span class="token number">10</span>
+save <span class="token number">60</span> <span class="token number">10000</span>
+服务器在<span class="token number">900</span>秒内进行了至少<span class="token number">1</span>次修改
+服务器在<span class="token number">300</span>秒内进行了至少<span class="token number">10</span>次修改
+服务器在<span class="token number">60</span>秒内进行了至少<span class="token number">10000</span>次修改</code></pre>
+<h4 id="设置保存条件"><a href="#设置保存条件" class="headerlink" title="设置保存条件"></a>设置保存条件</h4><p>服务器程序根据save选项（可通过配置文件设置）所设置的保存条件，设置服务器状态的redisServer结构的saveparams属性</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> redisServer<span class="token punctuation">{</span>    
+    <span class="token keyword">struct</span> saveparam <span class="token operator">*</span> saveparams<span class="token punctuation">;</span>    
+    <span class="token keyword">long</span> <span class="token keyword">long</span> dirty<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//距离上一次成功执行BGSAVE之后，进行修改的次数    </span>
+    time_t lastsave<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//上一次成功执行BGSAVE的时间</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> saveparam<span class="token punctuation">{</span>    
+    time_t seconds<span class="token punctuation">;</span>    
+    <span class="token keyword">int</span> changes<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="检查保存条件是否满足"><a href="#检查保存条件是否满足" class="headerlink" title="检查保存条件是否满足"></a>检查保存条件是否满足</h4><p>服务器周期性操作函数serverCron()默认每隔100ms执行一次</p>
+<p>其中一项工作就是检查save选项所设置的保存条件是否已经满足</p>
+<p>如果满足，则执行BGSAVE（）</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">serverCron</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    <span class="token comment" spellcheck="true"># 遍历所有保存条件    </span>
+    <span class="token keyword">for</span> saveparam <span class="token keyword">in</span> server<span class="token punctuation">.</span>saveparams<span class="token punctuation">:</span>        
+        save_interval<span class="token operator">=</span>unixtime_now<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> server<span class="token punctuation">.</span>lastsave                
+        <span class="token comment" spellcheck="true">#如果数据库状态的修改次数超过条件所设置的次数        </span>
+        <span class="token comment" spellcheck="true">#并且距离上次保存的时间超过条件所设置的时间        </span>
+        <span class="token comment" spellcheck="true">#那么执行保存操作        </span>
+        <span class="token keyword">if</span> server<span class="token punctuation">.</span>dirty <span class="token operator">>=</span> saveparam<span class="token punctuation">.</span>changes <span class="token operator">and</span> save_interval<span class="token operator">></span>saveparam<span class="token punctuation">.</span>seconds<span class="token punctuation">:</span>
+            BGSAVE<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h4 id="RDB文件结构"><a href="#RDB文件结构" class="headerlink" title="RDB文件结构"></a>RDB文件结构</h4><h5 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h5><ol>
+<li>REDIS，通过这五个字符，程序可以在载入文件时，快速检查所载入的文件是否是RDB文件</li>
+<li>db_version，记录了版本号</li>
+<li>databases，包含任意个数据库以及他们的键值对数据。</li>
+<li>EOF，标志着RDB文件正文内容的结束</li>
+<li>check_sum，校验和，检查RDB文件是否有出错或损坏的情况。服务器在载入RDB文件时，会将载入数据所计算出的校验和与check_sum进行比对，已发行RDB文件是否损坏</li>
+</ol>
+<h5 id="databases"><a href="#databases" class="headerlink" title="databases"></a>databases</h5><p>每个非空数据库保存三部分：</p>
+<ol>
+<li>SELECTDB 常量，说明接下来会读取一个数据库号码</li>
+<li>db_number，读入后，调用SELECT指令，进行数据库切换，使得之后读入的键值对可以载入到正确的数据库之中</li>
+<li>key_value_pairs，保存了数据库中的所有键值对数据。包含过期时间。</li>
+</ol>
+<h5 id="key-value-pairs"><a href="#key-value-pairs" class="headerlink" title="key_value_pairs"></a>key_value_pairs</h5><ol>
+<li>TYPE记录了value的类型，代表了一种对象类型或底层编码。程序根据TYPE的值决定如何读入和解释value的数据</li>
+<li>key总是一个字符串对象</li>
+<li>value根据TYPE的指令保存相应类型的内容</li>
+<li>EXPIRETIME_MS常量，代表之后会读取一个以毫秒为单位的过期时间</li>
+<li>ms，保存键值对的过期时间，以毫秒为单位的UNIX时间戳</li>
+</ol>
+<h3 id="AOF持久化（Append-Only-File"><a href="#AOF持久化（Append-Only-File" class="headerlink" title="AOF持久化（Append Only File)"></a>AOF持久化（Append Only File)</h3><h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><ul>
+<li>通过保存<code>Redis</code>服务器所执行的写命令来记录数据库状态的</li>
+<li>被写入AOF文件的所有命令都是以Redis的命令请求协议格式（纯文本）保存的。</li>
+<li>服务器启动时，可以通过载入和执行<code>AOF文件</code>中保存的命令来还原服务器关闭之前的数据库状态</li>
+</ul>
+<h4 id="AOF持久化的实现"><a href="#AOF持久化的实现" class="headerlink" title="AOF持久化的实现"></a>AOF持久化的实现</h4><h5 id="命令追加"><a href="#命令追加" class="headerlink" title="命令追加"></a>命令追加</h5><p>服务器在执行完一个写命令后，会将被执行的写命令追加到服务器状态的<code>aof_buf</code>缓冲区的末尾:</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> redisServer<span class="token punctuation">{</span>    
+    <span class="token comment" spellcheck="true">// AOF缓冲区    </span>
+    sds aof_buf<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="AOF文件的写入与同步"><a href="#AOF文件的写入与同步" class="headerlink" title="AOF文件的写入与同步"></a>AOF文件的写入与同步</h5><p>服务器进程是一个事件循环，循环中的文件事件负责接收客户端的命令请求，以及向客户端发送命令回复。时间事件负责执行像serverCron函数这样需要定时运行的函数</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">eventLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>        
+    <span class="token comment" spellcheck="true">#处理文件事件，接收命令请求以及发送命令回复        </span>
+    <span class="token comment" spellcheck="true">#处理命令请求时可能会有新内容加入到aof_buf缓冲区中        </span>
+    processFileEvents<span class="token punctuation">(</span><span class="token punctuation">)</span>                
+    <span class="token comment" spellcheck="true">#处理时间事件        </span>
+    processTimeEvents<span class="token punctuation">(</span><span class="token punctuation">)</span>                
+    <span class="token comment" spellcheck="true">#考虑是否要将aof_buf缓冲区中的内容写入和同步到AOF文件里面        </span>
+    flushAppendOnlyFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<p><strong>写入</strong>：在现代操作系统中，当数据写入到文件中时，会调用write函数。操作系统会将写入数据暂时保存在一个内存缓存区中，等到缓冲区空间满的时候，才真正将缓冲区中的数据写入到磁盘中。</p>
+<p><strong>同步</strong>：同时系统也提供了同步函数（例如fsync)，它可以强制让操作系统立即将缓冲区中的数据写入到磁盘中。</p>
+<p>在每个事件循环都会调用flushAppendOnlyFile函数，flushAppendOnlyFile函数的行为由<strong>appendfsync</strong>的值决定：</p>
+<p><strong>always</strong>：服务器在每个事件循环都要将aof_buf缓冲区中的所有内容写入到AOF文件中，并同步AOF文件（把aof_buf数据写入并同步到AOF文件中）</p>
+<p><strong>everysec</strong>：服务器在每个事件循环都要将aof_buf缓冲区中的所有内容写入到AOF文件中(先写入)，并且每隔一秒就在子线程中对AOF文件进行一次同步(每隔一秒同步)。</p>
+<p><strong>no</strong>：服务器在每个事件循环都要将aof_buf缓冲区中的所有内容写入到AOF文件中(先写入)，至于什么时候同步，由操作系统控制（不知道啥时候同步）。在该模式下的flushAppendOnlyFile的调用不需要同步执行。</p>
+<p>上述配置的值，直接决定服务器的效率与安全性，当always时，安全性最高，但是效率最低；no时效率最高，安全性最低；everysec居中：从效率上来讲，everysec模式足够快，并且就算出现了故障停机，数据库也只丢失一秒钟的命令数据。系统默认配置是everysec。</p>
+<h4 id="AOF文件的载入与数据还原"><a href="#AOF文件的载入与数据还原" class="headerlink" title="AOF文件的载入与数据还原"></a>AOF文件的载入与数据还原</h4><p>只要读入并重新执行一遍<code>AOF文件</code>里面保存的写命令，就可以还原服务器关闭之前的数据库状态</p>
+<ol>
+<li>创建一个不带网络连接的伪客户端</li>
+<li>从AOF文件中分析并读取出一条写命令</li>
+<li>使用伪客户端执行被读出的写命令</li>
+<li>一直执行2，3直到AOF文件中的所有写命令都被处理完毕</li>
+</ol>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207113554356.png" alt="image-20210207113554356"></p>
+<h4 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h4><p>为了解决AOF文件体积膨胀的问题，Redis提供了AOF文件重写(rewrite)功能。</p>
+<p>服务器创建一个新的AOF文件来<strong>替代</strong>现有的AOF文件，新旧两个AOF文件所保存的数据库状态相同，但是新的AOF文件不会包含任何浪费空间的冗余命令</p>
+<h4 id="AOF文件重写的实现"><a href="#AOF文件重写的实现" class="headerlink" title="AOF文件重写的实现"></a>AOF文件重写的实现</h4><p>不需要对现有的AOF文件进行操作，是通过读取服务器当前的数据库状态来实现的</p>
+<p>首先从数据库中读取键现在的值，然后用一条命令去记录键值对，代替之前记录这个键值对的多条命令，这就是AOF重写功能的实现原理。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">aof_rewrite</span><span class="token punctuation">(</span>new_aof_file_name<span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    <span class="token comment" spellcheck="true">#创建新的aof文件    </span>
+    f<span class="token operator">=</span>create_file<span class="token punctuation">(</span>new_aof_file_name<span class="token punctuation">)</span>    
+    <span class="token comment" spellcheck="true">#遍历数据库    </span>
+    <span class="token keyword">for</span> db <span class="token keyword">in</span> redisServer<span class="token punctuation">.</span>db<span class="token punctuation">:</span>        
+        <span class="token comment" spellcheck="true">#忽略空数据库        </span>
+        <span class="token keyword">if</span> db<span class="token punctuation">.</span>is_empty<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">continue</span>                
+        <span class="token comment" spellcheck="true">#写入SELECT命令，指定数据库号码        </span>
+        f<span class="token punctuation">.</span>write_command<span class="token punctuation">(</span><span class="token string">"SELECT"</span><span class="token operator">+</span>db<span class="token punctuation">.</span>id<span class="token punctuation">)</span>                
+        <span class="token comment" spellcheck="true">#遍历数据库中所有键        </span>
+        <span class="token keyword">for</span> key <span class="token keyword">in</span> db<span class="token punctuation">:</span>            
+            <span class="token comment" spellcheck="true">#忽略过期的键            </span>
+            <span class="token keyword">if</span> key<span class="token punctuation">.</span>is_expired<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">continue</span>                        
+            <span class="token comment" spellcheck="true">#根据键的类型对键进行重写            </span>
+            <span class="token keyword">if</span> key<span class="token punctuation">.</span>type <span class="token operator">==</span> String<span class="token punctuation">:</span>                rewrite_string<span class="token punctuation">(</span>key<span class="token punctuation">)</span>            
+            <span class="token keyword">elif</span> key<span class="token punctuation">.</span>type <span class="token operator">==</span> List<span class="token punctuation">:</span>                rewrite_list<span class="token punctuation">(</span>key<span class="token punctuation">)</span>            
+            <span class="token keyword">elif</span> key<span class="token punctuation">.</span>type <span class="token operator">==</span> Hash<span class="token punctuation">:</span>                rewrite_hash<span class="token punctuation">(</span>key<span class="token punctuation">)</span>            
+            <span class="token keyword">elif</span> key<span class="token punctuation">.</span>type <span class="token operator">==</span> Set<span class="token punctuation">:</span>                rewrite_set<span class="token punctuation">(</span>key<span class="token punctuation">)</span>            
+            <span class="token keyword">elif</span> key<span class="token punctuation">.</span>type <span class="token operator">==</span> SortedSet<span class="token punctuation">:</span>            rewrite_sortedSet<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+
+            <span class="token comment" spellcheck="true"># 如果键带有过期时间，过期时间也要重写            </span>
+            <span class="token keyword">if</span> key<span class="token punctuation">.</span>have_expired_time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                
+                rewrite_expired_time<span class="token punctuation">(</span>key<span class="token punctuation">)</span>    
+    <span class="token comment" spellcheck="true">#写入完毕，关闭文件            </span>
+    f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>    
+
+
+<span class="token keyword">def</span> <span class="token function">rewrite_string</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    <span class="token comment" spellcheck="true">#使用GET命令获取字符串的值    </span>
+    value<span class="token operator">=</span>GET<span class="token punctuation">(</span>key<span class="token punctuation">)</span>    
+    <span class="token comment" spellcheck="true">#使用SET命令重写字符串键    </span>
+    f<span class="token punctuation">.</span>write_command<span class="token punctuation">(</span>SET，key，value<span class="token punctuation">)</span>    
+
+<span class="token keyword">def</span> <span class="token function">rewrite_expired_time</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">:</span>    
+    <span class="token comment" spellcheck="true">#获取毫秒精度的键过期时间戳    </span>
+    timestamp<span class="token operator">=</span>get_expired_time_in_unixstamp<span class="token punctuation">(</span>key<span class="token punctuation">)</span>    
+    <span class="token comment" spellcheck="true">#使用PEXPIREAT命令重写键的过期时间    </span>
+    f<span class="token punctuation">.</span>write_command<span class="token punctuation">(</span>PEXPIREAT，key，timestamp<span class="token punctuation">)</span></code></pre>
+<h4 id="AOF后台重写"><a href="#AOF后台重写" class="headerlink" title="AOF后台重写"></a>AOF后台重写</h4><p>因为aof_rewrite函数会进行大量的写入操作，所以调用这个函数的线程将被长时间阻塞</p>
+<p>因为Redis服务器使用单个线程来处理命令请求，所以如果由服务器直接调用aof_rewrite函数的话，那么在重写AOF文件期间，服务器将无法处理客户端发来的命令请求。</p>
+<p>所以决定将AOF重写程序放到<strong>子进程</strong>中执行</p>
+<ul>
+<li>子进程在进行AOF重写期间，服务器进程可以进行处理命令请求</li>
+<li>子进程带有服务器进程的<strong>数据副本</strong>，使用子进程而不是线程，可以在避免使用锁的情况下，保证数据的安全性</li>
+</ul>
+<p>但是有可能导致当前数据库状态和重写后的AOF文件所保存的数据库<strong>状态不一致</strong></p>
+<h5 id="AOF重写缓冲区"><a href="#AOF重写缓冲区" class="headerlink" title="AOF重写缓冲区"></a>AOF重写缓冲区</h5><p>为了解决数据不一致问题，Redis服务器设置了一个AOF重写缓冲区，这个缓冲区在服务器创建子进程之后开始使用，当Redis服务器执行完一个写命令之后，会同时将这个命令发送给<strong>AOF缓冲区和AOF重写缓冲区</strong></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207114138147.png" alt="image-20210207114138147"></p>
+<p>在子进程执行AOF重写期间，服务器进程执行:</p>
+<ol>
+<li>执行客户端发来的指令</li>
+<li>将执行后的写命令追加到AOF缓冲区</li>
+<li>将执行后的写命令追加到AOF重写缓冲区</li>
+</ol>
+<p>这样一来可以<strong>保证</strong></p>
+<ul>
+<li>AOF缓冲区的内容会定期被写入和同步到AOF文件，对现有AOF文件的处理工作会如常进行。</li>
+<li>从创建子进程开始，服务器执行的所有写命都会被记录到AOF重写缓冲区里面。</li>
+</ul>
+<p>当子进程完成AOF重写工作之后，它会向父进程发送一个信号，父进程在接到该信号之后，会调用一个信号处理函数，并执行以下工作：</p>
+<ul>
+<li>将AOF重写缓冲区中的所有内容重写到新AOF文件中，这时新AOF文件保存的数据库状态将<strong>和服务器当前的数据库状态一致</strong>。</li>
+<li>对新的AOF文件进行改名，原子地(atomic)覆盖现有地AOF文件，完成<strong>新旧两个AOF文件地替换</strong>。</li>
+</ul>
+<p>这个信号处理函数执行完毕后，父进程可以继续像往常一样接收命令请求了</p>
+<p>在整个AOF后台重写过程中，只有<strong>信号处理函数执行时会对服务器进程（父进程）造成阻塞</strong>，在其他时候，AOF后台重写都不会阻塞父进程，这将AOF重写对服务器性能造成的影响降到了最低。</p>
+<h1 id="Redis高可用"><a href="#Redis高可用" class="headerlink" title="Redis高可用"></a>Redis高可用</h1><h2 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h2><p>被复制的服务器称为主服务器，对主服务器进行复制的服务器称为从服务器</p>
+<p>进行复制中的主从服务器双方的数据库将保存相同的数据</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>支持主从复制，主机会自动将数据同步到从机，可以进行读写分离。减轻主数据库的压力</li>
+<li>一主多从，「主数据库(master)可以读也可以写(read/write)，从数据库仅读(only read)」。</li>
+<li>主从一定程度上解决了单机版并发量大，导致请求延迟或者redis宕机服务停止的问题。</li>
+<li>从数据库分担主数据库的读压力，若是主数据库是只写模式，那么实现读写分离，主数据库就没有了读压力了。</li>
+<li>另一方面解决了单机版单点故障的问题，若是主数据库挂了，那么从数据库可以随时顶上来，综上来说，主从模式一定程度上提高了系统的可用性和性能，是实现哨兵和集群的基础。</li>
+<li>主从同步以异步方式进行同步，期间Redis仍然可以响应客户端提交的查询和更新的请求。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<p>比如数据的一致性问题，假如主数据库写操作完成，那么他的数据会被复制到从数据库，若是还没有及时复制到从数据库，读请求又来了，此时读取的数据就不是最新的数据。</p>
+<p>若是从主同步的过程网络出故障了，导致主从同步失败，也会出现问题数据一致性的问题。</p>
+<p>主从模式不具备自动容错和恢复的功能，一旦主数据库，从节点晋升为主数据库的过程需要人为操作，维护的成本就会升高，并且主节点的写能力、存储能力都会受到限制。</p>
+<h3 id="旧版复制功能的实现"><a href="#旧版复制功能的实现" class="headerlink" title="旧版复制功能的实现"></a>旧版复制功能的实现</h3><p>旧版复制功能在处理短线后重新连接的从服务器时，会遇到低效的情况</p>
+<ul>
+<li><strong>同步操作</strong>（sync）<strong>：</strong>用于将从服务器的数据库状态<strong>更新至</strong>主服务器当前所处的数据库状态</li>
+<li><strong>命令传播操作</strong>（command propagate）<strong>：</strong>则用于在主服务器的数据库状态被修改，导致主从服务器的数据库状态出现不一致时，让主从服务器的数据库<strong>重新回到一致状态</strong></li>
+</ul>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><ul>
+<li><p><strong>概念：</strong>当客户端向从服务器发送SLAVEOF命令，要求从服务器复制主服务器时，从服务器首先需要执行同步操作，也即是，<strong>将从服务器的数据库状态更新至主服务器当前所处的数据库状态</strong></p>
+</li>
+<li><p><strong>SYNC</strong></p>
+<p>从服务器对主服务器的同步操作需要通过向主服务器发送SYNC命令来完成，以下是SYNC命令的执行步骤：</p>
+<ul>
+<li>从服务器向主服务器<strong>发送SYNC命令</strong></li>
+<li>收到SYNC命令的主服务器<strong>执行BGSAVE命令，在后台生成一个RDB文件</strong>，并使用一 个缓冲区记录从现在开始执行的所有写命令</li>
+<li>当主服务器的BGSAVE命令执行完毕时，主服务器会将BGSAVE命令生成的<strong>RDB文件发送给从服务器</strong>，从服务器<strong>接收并载入</strong>这个RDB文件，将自己的数据库状态更新至主服务器执行BGSAVE命令时的数据库状态</li>
+<li>主服务器将记录在缓冲区里面的所有写命令发送给从服务器，从服务器执行这些写命令，将自己的数据库状态更新至主服务器数据库当前所处的状态</li>
+</ul>
+</li>
+<li><p>下图展示了SYNC命令执行期间，主从服务器的通信过程：</p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201105150863.png" alt="20191201105150863"></p>
+<h4 id="命令传播"><a href="#命令传播" class="headerlink" title="命令传播"></a>命令传播</h4><ul>
+<li>在同步操作执行完毕之后，主从服务器两者的数据库将达到一致状态，但这种一致并不是一成不变的，每当主服务器执行客户端发送的写命令时，主服务器的数据库就有可能会被修改，并<strong>导致主从服务器状态不再一致</strong></li>
+<li>为了让主从服务器再次回到一致状态，<strong>主服务器需要对从服务器执行命令传播操作：</strong>主 服务器会将自己执行的写命令，也即是造成主从服务器不一致的那条写命令，发送给从服务器执行，当从服务器执行了相同的写命令之后，主从服务器将再次回到一致状态</li>
+<li>例如，主服务器执行了DEL k3的命令，那么主服务器将向从服务器发送相同的命令DEL k3，当从服务器执行完这个命令之后，主从服务器将再次回到一致状态，现在主从服务器两者的数据库都不再包含键k3了。</li>
+</ul>
+<h4 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h4><p>旧版复制功能在处理断线重复制情况时低效</p>
+<p>在Redis中，<strong>从服务器对主服务器的复制可以分为以下两种情况：</strong></p>
+<ul>
+<li><strong>初次复制：</strong>从服务器以前没有复制过任何主服务器，或者从服务器当前要复制的主服务器和上一次复制的主服务器不同。</li>
+<li><strong>断线后重复制：</strong>处于命令传播阶段的主从服务器因为网络原因而中断了复制，但从服务器通过自动重连接重新连上了主服务器，并继续复制主服务器</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201105727757.png" alt="20191201105727757"></p>
+<p><strong>为什么网络断开之后重新复制效率低，以上面的演示案例为例：</strong></p>
+<ul>
+<li>主从服务器在时间T0至时间T10086中一直处于一致状态，这两个服务器保存的数据<strong>大部分都是相同的</strong></li>
+<li>从服务器想要将自己更新至主服务器当前所处的状态，<strong>真正需要的是主从服务器连接中断期间</strong>，主服务器新添加的k10087、k10088、k10089三个键的数据</li>
+<li>可惜的是，旧版复制功能并没有利用以上列举的两点条件，而是继续让主服务器生成并向从服务器发送包含键k1至键k10089的RDB文件，但实际上RDB文件包含的键k1至键k10086的数据对于从服务器来说都是不必要的</li>
+</ul>
+<p>主从服务器断开的时间越短，主服务器在断线期间执行的写命令就越少，而执行少量写命令所产生的数据量通常比整个数据库的数据量要少得多，在这种情况下，为了让从服务器补足一小部分缺失的数据，<strong>却要让主从服务器重新执行一次SYNC命令，这种做法无疑是非常低效的</strong></p>
+<p><strong>SYNC的开销大</strong></p>
+<ol>
+<li>每次执行SYNC，主服务器都需要执行BGSAVE命令来生成RDB文件，这个生成操作会消耗主服务器大量的CPU、内存和磁盘IO资源</li>
+<li>服务器需要将自己生成的RDB文件发送给从服务器，这个发送操作会耗费主从服务器大量的网络资源（带宽和流量），并对主服务器响应命令请求对时间产生影响。</li>
+<li>接收到RDB文件的从服务器需要载入主服务器发来的RDB文件，并且在载入期间，从服务器会因为阻塞而没办法处理命令请求</li>
+</ol>
+<h3 id="新版复制功能的实现"><a href="#新版复制功能的实现" class="headerlink" title="新版复制功能的实现"></a>新版复制功能的实现</h3><ul>
+<li>为了解决旧版复制功能在处理断线重复制情况时的低效问题，Redis从2.8版本开始，<strong>使用PSYNC命令代替SYNC命令</strong>来执行复制时的同步操作</li>
+<li><strong>PSYNC命令具有完整重同步（full resy nchronization）和部分重同步（partial resynchronization）两种模式：</strong><ul>
+<li><strong>完整重同步：</strong>用于处理初次复制情况：完整重同步的执行步骤和SYNC命令的执行步骤基本一样，它们都是通过让主服务器创建并发送RDB文件，以及向从服务器发送保存在缓冲区里面的写命令来进行同步</li>
+<li><strong>部分重同步：</strong>则用于处理断线后重复制情况：当从服务器在断线后重新连接主服务器时，如果条件允许，主服务器可以将主从服务器连接断开期间执行的写命令发送给从服务器，从服务器只要接收并执行这些写命令，就可以将数据库更新至主服务器当前所处的状态</li>
+</ul>
+</li>
+<li>PSYNC命令的部分重同步模式<strong>解决了旧版复制功能在处理断线后重复制时出现的低效情况</strong></li>
+</ul>
+<p><strong>执行部分重同步所需的资源比起执行SYNC命令所需的资源要少得多</strong>，完成同步的速度也快得多。执行SYNC命令需要生成、传送和载入整个RDB文件，而部分重同步只需要<strong>主服务器将从服务器缺少的写命令发送给从服务器执行</strong>就可以了</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731084242635.png" alt="image-20210731084242635" style="zoom:67%;" />
+
+<h3 id="部分重同步的实现"><a href="#部分重同步的实现" class="headerlink" title="部分重同步的实现"></a>部分重同步的实现</h3><p><strong>同步功能由以下三个部分构成：</strong></p>
+<ul>
+<li>主服务器的复制偏移量（replication offset）和从服务器的复制偏移量</li>
+<li>主服务器的复制积压缓冲区（replication backlog）</li>
+<li>服务器的运行ID（run ID）</li>
+</ul>
+<h4 id="复制偏移量"><a href="#复制偏移量" class="headerlink" title="复制偏移量"></a>复制偏移量</h4><ul>
+<li><p>执行复制的双方——主服务器和从服务器会<strong>分别维护一个复制偏移量：</strong></p>
+<ul>
+<li>主服务器每次向从服务器传播N个字节的数据时，就将自己的复制偏移量的值加上N</li>
+<li>从服务器每次收到主服务器传播来的N个字节的数据时，就将自己的复制偏移量的值加上N</li>
+</ul>
+</li>
+<li><p>通过对比主从服务器的复制偏移量，<strong>程序可以很容易地知道主从服务器是否处于一致状态：</strong></p>
+<ul>
+<li>如果主从服务器处于一致状态，那么主从服务器两者的偏移量总是相同的</li>
+</ul>
+</li>
+<li><p>相反，如果主从服务器两者的偏移量并不相同，那么说明主从服务器并未处于一致状态</p>
+</li>
+</ul>
+<p>在下图所示的例子中，主从服务器的复制偏移量的值都为10086</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121350757.png"></p>
+<p>如果这时主服务器向三个从服务器传播长度为33字节的数据，那么主服务器的复制偏移量将更新为10086+33=10119，而三个从服务器在接收到主服务器传播的数据之后，也会将复制偏移量更新为10119</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121359413.png" alt="img"></p>
+<p>如果主从服务器当前复制偏移量都为10086，但是就在主服务器要向从服务器传播长度为33字节的数据之前，从服务器A断线了，那么主服务器传播的数据只有从服务器B、从服务器C收到，在此之后，主服务器A、从服务器B、从服务器C三个服务器的复制偏移量都将更新为10119，而断线的从服务器A的复制偏移量仍然为10086，说明从服务器A与主服务器并不一致</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731085012474.png" alt="image-20210731085012474" style="zoom:50%;" />
+
+<p>假设从服务器A在断线后重连主服务器，并成功，那么接下来从服务器将向主服务器发送PSYNC命令，报告服务器A当前的复制偏移量为10086，那么主服务器将通过复制积压缓冲区来决定执行完整从同步还是部分重同步，并补偿从服务器A在断线期间丢失的那部分数据</p>
+<h4 id="复制积压缓冲区"><a href="#复制积压缓冲区" class="headerlink" title="复制积压缓冲区"></a>复制积压缓冲区</h4><ul>
+<li>复制积压缓冲区是由主服务器维护的一个<strong>固定长度（fixed-size）先进先出（FIFO）队列</strong>，默认大小为1MB</li>
+<li>固定长度先进先出队列的长度是固定的，当入队数量大于队列长度时，最先入队的长度会被弹出，而新元素会被放入队列</li>
+<li>当主服务器进行命令传播时，它不仅会将写命令发送给所有从服务器，还会<strong>将写命令入队到复制积压缓冲区里面</strong>，如下图所示：</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121909779.png" alt="img"></li>
+<li>因此，主服务器的复制积压缓冲区里面会保存着一部分最近传播的写命令，并且复制积压缓冲区会<strong>为队列中的每个字节记录相应的复制偏移量</strong></li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121943503.png" alt="img"></li>
+<li>当从服务器重新连上主服务器时，从服务器会通过PSYNC命令<strong>将自己的复制偏移量offset发送给主服务器</strong>，主服务器会根据这个复制偏移量来决定对从服务器执行何种同步操作：<ul>
+<li>如果offset偏移量之后的数据（也即是偏移量offset+1开始的数据）<strong>仍然存在于复制积压缓冲区里面</strong>，那么主服务器将对从服务器执行部分重同步操作</li>
+<li>相反，如果offset偏移量之后的数据<strong>已经不存在于复制积压缓冲区</strong>，那么主服务器将对从服务器执行完整重同步操作</li>
+</ul>
+</li>
+</ul>
+<p><strong>演示案例：</strong></p>
+<ul>
+<li>回到之前上面图片所展示的断线后重连接例子：</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201121522212.png" alt="img"></li>
+<li>当从服务器A断线之后，它立即重新连接主服务器，并<strong>向主服务器发送PSYNC命令，报告自己的复制偏移量为10086</strong></li>
+<li>主服务器收到从服务器发来的PSYNC命令以及偏移量10086之后，主服务器将<strong>检查偏移量10086之后的数据是否存在于复制积压缓冲区里面</strong>，结果发现<strong>这些数据仍然存在</strong>，于是主服务器向从服务器发送+CONTINUE回复，表示数据同步将以部分重同步模式来进行</li>
+<li>接着主服务器会将复制积压缓冲区10086偏移量之后的<strong>所有数据（偏移量为10087至 10119）都发送给从服务器</strong></li>
+<li>从服务器只要接收这33字节的缺失数据，就可以回到与主服务器一致的状态，如下图所示</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201122209306.png" alt="img"></li>
+</ul>
+<h4 id="服务器运行ID"><a href="#服务器运行ID" class="headerlink" title="服务器运行ID"></a>服务器运行ID</h4><ul>
+<li><p>除了复制偏移量和复制积压缓冲区之外，<strong>实现部分重同步还需要用到服务器运行ID（run ID）：</strong></p>
+<ul>
+<li>每个Redis服务器，不论主服务器还是从服务，都会有自己的运行ID</li>
+<li>运行ID在服务器启动时自动生成，由40个随机的十六进制字符组成，例如 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3</li>
+</ul>
+</li>
+<li><p>当从服务器对主服务器<strong>进行初次复制时</strong>，主服务器会<strong>将自己的运行ID传送给从服务器</strong>， 而从服务器则会将<strong>这个运行ID保存起来</strong></p>
+</li>
+<li><p>当从服务器断线并重新连上一个主服务器时，<strong>从服务器将向当前连接的主服务器发送之前保存的运行ID：</strong></p>
+<ul>
+<li>如果从服务器保存的运行ID和当前连接的主服务器的<strong>运行ID相同</strong>，那么说明从服务器断线之前复制的就是当前连接的这个主服务器，主服务器可以继续尝试执行部分重同步操 作</li>
+<li>相反地，如果从服务器保存的运行ID和当前连接的主服务器的<strong>运行ID并不相同</strong>，那么 说明从服务器断线之前复制的主服务器并不是当前连接的这个主服务器，主服务器将对从服务器执行完整重同步操作</li>
+</ul>
+</li>
+<li><p>举个例子，假设从服务器原本正在复制一个运行ID为 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3的主服务器，那么在网络断开，从服务器重新连 接上主服务器之后，从服务器将向主服务器发送这个运行ID，主服务器根据自己的运行ID是否53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3来判断是执行部分重同步还是执行完整重同步</p>
+</li>
+</ul>
+<h3 id="PSYNC命令的实现"><a href="#PSYNC命令的实现" class="headerlink" title="PSYNC命令的实现"></a>PSYNC命令的实现</h3><h4 id="调用方式"><a href="#调用方式" class="headerlink" title="调用方式"></a>调用方式</h4><p>PSYNC命令的调用方法有两种：</p>
+<ul>
+<li><p>如果从服务器<strong>以前没有复制过任何主服务器，或者之前执行过SLAVEOF no one命令：</strong>那么从服务器在开始一次新的复制时将向主服务器发送PSYNC ? -1命令，主动请求主服务器<strong>进行完整重同步</strong>（因为这时不可能执行部分重同步）</p>
+</li>
+<li><p>如果从服务器<strong>已经复制过某个主服务器</strong>，那么从服务器在开始一次新的复制时将向主服务器发送PSYNC <runid> <offset>命令：</p>
+<ul>
+<li>其中runid是上一次复制的主服务器的运行 ID，而offset则是从服务器当前的复制偏移量</li>
+</ul>
+</li>
+<li><p>接收到这个命令的主服务器会<strong>通过这两个参数来判断应该对从服务器执行哪种同步操作</strong></p>
+</li>
+</ul>
+<h4 id="回复"><a href="#回复" class="headerlink" title="回复"></a>回复</h4><p>接收到PSYNC命令的主服务器会向从服务器返回以下三种回复的其中一种：</p>
+<ul>
+<li>如果<strong>主服务器返回+FULLRESYNC回复</strong>，那么<strong>表示主服务器将与从服务器执行完整重同步操作：</strong>其中runid是这个主服务器的运行ID，从服务器会将这个ID保存起来，在下一次发送PSYNC命令时使用；而offset则是主服务器当前的复制偏移量，从服务器会将这个值作为自己的初始化偏移量</li>
+<li>如果<strong>主服务器返回+CONTINUE回复</strong>，那么表示<strong>主服务器将与从服务器执行部分重同步操作</strong>，从服务器只要等着主服务器将自己缺少的那部分数据发送过来就可以了</li>
+<li>如果<strong>主服务器返回-ERR回复</strong>，那么表示主服务器的版本低于Redis 2.8，<strong>它识别不了PSYNC命令</strong>，从服务器将向主服务器发送SYNC命令，并与主服务器执行完整同步操作</li>
+</ul>
+<h4 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h4><ul>
+<li>下面的流程图总结了PSYNC命令执行完整重同步和部分重同步时可能遇上的情况：</li>
+<li><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201123546284.png" alt="img"></li>
+</ul>
+<h4 id="演示案例"><a href="#演示案例" class="headerlink" title="演示案例"></a>演示案例</h4><p>为了熟悉PSYNC命令的用法，让我们来看一个完整的复制——网络中断——重复制例子</p>
+<ul>
+<li>首先，假设有两个Redis服务器，它们的版本都是Redis 2.8，其中主服务器的地址为 127.0.0.1:6379，从服务器的地址为127.0.0.1:12345</li>
+<li>如果客户端向从服务器发送命令SLAVEOF 127.0.0.1 6379，并且假设从服务器是第一次执行复制操作，那么从服务器将向主服务器发送PSYNC ? -1命令，请求主服务器执行完整重同步操作</li>
+<li>主服务器在收到完整重同步请求之后，将在后台执行BGSAVE命令，并向从服务器返回 +FULLRESYNC 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3 10086回复，其中 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3是主服务器的运行ID，而10086则是主服务器当前的复制偏移量</li>
+<li>假设完整重同步成功执行，并且主从服务器在一段时间之后仍然保持一致，但是在复制偏移量为20000的时候，主从服务器之间的网络连接中断了，这时从服务器将重新连接主服务器，并再次对主服务器进行复制。</li>
+<li>因为之前曾经对主服务器进行过复制，所以从服务器将向主服务器发送命令PSYNC 53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3 20000，请求进行部分重同步</li>
+<li>主服务器在接收到从服务器的PSYNC命令之后，首先对比从服务器传来的运行 ID53b9b28df8042fdc9ab5e3fcbbbabff1d5dce2b3和主服务器自身的运行ID，结果显示该ID和主服务器的运行ID相同，于是主服务器继续读取从服务器传来的偏移量20000，检查偏移量 为20000之后的数据是否存在于复制积压缓冲区里面，结果发现数据仍然存在</li>
+<li>确认运行ID相同并且数据存在之后，主服务器将向从服务器返回+CONTINUE回复，表 示将与从服务器执行部分重同步操作，之后主服务器会将保存在复制积压缓冲区20000偏移量之后的所有数据发送给从服务器，主从服务器将再次回到一致状态</li>
+</ul>
+<h3 id="复制的实现"><a href="#复制的实现" class="headerlink" title="复制的实现"></a>复制的实现</h3><h4 id="步骤1-设置主服务器的地址和端口"><a href="#步骤1-设置主服务器的地址和端口" class="headerlink" title="步骤1:设置主服务器的地址和端口"></a>步骤1:设置主服务器的地址和端口</h4><p>当客户端向从服务器发送以下命令时:<code>SLAVEOF 127.0.0.1 6379</code></p>
+<p>从服务器首先要做的就是将客户端给定的主服务器IP地址127.0.0.1以及端口6379<strong>保存到服务器状态的masterhost属性和masterport属性里面</strong></p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> redisServer
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span> masterhost<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//主服务器的地址</span>
+    <span class="token keyword">int</span> masterport<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//主服务器的端口号</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p><strong>SLAVEOF命令是一个异步命令</strong>，在完成masterhost属性和masterport属性的设置工作之 后，从服务器将向发送SLAVEOF命令的客户端返回OK，表示复制指令已经被接收，而<strong>实际的复制工作将在OK返回之后才真正开始执行</strong></p>
+<h4 id="步骤2-建立套接字连接"><a href="#步骤2-建立套接字连接" class="headerlink" title="步骤2:建立套接字连接"></a>步骤2:建立套接字连接</h4><ul>
+<li>在SLAVEOF命令执行之后，从服务器将根据命令所设置的IP地址和端口，<strong>创建连向主服务器的套接字连接</strong>，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131155414.png" alt="img"></p>
+<ul>
+<li>如果<strong>从服务器创建的套接字能成功连接（connect）到主服务器</strong>，那么从服务器将为这个套接字关联一个专门<strong>用于处理复制工作的文件事件处理器</strong>，这个处理器将负责执行后续的复制工作，比如接收RDB文件，以及接收主服务器传播来的写命令，诸如此类</li>
+<li>而<strong>主服务器在接受（accept）从服务器的套接字连接之后</strong>，将为该套接字创建相应的客户端状态，并将从服务器看作是一个连接到主服务器的客户端来对待，这时从服务器将同时具有服务器（server）和客户端（client）两个身份：从服务器可以向主服务器发送命令请求，而主服务器则会向从服务器返回命令回复，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131243941.png" alt="img"></p>
+<ul>
+<li>因为复制工作接下来的几个步骤都会以从服务器向主服务器发送命令请求的形式来进 行，所以<strong>理解“从服务器是主服务器的客户端”这一点非常重要</strong></li>
+</ul>
+<h4 id="步骤3-发送PING命令"><a href="#步骤3-发送PING命令" class="headerlink" title="步骤3:发送PING命令"></a>步骤3:发送PING命令</h4><ul>
+<li>从服务器成为主服务器的客户端之后，做的第一件事就是<strong>向主服务器发送一个PING命令</strong>，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131333757.png" alt="img"></p>
+<ul>
+<li><strong>这个PING命令有两个作用：</strong><ul>
+<li>虽然主从服务器成功建立起了套接字连接，但双方并未使用该套接字进行过任何通信， 通过发送PING命令可以<strong>检查套接字的读写状态是否正常</strong></li>
+<li>因为复制工作接下来的几个步骤都必须在主服务器可以正常处理命令请求的状态下才能进行，通过发送PING命令可以<strong>检查主服务器能否正常处理命令请求</strong></li>
+</ul>
+</li>
+<li><strong>从服务器在发送PING命令之后将遇到以下三种情况的其中一种：</strong><ul>
+<li>如果主服务器向从服务器返回了一个命令回复，但从服务器却<strong>不能在规定的时限 （timeout）内读取出命令回复的内容</strong>，那么表示主从服务器之间的网络连接状态不佳，不能继续执行复制工作的后续步骤。当出现这种情况时，从服务器<strong>断开并重新创建</strong>连向主服务器的套接字</li>
+<li>如果主服务器<strong>向从服务器返回一个错误</strong>，那么表示主服务器暂时没办法处理从服务器的命令请求，不能继续执行复制工作的后续步骤。当出现这种情况时，<strong>从服务器断开并重新创建连向主服务器的套接字</strong>。比如说，如果主服务器正在处理一个超时运行的脚本，那么当从 服务器向主服务器发送PING命令时，从服务器将收到主服务器返回的BUSY Redisis busy running a script.You can only call SCRIPT KILL or SHUTDOWN NOSAVE.错误</li>
+<li>如果从服务器<strong>读取到”PONG”回复</strong>，那么表示主从服务器之间的网络连接状态正常，并 且主服务器可以正常处理从服务器（客户端）发送的命令请求，在这种情况下，从服务器可 以继续执行复制工作的下个步骤</li>
+</ul>
+</li>
+<li>下面的流程图总结了从服务器在发送PING命令时可能遇到的情况，以及各个情况的处理方式</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131558981.png" alt="img"></p>
+<h4 id="步骤4-身份验证"><a href="#步骤4-身份验证" class="headerlink" title="步骤4:身份验证"></a>步骤4:身份验证</h4><ul>
+<li><p>从服务器在收到主服务器返回的”PONG”回复之后，<strong>下一步要做的就是决定是否进行身份验证：</strong></p>
+<ul>
+<li>如果从服务器设置了masterauth选项，那么进行身份验证</li>
+<li>如果从服务器没有设置masterauth选项，那么不进行身份验证</li>
+</ul>
+</li>
+<li><p>在需要进行身份验证的情况下，<strong>从服务器将向主服务器发送一条AUTH命令</strong>，命令的<strong>参数为从服务器masterauth选项的值</strong></p>
+</li>
+<li><p>举个例子，如果从服务器masterauth选项的值为10086，那么从服务器将向主服务器发送 命令AUTH 10086，如下图所示</p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201131632595.png" alt="img"></p>
+<h4 id="步骤5-发送端口信息"><a href="#步骤5-发送端口信息" class="headerlink" title="步骤5:发送端口信息"></a>步骤5:发送端口信息</h4><ul>
+<li>在身份验证步骤之后，从服务器将执行命令REPLCONF listening-port ， <strong>向主服务器发送从服务器的监听端口号</strong></li>
+<li>例如在我们的例子中，从服务器的监听端口为12345，那么从服务器将<strong>向主服务器发送命令REPLCONF listening-port 12345</strong>，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/2019120113200247.png" alt="img"></p>
+<h4 id="步骤6-同步"><a href="#步骤6-同步" class="headerlink" title="步骤6:同步"></a>步骤6:同步</h4><ul>
+<li><p>在这一步，从服务器将向主服务器发送PSYNC命令，<strong>执行同步操作</strong>，并<strong>将自己的数据库更新至主服务器数据库当前所处的状态</strong></p>
+</li>
+<li><p>值得一提的是，在同步操作执行之前，只有从服务器是主服务器的客户端，但是<strong>在执行同步操作之后，主服务器也会成为从服务器的客户端：</strong></p>
+<ul>
+<li>如果PSYNC命令执行的是<strong>完整重同步操作</strong>，那么主服务器需要成为从服务器的客户端，才能将保存在缓冲区里面的写命令发送给从服务器执行。</li>
+<li>如果PSYNC命令执行的是<strong>部分重同步操作</strong>，那么主服务器需要成为从服务器的客户端，才能向从服务器发送保存在复制积压缓冲区里面的写命令</li>
+</ul>
+</li>
+<li><p>因此，在同步操作执行之后，<strong>主从服务器双方都是对方的客户端</strong>，它们可以互相向对方发送命令请求，或者互相向对方返回命令回复，如下图所示：</p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/2019120113224549.png" alt="img"></p>
+<ul>
+<li>正因为主服务器成为了从服务器的客户端，所以主服务器才可以通过发送写命令来改变从服务器的数据库状态，不仅同步操作需要用到这一点，这也是主服务器对从服务器执行命 令传播操作的基础</li>
+</ul>
+<h4 id="步骤7-命令传播"><a href="#步骤7-命令传播" class="headerlink" title="步骤7:命令传播"></a>步骤7:命令传播</h4><ul>
+<li>当完成了同步之后，<strong>主从服务器就会进入命令传播阶段</strong>，这时主服务器只要一直将自己执行的写命令发送给从服务器，而从服务器只要一直接收并执行主服务器发来的写命令，就<strong>可以保证主从服务器一直保持一致了</strong></li>
+</ul>
+<h3 id="心跳检测"><a href="#心跳检测" class="headerlink" title="心跳检测"></a>心跳检测</h3><ul>
+<li>在命令传播阶段，从服务器默认会<strong>以每秒一次的频率</strong>，向主服务器发送命令：</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">REPLCONF ACK <span class="token operator">&lt;</span>replication_offset<span class="token operator">></span>
+//其中replication_offset是从服务器当前的复制偏移量</code></pre>
+<ul>
+<li><strong>发送REPLCONF ACK命令对于主从服务器有三个作用：</strong><ul>
+<li>①检测主从服务器的网络连接状态</li>
+<li>②辅助实现min-slaves选项</li>
+<li>③检测命令丢失</li>
+</ul>
+</li>
+</ul>
+<h4 id="检测主从服务器的网络连接状态"><a href="#检测主从服务器的网络连接状态" class="headerlink" title="检测主从服务器的网络连接状态"></a>检测主从服务器的网络连接状态</h4><ul>
+<li>主从服务器可以通过发送和接收REPLCONF ACK命令<strong>来检查两者之间的网络连接是否正常：</strong>如果主服务器<strong>超过一秒钟没有收到</strong>从服务器发来的REPLCONF ACK命令，那么主服务器就知道主从服务器之间的连接出现问题了</li>
+<li>通过向主服务器发送<strong>INFO replication命令</strong>，在列出的<strong>从服务器列表的lag一栏中</strong>，我们可以看到相应从服务器最后一次向主服务器发送REPLCONF ACK命令<strong>距离现在过了多少秒。</strong>在一般情况下，<strong>lag的值应该在0秒或者1秒之间跳动</strong>，如果超过1秒的话，那么说明主从 服务器之间的连接出现了故障。</li>
+</ul>
+<h4 id="辅助实现min-slaves配置选项"><a href="#辅助实现min-slaves配置选项" class="headerlink" title="辅助实现min-slaves配置选项"></a>辅助实现min-slaves配置选项</h4><ul>
+<li>Redis的<strong>min-slaves-to-write和min-slaves-max-lag两个选项</strong>可以<strong>防止主服务器在不安全的情况下执行写命令</strong></li>
+<li>举个例子，如果我们向主服务器提供以下设置：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201132859439.png" alt="img"></p>
+<ul>
+<li>那么在<strong>从服务器的数量少于3个，或者三个从服务器的延迟（lag）值都大于或等于10秒时</strong>，主服务器将<strong>拒绝执行写命令</strong>，这里的延迟值就是上面提到的INFO replication命令的lag 值</li>
+</ul>
+<h4 id="检测命令丢失"><a href="#检测命令丢失" class="headerlink" title="检测命令丢失"></a>检测命令丢失</h4><p>如果因为网络故障，<strong>主服务器传播给从服务器的写命令在半路丢失</strong>，那么当从服务器向主服务器发送REPLCONF ACK命令时，主服务器将<strong>发觉</strong>从服务器当前的复制偏移量少于自己的复制偏移量，然后主服务器就会根据从服务器提交的复制偏移量，在复制积压缓冲区里面找到从服务器缺少的数据，并<strong>将这些数据重新发送给从服务器</strong></p>
+<h4 id="演示案例-1"><a href="#演示案例-1" class="headerlink" title="演示案例"></a>演示案例</h4><ul>
+<li>举个例子，假设有两个处于一致状态的主从服务器，它们的复制偏移量都是200，如下图所示</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201133107682.png" alt="img"></p>
+<ul>
+<li>如果这时主服务器执行了命令SET key value（协议格式的长度为33字节），将自己的复制偏移量更新到了233，并尝试向从服务器传播命令SET key value，但这条命令却因为网络故障而在传播的途中丢失，那么主从服务器之间的复制偏移量就会出现不一致，主服务器的 复制偏移量会被更新为233，而从服务器的复制偏移量仍然为200，如下图所示</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201133127229.png" alt="img"></p>
+<ul>
+<li>在这之后，当从服务器向主服务器发送REPLCONF ACK命令的时候，主服务器会察觉从服务器的复制偏移量依然为200，而自己的复制偏移量为233，这说明复制积压缓冲区里面复制偏移量为201至233的数据（也即是命令SET key value）在传播过程中丢失了，于是主服务器会再次向从服务器传播命令SET key value，从服务器通过接收并执行这个命令可以将自 己更新至主服务器当前所处的状态，如下图所示</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201133147307.png" alt="img"></p>
+<p>主服务器向从服务器补发缺失数据这一操作的原理和部分重同步操作的原理非常相似，区别在于，补发缺失数据操作在主从服务器没有断线的情况下执行，而部分重同步则在主从服务器断线并重连后执行</p>
+<h2 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h2><p>Sentinel（哨岗、哨兵）是<strong>Redis的高可用性（high availability）解决方案：</strong>由一个或多个Sentinel实例（instance）组成的Sentinel系统（system）可以<strong>监视任意多个</strong>主服务器，以及这些主服务器属下的所有从服务器，并在被监视的<strong>主服务器进入下线状态时</strong>，自动将下线主服务器属下的某个从服务器<strong>升级为新的主服务器</strong>，然后由新的主服务器代替已下线的主服务器继续处理命令请求</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201213815316.png" alt="img"></p>
+<ul>
+<li>假设这时，主服务器server1进入下线状态，那么从服务器server2、server3、server4对 主服务器的复制操作将被中止，并且Sentinel系统会察觉到server1已下线，如下图所示（下线的服务器用虚线表示）</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201214010487.png" alt="img"></p>
+<ul>
+<li><p>当server1的<strong>下线时长超过用户设定的下线时长上限时</strong>，Sentinel系统就会对server1执行<strong>故障转移</strong>操作：</p>
+<ul>
+<li>首先，Sentinel系统会挑选server1属下的其中一个从服务器，并将这个被选中的从服务器升级为新的主服务器</li>
+<li>之后，Sentinel系统会向server1属下的所有从服务器发送新的复制指令，让它们成为新的主服务器的从服务器，当所有从服务器都开始复制新的主服务器时，故障转移操作执行完毕</li>
+<li>另外，Sentinel还会继续监视已下线的server1，并在它重新上线时，将它设置为新的主服务器的从服务器</li>
+</ul>
+</li>
+<li><p>举个例子，下图展示了Sentinel系统<strong>将server2升级为新的主服务器</strong>，并让服务器server3和server4成为server2的从服务器的过程</p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201214149843.png" alt="img"></p>
+<ul>
+<li>之后，如果server1<strong>重新上线的话</strong>，它将被Sentinel系统<strong>降级为server2的从服务器</strong>，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201214154597.png" alt="img"></p>
+<p><strong>整体流程</strong></p>
+<ul>
+<li>Sentinel知只是一个运行在特殊模式下的Redis服务器，使用的命令表不同</li>
+<li>Sentinel会读入用户指定的配置文件，为每个被监视的主服务器创建相应的实例结构，并创建连向主服务器的命令连接和订阅连接，其中命令连接用于向主服务器发送命令请求，而订阅连接则用于接收指定频道的消息</li>
+<li>Sentinel通过向主服务器发送INFO命令来获得主服务器属下所有从服务器的地址信息，并为这些从服务器创建相应的实例结构，以及连向这些从服务器的命令连接和订阅连接</li>
+<li>在一般情况下，Sentinel以每10秒一次的频率向被监视的主服务器和从服务器发送INFO命令，当主服务器处于下线状态，或者Sentinel正在对主服务器进行故障转移操作时，Sentinel发送命令的频率改为1秒一次</li>
+<li>对于监视同一个主服务器和从服务器的多个Sentinel来说，它们会以每两秒一次的频率，通过向被监视服务器的<code>_sentinel_:hello</code>频道发送信息来向其他Sentinel宣告自己的存在</li>
+<li>每个Sentinel也会从<code>_sentinel_:hello</code>频道中接收其他Sentinel发来的信息，并且根据这些信息为其他Sentinel创建相应的实例结构和命令连接</li>
+<li>Sentinel只会和主服务器和从服务器创建命令连接和订阅连接，Sentinel之间只会创建命令连接</li>
+<li>Sentinel以每秒一次的频率向实例（包括主服务器、从服务器、其他Sentinel）发送PING命令，并根据实例对PING命令的回复来判断实例是否在线，当一个实例在指定时长中连续向Sentinel发送无效回复时，Sentinel会将这个实例判断为主观下线</li>
+<li>当Sentinel将一个主服务器判断为主观下线状态时，它会向同样监视这个主服务器的其他Sentinel进行询问，看它们是否同意该主服务器进入主观下线状态</li>
+<li>当Sentinel收集到足够多的主观下线投票后，它会将主服务器判断为客观下线，并发起一次针对主服务器的故障转移操作</li>
+</ul>
+<h3 id="1-启动并初始化Sentinel"><a href="#1-启动并初始化Sentinel" class="headerlink" title="1. 启动并初始化Sentinel"></a>1. 启动并初始化Sentinel</h3><ol>
+<li>初始化服务器</li>
+<li>将普通Redis服务器使用的代码替换成<code>Sentinel</code>专用代码</li>
+<li>初始化<code>Sentinel</code>状态</li>
+<li>根据给定的配置文件，初始化<code>Sentinel</code>的监视主服务器列表</li>
+<li>创建连向主服务器的网络连接</li>
+</ol>
+<h4 id="1-初始化服务器"><a href="#1-初始化服务器" class="headerlink" title="1. 初始化服务器"></a>1. 初始化服务器</h4><p>Sentinel本质上只是一个运行在特殊模式下的Redis服务器，所以第一步就是初始化一个普通的Redis服务器。不过初始化Sentinel不会载入RDB或AOF文件</p>
+<h4 id="2-使用Sentinel专用代码"><a href="#2-使用Sentinel专用代码" class="headerlink" title="2. 使用Sentinel专用代码"></a>2. 使用Sentinel专用代码</h4><p>使用sentinelcmds命令表作为服务器的命令表，这解释了为什么在Sentinel模式下，Redis服务器不能执行诸如SET等命令，因为服务器根本没有在命令表中载入这些命令</p>
+<h4 id="3-初始化Sentinel状态"><a href="#3-初始化Sentinel状态" class="headerlink" title="3. 初始化Sentinel状态"></a>3. 初始化Sentinel状态</h4><p>在应用了Sentinel的专用代码之后，接下来，服务器会初始化一个<strong>sentinel.c/sentinelState结构</strong>（后面简称“Sentinel状态”），这个结构<strong>保存了服务器中所有和Sentinel功能有关的状态</strong> （服务器的一般状态仍然由redis.h/redisServer结构保存）</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> sentinelState <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//当前纪元，用于实现故障转移</span>
+    uint64_t current_epoch<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//保存了所有被这个sentinel 监视的主服务器</span>
+    dict <span class="token operator">*</span>masters<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> sentinel<span class="token punctuation">;</span></code></pre>
+<h4 id="4-初始化Sentinel状态的masters属性"><a href="#4-初始化Sentinel状态的masters属性" class="headerlink" title="4. 初始化Sentinel状态的masters属性"></a>4. 初始化Sentinel状态的masters属性</h4><p>Sentinel状态中的<strong>masters字典记录了所有被Sentinel监视的主服务器的相关信息</strong>，其中：</p>
+<ul>
+<li><p><strong>字典的键</strong>是被监视主服务器的名字</p>
+</li>
+<li><p><strong>字典的值</strong>则是被监视主服务器对应的sentinel.c/<strong>sentinelRedisInstance结构</strong></p>
+</li>
+<li><p>每个sentinelRedisInstance结构（后面简称“实例结构”）<strong>代表一个被Sentinel监视的Redis服务器实例</strong>（instance），这个实例可以是<strong>主服务器、从服务器，或者另外一个Sentinel</strong></p>
+</li>
+</ul>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> sentinelRedisInstance <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//标识值，记录了实例的类型，以及该实例的当前状态</span>
+    <span class="token keyword">int</span> flags<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//实例的名字</span>
+    <span class="token comment" spellcheck="true">//主服务器的名字由用户在配置文件中设置</span>
+    <span class="token comment" spellcheck="true">//从服务器以及Sentinel 的名字由Sentinel 自动设置</span>
+    <span class="token comment" spellcheck="true">//格式为ip:port ，例如"127.0.0.1:26379"</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//实例的运行ID</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>runid<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//配置纪元，用于实现故障转移</span>
+    uint64_t config_epoch<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//实例的地址</span>
+    sentinelAddr <span class="token operator">*</span>addr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> sentinelRedisInstance<span class="token punctuation">;</span></code></pre>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> sentinelAddr
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span> ip<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> port<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p><strong>例子</strong></p>
+<p>对Sentinel状态的初始化将引发对masters字典的初始化，而masters字典的初始化是<strong>根据被载入的Sentinel配置文件</strong>来进行的</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201220900699.png" alt="img"></p>
+<h4 id="5-创建连向主服务器的网络连接"><a href="#5-创建连向主服务器的网络连接" class="headerlink" title="5. 创建连向主服务器的网络连接"></a>5. 创建连向主服务器的网络连接</h4><ul>
+<li><p>初始化Sentinel的最后一步是创建连向被监视主服务器的网络连接，<strong>Sentinel将成为主服务器的客户端</strong>，它可以向主服务器发送命令，并从命令回复中获取相关的信息</p>
+</li>
+<li><p>对于每个被Sentinel监视的主服务器来说，Sentinel会<strong>创建两个连向主服务器的异步网络连接：</strong></p>
+<ul>
+<li>一个是<strong>命令连接</strong>，这个连接专门用于向主服务器发送命令，并接收命令回复</li>
+<li>另一个是<strong>订阅连接</strong>，这个连接专门用于订阅主服务器的<code>__sentinel__:hello</code>频道</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-获取主服务器的信息"><a href="#2-获取主服务器的信息" class="headerlink" title="2. 获取主服务器的信息"></a>2. 获取主服务器的信息</h3><ul>
+<li><p>Sentinel默认会以<strong>每十秒一次的频率</strong>，通过命令连接向被监视的主服务器发送INFO命令，并通过分析INFO命令的回复来<strong>获取主服务器的当前信息</strong></p>
+<p>内容回复例子：</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731095351594.png" alt="image-20210731095351594" style="zoom:50%;" />
+</li>
+<li><p>通过分析主服务器返回的INFO命令回复，<strong>Sentinel可以获取以下两方面的信息：</strong></p>
+<ul>
+<li>一方面是<strong>关于主服务器本身的信息</strong>，包括run_id域记录的服务器运行ID，以及role域记录的服务器角色</li>
+<li>另一方面是关于主服务器属下<strong>所有从服务器的信息</strong>，每个从服务器都由一个”slave”字符 串开头的行记录，每行的ip=域记录了从服务器的IP地址，而port=域则记录了从服务器的端口号。根据这些IP地址和端口号，Sentinel无须用户提供从服务器的地址信息，就可以自动发现从服务器</li>
+</ul>
+</li>
+<li><p><strong>根据run_id域和role域记录的信息，Sentinel将对主服务器的实例结构进行更新</strong>，例如， 主服务器重启之后，它的运行ID就会和实例结构之前保存的运行ID不同，Sentinel检测到这 一情况之后，就会对实例结构的运行ID进行更新</p>
+</li>
+<li><p>Sentinel在分析INFO命令中包含的从服务器信息时，<strong>会检查从服务器对应的实例结构是否已经存在于slaves字典：</strong></p>
+<ul>
+<li>如果<strong>从服务器对应的实例结构已经存在</strong>，那么Sentinel对从服务器的实例结构进行更新</li>
+<li>如果<strong>从服务器对应的实例结构不存在</strong>，那么说明这个从服务器是新发现的从服务器， Sentinel会在slaves字典中为这个从服务器新创建一个实例结构</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191201223205478.png" alt="img"></p>
+<p>主服务器实例结构和从服务器实例结构的区别：</p>
+<ul>
+<li>主服务器实例结构等flags属性值为SRI_MASTER，从服务器实例结构flags属性为SRI_SLAVE</li>
+<li>主服务器实例结构的name属性值是用户使用Sentinel配置文件设置的，而从服务器实例结构的name属性值是Sentinel根据从服务器的IP地址和端口号自动设置的</li>
+</ul>
+<h3 id="3-获取从服务器信息"><a href="#3-获取从服务器信息" class="headerlink" title="3. 获取从服务器信息"></a>3. 获取从服务器信息</h3><ul>
+<li>当Sentinel发现主服务器有新的从服务器出现时，Sentinel除了会为这个新的<strong>从服务器创建相应的实例结构之外</strong>，Sentinel还会创建连接到从服务器的<strong>命令连接和订阅连接</strong></li>
+<li>举个例子，对于上面那张图所示的主从服务器关系来说，Sentinel将对slave0、slave1和 slave2三个从服务器分别创建命令连接和订阅连接，如下图所示：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/2019120122373496.png" alt="img"></p>
+<p><strong>根据INFO命令的回复，Sentinel会提取出以下信息：</strong></p>
+<ul>
+<li>从服务器的运行ID run_id</li>
+<li>从服务器的角色role</li>
+<li>主服务器的IP地址master_host，以及主服务器的端口号master_port</li>
+<li>主从服务器的连接状态master_link_status</li>
+<li>从服务器的优先级slave_priority</li>
+<li>从服务器的复制偏移量slave_repl_offset</li>
+</ul>
+<h3 id="4-Sentinel向主服务器和从服务器发送信息"><a href="#4-Sentinel向主服务器和从服务器发送信息" class="headerlink" title="4. Sentinel向主服务器和从服务器发送信息"></a>4. Sentinel向主服务器和从服务器发送信息</h3><p>在默认情况下，Sentinel会以<strong>每两秒一次的频率</strong>，通过命令连接向所有被监视的<strong>主服务器和从服务器</strong>发送命令</p>
+<h3 id="5-Sentinel接收来自主服务器和从服务器的频道信息"><a href="#5-Sentinel接收来自主服务器和从服务器的频道信息" class="headerlink" title="5. Sentinel接收来自主服务器和从服务器的频道信息"></a>5. Sentinel接收来自主服务器和从服务器的频道信息</h3><h4 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h4><p>通过执行SUBSCRIBE命令，客户端可以订阅一个或多个频道，从而成为这些频道的订阅者：每当有其他客户端向被订阅的频道发送消息时，频道的所有订阅者都会收到这条消息</p>
+<p>举个例子，假设A、B、C三个客户端都执行了命令：</p>
+<blockquote>
+<p>SUBSCRIBE “new.it”</p>
+</blockquote>
+<p>那么这三个客户端都是”new.it”频道的订阅者。如果这时某个客户端执行命令：</p>
+<blockquote>
+<p>PUBLISH “new.it” “hello”</p>
+</blockquote>
+<p>那么”new.it”的三个订阅者都将收到这条消息</p>
+<h4 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h4><img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731101858678.png" alt="image-20210731101858678" style="zoom:50%;" />
+
+<p>当Sentinel与一个主服务器或从服务器建立起订阅连接后，Sentinel就会通过该订阅连接，向服务器发送以下命令：</p>
+<p><code>SUBSCRIBE _sentinel_:hello</code></p>
+<p>Sentinel对<code>_sentinel_:hello</code>频道对订阅会一直持续到Sentinel与服务器连接断开为止</p>
+<p>也就是说，对于每个与Sentinel连接的服务器，Sentinel既可以通过命令连接向服务器的<code>_sentinel_:hello</code>频道发送信息，又通过订阅连接从服务器的<code>_sentinel_:hello</code>频道接收信息</p>
+<p>对于监视同一个服务器的多个Sentinel来说，一个Sentinel发送的信息会被其他Sentinel接收到，这些信息会被用于更新其他Sentinel对发送Sentinel的认知，也会被用于更新其他Sentinel对被监视服务器的认知</p>
+<p>例如，当一个Sentinel从<code>__sentinel__:hello</code>频道收到一条信息时，Sentinel会对这条信息进行分析，<strong>提取出信息中的Sentinel IP地址、Sentinel端口号、Sentinel运行ID等八个参数，并进行以下检查：</strong></p>
+<ul>
+<li>如果信息中记录的Sentinel运行ID和接收信息的Sentinel的<strong>运行ID相同</strong>，那么说明这条信 息是Sentinel自己发送的，Sentinel将丢弃这条信息，不做进一步处理</li>
+<li>相反地，如果信息中记录的Sentinel运行ID和接收信息的Sentinel的<strong>运行ID不相同</strong>，那么 说明这条信息是监视同一个服务器的其他Sentinel发来的，接收信息的Sentinel将根据信息中的各个参数，<strong>对相应主服务器的实例结构进行更新</strong></li>
+</ul>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731101950485.png" alt="image-20210731101950485" style="zoom:50%;" />
+
+<h4 id="更新Sentinel字典"><a href="#更新Sentinel字典" class="headerlink" title="更新Sentinel字典"></a>更新Sentinel字典</h4><p>Sentinel为主服务器创建的实例结构中的sentinels字典保存了除Sentinel自身之外，所有同样监视这个主服务器的其他Sentinel资料</p>
+<p>因为一个Sentinel可以通过分析接收到的频道信息来<strong>获知其他Sentinel的存在</strong>，并通过发送频道信息来<strong>让其他Sentinel知道自己</strong>的存在，所以用户在使用Sentinel的时候并不需要提供各个Sentinel的地址信息，监视同一个主服务器的多个Sentinel<strong>可以自动发现对方</strong></p>
+<h4 id="创建连向其他Sentinel的命令连接"><a href="#创建连向其他Sentinel的命令连接" class="headerlink" title="创建连向其他Sentinel的命令连接"></a>创建连向其他Sentinel的命令连接</h4><p>当Sentinel通过频道信息发现一个新的Sentinel时，它不仅会为新Sentinel在sentinels字典中创建相应的实例结构，<strong>还会创建一个连向新Sentinel的命令连接</strong>，而新Sentinel也同样会创建连向这个Sentinel的命令连接，最终监视同一主服务器的<strong>多个Sentinel将形成相互连接的网络：</strong>Sentinel A有连向Sentinel B的命令连接，而Sentinel B也有连向Sentinel A的命令连接</p>
+<p>使用命令连接相连的各个Sentinel可以通过向其他Sentinel发送命令请求来进行信息交换</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202184847281.png" alt="img"></p>
+<h3 id="6-检测主观下线状态"><a href="#6-检测主观下线状态" class="headerlink" title="6. 检测主观下线状态"></a>6. 检测主观下线状态</h3><img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731103126909.png" alt="image-20210731103126909" style="zoom:50%;" />
+
+<ul>
+<li>在默认情况下，Sentinel会<strong>以每秒一次的频率</strong>向所有与它创建了命令连接的实例（<strong>包括主服务器、从服务器、其他Sentinel在内</strong>）发送<strong>PING命令</strong>，并通过实例返回的PING命令回复来判断实例是否在线</li>
+<li>如果配置文件指定Sentinel1的<strong>down-after-milliseconds选项的值为50000毫秒</strong>，那么当主服务器master连续50000毫秒都向Sentinel1<strong>返回无效回复时</strong>， Sentinel1就会将master标记为主观下线</li>
+</ul>
+<h3 id="7-检测客观下线状态"><a href="#7-检测客观下线状态" class="headerlink" title="7. 检测客观下线状态"></a>7. 检测客观下线状态</h3><ul>
+<li>当Sentinel将一个主服务器判断为主观下线之后，为了确认这个主服务器是否真的下线了，它会<strong>向同样监视这一主服务器的其他Sentinel进行询问</strong>，看它们是否也认为主服务器已经进入了下线状态（可以是主观下线或者客观下线）。当Sentinel从其他Sentinel那里<strong>接收到足够数量的已下线判断之后</strong>，Sentinel就会将从服务器判定为客观下线，并对主服务器<strong>执行故障转移操作</strong></li>
+</ul>
+<p><strong>客观下线状态的判断条件</strong></p>
+<p>当认为主服务器已经下线的sentinel数量超过sentinel配置中quorum参数的值，那么该Sentinel就会认定主服务器为客观下线。</p>
+<p>例如，如果Sentinel在启动时载入以下配置：</p>
+<pre class=" language-javascript"><code class="language-javascript">Sentinel monitor mymaster <span class="token number">192.168</span><span class="token punctuation">.</span><span class="token number">125.128</span> <span class="token number">6379</span> <span class="token number">2</span></code></pre>
+<p>那么包括当前Sentinel在内，只要总共有两个Sentinel认为主服务器已经进入下线状态，那么当前Sentinel就将主服务器判断为客观下线</p>
+<h3 id="8-选取领头Sentinel"><a href="#8-选取领头Sentinel" class="headerlink" title="8. 选取领头Sentinel"></a>8. 选取领头Sentinel</h3><ul>
+<li>当一个主服务器被判断为客观下线时，监视这个下线主服务器的<strong>各个Sentinel会进行协商</strong>，选举出一个领头Sentinel，并由领头Sentinel<strong>对下线主服务器执行故障转移操作</strong></li>
+<li>选取规则：<ul>
+<li>1.<strong>所有在线的Sentinel都有被选为领头Sentinel的资格</strong>，换句话说，监视同一个主服务器的 多个在线Sentinel中的任意一个都有可能成为领头Sentinel</li>
+<li>2.每次进行领头Sentinel选举之后，<strong>不论选举是否成功，所有Sentinel的配置纪元 （configuration epoch）的值都会自增一次</strong>。配置纪元实际上就是一个计数器，并没有什么特别的</li>
+<li>3.在一个配置纪元里面，<strong>所有Sentinel都有一次将某个Sentinel设置为局部领头Sentinel的机会</strong>，并且局部领头一旦设置，在这个配置每个发现主服务器进入客观下线的Sentinel都会要求其他Sentinel将自己设置为局部领头Sentinel</li>
+<li>4.当一个Sentinel（源Sentinel）向另一个Sentinel（目标Sentinel）发送<strong>SENTINEL ismaster-down-by-addr命令</strong>，并且命令中的runid参数不是*符号而是源Sentinel的运行ID时，这<strong>表示源Sentinel要求目标Sentinel将前者设置为后者的局部领头Sentinel</strong></li>
+<li>5.Sentinel设置局部领头Sentinel的规则是先到先得：<strong>最先向目标Sentinel发送设置要求的源Sentinel将成为目标Sentinel的局部领头</strong>Sentinel，而<strong>之后接收到的所有设置要求都会被目标Sentinel拒绝</strong></li>
+<li>6.目标Sentinel在接收到SENTINEL is-master-down-by-addr命令之后，<strong>将向源Sentinel返回 一条命令回复，</strong>回复中的leader_runid参数和leader_epoch参数分别<strong>记录了目标Sentinel的局部领头Sentinel的运行ID和配置纪元</strong></li>
+<li>7.源Sentinel在接收到目标Sentinel返回的命令回复之后，<strong>会检查回复中leader_epoch参数的值和自己的配置纪元是否相同</strong>，如果相同的话，那么源Sentinel继续取出回复中的 leader_runid参数，如果leader_runid参数的值和源Sentinel的运行ID一致，那么表示目标 Sentinel将源Sentinel设置成了局部领头Sentinel</li>
+<li>8.如果<strong>有某个Sentinel被半数以上的Sentinel设置成了局部领头Sentinel，那么这个Sentinel成为领头Sentinel</strong>。举个例子，在一个由10个Sentinel组成的Sentinel系统里面，只要有大于等于 10/2+1=6个Sentinel将某个Sentinel设置为局部领头Sentinel，那么被设置的那个Sentinel就会成 为领头Sentine</li>
+<li>9.因为领头Sentinel的产生需要半数以上Sentinel的支持，并且每个Sentinel在每个配置纪元里面只能设置一次局部领头Sentinel，<strong>所以在一个配置纪元里面，只会出现一个领头 Sentinel</strong></li>
+<li>10.如果在给定时限内，<strong>没有一个Sentinel被选举为领头Sentinel</strong>，那么各个Sentinel将在一段时间之后<strong>再次进行选举</strong>，直到选出领头Sentinel为止</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-故障转移"><a href="#9-故障转移" class="headerlink" title="9. 故障转移"></a>9. 故障转移</h3><ul>
+<li>在选举产生出领头Sentinel之后，领头Sentinel将对已下线的主服务器<strong>执行故障转移操作</strong></li>
+<li><strong>该操作包含下面3个步骤：</strong><ul>
+<li>①在已下线主服务器属下的所有从服务器里面，挑选出一个从服务器，并将其转换为主服务器</li>
+<li>②让已下线主服务器属下的所有从服务器改为复制新的主服务器</li>
+<li>③将已下线主服务器设置为新的主服务器的从服务器，当这个旧的主服务器重新上线时，它就会成为新的主服务器的从服务器</li>
+</ul>
+</li>
+</ul>
+<h4 id="选出新的主服务器"><a href="#选出新的主服务器" class="headerlink" title="选出新的主服务器"></a>选出新的主服务器</h4><ul>
+<li>故障转移操作第一步要做的就是<strong>在已下线主服务器属下的所有从服务器中</strong>，挑选出一个状态良好、数据完整的从服务器，然后向这个从服务器发送<strong>SLAVEOF no one命令</strong>，将这个<strong>从服务器转换为主服务器</strong></li>
+</ul>
+<h6 id="演示案例-2"><a href="#演示案例-2" class="headerlink" title="演示案例"></a>演示案例</h6><ul>
+<li>下图展示了在一次故障转移操作中，领头Sentinel向<strong>被选中的从服务器server2</strong>发送SLAVEOF no one命令的情形：</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193156859.png" alt="img"></p>
+<ul>
+<li>在发送SLAVEOF no one命令之后，领头Sentinel会以每秒一次的频率（平时是每十秒一 次），向被升级的从服务器<strong>发送INFO命令，</strong>并观察命令回复中的角色（role）信息，<strong>当被升级服务器的role从原来的slave变为master时</strong>，领头Sentinel就知道被选中的从服务器已经顺利升级为主服务器了</li>
+</ul>
+<h4 id="修改从服务器的复制目标"><a href="#修改从服务器的复制目标" class="headerlink" title="修改从服务器的复制目标"></a>修改从服务器的复制目标</h4><ul>
+<li><p>当新的主服务器出现之后，领头Sentinel下一步要做的就是，让已下线主服务器属下的<strong>所有从服务器去复制新的主服务器</strong>，这一动作可以<strong>通过向从服务器发送SLAVEOF命令来实现</strong></p>
+</li>
+<li><p>下图展示了在故障转移操作中，领头Sentinel向已下线主服务器server1的两个从服务器server3和server4发送SLAVEOF命令，让<strong>它们复制新的主服务器server2的例子</strong></p>
+</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193616934.png" alt="img"></p>
+<ul>
+<li>下图展示了<strong>server3和server4成为server2的从服务器之后</strong>，各个服务器以及领头Sentinel的样子</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193633254.png" alt="img"></p>
+<h4 id="将旧的主服务器变为从服务器"><a href="#将旧的主服务器变为从服务器" class="headerlink" title="将旧的主服务器变为从服务器"></a>将旧的主服务器变为从服务器</h4><ul>
+<li>故障转移操作最后要做的是，<strong>将已下线的主服务器设置为新的主服务器的从服务器</strong>。比如说，下图就展示了被领头Sentinel设置为从服务器之后，服务器server1的样子</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193748287.png" alt="img"></p>
+<ul>
+<li>因为旧的主服务器已经下线，所以这种设置是保存在server1对应的实例结构里面的，当 server1重新上线时，<strong>Sentinel就会向它发送SLAVEOF命令，让它成为server2的从服务器</strong></li>
+<li>例如，下图就展示了server1重新上线并成为server2的从服务器的例子</li>
+</ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20191202193757739.png" alt="img"></p>
+<h2 id="Redis集群"><a href="#Redis集群" class="headerlink" title="Redis集群"></a>Redis集群</h2><p>Redis集群说Redis提供的分布式数据库方案，集群通过分片来进行数据共享，并提供复制和故障转移功能</p>
+<p><strong>总结</strong></p>
+<ul>
+<li>节点通过握手来将其他节点添加到自己所处的集群当中</li>
+<li>集群中的16384个槽可以分别指派给集群中的各个节点，每个节点都会记录哪些槽指派给了自己，而哪些槽又被指派给了其他节点</li>
+<li>节点在接到一个命令请求时，会先检查这个命令请求要处理的键所在的槽是否由自己负责，如果不是的话，节点将向客户端返回一个MOVED错误，MOVED错误携带的信息可以指引客户端转向至正在负责相关槽的节点。</li>
+<li>对Redis集群的重新分片工作是由redis-trib负责执行的，重新分片的关键是将属于某个槽点所有键值对从一个节点转移到另一个节点</li>
+<li>如果节点A正在迁移槽i至节点B，那么当节点A没能在自己的数据库中找到命令指定的数据库键时，节点A会向客户端返回一个ASK错误，指引客户端到节点B‘继续查找指定的数据库键</li>
+<li>MOVED错误表示槽点负责权已经从一个节点转移到了另一个节点，而ASK错误只是两个节点在迁移槽过程中使用的临时措施</li>
+<li>集群里的从节点用于复制主节点，并在主节点下线时，代替主节点继续执行命令请求</li>
+<li>集群中的节点通过发送和接收消息来进行通信，常见的消息包括MEET、PING、PONG、PUBLISH、FALL</li>
+</ul>
+<h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><p>一个Redis集群通常是由多个节点（node）组成的，在刚开的时候这些节点是互相独立的。需要使用 cluster meet 命令来实现节点之间的连接，构成一个包含多个节点的集群。</p>
+<p>向一个节点发送cluster meet 命令，可以让node节点与ip和port所指定的节点进行握手，当握手成功时，node节点就会将ip和 port 所指定的节点加入到当前所在的集群中。<br><img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731113747194.png" alt="image-20210731113747194" style="zoom:50%;" /></p>
+<h4 id="启动节点"><a href="#启动节点" class="headerlink" title="启动节点"></a>启动节点</h4><p>一个节点就是一个运行在集群模式下的Redis服务器，节点会继续使用所有在单机模式中使用的服务器组件</p>
+<h4 id="集群数据结构"><a href="#集群数据结构" class="headerlink" title="集群数据结构"></a>集群数据结构</h4><p>每个节点都会使用一个clusterNode结构来记录自己的状态，并为集群中的所有其他节点（包括主节点和从节点）都创建一个相应的clusterNode结构</p>
+<p>每个节点都保存着一个clusterState结构，记录了当前节点的视角下，集群所处的状态，例如在线还是下线，集群节点名单</p>
+<h4 id="CLUSTER-MEET命令的实现"><a href="#CLUSTER-MEET命令的实现" class="headerlink" title="CLUSTER MEET命令的实现"></a>CLUSTER MEET命令的实现</h4><p>通过向节点A发送CLUSTER MEET命令，客户端可以让接收命令的节点A将另一个节点B添加到节点A当前所在的集群里面</p>
+<p>之后节点A会将节点B的消息通过Gossip协议传播给集群中的其他节点，让其他节点也与节点B进行握手，最终，节点B会被集群中所有节点认识</p>
+<h3 id="槽指派"><a href="#槽指派" class="headerlink" title="槽指派"></a>槽指派</h3><p>Redis集群通过分片的方式来保存数据库中的键值对，集群的整个数据库被分为16384个槽，数据库中的每个键都属于这16384个槽中的其中一个，集群中的每个节点可以处理[0,16384]个槽</p>
+<p>当数据库中的16384个槽都有节点在处理时，节点处于上线状态；如果数据库中有任何一个槽没有得到处理，那么集群处于下线状态</p>
+<h4 id="记录节点的槽指派信息"><a href="#记录节点的槽指派信息" class="headerlink" title="记录节点的槽指派信息"></a>记录节点的槽指派信息</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> clusterNode <span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> slots<span class="token punctuation">[</span><span class="token number">16384</span><span class="token operator">/</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> numslots<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>slots属性是一个二进制位的数组，这个数组的长度是16384/8=2048个字节，共包含16384个二进制位</p>
+<p>Redis以0为起始索引，16383位终止索引，对slots数组中的16384个二进制位进行编号，并根据索引i上的二进制位的值来判断节点是否负责处理槽i</p>
+<p>例子：这个数组索引上1、3、5、8、9、10上的二进制位都为1，则表示节点负责处理槽1、3、5、8、9、10</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731144836027.png" alt="image-20210731144836027" style="zoom:67%;" />
+
+<p>因为取出和设置slots数组中的任意一个二进制位的值的复制度仅为O(1)，对于一个给定节点的slots数组来说，程序检查节点是否负责处理某个槽，或者将某个槽指派给节点负责，复杂度都是O(1)</p>
+<p>numslots属性记录节点负责处理的槽的数量</p>
+<h4 id="传播节点的槽指派信息"><a href="#传播节点的槽指派信息" class="headerlink" title="传播节点的槽指派信息"></a>传播节点的槽指派信息</h4><p>一个节点除了会将自己负责处理的槽记录在slots属性中，还会将自己的slots数组通过消息发送给集群中的其他节点，以此来告知其他节点自己目前负责处理哪些槽</p>
+<p>当节点A通过消息从节点B那里接收到节点B的slots数组时，节点A会更新自己nodes字典里节点B对应的clusterNode结构</p>
+<p>因为集群中的每个节点都会将自己的slots数组通过消息发送给集群中的其他节点，并且每个接收到slots数组的节点都会将数组保存到相应节点的clusterNode结构里面。因此，集群中的每个节点都会知道数据库中的16384个槽分别被指派给了集群中的哪些节点</p>
+<h4 id="记录集群所有槽的指派信息"><a href="#记录集群所有槽的指派信息" class="headerlink" title="记录集群所有槽的指派信息"></a>记录集群所有槽的指派信息</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> clusterState <span class="token punctuation">{</span>
+    clusterNode <span class="token operator">*</span> slots<span class="token punctuation">[</span><span class="token number">16384</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> clusterState<span class="token punctuation">;</span></code></pre>
+<p>slots数组包含16384个项，每个数组项都是一个指向clusterNode结构的指针</p>
+<ul>
+<li>如果slots[i]指针为null，那么表示槽i尚未指派给任何节点</li>
+<li>如果slots[i]指向为clusterNode结构，那么表示槽i已指派给了clusterNode代表的结构体</li>
+</ul>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731150446713.png" alt="image-20210731150446713" style="zoom:50%;" />
+
+<p>如果只将槽指派信息保存在各个节点的clusterNode.slots数组中，效率会比较低：</p>
+<ul>
+<li>如果要知道槽i是否被指派，程序需要遍历clusterState.node字典里的所有clusterNode结构，检查这些结构的slots数组，直到找到负责处理槽i的节点为止。复杂度为O(N)</li>
+<li>而通过将所有槽的指派信息保存在clusterState.node.slots数组中，程序要检查槽i是否被指派，只需要访问clusterState.node.slots[i]即可，复杂度O(1)</li>
+</ul>
+<p>clusterState.node.clusterNode.slots数组也是有必要存在的：</p>
+<ul>
+<li>当程序需要将某个节点的槽指派信息通过消息发送给其他节点时，程序只需要将相应节点的clusterNode.slots数组整个发送即可</li>
+<li>如果每次要将节点A的槽指派信息传播给其他节点时，程序必须先遍历clusterState.slots数组，记录节点A负责处理哪些槽，然后才能发送节点A的槽指派信息，比较低效</li>
+</ul>
+<p>clusterState.slots数组记录了集群中所有槽的指派信息，而clusterState.node.clusterNode.slots数组只记录了clusterNode结构所代表的节点槽指派信息</p>
+<h4 id="CLUSTER-ADDSLOTS命令的实现"><a href="#CLUSTER-ADDSLOTS命令的实现" class="headerlink" title="CLUSTER ADDSLOTS命令的实现"></a>CLUSTER ADDSLOTS命令的实现</h4><p>CLUSTER ADDSLOTS命令接受一个或多个槽作为参数，并将所有输入的槽指派给接收该命令的节点负责</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> CLUSTER ADDSLOTS<span class="token punctuation">(</span><span class="token operator">*</span>all_input_slots<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token comment" spellcheck="true"># 遍历所有槽，检查是否是未指派槽</span>
+  <span class="token keyword">for</span> i int all_input_slots<span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 哪怕有一个槽已经被指派，都向客户端返回错误</span>
+    <span class="token keyword">if</span> clusterState<span class="token punctuation">.</span>slots<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> NULL<span class="token punctuation">:</span>
+        reply_error<span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token keyword">return</span>
+
+  <span class="token comment" spellcheck="true"># 分配槽给当前节点</span>
+  <span class="token keyword">for</span> i int all_input_slots<span class="token punctuation">:</span>
+        clusterState<span class="token punctuation">.</span>slots<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> clusterState<span class="token punctuation">.</span>myself <span class="token comment" spellcheck="true"># 设置全局slots</span>
+      setSlotBit<span class="token punctuation">(</span>clusterState<span class="token punctuation">.</span>myself<span class="token punctuation">.</span>slots<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 访问当前节点的clusterNode.slots数组，并设置相应二进制位</span>
+</code></pre>
+<p>例如执行<code>CLUSTER ADDSLOTS 1 2</code>：</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731151816692.png" alt="image-20210731151816692" style="zoom:50%;" />
+
+<h3 id="在集群中执行命令"><a href="#在集群中执行命令" class="headerlink" title="在集群中执行命令"></a>在集群中执行命令</h3><p>在对数据库中的16384个槽指派后，集群进入上线状态，此时客户端可以向集群中的节点发送数据命令了</p>
+<p>当客户端向节点发送与数据库相关的命令时，接收命令的节点会计算命令要处理的数据库键值对属于那个槽，并检查这个槽是否指派给了自己</p>
+<ul>
+<li>如果键所在的槽正好指派给了当前节点，那么节点之间执行这个命令</li>
+<li>否则节点向客户端返回一个MOVED错误，指引客户端转向正确的节点，并再次发送想要执行的命令</li>
+</ul>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731152228520.png" alt="image-20210731152228520" style="zoom:50%;" />
+
+<h4 id="计算键属于那个槽"><a href="#计算键属于那个槽" class="headerlink" title="计算键属于那个槽"></a>计算键属于那个槽</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">slot_number</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> CRC16<span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">16383</span> <span class="token comment" spellcheck="true"># CRC16(key)用于计算键的CRC-16校验和</span></code></pre>
+<h4 id="判断槽是否由当前节点负责处理"><a href="#判断槽是否由当前节点负责处理" class="headerlink" title="判断槽是否由当前节点负责处理"></a>判断槽是否由当前节点负责处理</h4><p>当节点计算出键所属的槽i后，节点会检查自己在clusterState.slots数组中的项i，判断键所属的槽是否由自己处理：</p>
+<ul>
+<li>如果<code>clusterState.slots[i] = clusterState.myself</code>，则是，节点可以执行客户端发送的命令</li>
+<li>否则不是，则根据<code>clusterState.slots[i]</code>指向的clusterNode结构所记录的节点IP和端口号，向客户端发送MOVED错误，指引客户端转向正在处理槽i的节点</li>
+</ul>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731152813205.png" alt="image-20210731152813205" style="zoom:50%;" />
+
+<h4 id="MOVED错误"><a href="#MOVED错误" class="headerlink" title="MOVED错误"></a>MOVED错误</h4><p>当节点发现键所在的槽并非由自己负责处理时，节点就会向客户端返回一个MOVED错误，指引客户端转向正在负责槽的节点。</p>
+<blockquote>
+<p>MOVED 10086 127.0.0.1:7002 表示槽10086正由IP为127.0.0.1，端口号为7002的节点负责</p>
+</blockquote>
+<p>当客户端接收到节点返回到MOVED错误时，客户端会根据MOVED错误中提供的IP地址和端口号，转向负责处理槽slot的节点，并向该节点重新发送之前想要执行的命令</p>
+<h3 id="重新分片"><a href="#重新分片" class="headerlink" title="重新分片"></a>重新分片</h3><p>Redis集群的重新分片操作可以将任意数量已经指派给某个节点的槽改为指派给另一个节点，并且相关槽所属的键值对也会从源节点移动到目标节点</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210802075041870.png" alt="image-20210802075041870" style="zoom:50%;" />
+
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210731154101298.png" alt="image-20210731154101298" style="zoom:50%;" />
+
+<p>通过redis-trib负责执行的，redis-trib对集群单个槽slot进行重新分片的步骤如下：</p>
+<ol>
+<li>对目标节点发送指令，让目标节点准备好从源节点导入所属槽slot的键值对</li>
+<li>对源节点发送指令，让源节点准备好将所属槽slot的键值对迁移到目标节点</li>
+<li>redis-trib向源节点发送指令，获得最多count个属于槽slot的键值对的key</li>
+<li>对于步骤3中得到的key，redis-trib向源节点发送指令，将选中的键原子地从源节点迁移到目标节点</li>
+<li>重复执行3，4，直到源节点保存到所有属于槽slot到键值对都被迁移到目标节点为止，<strong>每次迁移键的过程如上图所示</strong></li>
+<li>redis-trib向集群中任意一个节点发送命令，将槽slot指派给目标节点，这一指派信息会通过消息发送至整个集群，最终集群所有节点都会知道槽slot已经指派给了目标节点</li>
+</ol>
+<h3 id="ASK错误"><a href="#ASK错误" class="headerlink" title="ASK错误"></a>ASK错误</h3><p>在进行重新分片过程中，源节点向目标节点迁移一个槽点过程中，可能会出现属于被迁移槽点一部分键值对保存在源节点，而另一部分键值对保存在目标节点里面。</p>
+<p>当客户端向源节点发送一个与数据库键有关的命令，并且命令要处理的数据库键恰好就属于正在被迁移的槽时：</p>
+<p>源节点会先在自己的数据库里面查找指定的键，如果找到的话，就直接执行客户端发送的命令</p>
+<p>相反地，如果源节点没能在自己的数据库里面找到指定的键，那么这个键有可能已经被迁移到了目标节点，源节点将向客户端返回一个ASK错误，指引客户端转向正在导入槽的目标节点，并再次发送之前想要执行的命令</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210802075424818.png" alt="image-20210802075424818" style="zoom:50%;" />
+
+<p>如果节点收到一个关于键key的命令请求，并且键key所属的槽i正好就指派给了这个节点，那么节点会尝试在自己的数据库里查找键key，如果找到了的话，节点就直接执行客户端发送的命令</p>
+<p>如果节点没有在自己的数据库里找到键key，那么节点会检查自己的clusterState.migrating_slots_to[i]，看键key所属的槽i是否正在进行迁移，如果槽i的确在进行迁移的话，那么节点会向客户端发送一个ASK错误，引导客户端到正在导入槽i的节点去查找键key</p>
+<p><strong>ASK错误和MOVED错误的区别</strong></p>
+<p>ASK错误和MOVED错误都会导致客户端转向，区别在于：</p>
+<ul>
+<li>MOVED错误代表槽的负责权已经从一个节点转移到了另一个节点：在客户端收到关于槽i的MOVED错误之后，客户端每次遇到关于槽i的命令请求时，都可以直接将命令请求发送至MOVED错误所指向的节点，因为该节点就是目前负责槽i的节点。</li>
+<li>与此相反，ASK错误只是两个节点在迁移槽的过程中使用的一种临时措施：在客户端收到关于槽i的ASK错误之后，客户端只会在接下来的一次命令请求中将关于槽i的命令请求发送至ASK错误所指示的节点，因为可能该槽位还有没迁移完的元素，所以只有全部迁移完之后才会把这个槽位标记成 target 节点的。所以这种转向不会对客户端今后发送关于槽i的命令请求产生任何影响，客户端仍然会将关于槽i的命令请求发送至目前负责处理槽i的节点，除非ASK错误再次出现。</li>
+</ul>
+<h3 id="复制与故障转移"><a href="#复制与故障转移" class="headerlink" title="复制与故障转移"></a>复制与故障转移</h3><p>Redis的集群中分为主节点和从节点，其中主节点是用来处理槽的（此时已经做了读写分离，主服务器用来写，而从服务器只能读），而从服务器需要复制某个主节点，并在被复制的主节点下线时，<strong>代替下线主节点继续处理命令请求，与哨兵模式同理，下线主节点重新上线会称为新主节点的从节点</strong>。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210802080305870.png" alt="image-20210802080305870" style="zoom:50%;" />
+
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210802080321359.png" alt="image-20210802080321359" style="zoom:50%;" />
+
+<p>假如7000进入下线状态，那么集群中仍在正常运作的几个主节点将在节点7000的两个从节点-7004、7005之间选出一个节点作为新的主节点，这个新的主节点将接管7000负责处理的槽，并继续处理客户端发送的命令请求，例如：</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210802080540351.png" alt="image-20210802080540351" style="zoom:50%;" />
+
+<p>如果故障转移完成之后，下线的节点7000重新上线，那么它被视为节点7004的从节点：</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210802080640726.png" alt="image-20210802080640726" style="zoom:50%;" />
+
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210802080653472.png" alt="image-20210802080653472" style="zoom:50%;" />
+
+<h4 id="设置从节点"><a href="#设置从节点" class="headerlink" title="设置从节点"></a>设置从节点</h4><p><code>CLUSTER REPLICATE &lt;node_id&gt;</code>可以让接收命令的节点成为node_id所指定节点的从节点，并开始对主节点进行复制</p>
+<p>一个节点成为从节点，并开始复制某个主节点这一消息会通过消息发送给集群中的其他节点，最终集群中的所有节点都会知道某个从节点正在复制某个主节点</p>
+<h4 id="故障检测"><a href="#故障检测" class="headerlink" title="故障检测"></a>故障检测</h4><p>集群中的每个节点都会定期地向集群中的其他节点发送PING消息，一次来检测对方是否在线，如果接收PING消息的节点没有在规定的时间内，向发送PING消息的节点返回PONG消息，那么发送PING消息的节点就会将阶段后PING消息的节点标记为疑似下线（PFAIL）。</p>
+<p>集群中的各个节点会通过相互发送消息的方式来交换集群中各个节点的状态信息：某个节点处于在线状态、疑似下线、已下线状态。</p>
+<p>当一个主节点A通过消息得知主节点B认为主节点C进入疑似下线状态时，主节点A会在自己的clusterState.nodes字典中找到主节点C所对应的clusterNode结构，并将主节点B的下线报告添加到clusterNode结构的fail_reports链表中</p>
+<pre class=" language-c"><code class="language-c">status clusterNode<span class="token punctuation">{</span>
+    list <span class="token operator">*</span>fali_reports<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//链表，记录所有其他节点对该节点的下线报告</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>如果集群里半数以上负责处理槽的主节点都将某个主节点x报告未疑似下线，那么这个主节点x将被标记未已下线，将主节点x标记为已下线的节点会向集群广播一条关于主节点x的FAIL消息，所有收到这条消息的节点都会立即将主节点x标记为已下线。</p>
+<h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><p>1）复制下线主节点的所有从节点里面，会有一个从节点被选中，</p>
+<p>2）被选中的从节点会执行SLAVEOF no one命令，成为新的主节点。</p>
+<p>3）新的主节点会撤销所有对已下线主节点的槽指派，并将这些槽指派给自己。</p>
+<p>4）新的主节点向集群广播一条PONG消息，这条消息让其他集群中的其他节点立即知道这个节点已经由从节点变为主节点，并且这个主节点已经接管了原本已下线节点负责处理的槽。</p>
+<p>5）新的主节点开始接收和自己负责处理的槽有关的命令请求，故障转移完成。</p>
+<h4 id="选举新的主节点"><a href="#选举新的主节点" class="headerlink" title="选举新的主节点"></a>选举新的主节点</h4><p>1）集群的配置纪元是一个计数器。他的初始值为0；</p>
+<p>2）当集群中的某个节点开始一次故障转移操作时，集群配置纪元的值会被加1。</p>
+<p>3）集群里面每个负责处理槽的主节点都有一次投票机会，而第一个向主节点要求投票的从节点将获得主节点的投票。</p>
+<p>4）当从节点发现自己正在复制的主节点进入下线状态时，从节点会向集群广播一条CLUSTERMSG_TYPE_FAILOVER_AUTH_REQUEST消息，要求所有收到这个消息、并且具有投票权的主节点向这个从节点投票。</p>
+<p>5）如果一个主节点具有投票权，并且这个主节点尚未投票给其他从节点，那么主节点将向要求投票的从节点返回一条CLUSTERMSG_TYPE_FAILOVER_AUTH_ACK消息，表示这个主节点支持从节点成为新的主节点。</p>
+<p>6）每个参与选举的从节点都会收到CLUSTERMSG_TYPE_FAILOVER_AUTH_ACK消息，并根据自己收到了多少条这种消息来统计自己获得了多少主节点支持。</p>
+<p>7）如果集群中有N个具有投票权的主节点，那么当一个从节点大于等于N/2+1张支持票时，这个从节点就当选成为新的主节点。</p>
+<p>8）如果在一个配置纪元里面没有从节点收集到足够多的支持票，那么集群进入下一个纪元，再次进行选举，直到选出新的主节点为止。</p>
+<p>这个选举新主节点的算法和选举领头Sentinel的方法非常相似，因为他们都是基于Raft算法的领头选举方法来实现的</p>
+<h3 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h3><p>集群中各个节点通过发送和接收消息来进行通信：</p>
+<ul>
+<li>MEET消息：当发送者接收到客户端传来的CLUSTER MEET命令后，会向指定的REDIS服务器发送MEET消息，请求接收者加入到发送者当前所处的集群里面</li>
+<li>PING消息：集群中的每个节点会默认每隔一秒钟，从自己的clusterState.nodes属性中选择5个已知节点，然后在这5个节点又选出最长时间自己没有发送过PING消息的节点出来，进行发送PING消息给它，以此来检测节点是否在线，同时也会更新对接收节点的状态认知，除此之外，这5个节点中如果存在返回PONG消息的时间距离当前时间的时间差的节点，已经超过了cluster-node-timeout选项设置时长的一半，那么也会给这个节点发送PING消息，来防止对该节点的信息更新滞后</li>
+<li>PONG消息：当接收者收到发送者发来的MEET消息或者PING消息时，接收者为了表示已经收到这条消息，就会返回一条PONG消息给发送者，除此之外，节点也可以通过集群广播自己的PONG消息来让集群中的其他节点刷新对自己的认识，比如故障转移操作之后，这个节点成为了新的主节点，那么这个新主节点就会广播自己的PONG消息</li>
+<li>FAIL消息：当一个主节点判断另一个主节点进入了FAIL状态时（下线），该主节点会向集群中广播一条关于下线主节点的FAIL消息，所有收到这条消息的节点（包括从节点）会将该下线主节点标记为下线状态（flag属性）</li>
+<li>PUBLISH消息：当节点接收到PUBLISH命令时，那么节点会执行这个命令，并且会向集群广播一条PUBLISH消息，所有接收到这条PUBLISH消息的节点都会执行相同的PUBLISH命令</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">tongji4m3</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tongji4m3.club/posts/bae4ff13.html">https://tongji4m3.club/posts/bae4ff13.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">tongji4m3</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">数据结构</span>
+                                </a>
+                            
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                    <span class="chip bg-color">数据库</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'b3l6kB5FAaRmQL4rJm9sKfxz-gzGzoHsz',
+        appKey: 'T26ixt4nAVDxB4V3gvBDUzP6',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '留下你的足迹吧~'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/posts/bae4ff13.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/11.jpg" class="responsive-img" alt="Redis">
+                        
+                        <span class="card-title">Redis</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            学习Redis所做的笔记，包括Redis数据结构、Redis缓存、分布式锁、主从复制、高可用等。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">数据结构</span>
+                    </a>
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="chip bg-color">数据库</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/a2c3ad19.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="Java多线程">
+                        
+                        <span class="card-title">Java多线程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Java多线程，包括Synchronized、线程基础、线程池、ThreadLocal、AQS、ReentrantLock等
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E7%9B%B8%E5%85%B3/" class="post-category">
+                                    Java相关
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+                        <span class="chip bg-color">线程池</span>
+                    </a>
+                    
+                    <a href="/tags/ThreadLocal/">
+                        <span class="chip bg-color">ThreadLocal</span>
+                    </a>
+                    
+                    <a href="/tags/ReentrantLock/">
+                        <span class="chip bg-color">ReentrantLock</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1,h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1,h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">tongji4m3</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">251.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "09";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/tongji4m3" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="javascript:void(0)" class="tooltipped"  data-tooltip="微信联系我:tongji4m3" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="javascript:void(0)" class="tooltipped"  data-tooltip="QQ联系我: 1254931237" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+
+
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
