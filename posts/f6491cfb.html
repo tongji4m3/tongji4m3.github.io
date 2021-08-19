@@ -1,0 +1,2324 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="网络编程, tongji4m3&#39;s Blog">
+    <meta name="description" content="你日渐平庸，甘于平庸，将继续平庸。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="baidu-site-verification" content="code-MyLOF51Lns" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="google-site-verification" content="cb_eRUNfSOmCVjXFsefzdRthA-wzRyT6ws4hOMuQyUA" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>网络编程 | tongji4m3&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">tongji4m3&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">tongji4m3&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            你日渐平庸，甘于平庸，将继续平庸。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/tongji4m3" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/tongji4m3" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/8.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">网络编程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/IO%E6%A8%A1%E5%9E%8B/">
+                                <span class="chip bg-color">IO模型</span>
+                            </a>
+                        
+                            <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+                                <span class="chip bg-color">IO多路复用</span>
+                            </a>
+                        
+                            <a href="/tags/epoll/">
+                                <span class="chip bg-color">epoll</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-06-10
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    19.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    69 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="网络编程案例"><a href="#网络编程案例" class="headerlink" title="网络编程案例"></a>网络编程案例</h1><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603191611037.png" alt="image-20210603191611037" style="zoom: 67%;" />
+
+
+
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603203304963.png" alt="image-20210603203304963"></p>
+<p><strong>正常启动</strong></p>
+<ul>
+<li>启动服务器，它调用socket、bind、listen和accept，并阻塞于accept调用</li>
+<li>启动客户，客户调用socket和connect，后者引起TCP的三次握手过程。握手之后，客户中的connect、服务器的accept均返回，连接建立。</li>
+<li>客户调用函数，阻塞于fgets调用，因为我们没有输入文本</li>
+<li>当服务器端端accept返回时，服务器调用fork，再由子进程调用read，而read在等待客户送入文本而阻塞</li>
+<li>服务器端的父进程再次调用accept并阻塞，等待下一个客户连接</li>
+</ul>
+<p><strong>正常终止步骤</strong></p>
+<ol>
+<li>当我们键入EOF字符时，fgets返回一个空指针，于是str_cli函数返回</li>
+<li>当str_cli函数返回到客户的main函数时，main通过调用exit终止</li>
+<li>进程终止处理的部分工作是关闭所有打开的描述符，因此客户打开的套接字由内核关闭，这导致客户TCP发送一个FIN给服务器，服务器TCP则以ACK响应。至此，服务器套接字处于CLOSE_WAIT状态，客户套接字处于FIN_WAIT_2状态</li>
+<li>当服务器TCP接收FIN时，服务器子进程阻塞于readline调用，于是readline返回0，这导致str_echo函数返回服务器子进程的main函数</li>
+<li>服务器子进程通过调用exit来终止</li>
+<li>服务器子进程中打开的所有描述符随之关闭，由子进程来关闭已连接套接字会引发TCP连接终止序列的最后两个分节：一个从服务器到客户的FIN和一个从客户到服务器的ACK。至此连接完全终止，客户端套接字进入TIME_WAIT状态</li>
+</ol>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span>    <span class="token string">"unp.h"</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span>                    sockfd<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> sockaddr_in    servaddr<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>argc <span class="token operator">!=</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token function">err_quit</span><span class="token punctuation">(</span><span class="token string">"usage: tcpcli &lt;IPaddress>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 创建一个套接字，返回描述符。以后的所有函数调用就用该描述符来标识这个套接字</span>
+    sockfd <span class="token operator">=</span> <span class="token function">Socket</span><span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 填入服务器的IP地址和端口号</span>
+    <span class="token function">bzero</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>servaddr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>servaddr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    servaddr<span class="token punctuation">.</span>sin_family <span class="token operator">=</span> AF_INET<span class="token punctuation">;</span>
+    servaddr<span class="token punctuation">.</span>sin_port <span class="token operator">=</span> <span class="token function">htons</span><span class="token punctuation">(</span>SERV_PORT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Inet_pton</span><span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>servaddr<span class="token punctuation">.</span>sin_addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 和服务器建立TCP连接</span>
+    <span class="token function">Connect</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> <span class="token punctuation">(</span>SA <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>servaddr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>servaddr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">str_cli</span><span class="token punctuation">(</span><span class="token constant">stdin</span><span class="token punctuation">,</span> sockfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 终止程序运行，Unix在进程终止时总是关闭该进程所有打开的描述符</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">str_cli</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fp<span class="token punctuation">,</span> <span class="token keyword">int</span> sockfd<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span>    sendline<span class="token punctuation">[</span>MAXLINE<span class="token punctuation">]</span><span class="token punctuation">,</span> recvline<span class="token punctuation">[</span>MAXLINE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 使用read函数读取服务器的应答，并用IO函数fputs输出结果</span>
+      <span class="token comment" spellcheck="true">// 如果数据量很大，就不能确保一次read调用能返回服务器的整个应答。因此从TCP套接字读取数据时，我们总是需要把read编写在</span>
+    <span class="token comment" spellcheck="true">// 循环中，当read返回0（表明对端关闭连接）或负值（表明发生错误）时终止循环</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">Fgets</span><span class="token punctuation">(</span>sendline<span class="token punctuation">,</span> MAXLINE<span class="token punctuation">,</span> fp<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token function">Writen</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> sendline<span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>sendline<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">Readline</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> recvline<span class="token punctuation">,</span> MAXLINE<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">err_quit</span><span class="token punctuation">(</span><span class="token string">"str_cli: server terminated prematurely"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">Fputs</span><span class="token punctuation">(</span>recvline<span class="token punctuation">,</span> <span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>客户调用st_cli函数，该函数将阻塞于fgets调用，因为我们还未输入任何数据。</p>
+<h2 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span>    <span class="token string">"unp.h"</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span>                    listenfd<span class="token punctuation">,</span> connfd<span class="token punctuation">;</span>
+    pid_t                childpid<span class="token punctuation">;</span>
+    socklen_t            clilen<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> sockaddr_in    cliaddr<span class="token punctuation">,</span> servaddr<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 创建套接字</span>
+    listenfd <span class="token operator">=</span> <span class="token function">Socket</span><span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">bzero</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>servaddr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>servaddr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    servaddr<span class="token punctuation">.</span>sin_family      <span class="token operator">=</span> AF_INET<span class="token punctuation">;</span>
+    servaddr<span class="token punctuation">.</span>sin_addr<span class="token punctuation">.</span>s_addr <span class="token operator">=</span> <span class="token function">htonl</span><span class="token punctuation">(</span>INADDR_ANY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    servaddr<span class="token punctuation">.</span>sin_port        <span class="token operator">=</span> <span class="token function">htons</span><span class="token punctuation">(</span>SERV_PORT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 调用bind函数绑定端口号</span>
+    <span class="token function">Bind</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">,</span> <span class="token punctuation">(</span>SA <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>servaddr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>servaddr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 调用Listen函数把套接字转换成一个监听套接字，这样来自客户端的外来连接可以在该套接字由内核接收</span>
+  <span class="token comment" spellcheck="true">// socket、bind、listen这三个调用步骤是任何TCP服务器准备所谓的监听描述符的正常步骤</span>
+    <span class="token function">Listen</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">,</span> LISTENQ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        clilen <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>cliaddr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 服务器进程在accept调用中被置于休眠状态，等待某个客户连接的到达并被内核接受</span>
+    <span class="token comment" spellcheck="true">// TCP使用三次握手来建立连接，握手完毕后accept返回。一个已连接描述符connfd</span>
+    <span class="token comment" spellcheck="true">// 该描述符用于与新连接的那个客户通信，accept为每个连接到本服务器的客户返回一个新描述符</span>
+    <span class="token comment" spellcheck="true">// 该服务器一次只能处理一个客户。如果多个客户连接同时到达，系统内核在某个最大数量的限制下把他们排入队列，然后每次返回一个给accept函数</span>
+        connfd <span class="token operator">=</span> <span class="token function">Accept</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">,</span> <span class="token punctuation">(</span>SA <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>cliaddr<span class="token punctuation">,</span> <span class="token operator">&amp;</span>clilen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 为每个客户创建一个子进程</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>childpid <span class="token operator">=</span> <span class="token function">Fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+            <span class="token function">Close</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+            <span class="token function">str_echo</span><span class="token punctuation">(</span>connfd<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+            <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 服务器调用close关闭与客户的连接，引发四次挥手操作。（当然这里引用计数不为0，实际close操作在子进程完成）</span>
+        <span class="token function">Close</span><span class="token punctuation">(</span>connfd<span class="token punctuation">)</span><span class="token punctuation">;</span>            
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">str_echo</span><span class="token punctuation">(</span><span class="token keyword">int</span> sockfd<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ssize_t        n<span class="token punctuation">;</span>
+    <span class="token keyword">char</span>        buf<span class="token punctuation">[</span>MAXLINE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    again<span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">// 如果客户关闭连接，那么接收到客户的FIN将导致服务器子进程的read函数返回0，将导致str_echo返回，从而终止子进程</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>n <span class="token operator">=</span> <span class="token function">read</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> MAXLINE<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">Writen</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> errno <span class="token operator">==</span> EINTR<span class="token punctuation">)</span>
+        <span class="token keyword">goto</span> again<span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token function">err_sys</span><span class="token punctuation">(</span><span class="token string">"str_echo: read error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>当服务器端accept函数返回时，服务器调用fork，再有子进程调用str_echo。该函数调用readline，readline调用read，而read在等待客户送入一行文本期间阻塞。</p>
+<p>另一方面，服务器父进程再次调用accept并阻塞，等待下一个客户连接。</p>
+<h2 id="并发服务器"><a href="#并发服务器" class="headerlink" title="并发服务器"></a>并发服务器</h2><p>主服务器循环通过派生一个子进程来处理每个新的连接</p>
+<p>当服务器接收并接受这个客户的连接，它fork一个自身的副本，让子进程来处理该客户的请求</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603172737267.png" alt="image-20210603172737267"></p>
+<p>TCP无法仅仅通过查看目的端口号来分离外来的分节到不同的端点，它必须查看套接字对的所有四个元素才能确定由哪个端点接收某个到达的分节</p>
+<p>我们必须在服务器主机上区分监听套接字和已连接套接字。已连接套接字使用与监听套接字相同的本地端口（21）</p>
+<p>对于同一个本地端口（21）存在三个套接字：</p>
+<ul>
+<li>如果一个分节来自客户端端口1500，目的地为服务器端端口21，被传递到第一个子进程</li>
+<li>如果一个分节来自客户端端口1501，目的地为服务器端端口21，被传递到第二个子进程</li>
+<li>所有目的端口为21的其他TCP分节被传递给拥有监听套接字的那个最初服务器（父进程）</li>
+</ul>
+<p>是在同时有大量的客户连接到同一个服务器上时用于提供并发性的一种技术，每个客户连接都迫使服务器为他fork一个新的进程</p>
+<pre class=" language-c"><code class="language-c">pid_t pid<span class="token punctuation">;</span>
+<span class="token keyword">int</span> listenfd<span class="token punctuation">,</span> connfd<span class="token punctuation">;</span>
+listenfd <span class="token operator">=</span> <span class="token function">Socket</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">Bind</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">Listen</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">,</span> backlog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    connfd <span class="token operator">=</span> <span class="token function">Accept</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 子进程进入if执行</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token function">Fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Close</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">processHandler</span><span class="token punctuation">(</span>connfd<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 处理请求</span>
+        <span class="token function">Close</span><span class="token punctuation">(</span>connfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">Close</span><span class="token punctuation">(</span>connfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>当一个连接建立时，accept返回，服务器接着调用fork，然后由子进程服务客户（提供已连接套接字connfd)，父进程则等待另一个连接（通过监听套接字listenfd)。既然新的客户由子进程提供服务，父进程就关闭已连接套接字。</p>
+<p>对一个TCP套接字调用close会导致发送一个FIN，随后是正常的四次挥手，那么为什么父进程对connfd调用close没有终止它与客户的连接？因为每个文件或套接字都有一个引用计数（是当前打开着的引用该文件或套接字的描述符的个数）。套接字真正的清理和资源释放要等到引用计数值为0时才发生，即会在子进程也关闭connfd时发生。</p>
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603200912778.png" alt="image-20210603200912778" style="zoom:50%;" />
+
+<p>从accept返回时，连接被内核接收，新的套接字connfd被创建。这是一个已连接套接字，可由此跨连接读写数据</p>
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603200853359.png" alt="image-20210603200853359" style="zoom:50%;" />
+
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603200933250.png" alt="image-20210603200933250" style="zoom:50%;" />
+
+<h1 id="套接字函数"><a href="#套接字函数" class="headerlink" title="套接字函数"></a>套接字函数</h1><h2 id="socket函数"><a href="#socket函数" class="headerlink" title="socket函数"></a>socket函数</h2><pre class=" language-c#"><code class="language-c#">int socket(int family, in type, int protocol);</code></pre>
+<p>指定期望的通信协议类型（例如使用IPv4的TCP）</p>
+<p>socket函数在成功时返回一个小的非负整数值，与文件描述符类似，称为套接字描述符，简称sockfd</p>
+<h2 id="connect函数"><a href="#connect函数" class="headerlink" title="connect函数"></a>connect函数</h2><p>TCP客户用connect函数来建立与TCP服务器的连接</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token keyword">int</span> sockfd<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">struct</span> sockaddr <span class="token operator">*</span>servaddr<span class="token punctuation">,</span> socklen_t addrlen<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>sockfd是由socket函数返回的套接字描述符</p>
+<p>servaddr、addrlen是指向套接字地址结构的指针和该结构的大小（结构中含有服务器的IP地址和端口号）</p>
+<p>客户调用connect函数时不需要调用bind函数，因为如果需要，内核会确定源ip地址，并选择一个临时端口作为源端口</p>
+<p>如果是TCP套接字，调用connect函数将触发TCP的三次握手过程</p>
+<h2 id="bind函数"><a href="#bind函数" class="headerlink" title="bind函数"></a>bind函数</h2><pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">int</span> sockfd<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">struct</span> sockaddr <span class="token operator">*</span>myaddr<span class="token punctuation">,</span> socklen_t addrlen<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>myaddr、addrlen是指向套接字地址结构的指针和该结构的大小（可以指定要绑定的IP地址和端口号），如果要绑定IP地址，则该IP地址必须属于其所在主机的网络接口之一</p>
+<p>可以指定一个端口号、或指定一个IP地址、或两者都指定、或都不指定</p>
+<h2 id="listen函数"><a href="#listen函数" class="headerlink" title="listen函数"></a>listen函数</h2><pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">listen</span><span class="token punctuation">(</span><span class="token keyword">int</span> sockfd<span class="token punctuation">,</span> <span class="token keyword">int</span> backlog<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>listen函数仅由TCP服务器调用，作用：</p>
+<ol>
+<li>当socket函数创建一个套接字时，它被假设为一个主动套接字，也就是一个调用connect发起连接的客户套接字。listen函数把一个未连接的套接字转换成一个被动套接字，指示内核应接受指向该套接字的连接请求。即调用listen函数导致套接字从CLOSED状态转换成LISTEN状态</li>
+<li>本函数第二个参数规定内核应该为相应套接字排队的最大连接个数</li>
+</ol>
+<p>内核为任何一个给定的监听套接字维护两个队列：</p>
+<ol>
+<li><strong>未完成连接队列</strong>。每个这样的SYN分节对应其中的一项：已由某个客户发出并到达服务器，而服务器正在等待完成相应的TCP三次握手过程。这些套接字处于SYN_RCVD状态（在三次握手正常完成的前提下，未完成连接队列中的任何一项在其中的存留时间就是一个RTT)</li>
+<li><strong>已完成连接队列</strong>。每个已完成TCP三次握手过程的客户对应其中一项。这些套接字处于ESTABLISHED状态</li>
+</ol>
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603193151337.png" alt="image-20210603193151337" style="zoom:67%;" />
+
+<p>每当在未完成连接队列中创建一项时，来自监听套接字的参数就复制到即将建立的连接中。连接的创建机制是完全自动的，无需服务器进程插手。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810192645264.png" alt="image-20210810192645264" style="zoom:50%;" />
+
+<p>当来自客户的SYN到达时，TCP在未完成连接队列中创建一个新项，然后响应三次握手的第二个分节：服务器的SYN响应，其中捎带对客户SYN的ACK。这一项一直保留在未完成连接队列中，直到三次握手的第三个分节（客户对服务器SYN的ACK）到达或该项超时为止。如果三次握手正常完成，该项就从未完成连接队列移动到已完成连接队列的队尾。当进程调用accept时，已完成连接队列中的队头项就返回给进程，或者如果该队列为空，那么进程将处于休眠状态，直到TCP在该队列中放入一项才唤醒他</p>
+<p>在三次握手完成之后，但在服务器调用accept之前到达的数据应由服务器TCP排队，最大数据量为相应已连接套接字的接受缓冲区大小</p>
+<h2 id="accept函数"><a href="#accept函数" class="headerlink" title="accept函数"></a>accept函数</h2><pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token keyword">int</span> sockfd<span class="token punctuation">,</span> <span class="token keyword">struct</span> sockaddr <span class="token operator">*</span>cliaddr<span class="token punctuation">,</span> socklen_t <span class="token operator">*</span>addrlen<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>accept函数由TCP服务器调用，用于从已完成连接队列队头返回下一个已完成连接。如果已完成连接队列为空，那么进程置为休眠状态。</p>
+<p>如果accept成功。那么其返回值是由内核自动生成的一个全新描述符，代表与所返回客户的TCP连接</p>
+<p>称第一个参数为监听套接字描述符，返回值为已连接套接字描述符。一个服务器通常仅仅创建一个监听套接字，他在该服务器的生命周期内一直存在，内核为每个由服务器进程接受的客户连接创建一个已连接套接字（对于他的三次握手过程已经完成）。当服务器完成对某个给定客户的服务时，相应的已连接套接字就被关闭。</p>
+<h2 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h2><pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token keyword">int</span> sockfd<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>关闭套接字，终止TCP连接</p>
+<p>默认行为是把该套接字标记成已关闭，然后立即返回到调用进程。该套接字描述符不能再由调用进程使用，也就是说它不能再作为read或write的参数。</p>
+<p>然而TCP将尝试发送已排队等待发送到对端的任何数据，发送完毕后发生的是正常的TCP连接四次挥手</p>
+<h1 id="IO模型"><a href="#IO模型" class="headerlink" title="IO模型"></a>IO模型</h1><p>首先看看服务端处理网络请求的典型过程：</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/165a72396ad36eda" alt="服务端处理网络请求流程图"></p>
+<p>输入操作通常包括两个不同的阶段：</p>
+<ol>
+<li>等待数据准备好</li>
+<li>从内核向进程复制数据</li>
+</ol>
+<p>对于一个套接字上的输入操作，第一步通常涉及等待数据从网络中到达。当所等待分组到达时，它被复制到内核中的某个缓冲区。第二步就是把数据从内核缓冲区复制到应用进程缓冲区。</p>
+<p><strong>UDP套接字编程</strong></p>
+<p>下面的IO模型拿UDP举例，因为数据准备好读取的概念比较简单：要么整个数据报已经收到，要么还没有。所以先简述UDP套接字编程</p>
+<p>客户不与服务器建立连接，而是只使用sendto函数给服务器发送数据报，其中必须指定目的地。类似的，服务器不接受来自客户的连接，而是只管调用recvfrom函数，等待来自某个客户的数据到达。recvfrom将与所接收的数据报一道返回客户的协议地址，因此服务器可以把响应发送给正确的客户。</p>
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210604183925749.png" alt="image-20210604183925749" style="zoom:67%;" />
+
+<p><strong>阻塞和非阻塞</strong></p>
+<p>描述的是用户线程调用内核IO操作的方式：阻塞是指IO操作需要彻底完成后才返回到用户空间；而非阻塞是指IO操作被调用后立即返回给用户一个状态值，无需等到IO操作彻底完成。阻塞调用会一直等待远程数据就绪再返回，直到读取结束。而非阻塞无论在什么情况下都会立即返回，虽然非阻塞大部分时间不会被block，但是它仍要求进程不断地去主动询问kernel是否准备好数据，也需要进程主动地再次调用recvfrom来将数据拷贝到用户内存。</p>
+<ul>
+<li>阻塞调用与非阻塞调用<ul>
+<li>阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回</li>
+<li>非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程</li>
+</ul>
+</li>
+</ul>
+<p>两者的最大区别在于被调用方在收到请求到返回结果之前的这段时间内，调用方是否一直在等待。阻塞是指调用方一直在等待而且别的事情什么都不做。非阻塞是指调用方先去忙别的事情</p>
+<p><strong>同步和异步</strong></p>
+<p>描述的是用户线程与内核的交互方式：同步是指用户线程发起IO请求后需要等待或者轮询内核IO操作完成后才能继续执行；而异步是指用户线程发起IO请求后仍继续执行，当内核IO操作完成后会通知用户线程，或者调用用户线程注册的回调函数。</p>
+<ul>
+<li><p>同步处理与异步处理</p>
+<ul>
+<li>同步处理是指被调用方得到最终结果之后才返回给调用方</li>
+<li>异步处理是指被调用方先返回应答，然后再计算调用结果，计算完最终结果后再通知并返回给调用方</li>
+</ul>
+</li>
+</ul>
+<p><strong>IO模型比较</strong></p>
+<ul>
+<li>同步IO操作：导致请求进程阻塞，直到IO操作完成</li>
+<li>异步IO操作：不导致请求进程阻塞</li>
+</ul>
+<p>前四种同步IO模型的主要区别在第一阶段，因为他们第二阶段是一样的：在数据从内核复制到调用者缓冲区期间，进程阻塞与recvfrom调用。相反，异步IO模型在这两阶段都要处理</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/165a723ae2b8fb2a" alt="img"></p>
+<p>阻塞式IO模型、非阻塞式IO模型、IO复用模型、信号驱动IO模型都是同步IO模型，因为其中真正的IO操作(recvfrom)将阻塞进程。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207165051430.png" alt="image-20210207165051430"></p>
+<p>服务端为了处理客户端的连接和请求的数据，写了如下代码。</p>
+<pre><code>listenfd = socket();   // 打开一个网络通信端口
+bind(listenfd);        // 绑定
+listen(listenfd);      // 监听
+while(1) {
+  connfd = accept(listenfd);  // 阻塞建立连接
+  int n = read(connfd, buf);  // 阻塞读数据
+  doSomeThing(buf);  // 利用读到的数据做些什么
+  close(connfd);     // 关闭连接，循环等待下一个连接
+}</code></pre>
+<p>服务端的线程阻塞在了两个地方，一个是 accept 函数，一个是 read 函数。</p>
+<p>如果这个连接的客户端一直不发数据，那么服务端线程将会一直阻塞在 read 函数上不返回，也无法接受其他客户端连接。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210805211930154.png" alt="image-20210805211930154" style="zoom:50%;" />
+
+<h2 id="阻塞式IO模型"><a href="#阻塞式IO模型" class="headerlink" title="阻塞式IO模型"></a>阻塞式IO模型</h2><p>把recvfrom视为系统调用，因为要区分应用进程和内核。它一般都会从在应用进程空间中运行切换到在内核空间中运行，一段时间后再切换回来</p>
+<p>进程调用recvfrom，其系统调用直到数据报到达且被复制到应用进程的缓冲区中或者发生错误才返回。进程在从调用recvfrom开始到它返回的整段时间内是被阻塞的。recvfrom成功返回后，应用进程开始处理数据报。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/165a72396a811072" alt="阻塞式I/O模型"></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207152811758.png" alt="image-20210207152811758"></p>
+<ul>
+<li><p>同步阻塞IO模型是最简单的IO模型，用户线程在内核进行IO操作时被阻塞。</p>
+</li>
+<li><p>用户线程通过系统调用read发起IO读操作，由用户空间转到内核空间。内核等到数据包到达后，然后将接收的数据拷贝到用户空间，完成read操作。</p>
+</li>
+<li><p>服务端采用单线程，当 accept 一个请求后，在read调用阻塞时，将无法 accept 其他请求（必须等上一个请求处理完 ）（无法处理并发）</p>
+</li>
+<li><p>套接字的读写方法，默认是阻塞的。例如read方法要传递进去一个参数n，代表最多读取n个字节后再返回，如果一个字节都没有，则线程卡顿直到新的数据到来或连接关闭，read方法才能返回。</p>
+</li>
+<li><p>write方法一般不会阻塞，除非内核为套接字分配的写缓冲区满了，write方法才会阻塞，直到缓冲区中有空间空闲出来</p>
+</li>
+<li><p>即用户需要等待read将socket中的数据读取到buffer后，才继续处理接收的数据。整个IO请求的过程中，用户线程是被阻塞的，这导致用户在发起IO请求时，不能做任何事情，对CPU的资源利用率不够。</p>
+</li>
+<li><p>阻塞IO意味着当我们发起一次IO操作后一直等待成功或失败之后才返回，在这期间程序不能做其它的事情。阻塞IO操作只能对单个文件描述符进行操作</p>
+</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token punctuation">{</span>
+    <span class="token function">read</span><span class="token punctuation">(</span>socket， buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">process</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="非阻塞式IO模型"><a href="#非阻塞式IO模型" class="headerlink" title="非阻塞式IO模型"></a>非阻塞式IO模型</h2><p>进程把一个套接字设置成非阻塞是通知内核：当所请求的IO操作需要把本进程阻塞时，不阻塞了，而是返回一个错误</p>
+<p>前三次调用recvfrom时没有数据可返回，因此内核立即返回一个RWOULDBLOCK错误。第四次调用recvfrom时已有一个数据报准备好，它被复制到应用进程缓冲区，于是recvfrom成功返回。我们接着处理数据。</p>
+<p>当一个应用进程像这样对一个非阻塞描述符循环调用recvfrom时，称为轮询。应用程序持续轮询内核，以查看某个操作是否就绪，往往会消耗大量的CPU时间</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/165a72396af89a4a" alt="非阻塞式I/O模型"></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207153315652.png" alt="image-20210207153315652"></p>
+<ul>
+<li>由于socket是非阻塞的方式，因此用户线程发起IO请求时立即返回。但并未读取到任何数据，用户线程需要不断地发起IO请求，直到数据到达后，才真正读取到数据，继续执行。</li>
+<li>非阻塞IO通常发生在一个for循环当中，因为每次进行IO操作时要么IO操作成功，要么当IO操作会阻塞时返回错误EWOULDBLOCK/EAGAIN，然后再根据需要进行下一次的for循环操作，这种类似轮询的方式会浪费很多不必要的CPU资源，是一种糟糕的设计。</li>
+<li>即用户需要不断地调用read，尝试读取socket中的数据，直到读取成功后，才继续处理接收的数据。整个IO请求的过程中，虽然用户线程每次发起IO请求后可以立即返回，但是为了等到数据，仍需要不断地轮询、重复请求，消耗了大量的CPU的资源。</li>
+</ul>
+<pre><code>{
+    while(read(socket， buffer) != SUCCESS);
+    process(buffer);
+}</code></pre>
+<p>非阻塞的 read，指的是在数据到达前，即数据还未到达网卡，或者到达网卡但还没有拷贝到内核缓冲区之前，这个阶段是非阻塞的。</p>
+<p>当数据已到达内核缓冲区，此时调用 read 函数仍然是阻塞的，需要等待数据从内核缓冲区拷贝到用户缓冲区，才能返回。</p>
+<p>整体流程如下图</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210805212052351.png" alt="image-20210805212052351" style="zoom:50%;" />
+
+<h2 id="IO复用模型"><a href="#IO复用模型" class="headerlink" title="IO复用模型"></a>IO复用模型</h2><p>Redis 是跑在单线程中的，所有的操作都是按照顺序线性执行的，但是由于读写操作等待用户输入或输出都是阻塞的，所以 I/O 操作在一般情况下往往不能直接返回，这会导致某一文件的 I/O 阻塞导致整个进程无法对其它客户提供服务，而  <strong>I/O 多路复用</strong> 就是为了解决这个问题而出现的。</p>
+<p>redis的io模型主要是基于epoll实现的，不过它也提供了 select和kqueue的实现，默认采用epoll。</p>
+<ul>
+<li>优先选择时间复杂度为O(1)的IO复用函数作为底层实现，例如epoll</li>
+<li>以select系统调用为保底，时间复杂度O(N)</li>
+<li>基于react设计模式监听IO事件</li>
+</ul>
+<p>多路I/O复用模型是利用 select、poll、epoll 可以同时监察多个流的 I/O 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有 I/O 事件时，就从阻塞态中唤醒，于是程序就会轮询一遍所有的流（epoll 是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流，这种做法就避免了大量的无用操作。</p>
+<p><strong>这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。</strong>采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络 IO 的时间消耗），且 Redis 在内存中操作数据的速度非常快，也就是说内存内的操作不会成为影响Redis性能的瓶颈，主要由以上几点造就了 Redis 具有很高的吞吐量。</p>
+<p><strong>原理</strong></p>
+<ul>
+<li>IO多路复用模型是建立在内核提供的多路分离函数select基础之上的，使用select函数可以避免同步非阻塞IO模型中轮询等待的问题。</li>
+<li>IO 多路复用实现一个线程可以监视多个文件句柄；</li>
+<li>一旦某个文件句柄就绪，就能够通知应用程序进行相应的读写操作；</li>
+<li>没有文件句柄就绪就会阻塞应用程序，交出CPU。</li>
+<li>多路是指网络连接，复用指的是同一个线程</li>
+<li>服务器端采用单线程通过 select/poll/epoll 等系统调用获取 fd 列表，遍历有事件的 fd 进行 accept/recv/send ，使其能支持更多的并发连接请求。</li>
+</ul>
+<p>多路网络连接复用一个io线程。</p>
+<p>单线程或单进程同时监测若干个文件描述符是否可以执行IO操作的能力。</p>
+<p>一种可以在单线程/进程中处理多个事件流的方法</p>
+<p>I/O多路复用（multiplexing）的本质是通过一种机制（系统内核缓冲I/O数据），让单个进程可以监视多个文件描述符，一旦某个描述符就绪（一般是读就绪或写就绪），能够通知程序进行相应的读写操作</p>
+<p>进程需要一种预先告知内核的能力，使得内核一旦发现进程指定的一个或多个IO条件就绪（输入已经准备好或描述符已能承接更多的输出），它就通知进程。</p>
+<p>适用于：</p>
+<ul>
+<li>客户处理多个描述符（通常是交互式输入和网络套接字）</li>
+<li>TCP服务器既要处理监听套接字，又要处理已连接套接字</li>
+</ul>
+<p>select, poll, epoll 都是I/O多路复用的具体的实现</p>
+<p>阻塞在这两个系统调用中的某一个之上，而不是阻塞在真正的IO系统调用上。</p>
+<p>我们阻塞于select调用，等待数据报套接字变为可读。当select返回套接字可读这一条件时，我们调用recvfrom把所读数据复制到应用进程缓冲区。</p>
+<p>服务器端采用单线程通过 select/poll/epoll 等系统调用获取 fd 列表，遍历有事件的 fd 进行 accept/recv/send ，使其能支持更多的并发连接请求。</p>
+<p>有了IO复用，我们就可以调用select或poll，阻塞在这两个系统调用中的某一个上，而不是阻塞在真正的IO系统调用上</p>
+<p>我们阻塞于select调用，等待数据报套接字变为可读。当select返回套接字可读这一条件时，我们调用recvfrom把所读数据报复制到进程缓冲区。</p>
+<p>使用select的优势在于我们可以等待多个描述符就绪。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/165a72396cc78d98" alt="I/O复用模型"></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207153611203.png" alt="image-20210207153611203"></p>
+<p>用户首先将需要进行IO操作的socket添加到select中，然后阻塞等待select系统调用返回。当数据到达时，socket被激活，select函数返回。用户线程正式发起read请求，读取数据并继续执行。</p>
+<p>从流程上来看，使用select函数进行IO请求和同步阻塞模型没有太大的区别，甚至还多了添加监视socket，以及调用select函数的额外操作，效率更差。但是，使用select以后最大的优势是用户可以在一个线程内同时处理多个socket的IO请求。用户可以注册多个socket，然后不断地调用select读取被激活的socket，即可达到在<strong>同一个线程内同时处理多个IO请求的目的</strong>。而在同步阻塞模型中，必须通过多线程的方式才能达到这个目的。</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//将socket添加到select监视中</span>
+<span class="token function">select</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    sockets <span class="token operator">=</span> <span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//一直调用select获取被激活的socket，一旦socket可读，便调用read函数将socket中的数据读取出来。</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>socket in sockets<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">can_read</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">read</span><span class="token punctuation">(</span>socket， buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">process</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>虽然上述方式允许单线程内处理多个IO请求，但是每个IO请求的过程还是阻塞的（在select函数上阻塞），平均时间甚至比同步阻塞IO模型还要长。如果用户线程只注册自己感兴趣的socket或者IO请求，然后去做自己的事情，等到数据到来时再进行处理，则可以提高CPU的利用率。</p>
+<p>IO多路复用模型使用了Reactor设计模式实现了这一机制。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207154330581.png" alt="image-20210207154330581"></p>
+<p><strong>Reactor设计模式</strong></p>
+<p>EventHandler抽象类表示IO事件处理器，它拥有IO文件句柄Handle（通过get_handle获取），以及对Handle的操作handle_event（读/写等）。继承于EventHandler的子类可以对事件处理器的行为进行定制。Reactor类用于管理EventHandler（注册、删除等），并使用handle_events实现事件循环，不断调用同步事件多路分离器（一般是内核）的多路分离函数select，只要某个文件句柄被激活（可读/写等），select就返回（阻塞），handle_events就会调用与文件句柄关联的事件处理器的handle_event进行相关操作。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207154426634.png" alt="image-20210207154426634"></p>
+<p>通过Reactor的方式，可以将用户线程轮询IO操作状态的工作统一交给handle_events事件循环进行处理。用户线程注册事件处理器之后可以继续执行做其他的工作（异步），而Reactor线程负责调用内核的select函数检查socket状态。当有socket被激活时，则通知相应的用户线程（或执行用户线程的回调函数），执行handle_event进行数据读取、处理的工作。由于select函数是阻塞的，因此多路IO复用模型也被称为异步阻塞IO模型。注意，这里的所说的阻塞是指select函数执行时线程被阻塞，而不是指socket。一般在使用IO多路复用模型时，socket都是设置为NONBLOCK的，不过这并不会产生影响，因为用户发起IO请求时，数据已经到达了，用户线程一定不会被阻塞。</p>
+<p>用户线程使用IO多路复用模型的伪代码描述为：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> UserEventHandler<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">handle_event</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">can_read</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">read</span><span class="token punctuation">(</span>socket， buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">process</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//用户需要重写EventHandler的handle_event函数进行读取数据、处理数据的工作，用户线程只需要将自己的EventHandler注册到Reactor即可。</span>
+<span class="token punctuation">{</span>
+    Reactor<span class="token punctuation">.</span><span class="token keyword">register</span><span class="token punctuation">(</span>new <span class="token function">UserEventHandler</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Reactor中handle_events事件循环的伪代码大致如下。</p>
+<p>事件循环不断地调用select获取被激活的socket，然后根据获取socket对应的EventHandler，执行器handle_event函数即可。</p>
+<pre class=" language-c"><code class="language-c">Reactor<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">handle_events</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sockets <span class="token operator">=</span> <span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>socket in sockets<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">get_event_handler</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">handle_event</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="信号驱动IO模型"><a href="#信号驱动IO模型" class="headerlink" title="信号驱动IO模型"></a>信号驱动IO模型</h2><p><img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810200237351.png" alt="image-20210810200237351"></p>
+<p>也可以用信号，让内核在描述符就绪时发送SIGIO信号通知我们</p>
+<p>我们需要开启套接字的信号驱动式IO功能，并且通过sigaction系统调用安装一个信号处理函数。该系统调用将立即返回，我们进程继续工作，也就是说它没有被阻塞。当数据报准备好读取时，内核就为该进程产生一个SIGIO信号。我们随后可以立即通知主循环，让它读取数据报</p>
+<p>无论如何处理SIGIO信号，这种模型的优势在于等待数据报到达期间进程不被阻塞，主循环可以继续执行，只要等待来自信号处理函数的通知：数据报已经准备好被读取</p>
+<h2 id="异步IO模型"><a href="#异步IO模型" class="headerlink" title="异步IO模型"></a>异步IO模型</h2><p>告知内核启动某个操作，并让内核在整个操作（包括将数据从内核复制到我们自己的缓冲区）完成后通知我们。</p>
+<p>与信号驱动模型的主要区别在于：信号驱动IO由内核通知我们何时可以启动一个IO操作，而异步IO模型是由内核通知我们IO操作何时完成。</p>
+<p>我们调用aio_read函数，给内核传递描述符、缓冲区指针、缓冲区大小和文件偏移，并告诉内核当整个操作完成时如何通知我们。</p>
+<p>系统调用立即返回，并且在等待IO完成期间，我们的进程不被阻塞。本例子中我们假设要求内核在操作完成时产生某个信号。该信号直到数据已复制到应用进程缓冲区才产生。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/165a723ae253818f" alt="异步I/O模型"></p>
+<p>“真正”的异步IO需要操作系统更强的支持。在IO多路复用模型中，事件循环将文件句柄的状态事件通知给用户线程，由用户线程自行读取数据、处理数据。而在异步IO模型中，当用户线程收到通知时，数据已经被内核读取完毕，并放在了用户线程指定的缓冲区内，内核在IO完成后通知用户线程直接使用即可。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210207154623278.png" alt="image-20210207154623278"></p>
+<p>异步IO模型中，用户线程直接使用内核提供的异步IO API发起read请求，且发起后立即返回，继续执行用户线程代码。</p>
+<p>目前操作系统对异步IO的支持并非特别完善，更多的是采用IO多路复用模型模拟异步IO的方式（IO事件触发时不直接通知用户线程，而是将数据读写完毕后放到用户指定的缓冲区中）。</p>
+<p>异步IO和信号驱动IO差不多，但它比信号驱动IO可以多做一步：相比信号驱动IO需要在程序中完成数据从用户态到内核态(或反方向)的拷贝，异    步IO可以把拷贝这一步也帮我们完成之后才通知应用程序。</p>
+<p>异步IO是完全完成了数据的拷贝之后才通知程序进行处理，没有阻塞的数据读写过程。</p>
+<p>这里面的读取操作的语义与上面的几种模型都不同。这里的读取操作(aio_read)会通知内核进行读取操作并将数据拷贝至进程中，完事后通知进程整个操作全部完成（绑定一个回调函数处理数据）。读取操作会立刻返回，程序可以进行其它的操作，所有的读取、拷贝工作都由内核去做，做完以后通知进程，进程调用绑定的回调函数来处理数据。</p>
+<h1 id="IO多路复用实现"><a href="#IO多路复用实现" class="headerlink" title="IO多路复用实现"></a>IO多路复用实现</h1><p>select，poll，epoll都是IO多路复用的机制。I/O多路复用就通过一种机制，可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。</p>
+<p>select，poll实现需要自己不断轮询所有fd集合，直到设备就绪，期间可能要睡眠和唤醒多次交替。而epoll其实也需要调用epoll_wait不断轮询就绪链表，期间也可能多次睡眠和唤醒交替，但是它是设备就绪时，调用回调函数，把就绪fd放入就绪链表中，并唤醒在epoll_wait中进入睡眠的进程。虽然都要睡眠和交替，但是select和poll在“醒着”的时候要遍历整个fd集合，而epoll在“醒着”的时候只要判断一下就绪链表是否为空就行了，这节省了大量的CPU时间。这就是回调机制带来的性能提升。</p>
+<p>select，poll每次调用都要把fd集合从用户态往内核态拷贝一次，并且要把current往设备等待队列中挂一次，而epoll只要一次拷贝，而且把current往等待队列上挂也只挂一次（在epoll_wait的开始，注意这里的等待队列并不是设备等待队列，只是一个epoll内部定义的等待队列）。这也能节省不少的开销。</p>
+<h2 id="select函数"><a href="#select函数" class="headerlink" title="select函数"></a>select函数</h2><p>为每个客户端创建一个线程，服务器端的线程资源很容易被耗光。</p>
+<p>当然还有个聪明的办法，我们可以每 accept 一个客户端连接后，将这个文件描述符（connfd）放到一个数组里。</p>
+<pre><code>fdlist.add(connfd);</code></pre>
+<p>然后弄一个新的线程去不断遍历这个数组，调用每一个元素的非阻塞 read 方法。</p>
+<pre><code>while(1) {
+  for(fd &lt;-- fdlist) {
+    if(read(fd) != -1) {
+      doSomeThing();
+    }
+  }
+}</code></pre>
+<p>这样，我们就成功用一个线程处理了多个客户端连接。</p>
+<p>你是不是觉得这有些多路复用的意思？</p>
+<p>但这和我们用多线程去将阻塞 IO 改造成看起来是非阻塞 IO 一样，这种遍历方式也只是我们用户自己想出的小把戏，每次遍历遇到 read 返回 -1 时仍然是一次浪费资源的系统调用。</p>
+<p>在 while 循环里做系统调用，就好比你做分布式项目时在 while 里做 rpc 请求一样，是不划算的。</p>
+<p>所以，还是得恳请操作系统老大，提供给我们一个有这样效果的函数，我们将一批文件描述符通过一次系统调用传给内核，由内核层去遍历，才能真正解决这个问题。</p>
+<p>select 是操作系统提供的系统调用函数，通过它，我们可以把一个文件描述符的数组发给操作系统， 让操作系统去遍历，确定哪个文件描述符可以读写， 然后告诉我们去处理：</p>
+<p>select系统调用的函数定义如下。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">select</span><span class="token punctuation">(</span>
+    <span class="token keyword">int</span> nfds<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// nfds:监控的文件描述符集里最大文件描述符加1</span>
+    fd_set <span class="token operator">*</span>readfds<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// readfds：监控有读数据到达文件描述符集合，传入传出参数</span>
+    fd_set <span class="token operator">*</span>writefds<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// writefds：监控写数据到达文件描述符集合，传入传出参数</span>
+    fd_set <span class="token operator">*</span>exceptfds<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// exceptfds：监控异常发生达文件描述符集合, 传入传出参数</span>
+    <span class="token keyword">struct</span> timeval <span class="token operator">*</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// timeout：定时阻塞监控时间，3种情况</span>
+
+<span class="token comment" spellcheck="true">//  1.NULL，永远等下去</span>
+<span class="token comment" spellcheck="true">//  2.设置timeval，等待固定时间</span>
+<span class="token comment" spellcheck="true">//  3.设置timeval里时间均为0，检查描述字后立即返回，轮询</span></code></pre>
+<p>服务端代码，这样来写。</p>
+<p>首先一个线程不断接受客户端连接，并把 socket 文件描述符放到一个 list 里。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  connfd <span class="token operator">=</span> <span class="token function">accept</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">fcntl</span><span class="token punctuation">(</span>connfd<span class="token punctuation">,</span> F_SETFL<span class="token punctuation">,</span> O_NONBLOCK<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  fdlist<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>connfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>然后，另一个线程不再自己遍历，而是调用 select，将这批文件描述符 list 交给操作系统去遍历。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 把一堆文件描述符 list 传给 select 函数</span>
+  <span class="token comment" spellcheck="true">// 有已就绪的文件描述符就返回，nready 表示有多少个就绪的</span>
+  nready <span class="token operator">=</span> <span class="token function">select</span><span class="token punctuation">(</span>list<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>不过，当 select 函数返回后，用户依然需要遍历刚刚提交给操作系统的 list。</p>
+<p>只不过，操作系统会将准备就绪的文件描述符做上标识，用户层将不会再有无意义的系统调用开销。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  nready <span class="token operator">=</span> <span class="token function">select</span><span class="token punctuation">(</span>list<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 用户层依然要遍历，只不过少了很多无效的系统调用</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>fd <span class="token operator">&lt;</span><span class="token operator">--</span> fdlist<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>fd <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">// 只读已就绪的文件描述符</span>
+      <span class="token function">read</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 总共只有 nready 个已就绪描述符，不用过多遍历</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">--</span>nready <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>可以看出几个细节：</p>
+<ol>
+<li><p>select 调用需要传入 fd 数组，需要拷贝一份到内核，高并发场景下这样的拷贝消耗的资源是惊人的。（可优化为不复制）</p>
+</li>
+<li><p>select 在内核层仍然是通过遍历的方式检查文件描述符的就绪状态，是个同步过程，只不过无系统调用切换上下文的开销。（内核层可优化为异步事件通知）</p>
+</li>
+<li><p>select 仅仅返回可读文件描述符的个数，具体哪个可读还是要用户自己遍历。（可优化为只返回给用户就绪的文件描述符，无需用户做无效的遍历）</p>
+</li>
+</ol>
+<p>可以看到，这种方式，既做到了一个线程处理多个客户端连接（文件描述符），又减少了系统调用的开销（多个文件描述符只有一次 select 的系统调用 + n 次就绪状态的文件描述符的 read 系统调用）。</p>
+<p><strong>概述</strong></p>
+<p>该函数允许进程指示内核等待多个事件中的任何一个发生，并只在有一个或多个事件发生或经历一段指定的时间后才唤醒它。</p>
+<p>例子：我们可以调用select，告知内核仅在下列情况发生时才返回：</p>
+<ul>
+<li>集合{1，4，5}中的任何描述符准备好读；</li>
+<li>集合{2，7}中的任何描述符准备好写；</li>
+<li>集合{1，4}中的任何描述符有异常条件待处理；</li>
+<li>已经历10.2s</li>
+</ul>
+<p>也就是说，我们调用select告知内核对哪些描述符（就读、写或异常条件）感兴趣，以及等待多长时间。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">select</span><span class="token punctuation">(</span><span class="token keyword">int</span> maxfdp1<span class="token punctuation">,</span> fd_set <span class="token operator">*</span>readset<span class="token punctuation">,</span> fd_set <span class="token operator">*</span>writeset<span class="token punctuation">,</span> fd_set <span class="token operator">*</span>exceptset<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">struct</span> timeval <span class="token operator">*</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<ul>
+<li><p><strong>timeout</strong>告知内核等待所指定描述符中的任何一个就绪可花多长时间，可赋值为三种情况：</p>
+<ul>
+<li>永远等待下去：仅在有一个描述符准备好IO才返回。为此，我们把该参数设置为空指针。</li>
+<li>等待一段固定时间：在有一个描述符准备好IO才返回，但是不超过指定参数的时间。</li>
+<li>根本不等待：检查描述符后立即返回，这称为轮询。参数指定为0.</li>
+</ul>
+</li>
+<li><p><strong>fd_set</strong>可以理解为一个集合，这个集合中存放的是文件描述符，即文件句柄。readset、writeset、exceptset指定我们要让内核测试读、写和异常条件的描述符，如果对某一个条件不感兴趣，就可以把它设为空指针。描述符集通常是一个整数数组，其中每一位代表一个描述符</p>
+</li>
+<li><p><strong>maxfdp1</strong>参数指定待测试的描述符个数，它的值是待测试的最大描述符加1。头文件&lt;sys/select.h&gt;中定义的FD_SETSIZE常量值是数据类型fd_set中的描述符总数（通常是1024）。因为很多程序用不到这么多描述符，所以maxfdp1参数让我们计算出所关心的最大描述符并告知内核该值</p>
+</li>
+<li><p>当函数返回时，结果将指示哪些描述符已就绪，返回值表示所有已就绪的总位数，如果在任何描述符就绪之前定时器到时，那么返回0。该函数返回时，我们使用FD_ISSET宏来测试fd_set数据类型中的描述符，描述符集内任何与未就绪描述符对应的位返回时均清为0，所以，每次重新调用select函数，都得再次把所有描述符集内所关心的位置为1</p>
+</li>
+</ul>
+<p>当调用select()时，由内核根据IO状态修改fd_set的内容，由此来通知执行了select()的进程哪一Socket或文件可读。</p>
+<p>使用select以后最大的优势是用户可以在一个线程内同时处理多个socket的IO请求。用户可以注册多个socket，然后不断地调用select读取被激活的socket，即可达到在同一个线程内同时处理多个IO请求的目的。而在同步阻塞模型中，必须通过多线程的方式才能达到这个目的。</p>
+<p><strong>理解</strong></p>
+<ul>
+<li>这里的select相当于一个“代理”，调用select以后进程会被select阻塞，这时候在内核空间内select会监听指定的多个datagram (如socket连接)，如果其中任意一个数据就绪了就返回。此时程序再进行数据读取操作，将数据拷贝至当前进程内。由于select可以监听多个socket，我们可以用它来处理多个连接。</li>
+<li>在select模型中每个socket一般都设置成non-blocking，虽然等待数据阶段仍然是阻塞状态，但是它是被select调用阻塞的，而不是直接被I/O阻塞的。select底层通过轮询机制来判断每个socket读写是否就绪。</li>
+<li>当然select也有一些缺点，比如底层轮询机制会增加开销、支持的文件描述符数量过少等。为此，Linux引入了epoll作为select的改进版本。</li>
+<li>select、poll、epoll本质上也都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的。</li>
+</ul>
+<p><strong>优缺点</strong></p>
+<p>它仅仅知道了，有I/O事件发生了，却并不知道是哪那几个流（可能有一个，多个，甚至全部），我们只能无差别轮询所有流，找出能读出数据，或者写入数据的流，对他们进行操作。所以select具有O(n)的无差别轮询复杂度，同时处理的流越多，无差别轮询时间就越长。</p>
+<ul>
+<li>使用事件轮询API的select函数，输入是read_fds &amp; write_fds；输出是与之对应的可读可写事件，同时还提供了timeout参数。</li>
+<li>如果期间没有任何事件到来，那么最多等待timeout的值的时间，线程处于阻塞状态。</li>
+<li>一旦其间有任何事件到来，就立即返回。时间过了之后还是没有任何事件，就立即返回。</li>
+<li>拿到事件后，线程可以继续挨个处理相应事件，处理完了继续轮询，于是线程就进入了一个死循环，我们称循环为时间循环，一个循环为一个周期。</li>
+</ul>
+<p><strong>select缺点</strong><br>select本质上是通过设置或者检查存放fd标志位的数据结构来进行下一步处理。这样所带来的缺点是：</p>
+<ul>
+<li>单个进程所打开的FD是有限制的，通过 FD_SETSIZE 设置，默认1024 ;为了减少数据拷贝带来的性能损坏，内核对被监控的fd_set集合大小做了限制，并且这个是通过宏控制的，大小不可改变(限制为1024)</li>
+<li>每次调用 select，都需要把 fd_set集合从用户态拷贝到内核态，这个开销在 fd_set很多时会很大；需要维护一个用来存放大量fd的数据结构，这样会使得用户空间和内核空间在传递该结构时复制开销大</li>
+<li>对 socket 扫描时是线性扫描，采用轮询的方法，效率较低（高并发)。当套接字比较多的时候，每次select()都要通过遍历FD_SET中SIZE个Socket来完成调度，不管哪个Socket是活跃的，都遍历一遍。这会浪费很多CPU时间。如果能给套接字注册某个回调函数，当他们活跃时，自动完成相关操作，那就避免了轮询，这正是epoll与kqueue做的。</li>
+</ul>
+<p><strong>客户端程序</strong></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210604193654363.png" alt="image-20210604193654363"></p>
+<p>8-13行：<strong>调用select</strong></p>
+<p>我们只需要一个用于检查可读性的描述符集。该集合由FD_ZERO初始化，并用FD_SET打开两位：一位对应于标准IO文件指针fp，一位对应于套接字sockfd。fileno函数把标准IO文件指针转换为对应的描述符。因为select函数只工作在描述符上。</p>
+<p>计算两个描述符中的较大者后，调用select。在该调用中，写集合指针和异常集合指针都是空指针。最后一个参数（时间限制）也是空指针，因为我们希望本调用阻塞到某个描述符就绪为止。</p>
+<p>14-18行：<strong>处理可读套接字</strong></p>
+<p>如果在select返回时套接字是可读的，就执行对应操作</p>
+<p>19-23行：<strong>处理可读输入</strong></p>
+<p>如果标准输入可读，就执行相应操作</p>
+<p><strong>服务器程序</strong></p>
+<p>把之前的案例重写为使用select来处理任意个客户的单进程程序。</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210604194813136.png" alt="image-20210604194813136"></p>
+<p>服务器只维护一个读描述符集，假设服务器是前台启动的，那么描述符0、1、2分别被置为标准输入、标准输出、标准错误输出。所以监听套接字的第一个可用描述符是3</p>
+<p>client数组中含有每个客户的已连接套接字描述符，初始化为-1</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210604195011425.png" alt="image-20210604195011425"></p>
+<p>当第一个客户与服务器建立连接时，监听描述符变为可读，我们的服务器于是调用accept</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210604195113032.png" alt="image-20210604195113032"></p>
+<p>我们的服务器必须在client数组中记住每个新的已连接描述符，并把他加到描述符集中去：</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210604195226480.png" alt="image-20210604195226480"></p>
+<p>随后第二个客户与服务器建立连接：</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210604195258834.png" alt="image-20210604195258834"></p>
+<p>接着假设第一个客户终止连接。该客户的TCP发生一个FIN，使得描述符4变得可读。当服务器读这个已连接套接字时，read将返回0。于是关闭该套接字并且把client[0]置为-1，把描述符集中描述符4的位设置位0</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210604195506423.png" alt="image-20210604195506423"></p>
+<p>总之，有客户到达时，我们在client数组中的第一个可用项（值为-1的项）中记录其已连接套接字的描述符。并且还必须把这个已连接描述符加到读描述符集中</p>
+<pre class=" language-c"><code class="language-c">fd_set rset<span class="token punctuation">,</span> allset<span class="token punctuation">;</span>
+listenfd <span class="token operator">=</span> <span class="token function">Socket</span><span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">Bind</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">Listen</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">,</span> LISTENQ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    rset <span class="token operator">=</span> allset<span class="token punctuation">;</span>
+    nready <span class="token operator">=</span> <span class="token function">Select</span><span class="token punctuation">(</span>maxfd<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>rset<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 处理新连接接入</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">FD_ISSET</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">,</span> <span class="token operator">&amp;</span>rset<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">// 检查listenfd是否可读；</span>
+        connfd <span class="token operator">=</span> <span class="token function">Accept</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">FD_SET</span><span class="token punctuation">(</span>connfd<span class="token punctuation">,</span> <span class="token operator">&amp;</span>allset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>connfd <span class="token operator">></span> maxfd<span class="token punctuation">)</span> maxfd <span class="token operator">=</span> connfd<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 检查现有连接</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> maxi<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">FD_ISSET</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> <span class="token operator">&amp;</span>rset<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>n <span class="token operator">=</span> <span class="token function">Read</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> MAXLINE<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  <span class="token function">Close</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span>
+                <span class="token function">Writen</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<ul>
+<li><strong>创建监听套接字并调用select进行初始化</strong></li>
+<li><strong>阻塞于select</strong>：select等待某个事件发生：或是新连接建立，或是数据、FIN或RST到达</li>
+<li><strong>accept新的连接</strong>：如果监听套接字变为可读，则已建立一个新的连接。我们调用accept并更新相应的数据结构。</li>
+<li><strong>检查现有连接</strong>：对于每个现有的客户连接，我们要测试其描述符是否在select返回的描述集里。如果是就从该客户读入一行文本并回射给它。</li>
+</ul>
+<h2 id="poll函数"><a href="#poll函数" class="headerlink" title="poll函数"></a>poll函数</h2><pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">poll</span><span class="token punctuation">(</span><span class="token keyword">struct</span> pollfd <span class="token operator">*</span>fdarray<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">long</span> nfds<span class="token punctuation">,</span> <span class="token keyword">int</span> timeout<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<ul>
+<li>fdarray是指向一个结构数组的指针，每个数组元素都是一个pollfd结构，用于指定测试某个给定描述符fd的条件。还是三种：处理输入的、处理输出的、处理错误的</li>
+<li>nfds指定了结构数组中元素的个数</li>
+<li>timeout指定poll函数返回前等待多长时间</li>
+<li>当发生错误时，poll函数返回值是-1、若定时器到时之前没有任何描述符就绪，则返回0、否则返回就绪描述符的个数（即revents成员值非0的描述符个数）</li>
+</ul>
+<p>poll本质上和select没有区别，它将用户传入的数组拷贝到内核空间，然后查询每个fd对应的设备状态， 但是它没有最大连接数的限制，原因是它是基于链表来存储的。</p>
+<p><strong>poll缺点</strong><br>它没有最大连接数的限制，原因是它是基于链表来存储的，但是同样有缺点：</p>
+<ul>
+<li>每次调用 poll ，都需要把 fd 集合从用户态拷贝到内核态，这个开销在 fd 很多时会很大；</li>
+<li>对 socket 扫描是线性扫描，采用轮询的方法，效率较低（高并发时）</li>
+</ul>
+<p><strong>服务器</strong></p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    listenfd <span class="token operator">=</span> <span class="token function">Socket</span><span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Bind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Listen</span><span class="token punctuation">(</span>listenfd<span class="token punctuation">,</span> LISTENQ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">struct</span> pollfd        client<span class="token punctuation">[</span>OPEN_MAX<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    client<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>fd <span class="token operator">=</span> listenfd<span class="token punctuation">;</span>
+    client<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>events <span class="token operator">=</span> POLLRDNORM<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> OPEN_MAX<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        client<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>fd <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>                        
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        nready <span class="token operator">=</span> <span class="token function">Poll</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span> maxi<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> INFTIM<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 新连接</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>client<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>revents <span class="token operator">&amp;</span> POLLRDNORM<span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> OPEN_MAX<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>client<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>fd <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    client<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>fd <span class="token operator">=</span> connfd<span class="token punctuation">;</span>    
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            client<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>events <span class="token operator">=</span> POLLRDNORM<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 检查某个现有连接上的数据</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> maxi<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+            <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>sockfd <span class="token operator">=</span> client<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>fd<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>client<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>revents <span class="token operator">&amp;</span> <span class="token punctuation">(</span>POLLRDNORM <span class="token operator">|</span> POLLERR<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>n <span class="token operator">=</span> <span class="token function">read</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> MAXLINE<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token function">Close</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        client<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>fd <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment" spellcheck="true">// 代表连接关闭</span>
+                    <span class="token function">Close</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    client<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>fd <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                    <span class="token function">Writen</span><span class="token punctuation">(</span>sockfd<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<ul>
+<li>分配pollfd结构数组</li>
+<li>初始化。把client数组的第一项用于监听套接字，并把其余各项的描述符成员置为-1</li>
+<li>调用poll，检查新的连接。我们调用poll以等待新的连接或者现有连接上有数据可读。当一个新的连接被接受后，我们在client数组中查找第一个描述符成员为负的可用项。注意，从下标1开始搜索，因为client[0]固定用于监听套接字。</li>
+<li>检查某个现有连接上的数据。</li>
+</ul>
+<h2 id="epoll函数"><a href="#epoll函数" class="headerlink" title="epoll函数"></a>epoll函数</h2><p>epoll 监听的 fd（file descriptor）集合是常驻内核的，它有 3 个系统调用 （<em>epoll_create</em>, <em>epoll_wait</em>, <em>epoll_ctl</em>），通过 <em>epoll_wait</em> 可以多次监听同一个 fd 集合，只返回可读写那部分</p>
+<p>select 只有一个系统调用，每次要监听都要将其从用户态传到内核，有事件时返回整个集合。</p>
+<p>从性能上看，如果 fd 集合很大，用户态和内核态之间数据复制的花销是很大的，所以 select 一般限制 fd 集合最大1024。</p>
+<p>从使用上看，epoll 返回的是可用的 fd 子集，select 返回的是全部，哪些可用需要用户遍历判断。</p>
+<p><strong>简介</strong></p>
+<p>epoll可以理解为event poll，不同于忙轮询和无差别轮询，epoll会把哪个流发生了怎样的I/O事件通知我们。所以我们说epoll实际上是<strong>事件驱动（每个事件关联上fd）</strong>的，此时我们对这些流的操作都是有意义的。（复杂度降低到了O(1)）</p>
+<p><strong>epoll的优点</strong></p>
+<ul>
+<li>没有最大并发连接的限制，能打开的FD的上限远大于1024（1G的内存上能监听约10万个端口）；</li>
+<li>效率提升，不是轮询的方式，不会随着FD数目的增加效率下降。只有活跃可用的FD才会调用callback函数；即Epoll最大的优点就在于它只管你“活跃”的连接，而跟连接总数无关，因此在实际的网络环境中，Epoll的效率就会远远高于select和poll；</li>
+<li>内存拷贝，利用mmap()文件映射内存加速与内核空间的消息传递；即epoll使用mmap减少复制开销。</li>
+</ul>
+<p><strong>了解</strong></p>
+<p>epoll 全称 eventpoll，是 linux 内核实现IO多路复用（IO multiplexing）的一个实现。IO多路复用的意思是在一个操作里同时监听多个输入输出源，在其中一个或多个输入输出源可用的时候返回，然后对其的进行读写操作。</p>
+<p>epoll 监听的 fd（file descriptor）集合是常驻内核的，它有 3 个系统调用 （<em>epoll_create</em>, <em>epoll_wait</em>, <em>epoll_ctl</em>），通过 <em>epoll_wait</em> 可以多次监听同一个 fd 集合，只返回可读写那部分</p>
+<p>select 只有一个系统调用，每次要监听都要将其从用户态传到内核，有事件时返回整个集合。</p>
+<p>从性能上看，如果 fd 集合很大，用户态和内核态之间数据复制的花销是很大的，所以 select 一般限制 fd 集合最大1024。</p>
+<p>从使用上看，epoll 返回的是可用的 fd 子集，select 返回的是全部，哪些可用需要用户遍历判断。</p>
+<p><strong>原理</strong></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20140911103834_133.jpg"></p>
+<p>设想一个场景：有100万用户同时与一个进程保持着TCP连接，而每一时刻只有几十个或几百个TCP连接是活跃的(接收TCP包)，也就是说在每一时刻进程只需要处理这100万连接中的一小部分连接。那么，如何才能高效的处理这种场景呢？进程是否在每次询问操作系统收集有事件发生的TCP连接时，把这100万个连接告诉操作系统，然后由操作系统找出其中有事件发生的几百个连接呢？实际上，在Linux2.4版本以前，那时的select或者poll事件驱动方式是这样做的。</p>
+<p>  这里有个非常明显的问题，即在某一时刻，进程收集有事件的连接时，其实这100万连接中的大部分都是没有事件发生的。因此如果每次收集事件时，都把100万连接的套接字传给操作系统(这首先是用户态内存到内核态内存的大量复制)，而由操作系统内核寻找这些连接上有没有未处理的事件，将会是巨大的资源浪费，然后select和poll就是这样做的，因此它们最多只能处理几千个并发连接。而epoll不这样做，它在Linux内核中申请了一个简易的文件系统，把原先的一个select或poll调用分成了3部分：</p>
+<pre class=" language-c++"><code class="language-c++">int epoll_create(int size);  
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);  
+int epoll_wait(int epfd, struct epoll_event *events,int maxevents, int timeout);  </code></pre>
+<ol>
+<li><p>调用epoll_create建立一个epoll对象(在epoll文件系统中给这个句柄分配资源)；</p>
+</li>
+<li><p>调用epoll_ctl向epoll对象中添加这100万个连接的套接字；</p>
+</li>
+<li><p>调用epoll_wait收集发生事件的连接。</p>
+</li>
+</ol>
+<p>  这样只需要在进程启动时建立1个epoll对象，并在需要的时候向它添加或删除连接就可以了，因此，在实际收集事件时，epoll_wait的效率就会非常高，因为调用epoll_wait时并没有向它传递这100万个连接，内核也不需要去遍历全部的连接。</p>
+<p><strong>epoll_create</strong></p>
+<p>当某一进程调用epoll_create方法时，Linux内核会创建一个eventpoll结构体，这个结构体中有两个成员与epoll的使用方式密切相关，如下所示：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> eventpoll <span class="token punctuation">{</span>
+　　<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+　　<span class="token comment" spellcheck="true">/*红黑树的根节点，这棵树中存储着所有添加到epoll中的事件，
+　　也就是这个epoll监控的事件*/</span>
+　　<span class="token keyword">struct</span> rb_root rbr<span class="token punctuation">;</span>
+　　<span class="token comment" spellcheck="true">/*双向链表rdllist保存着将要通过epoll_wait返回给用户的、满足条件的事件*/</span>
+　　<span class="token keyword">struct</span> list_head rdllist<span class="token punctuation">;</span>
+　　<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>调用epoll_create时，内核除了帮我们在epoll文件系统里建了个file结点，在内核cache里建了个红黑树用于存储以后epoll_ctl传来的socket外，还会再建立一个rdllist双向链表，用于存储准备就绪的事件，当epoll_wait调用时，仅仅观察这个rdllist双向链表里有没有数据即可。有数据就返回，没有数据就sleep，等到timeout时间到后即使链表没数据也返回。所以，epoll_wait非常高效。</p>
+<p>  所有添加到epoll中的事件都会与设备(如网卡)驱动程序建立回调关系，也就是说相应事件的发生时会调用这里的回调方法。这个回调方法在内核中叫做ep_poll_callback，它会把这样的事件放到上面的rdllist双向链表中。<br>在epoll中对于每一个事件都会建立一个epitem结构体，如下所示：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> epitem <span class="token punctuation">{</span>
+　　<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+　　<span class="token comment" spellcheck="true">//红黑树节点</span>
+　　<span class="token keyword">struct</span> rb_node rbn<span class="token punctuation">;</span>
+　　<span class="token comment" spellcheck="true">//双向链表节点</span>
+　　<span class="token keyword">struct</span> list_head rdllink<span class="token punctuation">;</span>
+　　<span class="token comment" spellcheck="true">//事件句柄等信息</span>
+　　<span class="token keyword">struct</span> epoll_filefd ffd<span class="token punctuation">;</span>
+　　<span class="token comment" spellcheck="true">//指向其所属的eventepoll对象</span>
+　　<span class="token keyword">struct</span> eventpoll <span class="token operator">*</span>ep<span class="token punctuation">;</span>
+　　<span class="token comment" spellcheck="true">//期待的事件类型</span>
+　　<span class="token keyword">struct</span> epoll_event event<span class="token punctuation">;</span>
+　　<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 这里包含每一个事件对应着的信息。</span></code></pre>
+<p>当调用epoll_wait检查是否有发生事件的连接时，只是检查eventpoll对象中的rdllist双向链表是否有epitem元素而已，如果rdllist链表不为空，则这里的事件复制到用户态内存（使用共享内存提高效率）中，同时将事件数量返回给用户。因此epoll_waitx效率非常高。epoll_ctl在向epoll对象中添加、修改、删除事件时，从rbr红黑树中查找事件也非常快，也就是说epoll是非常高效的，它可以轻易地处理百万级别的并发连接。</p>
+<p><strong>原理总结</strong></p>
+<ul>
+<li><p>一颗红黑树，一张准备就绪句柄链表，少量的内核cache，就帮我们解决了大并发下的socket处理问题。</p>
+</li>
+<li><p>执行epoll_create()时，创建了红黑树和就绪链表；</p>
+</li>
+<li><p>执行epoll_ctl()时，如果增加socket句柄，则检查在红黑树中是否存在，存在立即返回，不存在则添加到树干上，然后向内核注册回调函数，用于当中断事件来临时向准备就绪链表中插入数据；</p>
+</li>
+<li><p>执行epoll_wait()时立刻返回准备就绪链表里的数据即可。</p>
+</li>
+</ul>
+<ol>
+<li><p>内核中保存一份文件描述符集合，无需用户每次都重新传入，只需告诉内核修改的部分即可。</p>
+</li>
+<li><p>内核不再通过轮询的方式找到就绪的文件描述符，而是通过异步 IO 事件唤醒。</p>
+</li>
+<li><p>内核仅会将有 IO 事件的文件描述符返回给用户，用户也无需遍历整个文件描述符集合。</p>
+</li>
+</ol>
+<p>具体，操作系统提供了这三个函数。</p>
+<p>第一步，创建一个 epoll 句柄</p>
+<pre><code>int epoll_create(int size);</code></pre>
+<p>第二步，向内核添加、修改或删除要监控的文件描述符。</p>
+<pre><code>int epoll_ctl(
+  int epfd, int op, int fd, struct epoll_event *event);</code></pre>
+<p>第三步，类似发起了 select() 调用</p>
+<pre><code>int epoll_wait(
+  int epfd, struct epoll_event *events, int max events, int timeout);</code></pre>
+<p>使用起来，其内部原理就像如下一般丝滑。</p>
+<p><strong>原理</strong></p>
+<pre><code>int main(){
+    listen(lfd, ...);
+
+    cfd1 = accept(...);
+    cfd2 = accept(...);
+    efd = epoll_create(...);
+
+    epoll_ctl(efd, EPOLL_CTL_ADD, cfd1, ...);
+    epoll_ctl(efd, EPOLL_CTL_ADD, cfd2, ...);
+    epoll_wait(efd, ...)
+}</code></pre>
+<ul>
+<li>epoll_create：创建一个 epoll 对象</li>
+<li>epoll_ctl：向 epoll 对象中添加要管理的连接</li>
+<li>epoll_wait：等待其管理的连接上的 IO 事件</li>
+</ul>
+<p><strong>原理</strong></p>
+<pre><code>//创建socket
+int s = socket(AF_INET, SOCK_STREAM, 0);   
+//绑定
+bind(s, ...)
+//监听
+listen(s, ...)
+//接受客户端连接
+int c = accept(s, ...)
+//接收客户端数据
+recv(c, ...);
+//将数据打印出来
+printf(...)</code></pre>
+<ul>
+<li><p>先新建socket对象，依次调用bind、listen、accept，最后调用recv接收数据。recv是个阻塞方法，当程序运行到recv时，它会一直等待，直到接收到数据才往下执行。</p>
+<blockquote>
+<p>操作系统为了支持多任务，实现了进程调度的功能，会把进程分为“运行”和“等待”等几种状态。运行状态是进程获得cpu使用权，正在执行代码的状态；等待状态是阻塞状态，比如上述程序运行到recv时，程序会从运行状态变为等待状态，接收到数据后又变回运行状态。</p>
+<p>当进程A执行到创建socket的语句时，操作系统会创建一个由文件系统管理的socket对象。这个socket对象包含了发送缓冲区、接收缓冲区、等待队列等成员。等待队列是个非常重要的结构，它指向所有需要等待该socket事件的进程。</p>
+<p>当程序执行到recv时，操作系统会将进程A从工作队列移动到该socket的等待队列中。由于工作队列只剩下了进程B和C，依据进程调度，cpu会轮流执行这两个进程的程序，不会执行进程A的程序。<strong>所以进程A被阻塞，不会往下执行代码，也不会占用cpu资源</strong>。</p>
+<p>ps：操作系统添加等待队列只是添加了对这个“等待中”进程的引用，以便在接收到数据时获取进程对象、将其唤醒，而非直接将进程管理纳入自己之下。上图为了方便说明，直接将进程挂到等待队列之下。</p>
+<p>当socket接收到数据后，操作系统将该socket等待队列上的进程重新放回到工作队列，该进程变成运行状态，继续执行代码。也由于socket的接收缓冲区已经有了数据，recv可以返回接收到的数据。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810214004929.png" alt="image-20210810214004929" style="zoom:50%;" />
+</blockquote>
+</li>
+<li><p>网卡会把接收到的数据写入内存。</p>
+</li>
+<li><p>当网卡把数据写入到内存后，<strong>网卡向cpu发出一个中断信号，操作系统便能得知有新数据到来</strong>，再通过网卡<strong>中断程序</strong>去处理数据。</p>
+</li>
+<li><p>cpu执行中断程序：先将网络数据写入到对应socket的接收缓冲区里面，再唤醒并重新将进程A放入工作队列中。</p>
+<blockquote>
+<p>操作系统如何知道网络数据对应于哪个socket？因为一个socket对应着一个端口号，而网络数据包中包含了ip和端口的信息，内核可以通过端口号找到对应的socket。当然，为了提高处理速度，操作系统会维护端口号到socket的索引结构，以快速读取。</p>
+<p>如何同时监视多个socket的数据？服务端需要管理多个客户端连接，而recv只能监视单个socket，这种矛盾下，人们开始寻找监视多个socket的方法。epoll的要义是<strong>高效</strong>的监视多个socket。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810214319118.png" alt="image-20210810214319118" style="zoom:50%;" />
+</blockquote>
+</li>
+</ul>
+<p><strong>select</strong></p>
+<p>假如能够预先传入一个socket列表，<strong>如果列表中的socket都没有数据，挂起进程，直到有一个socket收到数据，唤醒进程</strong>。这种方法很直接，也是select的设计思想。</p>
+<p>先准备一个数组（下面代码中的fds），让fds存放着所有需要监视的socket。然后调用select，如果fds中的所有socket都没有数据，select会阻塞，直到有一个socket接收到数据，select返回，唤醒进程。用户可以遍历fds，通过FD_ISSET判断具体哪个socket收到数据，然后做出处理。</p>
+<pre><code>int s = socket(AF_INET, SOCK_STREAM, 0);  
+bind(s, ...)
+listen(s, ...)
+
+int fds[] =  存放需要监听的socket
+
+while(1){
+    int n = select(..., fds, ...)
+    for(int i=0; i &lt; fds.count; i++){
+        if(FD_ISSET(fds[i], ...)){
+            //fds[i]的数据处理
+        }
+    }
+}</code></pre>
+<p>select的实现思路很直接。假如程序同时监视如下图的sock1、sock2和sock3三个socket，那么在调用select之后，操作系统把进程A分别加入这三个socket的等待队列中。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810214703452.png" alt="image-20210810214703452" style="zoom:50%;" />
+
+<p>当任何一个socket收到数据后，中断程序将唤起进程。下图展示了sock2接收到了数据的处理流程。所谓唤起进程，就是将进程从所有的等待队列中移除，加入到工作队列里面。如下图所示。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810214735997.png" alt="image-20210810214735997" style="zoom:50%;" />
+
+<p>经由这些步骤，当进程A被唤醒后，它知道至少有一个socket接收了数据。程序只需遍历一遍socket列表，就可以得到就绪的socket。</p>
+<p><strong>缺点：</strong></p>
+<p>其一，每次调用select都需要将进程加入到所有监视socket的等待队列，每次唤醒都需要从每个队列中移除。这里涉及了两次遍历，而且每次都要将整个fds列表传递给内核，有一定的开销。正是因为遍历操作开销大，出于效率的考量，才会规定select的最大监视数量，默认只能监视1024个socket。</p>
+<p>其二，进程被唤醒后，程序并不知道哪些socket收到数据，还需要遍历一次。</p>
+<p><strong>epoll</strong></p>
+<pre class=" language-text"><code class="language-text">int s = socket(AF_INET, SOCK_STREAM, 0);   
+bind(s, ...)
+listen(s, ...)
+
+int epfd = epoll_create(...);
+epoll_ctl(epfd, ...); //将所有需要监听的socket添加到epfd中
+
+while(1){
+    int n = epoll_wait(...)
+    for(接收到数据的socket){
+        //处理
+    }
+}</code></pre>
+<p><strong>措施一：功能分离</strong></p>
+<p>select低效的原因之一是将“维护等待队列”和“阻塞进程”两个步骤合二为一。如下图所示，每次调用select都需要这两步操作，然而大多数应用场景中，需要监视的socket相对固定，并不需要每次都修改。epoll将这两个操作分开，先用epoll_ctl维护等待队列，再调用epoll_wait阻塞进程。显而易见的，效率就能得到提升。</p>
+<p>先用epoll_create创建一个epoll对象epfd，再通过epoll_ctl将需要监视的socket添加到epfd中，最后调用epoll_wait等待数据。</p>
+<p><strong>措施二：就绪列表</strong></p>
+<p>select低效的另一个原因在于程序不知道哪些socket收到数据，只能一个个遍历。如果内核维护一个“就绪列表”，引用收到数据的socket，就能避免遍历。如下图所示，计算机共有三个socket，收到数据的sock2和sock3被rdlist（就绪列表）所引用。当进程被唤醒后，只要获取rdlist的内容，就能够知道哪些socket收到数据。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810214942576.png" alt="image-20210810214942576" style="zoom:50%;" />
+
+<p><strong>创建epoll对象</strong></p>
+<p>如下图所示，当某个进程调用epoll_create方法时，内核会创建一个eventpoll对象（也就是程序中epfd所代表的对象）。eventpoll对象也是文件系统中的一员，和socket一样，它也会有等待队列。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810215022931.png" alt="image-20210810215022931" style="zoom:50%;" />
+
+<p>创建一个代表该epoll的eventpoll对象是必须的，因为内核要维护“就绪列表”等数据，“就绪列表”可以作为eventpoll的成员。</p>
+<p><strong>维护监视列表</strong></p>
+<p>创建epoll对象后，可以用epoll_ctl添加或删除所要监听的socket。以添加socket为例，如下图，如果通过epoll_ctl添加sock1、sock2和sock3的监视，内核会将eventpoll添加到这三个socket的等待队列中。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810215051981.png" alt="image-20210810215051981" style="zoom:50%;" />
+
+<p>当socket收到数据后，中断程序会操作eventpoll对象，而不是直接操作进程。</p>
+<p><strong>接收数据</strong></p>
+<p>当socket收到数据后，中断程序会给eventpoll的“就绪列表”添加socket引用。如下图展示的是sock2和sock3收到数据后，中断程序让rdlist引用这两个socket。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810215117635.png" alt="image-20210810215117635" style="zoom:50%;" />
+
+<p>eventpoll对象相当于是socket和进程之间的中介，socket的数据接收并不直接影响进程，而是通过改变eventpoll的就绪列表来改变进程状态。</p>
+<p>当程序执行到epoll_wait时，如果rdlist已经引用了socket，那么epoll_wait直接返回，如果rdlist为空，阻塞进程。</p>
+<p><strong>阻塞和唤醒进程</strong></p>
+<p>假设计算机中正在运行进程A和进程B，在某时刻进程A运行到了epoll_wait语句。如下图所示，内核会将进程A放入eventpoll的等待队列中，阻塞进程。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810215213972.png" alt="image-20210810215213972" style="zoom:50%;" />
+
+<p>当socket接收到数据，中断程序一方面修改rdlist，另一方面唤醒eventpoll等待队列中的进程，进程A再次进入运行状态（如下图）。也因为rdlist的存在，进程A可以知道哪些socket发生了变化。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810215238912.png" alt="image-20210810215238912" style="zoom:50%;" />
+
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810215403654.png" alt="image-20210810215403654" style="zoom:50%;" />
+
+<p><strong>就绪列表的数据结构</strong></p>
+<p>就绪列表引用着就绪的socket，所以它应能够快速的插入数据。</p>
+<p>程序可能随时调用epoll_ctl添加监视socket，也可能随时删除。当删除时，若该socket已经存放在就绪列表中，它也应该被移除。</p>
+<p>所以就绪列表应是一种能够快速插入和删除的数据结构。双向链表就是这样一种数据结构，epoll使用双向链表来实现就绪队列（对应上图的rdllist）。</p>
+<p><strong>索引结构</strong></p>
+<p>既然epoll将“维护监视队列”和“进程阻塞”分离，也意味着需要有个数据结构来保存监视的socket。至少要方便的添加和移除，还要便于搜索，以避免重复添加。红黑树是一种自平衡二叉查找树，搜索、插入和删除时间复杂度都是O(log(N))，效率较好。epoll使用了红黑树作为索引结构（对应上图的rbr）。</p>
+<p><strong>总结</strong></p>
+<p>首先epoll初始化用epoll_create创建一个event_poll对象，这个对象有就绪列表、红黑树、等待列表。就绪列表存放就绪的socket，红黑树存放所有正在监听的socket引用，等待列表放正在等待的进程。</p>
+<p>每次accept到一个新连接，调用中断在文件系统中创建fd，这个fd里有接收缓存区，发送缓存区，等待列表，同时在中断系统里注册一个监听回调函数。一旦某个socket发生了读写操作，中断程序会调用这个socket的回调函数，将这个socket的引用加入到event_poll的就绪队列中，在while程序里，一直都会有epoll_wait(A进程)，一旦A进程会一直轮询就绪队列，一旦就绪队列非空，A进程获得其中的socket数据进入系统运行队列，由等待列表的下一个进程继续使用epoll_wait来轮询。</p>
+<p>等待列表中的进程，我的理解是系统每次有空闲进程，就将其放入等待列表中阻塞，epoll_wait有一个time_out参数，在这个等待时间time里，如果就绪队列有socket需要处理，就调用阻塞的进程运行，如果一直为空，当计时器到了，进程变为非阻塞继续去干活。</p>
+<p><strong>其他</strong></p>
+<p>O(1)是因为epoll的回调机制，在执行epoll_ctl时，除了把socket放到对应的红黑树上之外，还会给内核中断处理程序注册一个回调函数，告诉内核，如果这个句柄的中断到了，就把它放到准备就绪rdlist链表里。所以，当一个socket上有数据到了，内核除了把网卡上的数据copy到内存中，还会把该socket插入到准备就绪链链表里。</p>
+<p>对于select中断处理程序仅是把数据从网卡拷贝到内存，而epoll多了一个回调函数的执行，即把有事件发生的文件描述符引用放到就绪链表中</p>
+<p>epoll的本质是有io事件的时候，会自动触发加在这个socket上面的回调函数</p>
+<p>我们在调用epoll_create时，内核除了帮我们在epoll文件系统里建了个file结点，在内核cache里建了个红黑树用于存储以后epoll_ctl传来的socket外，还会再建立一个rdllist双向链表，用于存储准备就绪的事件，当epoll_wait调用时，仅仅观察这个rdllist双向链表里有没有数据即可。有数据就返回，没有数据就sleep，等到timeout时间到后即使链表没数据也返回。所以，epoll_wait非常高效。</p>
+<p>  所有添加到epoll中的事件都会与设备(如网卡)驱动程序建立回调关系，也就是说相应事件的发生时会调用这里的回调方法。这个回调方法在内核中叫做ep_poll_callback，它会把这样的事件放到上面的rdllist双向链表中。</p>
+<p>当调用epoll_wait检查是否有发生事件的连接时，只是检查eventpoll对象中的rdllist双向链表是否有epitem元素而已，如果rdllist链表不为空，则这里的事件复制到用户态内存（使用共享内存提高效率）中，同时将事件数量返回给用户。因此epoll_waitx效率非常高。epoll_ctl在向epoll对象中添加、修改、删除事件时，从rbr红黑树中查找事件也非常快，也就是说epoll是非常高效的，它可以轻易地处理百万级别的并发连接。</p>
+<p>  一颗红黑树，一张准备就绪句柄链表，少量的内核cache，就帮我们解决了大并发下的socket处理问题。</p>
+<p>执行epoll_create()时，创建了红黑树和就绪链表；</p>
+<p>执行epoll_ctl()时，如果增加socket句柄，则检查在红黑树中是否存在，存在立即返回，不存在则添加到树干上，然后向内核注册回调函数，用于当中断事件来临时向准备就绪链表中插入数据；</p>
+<p>执行epoll_wait()时立刻返回准备就绪链表里的数据即可。</p>
+<p><strong>两种模式</strong></p>
+<p> epoll有EPOLLLT和EPOLLET两种触发模式，LT是默认的模式，ET是“高速”模式。</p>
+<p>LT（水平触发）模式下，只要这个文件描述符还有数据可读，每次 epoll_wait都会返回它的事件，提醒用户程序去操作；</p>
+<p>ET（边缘触发）模式下，在它检测到有 I/O 事件时，通过 epoll_wait 调用会得到有事件通知的文件描述符，对于每一个被通知的文件描述符，如可读，则必须将该文件描述符一直读到空，让 errno 返回 EAGAIN 为止，否则下次的 epoll_wait 不会返回余下的数据，会丢掉事件。如果ET模式不是非阻塞的，那这个一直读或一直写势必会在最后一次阻塞。</p>
+<p>  还有一个特点是，epoll使用“事件”的就绪通知方式，通过epoll_ctl注册fd，一旦该fd就绪，内核就会采用类似callback的回调机制来激活该fd，epoll_wait便可以收到通知。</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810220129254.png" alt="image-20210810220129254" style="zoom:50%;" />
+
+<p>【epoll为什么要有EPOLLET触发模式？】：</p>
+<p>  如果采用EPOLLLT模式的话，系统中一旦有大量你不需要读写的就绪文件描述符，它们每次调用epoll_wait都会返回，这样会大大降低处理程序检索自己关心的就绪文件描述符的效率.。而采用EPOLLET这种边缘触发模式的话，当被监控的文件描述符上有可读写事件发生时，epoll_wait()会通知处理程序去读写。如果这次没有把数据全部读写完(如读写缓冲区太小)，那么下次调用epoll_wait()时，它不会通知你，也就是它只会通知你一次，直到该文件描述符上出现第二次可读写事件才会通知你！！！这种模式比水平触发效率高，系统不会充斥大量你不关心的就绪文件描述符。</p>
+<p>【总结】：</p>
+<p>ET模式（边缘触发）只有数据到来才触发，不管缓存区中是否还有数据，缓冲区剩余未读尽的数据不会导致epoll_wait返回；</p>
+<p>LT 模式（水平触发，默认）只要有数据都会触发，缓冲区剩余未读尽的数据会导致epoll_wait返回。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">tongji4m3</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tongji4m3.club/posts/f6491cfb.html">https://tongji4m3.club/posts/f6491cfb.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">tongji4m3</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/IO%E6%A8%A1%E5%9E%8B/">
+                                    <span class="chip bg-color">IO模型</span>
+                                </a>
+                            
+                                <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+                                    <span class="chip bg-color">IO多路复用</span>
+                                </a>
+                            
+                                <a href="/tags/epoll/">
+                                    <span class="chip bg-color">epoll</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'b3l6kB5FAaRmQL4rJm9sKfxz-gzGzoHsz',
+        appKey: 'T26ixt4nAVDxB4V3gvBDUzP6',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '留下你的足迹吧~'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/a2c3ad19.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="Java多线程">
+                        
+                        <span class="card-title">Java多线程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Java多线程，包括Synchronized、线程基础、线程池、ThreadLocal、AQS、ReentrantLock等
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E7%9B%B8%E5%85%B3/" class="post-category">
+                                    Java相关
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+                        <span class="chip bg-color">线程池</span>
+                    </a>
+                    
+                    <a href="/tags/ThreadLocal/">
+                        <span class="chip bg-color">ThreadLocal</span>
+                    </a>
+                    
+                    <a href="/tags/ReentrantLock/">
+                        <span class="chip bg-color">ReentrantLock</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/515d78b5.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="Java虚拟机">
+                        
+                        <span class="card-title">Java虚拟机</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Java虚拟机，包括内存区域、垃圾回收、类文件结构、类加载机制等
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E7%9B%B8%E5%85%B3/" class="post-category">
+                                    Java相关
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/">
+                        <span class="chip bg-color">内存区域</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                        <span class="chip bg-color">垃圾回收</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
+                        <span class="chip bg-color">类加载机制</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1,h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1,h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">tongji4m3</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">200.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "09";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/tongji4m3" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="javascript:void(0)" class="tooltipped"  data-tooltip="微信联系我:tongji4m3" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="javascript:void(0)" class="tooltipped"  data-tooltip="QQ联系我: 1254931237" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+
+
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

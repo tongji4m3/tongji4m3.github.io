@@ -31,8 +31,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -475,7 +475,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    11.9k
+                    11.7k
                 </div>
                 
 
@@ -497,7 +497,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="集合基础"><a href="#集合基础" class="headerlink" title="集合基础"></a>集合基础</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+                <h1 id="集合基础"><a href="#集合基础" class="headerlink" title="集合基础"></a>集合基础</h1><ul>
 <li>HashMap快，TreeMap按照比较结果的升序保存键，LinkedHashMap按照插入顺序保存键，还保留了HashMap的查询速度</li>
 <li>HashSet快，TreeSet按比较结果升序排列，LinkedHashSet按照被添加顺序保存对象</li>
 <li>ArrayList，LinkedList按照被插入的顺序保存元素，使用LinkedList来实现queue，stack</li>
@@ -570,7 +570,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="安全失败（fail—safe）"><a href="#安全失败（fail—safe）" class="headerlink" title="安全失败（fail—safe）"></a>安全失败（fail—safe）</h3><ul>
+<h3 id="安全失败（fail-safe）"><a href="#安全失败（fail-safe）" class="headerlink" title="安全失败（fail-safe）"></a>安全失败（fail-safe）</h3><ul>
 <li>那么在遍历时不是直接在集合内容上访问，而是先复制原有集合内容，在拷贝的集合上进行遍历。</li>
 <li>由于迭代时是对原集合的拷贝进行遍历，所以在遍历过程中对原集合所作的修改并不能被迭代器检测到，故不会抛 ConcurrentModificationException 异常。</li>
 <li>java.util.concurrent 包下的并发容器都是安全失败的。</li>
@@ -603,14 +603,16 @@
 <li>add()的均摊开销是常数级别，均摊花费为O(1)</li>
 <li>在分配大量元素前,使用ensureCapacity减少重新分配的次数</li>
 </ul>
-<h3 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h3><ul>
+<p><strong>扩容</strong></p>
+<ul>
 <li>ArrayList可以通过构造⽅法在初始化的时候指定底层数组的⼤⼩</li>
 <li>通过⽆参构造⽅法的⽅式ArrayList()初始化，则赋值底层数Object[] elementData为⼀个默认空数组Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {}所以数组容量为0，只有真正对数据进⾏添加add时，才分配默认DEFAULT_CAPACITY = 10的初始容量。</li>
 <li>他会重新定义⼀个⻓度为10+10/2的数组也就是新增⼀个⻓度为15的数组</li>
 <li>然后把原数组的数据，原封不动的复制到新数组中，这个时候再把指向原数的地址换到新数组，</li>
 <li>在使⽤ArrayList的时候⼀般不会设置初始值的⼤⼩，那ArrayList默认的⼤⼩就刚好是10。</li>
 </ul>
-<h3 id="add"><a href="#add" class="headerlink" title="add"></a>add</h3><p>他有指定index新增，也有直接新增的，在这之前他会有⼀步校验⻓度的判断</p>
+<p><strong>add</strong></p>
+<p>他有指定index新增，也有直接新增的，在这之前他会有⼀步校验⻓度的判断</p>
 <p>ensureCapacityInternal，就是说如果⻓度不够，是需要扩容的。</p>
 <pre class=" language-java"><code class="language-java"> <span class="token comment" spellcheck="true">/*
     如果new ArrayList(),就马上调用add
@@ -651,7 +653,8 @@
         elementData<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> element<span class="token punctuation">;</span>
         size<span class="token operator">++</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
-<h3 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h3><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//把目标之后的数组元素复制到删除那块</span>
+<p><strong>remove</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//把目标之后的数组元素复制到删除那块</span>
 <span class="token keyword">public</span> E <span class="token function">remove</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">rangeCheck</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -667,28 +670,8 @@
 
     <span class="token keyword">return</span> oldValue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<h3 id="toArray"><a href="#toArray" class="headerlink" title="toArray()"></a>toArray()</h3><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">//某种程度上是安全的,因为创建了一个新的数组</span>
-    <span class="token keyword">public</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">toArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">/**
-     * 如果a的length不够大,就新建一个同样类型的数组
-     * a.length够大,则把值赋值到a中,并且把多余的部分赋值为null,然后返回传入的那个a(末尾没用到的元素为null)
-     * 只能说数组是不重复的,但是把toArray里面元素内容改变了,arrayList的也变化,他们里面存储的是相同的引用
-     * 除非是把toArray里面的元素引用换掉,就没问题
-     */</span>
-    <span class="token annotation punctuation">@SuppressWarnings</span><span class="token punctuation">(</span><span class="token string">"unchecked"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> T<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">toArray</span><span class="token punctuation">(</span>T<span class="token punctuation">[</span><span class="token punctuation">]</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> size<span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true">// Make a new array of a's runtime type, but my contents:</span>
-            <span class="token keyword">return</span> <span class="token punctuation">(</span>T<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span> size<span class="token punctuation">,</span> a<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span><span class="token function">arraycopy</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>length <span class="token operator">></span> size<span class="token punctuation">)</span>
-            a<span class="token punctuation">[</span>size<span class="token punctuation">]</span> <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> a<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span></code></pre>
-<h3 id="Vector和ArrayList的区别"><a href="#Vector和ArrayList的区别" class="headerlink" title="Vector和ArrayList的区别"></a>Vector和ArrayList的区别</h3><ul>
+<p><strong>Vector和ArrayList的区别</strong></p>
+<ul>
 <li><p>Vector的方法都是同步的(Synchronized),是线程安全的(thread-safe)，而ArrayList的方法不是，由于线程的同步必然要影响性能，因此,ArrayList的性能比Vector好。<strong>只要是关键性的操作，方法前面都加了synchronized关键字，来保证线程的安全性</strong>。</p>
 </li>
 <li><p>当Vector或ArrayList中的元素超过它的初始大小时,Vector会将它的容量翻倍，而ArrayList只增加50%的大小，这样,ArrayList就有利于节约内存空间。</p>
@@ -697,7 +680,8 @@
 <span class="token keyword">int</span> newCapacity <span class="token operator">=</span> oldCapacity <span class="token operator">+</span> <span class="token punctuation">(</span>oldCapacity <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 </li>
 </ul>
-<h3 id="ArrayList和Linkedlist的区别"><a href="#ArrayList和Linkedlist的区别" class="headerlink" title="ArrayList和Linkedlist的区别"></a>ArrayList和Linkedlist的区别</h3><p><strong>优缺点</strong></p>
+<p><strong>ArrayList和Linkedlist的区别</strong></p>
+<p><strong>优缺点</strong></p>
 <ul>
 <li>ArrayList基于动态数组实现的非线程安全的集合；LinkedList基于链表实现的非线程安全的集合。</li>
 <li>对于随机index访问的get和set方法，一般ArrayList的速度要优于LinkedList。因为ArrayList直接通过数组下标直接找到元素；LinkedList要移动指针遍历每个元素直到找到为止。LinkedList集合不支持高效的随机访问（RandomAccess）</li>
@@ -709,7 +693,7 @@
 <li>如果应用程序对数据有较多的随机访问，ArrayList对象要优于LinkedList对象；</li>
 <li>如果应用程序有更多的插入或者删除操作，较少的随机访问，LinkedList对象要优于ArrayList对象；</li>
 <li>不过ArrayList的插入，删除操作也不一定比LinkedList慢，如果在List靠近末尾的地方插入，那么ArrayList只需要移动较少的数据，而LinkedList则需要一直查找到列表尾部，反而耗费较多时间，这时ArrayList就比LinkedList要快。</li>
-<li>LinkedList还实现了Deque接口，Deque接口是Queue接口的子接口，它代表一个双向队列，因此LinkedList可以作为双向队列 ，栈</li>
+<li>LinkedList还实现了Deque接口，Deque接口是Queue接口的子接口，它代表一个双向队列，LinkedList可以作为双向队列 ，栈</li>
 </ul>
 <h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><ul>
 <li><p>双向循环链表，有first、last指针</p>
@@ -723,7 +707,8 @@
 <li><p>实现接口Deque(double ended queue)、Deque 又继承自 Queue 接口。所以LinkedList实现队列、栈行为</p>
 </li>
 </ul>
-<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+<p><strong>源码</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
  * 对首部的操作:
  * getFirst()
  * removeFirst()
@@ -914,7 +899,8 @@ LinkedList 是非线程安全的集合类，并发环境下，多个线程同时
 <li>数据一致性问题：CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的实时一致性。如果希望写入的数据实时读取到，则不要使用</li>
 <li>内存占用问题：因为写时复制操作，在进行写操作时，内存会同时驻扎两个对象的内存</li>
 </ul>
-<h3 id="add-1"><a href="#add-1" class="headerlink" title="add()"></a>add()</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p><strong>add()</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 读操作会上锁</span>
     <span class="token keyword">final</span> ReentrantLock lock <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>lock<span class="token punctuation">;</span>
     lock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -934,18 +920,20 @@ LinkedList 是非线程安全的集合类，并发环境下，多个线程同时
 <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">setArray</span><span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     array <span class="token operator">=</span> a<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<h3 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h3><p>整个过程没有任何加锁的操作</p>
+<p><strong>get()</strong></p>
+<p>整个过程没有任何加锁的操作</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> E <span class="token function">get</span><span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span>E<span class="token punctuation">)</span> a<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><h3 id="继承体系"><a href="#继承体系" class="headerlink" title="继承体系"></a>继承体系</h3><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210601175023607.png" alt="image-20210601175023607"></p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210601175023607.png" alt="image-20210601175023607"></p>
 <ul>
 <li>HashMap：不保证遍历顺序，非线程安全</li>
 <li>LinkedHashMap：HashMap的子类，保持了记录插入顺序，遍历会得到先插入的Node，也可以按照访问顺序排列，实现LRU算法</li>
 <li>TreeMap：默认按照key升序排列</li>
 <li>Hashtable：线程安全，效率低，所有方法加synchronized修饰，需要线程安全场景用ConcurrentHashMap即可</li>
 </ul>
-<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>数组+链表+红黑树</p>
+<p><strong>数据结构</strong></p>
+<p>数组+链表+红黑树</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210601212902002.png" alt="image-20210601212902002"></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Map<span class="token punctuation">.</span>Entry</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token keyword">final</span> <span class="token keyword">int</span> hash<span class="token punctuation">;</span>
@@ -967,7 +955,8 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
 <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> TREEIFY_THRESHOLD <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 单个Node下的值的个数大于8时候，会将链表转换成为红黑树。</span>
 <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> UNTREEIFY_THRESHOLD <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 单个Node节点下的红黑树节点的个数小于6时候，会将红黑树转化成为链表。</span>
 <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> MIN_TREEIFY_CAPACITY <span class="token operator">=</span> <span class="token number">64</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 树化的最小数组容量</span></code></pre>
-<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<p><strong>特性</strong></p>
+<ul>
 <li><p>允许key为null（hash为null），存放在entry数组的第0个位置上</p>
 </li>
 <li><p>如果put操作中，只改变了value，则modCount不变</p>
@@ -981,7 +970,7 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
 <li><p>为它的子类LinkedHashMap提供一些钩子方法</p>
 </li>
 </ul>
-<h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><h3 id="put"><a href="#put" class="headerlink" title="put()"></a>put()</h3><ol>
+<h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><h4 id="put"><a href="#put" class="headerlink" title="put()"></a>put()</h4><ol>
 <li>计算key对应的hashCode</li>
 <li>在entry数组较小时也能让高位也参与hash的运算：<code>hash = (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16)</code></li>
 <li>如果table不存在，则先初始化</li>
@@ -1043,7 +1032,7 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
 <ul>
 <li>当length总是2的n次方时，h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;比%具有更高的效率。</li>
 </ul>
-<h3 id="get-1"><a href="#get-1" class="headerlink" title="get()"></a>get()</h3><ul>
+<h4 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h4><ul>
 <li>获取对应hash</li>
 <li>看table是否存在，以及<code>tab[(n - 1) &amp; hash]</code>是否存在</li>
 <li>检查索引下的第一个节点的hash、equals是否相同</li>
@@ -1058,15 +1047,13 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
     Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> tab<span class="token punctuation">;</span> Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> first<span class="token punctuation">,</span> e<span class="token punctuation">;</span> <span class="token keyword">int</span> n<span class="token punctuation">;</span> K k<span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>tab <span class="token operator">=</span> table<span class="token punctuation">)</span> <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>n <span class="token operator">=</span> tab<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span>
             <span class="token punctuation">(</span>first <span class="token operator">=</span> tab<span class="token punctuation">[</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> hash<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>first<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span> 
-                <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> first<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span> <span class="token punctuation">(</span>key <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>first<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> first<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span> <span class="token punctuation">(</span>key <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
             <span class="token keyword">return</span> first<span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>e <span class="token operator">=</span> first<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span>first <span class="token keyword">instanceof</span> <span class="token class-name">TreeNode</span><span class="token punctuation">)</span>
                 <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>TreeNode<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">)</span>first<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTreeNode</span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">do</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span>
-                        <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> e<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span> <span class="token punctuation">(</span>key <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> e<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span> <span class="token punctuation">(</span>key <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                     <span class="token keyword">return</span> e<span class="token punctuation">;</span>
             <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>e <span class="token operator">=</span> e<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -1077,7 +1064,7 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
 <ul>
 <li>两种情况会返回null：value不存在、put的value是null</li>
 </ul>
-<h3 id="resize"><a href="#resize" class="headerlink" title="resize()"></a>resize()</h3><p>如果没有初始化，则首先执行初始化，否则执行正常的扩容操作。将容量变成原来的两倍</p>
+<h4 id="resize"><a href="#resize" class="headerlink" title="resize()"></a>resize()</h4><p>如果没有初始化，则首先执行初始化，否则执行正常的扩容操作。将容量变成原来的两倍</p>
 <p>遍历原Entry数组，把所有的Entry重新Hash到新数组</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">final</span> Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">resize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> newTab <span class="token operator">=</span> <span class="token punctuation">(</span>Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">[</span>newCap<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -1124,7 +1111,7 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
     <span class="token keyword">return</span> newTab<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p>例如00011,10011，如果oldCap=10000(16)<br>00011 &amp; 10000 = 0<br>10011 &amp; 10000 = 10000 != 0<br>将原本在一个索引的节点分成两条链表，一个放在原位置处，一个放在[原位置 + oldCap]处</p>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>第一次put时才真正创建数组，分配空间</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>第一次put时才真正创建数组，分配空间</p>
 <p><strong>tableSizeFor（）</strong></p>
 <p>得到第一个大于等于cap的二的幂次方</p>
 <p>用于从构造函数中获取用户输入，并且保证了 table 数组的长度总是 2 的次幂</p>
@@ -1146,7 +1133,7 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
 <p>例如10001(17)<br>首先cap-1:     10000<br>n |= n &gt;&gt;&gt; 1: n=(10000 | 01000) =11000<br>n |= n &gt;&gt;&gt; 2: n=(11000 | 00110) =11110<br>n |= n &gt;&gt;&gt; 4: n=(11110 | 00001) =11111<br>n |= n &gt;&gt;&gt; 8: n=(11111 | 00000) =11111<br>n |= n &gt;&gt;&gt; 16: n=(11111 | 00000) =11111<br>return n+1:100000(32)</p>
 <p>因为int为32位,所以为了保证结果,最后右移16位结束<br>使得要求的数字1开始的后面全为1</p>
 </blockquote>
-<h3 id="迭代器HashIterator"><a href="#迭代器HashIterator" class="headerlink" title="迭代器HashIterator"></a>迭代器HashIterator</h3><ul>
+<h4 id="迭代器HashIterator"><a href="#迭代器HashIterator" class="headerlink" title="迭代器HashIterator"></a>迭代器HashIterator</h4><ul>
 <li>初始化记录modCount当前值，并让next指向第一个非空元素，而current=null</li>
 <li>nextNode方法，首先查看modCount值以决定是否fail-fast</li>
 <li>然后检查当前元素是否为空，为空则抛出NoSuchElementException异常</li>
@@ -1214,7 +1201,7 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
         expectedModCount <span class="token operator">=</span> modCount<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 此处remove不会触发fail-fast</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="JDK1-7和JDK1-8中HashMap有什么区别？"><a href="#JDK1-7和JDK1-8中HashMap有什么区别？" class="headerlink" title="JDK1.7和JDK1.8中HashMap有什么区别？"></a>JDK1.7和JDK1.8中HashMap有什么区别？</h3><ul>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><h4 id="JDK1-7和JDK1-8中HashMap有什么区别？"><a href="#JDK1-7和JDK1-8中HashMap有什么区别？" class="headerlink" title="JDK1.7和JDK1.8中HashMap有什么区别？"></a>JDK1.7和JDK1.8中HashMap有什么区别？</h4><ul>
 <li>数据结构上：JDK1.8中当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。</li>
 <li>插入数据方式上：<ul>
 <li>JDK1.7使用头插法插入元素，在多线程的环境下有可能导致环形链表的出现，扩容的时候会导致死循环（导致死循环的主要原因是扩容后，节点的顺序会反掉）。</li>
@@ -1222,15 +1209,15 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
 </ul>
 </li>
 </ul>
-<h3 id="HashMap线程安全问题"><a href="#HashMap线程安全问题" class="headerlink" title="HashMap线程安全问题"></a>HashMap线程安全问题</h3><p>例如两个线程同时调用put操作，他们同时进入到了if语句后，先写入的Node会被后写入的Node覆盖掉</p>
+<h4 id="HashMap线程安全问题"><a href="#HashMap线程安全问题" class="headerlink" title="HashMap线程安全问题"></a>HashMap线程安全问题</h4><p>例如两个线程同时调用put操作，他们同时进入到了if语句后，先写入的Node会被后写入的Node覆盖掉</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>p <span class="token operator">=</span> tab<span class="token punctuation">[</span>i <span class="token operator">=</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> hash<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> null<span class="token punctuation">)</span>
             tab<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">newNode</span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h3 id="为什么不直接用红黑树？"><a href="#为什么不直接用红黑树？" class="headerlink" title="为什么不直接用红黑树？"></a>为什么不直接用红黑树？</h3><p>红黑树节点的大小是普通节点的两倍、红黑树需要进行左旋，右旋，变色这些操作来保持平衡，新增节点的效率低，而单链表不需要。当元素小于 8 个的时候，此时做查询操作，链表结构已经能保证查询性能。当元素大于 8 个的时候， 红黑树搜索时间复杂度是 O(logn)，而链表是 O(n)，此时需要红黑树来加快查询速度。</p>
+<h4 id="为什么不直接用红黑树？"><a href="#为什么不直接用红黑树？" class="headerlink" title="为什么不直接用红黑树？"></a>为什么不直接用红黑树？</h4><p>红黑树节点的大小是普通节点的两倍、红黑树需要进行左旋，右旋，变色这些操作来保持平衡，新增节点的效率低，而单链表不需要。当元素小于 8 个的时候，此时做查询操作，链表结构已经能保证查询性能。当元素大于 8 个的时候， 红黑树搜索时间复杂度是 O(logn)，而链表是 O(n)，此时需要红黑树来加快查询速度。</p>
 <p><strong>为什么链表改为红黑树的阈值是 8?</strong></p>
 <p>理想情况下使用随机的哈希码，容器中节点分布在 hash 桶中的频率遵循<strong>泊松分布</strong>，按照泊松分布的计算公式计算出桶中元素个数和概率的对照表，链表中元素个数为 8 时的概率非常小。</p>
 <p><strong>默认加载因子为什么是 0.75？</strong></p>
 <p>作为一般规则，默认负载因子（0.75）在时间和空间成本上提供了很好的折衷，是对空间和时间效率的一个平衡选择。较高的值会降低空间开销，但提高查找成本。较低的值浪费空间。</p>
-<h3 id="HashTable与HashMap的区别"><a href="#HashTable与HashMap的区别" class="headerlink" title="HashTable与HashMap的区别"></a>HashTable与HashMap的区别</h3><ul>
+<h4 id="HashTable与HashMap的区别"><a href="#HashTable与HashMap的区别" class="headerlink" title="HashTable与HashMap的区别"></a>HashTable与HashMap的区别</h4><ul>
 <li><p>比HashMap多了个线程安全，直接在方法上锁，并发度很低，最多同时允许一个线程访问，效率比较低下</p>
 </li>
 <li><p>如线程1使用put进行添加元素，线程2不但不能使用put方法添加元素，并且也不能使用get方法来获取元素，所以竞争越激烈效率越低。也就是说对于Hashtable而言，synchronized是针对整张Hash表的，即每次锁住整张表让线程独占。相当于所有线程进行读写时都去竞争一把锁，导致效率非常低下。</p>
@@ -1246,7 +1233,7 @@ Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</
 <li><p>迭代器不同：HashMap 中的 Iterator 迭代器是 fail-fast 的，⽽ Hashtable 的 Enumerator是安全失败机制（fail-safe），这种机制会使你此次读到的数据不⼀定是最新的数据。</p>
 </li>
 </ul>
-<h3 id="JDK1-7死循环"><a href="#JDK1-7死循环" class="headerlink" title="JDK1.7死循环"></a>JDK1.7死循环</h3><ul>
+<h4 id="JDK1-7死循环"><a href="#JDK1-7死循环" class="headerlink" title="JDK1.7死循环"></a>JDK1.7死循环</h4><ul>
 <li>扩容操作中，把旧表中所有Node重新计算索引下标并散列到新表对应索引处(采用头插法)</li>
 <li>把新表的引用赋值给table</li>
 </ul>
@@ -1283,7 +1270,7 @@ e = next;</code></pre>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h3 id="hashCode与equals"><a href="#hashCode与equals" class="headerlink" title="hashCode与equals"></a><strong>hashCode与equals</strong></h3><p><strong>equals</strong></p>
+<h4 id="hashCode与equals"><a href="#hashCode与equals" class="headerlink" title="hashCode与equals"></a><strong>hashCode与equals</strong></h4><p><strong>equals</strong></p>
 <p>在未重写equals方法我们是继承了Object的equals方法，默认比较两个对象的内存地址</p>
 <ul>
 <li>对于值对象，==比较的是两个对象的值</li>
@@ -1330,7 +1317,7 @@ e = next;</code></pre>
 <p>使用Set存放学生信息，此时不小心对同一个人录入了两次（学号和姓名相同，但不是同一个对象）（我们逻辑上认为是同一个人，并且已重写了equals()方法，但是没有重写hashcode()方法）。这时Set中按逻辑应该只有一个学生，但是实际上却有两个</p>
 <p>这是因为我们没有重写父类（Object）的hashcode方法，Object的hashcode方法会根据两个对象的地址生成对相应的hashcode；s1和s2是分别new出来的，那么他们的地址肯定是不一样的，自然hashcode值也会不一样。</p>
 <p>Set区别对象的标准是，两个对象hashcode是不是一样，再判定两个对象是否equals；此时因为hashCode不一样，所以Set判定他们不是同一个对象，在Set中该学生信息就出现了两次</p>
-<h1 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h1><h2 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Map<span class="token punctuation">.</span>Entry</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token punctuation">{</span>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Map<span class="token punctuation">.</span>Entry</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token keyword">final</span> <span class="token keyword">int</span> hash<span class="token punctuation">;</span>
     <span class="token keyword">final</span> K key<span class="token punctuation">;</span>
     <span class="token keyword">volatile</span> V val<span class="token punctuation">;</span>
@@ -1364,7 +1351,8 @@ e = next;</code></pre>
 <li>集合<strong>初始化完成后</strong>，sizeCtl 用于记录当前集合的负载容量值，也就是触发集合扩容的极限值 。</li>
 <li>集合<strong>正在扩容时</strong>，sizeCtl 用于记录当前扩容的并发线程数情况，该状态下 sizeCtl &lt; 0 。</li>
 </ul>
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><h3 id="put-1"><a href="#put-1" class="headerlink" title="put"></a>put</h3><p>ConcurrentHashMap添加数据时，采取了CAS+synchronize结合策略。首先会判断该节点是否为null，如果为null，尝试使用CAS添加节点；如果添加失败，说明发生了并发冲突，再对节点进行上锁并插入数据。在并发较低的情景下无需加锁，可以显著提高性能。同时只会CAS尝试一次，也不会造成线程长时间等待浪费cpu时间的情况。</p>
+<p><strong>put</strong></p>
+<p>ConcurrentHashMap添加数据时，采取了CAS+synchronize结合策略。首先会判断该节点是否为null，如果为null，尝试使用CAS添加节点；如果添加失败，说明发生了并发冲突，再对节点进行上锁并插入数据。在并发较低的情景下无需加锁，可以显著提高性能。同时只会CAS尝试一次，也不会造成线程长时间等待浪费cpu时间的情况。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">final</span> V <span class="token function">putVal</span><span class="token punctuation">(</span>K key<span class="token punctuation">,</span> V value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token operator">==</span> null <span class="token operator">||</span> value <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> hash <span class="token operator">=</span> <span class="token function">spread</span><span class="token punctuation">(</span>key<span class="token punctuation">.</span><span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1420,7 +1408,8 @@ e = next;</code></pre>
 <li>最后判断该bucket上的链表长度是否大于**链表转红黑树的阈值(8)**，大于则将链表转成红黑树。</li>
 <li>调用<code>addCount()</code>方法，将键值对数量+1，并检查是否需要扩容。</li>
 </ul>
-<h3 id="get-2"><a href="#get-2" class="headerlink" title="get"></a>get</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> V <span class="token function">get</span><span class="token punctuation">(</span>Object key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p><strong>get</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> V <span class="token function">get</span><span class="token punctuation">(</span>Object key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">int</span> h <span class="token operator">=</span> <span class="token function">spread</span><span class="token punctuation">(</span>key<span class="token punctuation">.</span><span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>tab <span class="token operator">=</span> table<span class="token punctuation">)</span> <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>n <span class="token operator">=</span> tab<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span>
             <span class="token punctuation">(</span>e <span class="token operator">=</span> <span class="token function">tabAt</span><span class="token punctuation">(</span>tab<span class="token punctuation">,</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> h<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1443,7 +1432,8 @@ e = next;</code></pre>
 <li>如果bucket的头节点的hash小于0，则代表这个bucket存储的是红黑树，则在红黑树中查找。</li>
 <li>如果bucket头节点的哈希地址不小于0，则代表bucket为链表，遍历链表，找到则返回该键key的值，找不到则返回null。</li>
 </ol>
-<h3 id="remove-1"><a href="#remove-1" class="headerlink" title="remove"></a>remove</h3><ol>
+<p><strong>remove</strong></p>
+<ol>
 <li>调用<code>spread()</code>方法计算出键key的哈希地址。</li>
 <li>计算出键key所在的数组下标，如果table为空或者bucket为空，则返回<code>null</code>。</li>
 <li>判断当前table是否正在扩容，如果在扩容则调用helpTransfer方法协助扩容。</li>
@@ -1452,7 +1442,8 @@ e = next;</code></pre>
 <li>在链表或者红黑树中移除哈希地址、键key相同的节点。</li>
 <li>调用<code>addCount</code>方法，将当前table存储的键值对数量-1。</li>
 </ol>
-<h3 id="初始化-1"><a href="#初始化-1" class="headerlink" title="初始化"></a>初始化</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token function">ConcurrentHashMap</span><span class="token punctuation">(</span><span class="token keyword">int</span> initialCapacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p><strong>初始化</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token function">ConcurrentHashMap</span><span class="token punctuation">(</span><span class="token keyword">int</span> initialCapacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">int</span> cap <span class="token operator">=</span> <span class="token function">tableSizeFor</span><span class="token punctuation">(</span>initialCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>sizeCtl <span class="token operator">=</span> cap<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -1479,7 +1470,8 @@ e = next;</code></pre>
 <li>如果table为null，进入到while循环，如果<code>sizeCtl</code>小于0(其他线程正在对table初始化)，那么该线程调用<code>Thread.yield()</code>挂起该线程，让出CPU时间，该线程也从运行态转成就绪态，等该线程从就绪态转成运行态的时候，别的线程已经table初始化好了，那么该线程结束while循环，结束初始化方法返回。如果从就绪态转成运行态后，table仍然为<code>null</code>，则继续while循环。</li>
 <li>如果table为null且<code>sizeCtl</code>不小于0，则调用实现<code>CAS</code>原子性操作的<code>compareAndSwap()</code>方法将sizeCtl设置成-1，告诉别的线程我正在初始化table，这样别的线程无法对table进行初始化。如果设置成功，则初始化table，容量大小为默认的容量大小(16)，或者为sizeCtl。其中sizeCtl的初始化是在构造函数中进行的。并设置sizeCtl的值为数组长度的3/4（<code>threshold</code>的作用），当ConcurrentHashMap储存的键值对数量大于这个阈值，就会发生扩容。</li>
 </ul>
-<h3 id="扩容-1"><a href="#扩容-1" class="headerlink" title="扩容"></a>扩容</h3><p><strong>触发扩容</strong></p>
+<p><strong>扩容</strong></p>
+<p><strong>触发扩容</strong></p>
 <ol>
 <li><p>添加新元素后，元素个数达到扩容阈值触发扩容。</p>
 </li>
@@ -1495,8 +1487,9 @@ e = next;</code></pre>
 </ul>
 <p><strong>扩容时其他操作</strong></p>
 <p>扩容状态下其他线程对集合进行插入、修改、删除等操作时遇到 ForwardingNode 节点会调用helpTransfer方法帮助扩容</p>
-<h2 id="扩展-1"><a href="#扩展-1" class="headerlink" title="扩展"></a>扩展</h2><h3 id="JDK1-7的ConcurrentHashMap"><a href="#JDK1-7的ConcurrentHashMap" class="headerlink" title="JDK1.7的ConcurrentHashMap"></a>JDK1.7的ConcurrentHashMap</h3><ul>
-<li>基本思想是将数据分为一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据时，其他段的数据也能被其他线程访问。s</li>
+<p><strong>JDK1.7的ConcurrentHashMap</strong></p>
+<ul>
+<li>基本思想是将数据分为一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据时，其他段的数据也能被其他线程访问。</li>
 <li>Segment 是一个ReentrantLock，每一个Segment元素存储的是HashEntry数组+链表，每一个Segment其实就相当于一个HashMap</li>
 <li>put操作需要加锁，get操作不用加锁（通过使用volatile和巧妙的操作保证同步）</li>
 <li>ConcurrentHashMap定位一个元素的过程需要进行两次Hash操作，第一次Hash定位到Segment，第二次Hash定位到元素所在的链表的头部</li>
@@ -1517,7 +1510,8 @@ e = next;</code></pre>
     <span class="token keyword">volatile</span> V value<span class="token punctuation">;</span> 
     <span class="token keyword">final</span> HashEntry<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> next<span class="token punctuation">;</span> 
 <span class="token punctuation">}</span></code></pre>
-<h3 id="ConcurrentHashMap不允许key或value为null值"><a href="#ConcurrentHashMap不允许key或value为null值" class="headerlink" title="ConcurrentHashMap不允许key或value为null值"></a>ConcurrentHashMap不允许key或value为null值</h3><p>put操作中有相应的判断：</p>
+<p><strong>ConcurrentHashMap不允许key或value为null值</strong></p>
+<p>put操作中有相应的判断：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token operator">==</span> null <span class="token operator">||</span> value <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>但这样设计的原因是避免二义性：假定ConcurrentHashMap也可以存放value为null的值。那调用map.get(key)时如果返回了null，有两重含义:</p>
 <p><strong>1.这个key从来没有在map中映射过。</strong></p>
@@ -2137,8 +2131,8 @@ e = next;</code></pre>
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    计算机基础
+                            <a href="/categories/Java%E7%9B%B8%E5%85%B3/" class="post-category">
+                                    Java相关
                                 </a>
                             
                             
@@ -2310,7 +2304,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">251.9k</span>&nbsp;字
+                class="white-color">200.5k</span>&nbsp;字
             
             
             

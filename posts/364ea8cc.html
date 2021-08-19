@@ -31,8 +31,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -453,8 +453,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
-                                计算机基础
+                            <a href="/categories/Java%E7%9B%B8%E5%85%B3/" class="post-category">
+                                Java相关
                             </a>
                         
                     </div>
@@ -475,14 +475,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    12.9k
+                    8.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    47 分
+                    30 分
                 </div>
                 
 
@@ -497,187 +497,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><h2 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h2><h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>利用抽象数据类型将数据和基于数据的操作封装在一起，使其构成一个不可分割的独立实体。数据被保护在抽象数据类型的内部，尽可能地隐藏内部的细节，只保留一些对外的接口使其与外部发生联系。用户无需关心对象内部的细节，但可以通过对象对外提供的接口来访问该对象。</p>
-<p>优点：</p>
-<ul>
-<li>减少耦合：可以独立地开发、测试、优化、使用、理解和修改</li>
-<li>减轻维护的负担：可以更容易被理解，并且在调试的时候可以不影响其他模块</li>
-<li>有效地调节性能：可以通过剖析来确定哪些模块影响了系统的性能</li>
-<li>提高软件的可重用性</li>
-<li>降低了构建大型系统的风险：即使整个系统不可用，但是这些独立的模块却有可能是可用的</li>
-</ul>
-<p>以下 Person 类封装 name、gender、age 等属性，外界只能通过 get() 方法获取一个 Person 对象的 name 属性和 gender 属性，而无法获取 age 属性，但是 age 属性可以供 work() 方法使用。</p>
-<p>注意到 gender 属性使用 int 数据类型进行存储，封装使得用户注意不到这种实现细节。并且在需要修改 gender 属性使用的数据类型时，也可以在不影响客户端代码的情况下进行。</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-
-    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> gender<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> String <span class="token function">getGender</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> gender <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token string">"man"</span> <span class="token operator">:</span> <span class="token string">"woman"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">work</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">18</span> <span class="token operator">&lt;=</span> age <span class="token operator">&amp;&amp;</span> age <span class="token operator">&lt;=</span> <span class="token number">50</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name <span class="token operator">+</span> <span class="token string">" is working very hard!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name <span class="token operator">+</span> <span class="token string">" can't work any more!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承实现了 <strong>IS-A</strong> 关系，例如 Cat 和 Animal 就是一种 IS-A 关系，因此 Cat 可以继承自 Animal，从而获得 Animal 非 private 的属性和方法。</p>
-<p>继承应该遵循里氏替换原则，子类对象必须能够替换掉所有父类对象。</p>
-<p>Cat 可以当做 Animal 来使用，也就是说可以使用 Animal 引用 Cat 对象。父类引用指向子类对象称为 <strong>向上转型</strong> 。</p>
-<pre class=" language-java"><code class="language-java">Animal animal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>多态分为编译时多态和运行时多态：</p>
-<ul>
-<li>编译时多态主要指方法的重载</li>
-<li>运行时多态指程序中定义的对象引用所指向的具体类型在运行期间才确定</li>
-</ul>
-<p>运行时多态有三个条件：</p>
-<ul>
-<li>继承</li>
-<li>覆盖（重写）</li>
-<li>向上转型</li>
-</ul>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><h3 id="泛化关系-Generalization"><a href="#泛化关系-Generalization" class="headerlink" title="泛化关系 (Generalization)"></a>泛化关系 (Generalization)</h3><p>用来描述继承关系，在 Java 中使用 extends 关键字。</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/c0874e0a-dba3-467e-9c86-dd9313e0843e.jpg" alt="img"></p>
-<h3 id="实现关系-Realization"><a href="#实现关系-Realization" class="headerlink" title="实现关系 (Realization)"></a>实现关系 (Realization)</h3><p>用来实现一个接口，在 Java 中使用 implements 关键字。</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/83d466bd-946b-4430-854a-cf7b0696d4c8.jpg" alt="img"></p>
-<h3 id="聚合关系-Aggregation"><a href="#聚合关系-Aggregation" class="headerlink" title="聚合关系 (Aggregation)"></a>聚合关系 (Aggregation)</h3><p>表示整体由部分组成，但是整体和部分不是强依赖的，整体不存在了部分还是会存在。</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/a0ce43b7-afa8-4397-a96e-5c12a070f2ae.jpg" alt="img"></p>
-<h3 id="组合关系-Composition"><a href="#组合关系-Composition" class="headerlink" title="组合关系 (Composition)"></a>组合关系 (Composition)</h3><p>和聚合不同，组合中整体和部分是强依赖的，整体不存在了部分也不存在了。比如公司和部门，公司没了部门就不存在了。但是公司和员工就属于聚合关系了，因为公司没了员工还在。</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/6a88a398-c494-41f5-bb62-9f7fb811df7c.jpg" alt="img"></p>
-<h3 id="关联关系-Association"><a href="#关联关系-Association" class="headerlink" title="关联关系 (Association)"></a>关联关系 (Association)</h3><p>表示不同类对象之间有关联，这是一种静态关系，与运行过程的状态无关，在最开始就可以确定。因此也可以用 1 对 1、多对 1、多对多这种关联关系来表示。比如学生和学校就是一种关联关系，一个学校可以有很多学生，但是一个学生只属于一个学校，因此这是一种多对一的关系，在运行开始之前就可以确定。</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/a3e4dc62-0da5-4d22-94f2-140078281812.jpg" alt="img"></p>
-<h3 id="依赖关系-Dependency"><a href="#依赖关系-Dependency" class="headerlink" title="依赖关系 (Dependency)"></a>依赖关系 (Dependency)</h3><p>和关联关系不同的是，依赖关系是在运行过程中起作用的。A 类和 B 类是依赖关系主要有三种形式：</p>
-<ul>
-<li>A 类是 B 类方法的局部变量；</li>
-<li>A 类是 B 类方法的参数；</li>
-<li>A 类向 B 类发送消息，从而影响 B 类发生变化。</li>
-</ul>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/379444c9-f1d1-45cd-b7aa-b0c18427d388.jpg" alt="img"></p>
-<h1 id="设计模式原则"><a href="#设计模式原则" class="headerlink" title="设计模式原则"></a>设计模式原则</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h4 id="单一责任原则"><a href="#单一责任原则" class="headerlink" title="单一责任原则"></a>单一责任原则</h4><blockquote>
-<p>修改一个类的原因应该只有一个。</p>
-</blockquote>
-<p>换句话说就是让一个类只负责一件事，当这个类需要做过多事情的时候，就需要分解这个类。</p>
-<p>如果一个类承担的职责过多，就等于把这些职责耦合在了一起，一个职责的变化可能会削弱这个类完成其它职责的能力。</p>
-<h4 id="开放封闭原则"><a href="#开放封闭原则" class="headerlink" title="开放封闭原则"></a>开放封闭原则</h4><blockquote>
-<p>类应该对扩展开放，对修改关闭。</p>
-</blockquote>
-<p>扩展就是添加新功能的意思，因此该原则要求在添加新功能时不需要修改代码。</p>
-<p>符合开闭原则最典型的设计模式是装饰者模式，它可以动态地将责任附加到对象上，而不用去修改类的代码。</p>
-<h4 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h4><blockquote>
-<p>子类对象必须能够替换掉所有父类对象。</p>
-</blockquote>
-<p>继承是一种 IS-A 关系，子类需要能够当成父类来使用，并且需要比父类更特殊。</p>
-<p>如果不满足这个原则，那么各个子类的行为上就会有很大差异，增加继承体系的复杂度。</p>
-<h4 id="接口分离原则"><a href="#接口分离原则" class="headerlink" title="接口分离原则"></a>接口分离原则</h4><blockquote>
-<p>不应该强迫客户依赖于它们不用的方法。</p>
-</blockquote>
-<p>因此使用多个专门的接口比使用单一的总接口要好。</p>
-<h4 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h4><blockquote>
-<p>高层模块不应该依赖于低层模块，二者都应该依赖于抽象；<br>抽象不应该依赖于细节，细节应该依赖于抽象。</p>
-</blockquote>
-<p>高层模块包含一个应用程序中重要的策略选择和业务模块，如果高层模块依赖于低层模块，那么低层模块的改动就会直接影响到高层模块，从而迫使高层模块也需要改动。</p>
-<p>依赖于抽象意味着：</p>
-<ul>
-<li>任何变量都不应该持有一个指向具体类的指针或者引用；</li>
-<li>任何类都不应该从具体类派生；</li>
-<li>任何方法都不应该覆写它的任何基类中的已经实现的方法</li>
-</ul>
-<h2 id="具体说明"><a href="#具体说明" class="headerlink" title="具体说明"></a>具体说明</h2><p>设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。</p>
-<p>1、代码重用性（即：相同功能的代码，不用多次编写）</p>
-<p>2、可读性（即：编程规范性，便于其他程序员的阅读和理解）</p>
-<p>3、可扩展性（即：当需要增加新的功能时，非常的方便，称为可维护）</p>
-<p>4、可靠性（即：当我们增加新的功能后，对原来的功能没有影响）</p>
-<p>5、使程序呈现高内聚，低耦合的特性</p>
-<ul>
-<li><p>开闭原则是总纲，告诉我们要对扩展开放，对修改关闭</p>
-</li>
-<li><p>单一职责原则告诉我们实现类要职责单一</p>
-</li>
-<li><p>里氏替换原则告诉我们不要破坏继承体系</p>
-</li>
-<li><p>依赖倒置原则告诉我们要面向接口编程</p>
-</li>
-<li><p>接口隔离原则告诉我们在设计接口的时候要精简单一</p>
-</li>
-<li><p>迪米特原则告诉我们要降低耦合</p>
-</li>
-</ul>
-<h3 id="单一职责原则（Single-Responsibility-Principle）"><a href="#单一职责原则（Single-Responsibility-Principle）" class="headerlink" title="单一职责原则（Single Responsibility Principle）"></a>单一职责原则（Single Responsibility Principle）</h3><p>一个类只负责一个功能领域中的相应职责，或者可以定义为：就一个类而言，应该只有一个引起它变化的原因。</p>
-<p>类T负责两个不同的职责：职责P1，职责P2。当由于职责P1需求发生改变而需要修改类T时，有 可能会导致原本运行正常的职责P2功能发生故障。</p>
-<p>在软件系统中，一个类（大到模块，小到方法）承担的职责越多，它被复用的可能性就越小，而且一个类承担的职责过多，就相当于将这些职责耦合在一起，当其中一个职责变化时，可能会影响其他职责的运作，因此要将这些职责进行分离，将不同的职责封装在不同的类中，即将不同的变化原因封装在不同的类中。</p>
-<p>单一职责原则是实现<strong>高内聚、低耦合</strong>的指导方针</p>
-<p>可以降低类的复杂度，一个类只负责一项职责，其逻辑肯定要比负责多项职责简单的多；</p>
-<p>提高类的可读性，提高系统的可维护性；</p>
-<p>变更引起的风险降低，变更是必然的，如果单一职责原则遵守的好，当修改一个功能时，可以显著降低对其他功能的影响。</p>
-<h3 id="开闭原则（Open-Close-Principle）"><a href="#开闭原则（Open-Close-Principle）" class="headerlink" title="开闭原则（Open Close Principle）"></a>开闭原则（Open Close Principle）</h3><ul>
-<li>一个软件实体应当对扩展开放，对修改关闭。即软件实体应尽量在不修改原有代码的情况下进行扩展</li>
-<li>在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。</li>
-<li>为了使程序的扩展性好，易于维护和升级。</li>
-<li>简言之，我们需要使用接口和抽象类。</li>
-</ul>
-<p>任何软件都需要面临一个很重要的问题，即它们的需求会随时间的推移而发生变化。因为变化，升级和维护等原因，如果需要对软件原有代码进行修改，可能会给旧代码引入错误，也有可能会使我们不得不对整个功能进行重构，并且需要原有代码经过重新测试，所以当软件需要变化时，尽量通过扩展软件实体的行为来实现变化，而不是通过修改已有的代码来实现使我们需要的。</p>
-<p>为了满足开闭原则，需要对系统进行抽象化设计，抽象化是开闭原则的关键。在Java、C#等编程语言中，可以为系统定义一个相对稳定的抽象层，而将不同的实现行为移至具体的实现层中完成。如果需要修改系统的行为，无须对抽象层进行任何改动，只需要增加新的具体类来实现新的业务功能即可，实现在不修改已有代码的基础上扩展系统的功能，达到开闭原则的要求。</p>
-<p>开闭原则是最基础的设计原则，其它的五个设计原则都是开闭原则的具体形态，也就是说其它的五个设计原则是指导设计的工具和方法，而开闭原则才是其精神领袖。依照Java语言的称谓，开闭原则是抽象类，而其它的五个原则是具体的实现类。</p>
-<p>开闭原则可以提高复用性，在面向对象的设计中，所有的逻辑都是从原子逻辑组合而来，而不是在一个类中独立实现一套业务逻辑。只有这样的代码才可以复用，逻辑粒度越小，被复用的可能性越大。为什么要复用呢？复用可以减少代码的重复，避免相同的逻辑分散在多个角落，减少维护人员的工作量以及系统变化时产生bug的机会。怎么才能提高复用率呢？设计者需要缩小逻辑粒度，直到一个逻辑不可以分为止。</p>
-<p>开闭原则可以提高维护性 ，一款软件量产后，维护人员的工作不仅仅对数据进行维护，还可能要对程序进行扩展，维护人员最乐意的事是扩展一个类，而不是修改一个类。让维护人员读懂原有代码，再进行修改，是一件非常痛苦的事情，不要让他在原有的代码海洋中游荡后再修改，那是对维护人员的折磨和摧残。</p>
-<p>面向对象开发的要求，万物皆对象，我们要把所有的事物抽象成对象，然后针对对象进行操作，但是万物皆发展变化，有变化就要有策略去应对，怎么快速应对呢？这就需要在设计之初考虑到尽可能多变化的因素，然后留下接口，等待“可能”转变为“现实”。</p>
-<h3 id="里氏代换原则（Liskov-Substitution-Principle）"><a href="#里氏代换原则（Liskov-Substitution-Principle）" class="headerlink" title="里氏代换原则（Liskov Substitution Principle）"></a>里氏代换原则（Liskov Substitution Principle）</h3><ul>
-<li>任何基类可以出现的地方，子类一定可以出现。</li>
-<li>里氏代换原则是对开闭原则的补充。</li>
-<li>实现开闭原则的关键步骤就是抽象化，而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。</li>
-<li>LSP 是继承复用的基石，只有当派生类可以替换掉基类，且软件单位的功能不受到影响时，基类才能真正被复用，而派生类也能够在基类的基础上增加新的行为。</li>
-<li>里氏代换原则是实现开闭原则的重要方式之一，由于使用基类对象的地方都可以使用子类对象，因此在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象。</li>
-</ul>
-<h3 id="依赖倒转原则（Dependence-Inversion-Principle）"><a href="#依赖倒转原则（Dependence-Inversion-Principle）" class="headerlink" title="依赖倒转原则（Dependence Inversion Principle）"></a>依赖倒转原则（Dependence Inversion Principle）</h3><ul>
-<li>高层模块不应该依赖低层模块，两者都应该依赖其抽象；抽象不应该依赖细节，细节应该依赖抽象，其核心思想是：要面向接口编程，不要面向实现编程。</li>
-<li>依赖倒转原则要求我们在程序代码中传递参数时或在关联关系中，尽量引用层次高的抽象层类，即使用接口和抽象类进行变量类型声明、参数类型声明、方法返回类型声明，以及数据类型的转换等，而不要用具体类来做这些事情。为了确保该原则的应用，一个具体类应当只实现接口或抽象类中声明过的方法，而不要给出多余的方法，否则将无法调用到在子类中增加的新方法。</li>
-<li>在引入抽象层后，系统将具有很好的灵活性，在程序中尽量使用抽象层进行编程，而将具体类写在配置文件中，这样一来，如果系统行为发生变化，只需要对抽象层进行扩展，并修改配置文件，而无须修改原有系统的源代码，在不修改的情况下来扩展系统的功能，满足开闭原则的要求。</li>
-<li>在实现依赖倒转原则时，我们需要针对抽象层编程，而将具体类的对象通过依赖注入(DependencyInjection, DI)的方式注入到其他对象中，依赖注入是指当一个对象要与其他对象发生依赖关系时，通过抽象来注入所依赖的对象。</li>
-</ul>
-<p><strong>依赖倒置原则的作用</strong></p>
-<p>（1）依赖倒置原则可以降低类间的耦合性。</p>
-<p>（2）依赖倒置原则可以提高系统的稳定性。</p>
-<p>（3）依赖倒置原则可以减少并行开发引起的风险。</p>
-<p>（4）依赖倒置原则可以提高代码的可读性和可维护性。</p>
-<h3 id="接口隔离原则（Interface-Segregation-Principle）"><a href="#接口隔离原则（Interface-Segregation-Principle）" class="headerlink" title="接口隔离原则（Interface Segregation Principle）"></a>接口隔离原则（Interface Segregation Principle）</h3><ul>
-<li><p>使用多个隔离的接口，比使用单个接口要好</p>
-</li>
-<li><p>降低类之间的耦合度，强调降低依赖，降低耦合。</p>
-</li>
-<li><p>设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想</p>
-</li>
-<li><p>根据接口隔离原则，当一个接口太大时，我们需要将它分割成一些更细小的接口，使用该接口的客户端仅需知道与之相关的方法即可。每一个接口应该承担一种相对独立的角色，不干不该干的事，该干的事都要干。这里的“接口”往往有两种不同的含义：一种是指一个类型所具有的方法特征的集合，仅仅是一种逻辑上的抽象；另外一种是指某种语言具体的“接口”定义，有严格的定义和结构，比如Java语言中的interface。</p>
-</li>
-<li><p>接口隔离原则和单一职责都是为了提高类的内聚性、降低它们之间的耦合性，体现了封装的思想，但两者是不同的：</p>
-<p>  （1）单一职责原则注重的是职责，而接口隔离原则注重的是对接口依赖的隔离。</p>
-<p>  （2）单一职责原则主要是约束类，它针对的是程序中的实现和细节；接口隔离原则主要约束接口，主要针对抽象和程序整体框架的构建。</p>
-</li>
-</ul>
-<p><strong>优点</strong></p>
-<p>（1）将臃肿庞大的接口分解为多个粒度小的接口，可以预防外来变更的扩散，提高系统的灵活性和可维护性。</p>
-<p>（2）接口隔离提高了系统的内聚性，减少了对外交互，降低了系统的耦合性。</p>
-<p>（3）如果接口的粒度大小定义合理，能够保证系统的稳定性；但是，如果定义过小，则会造成接口数量过多，使设计复杂化；如果定义太大，灵活性降低，无法提供定制服务，给整体项目带来无法预料的风险。</p>
-<p>（4）使用多个专门的接口还能够体现对象的层次，因为可以通过接口的继承，实现对总接口的定义。</p>
-<p>（5）能减少项目工程中的代码冗余。过大的大接口里面通常放置许多不用的方法，当实现这个接口的时候，被迫设计冗余的代码。</p>
-<h3 id="迪米特法则，又称最少知道原则（Demeter-Principle）"><a href="#迪米特法则，又称最少知道原则（Demeter-Principle）" class="headerlink" title="迪米特法则，又称最少知道原则（Demeter Principle）"></a>迪米特法则，又称最少知道原则（Demeter Principle）</h3><p>一个实体应当尽量少地与其他实体之间发生相互作用，使得系统功能模块相对独立。</p>
-<p>如果两个软件实体无须直接通信，那么就不应当发生直接的相互调用，可以通过第三方转发该调用。其目的是降低类之间的耦合度，提高模块的相对独立性。</p>
-<p>从依赖者的角度来说，只依赖应该依赖的对象。</p>
-<p>从被依赖者的角度说，只暴露应该暴露的方法。</p>
-<p>在类的结构设计上，尽量降低类成员的访问权限。</p>
-<p>在类的设计上，优先考虑将一个类设置成不变类。</p>
-<p>在对其他类的引用上，将引用其他对象的次数降到最低。</p>
-<p>不暴露类的属性成员，而应该提供相应的访问器（set 和 get 方法）。</p>
-<h3 id="合成复用原则（Composite-Reuse-Principle）"><a href="#合成复用原则（Composite-Reuse-Principle）" class="headerlink" title="合成复用原则（Composite Reuse Principle）"></a>合成复用原则（Composite Reuse Principle）</h3><p>尽量使用合成/聚合的方式，而不是使用继承。</p>
-<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul>
+                <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul>
 <li>单例模式是很常用的一个设计模式，它可以确保只有一个实例被创建</li>
 <li>无状态的工具类：例如日志工具类，使用单例模式就不用反复创建，节约系统开销</li>
 <li>全局信息类：例如统计网站访问次数。这一类对象只能有一个实例，如果制造出多个实例就可能会导致一些问题的产生，出现不一致性的结果。</li>
@@ -703,10 +523,7 @@
         <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="懒汉式（线程不安全，不可用）"><a href="#懒汉式（线程不安全，不可用）" class="headerlink" title="懒汉式（线程不安全，不可用）"></a>懒汉式（线程不安全，不可用）</h2><ul>
-<li>容易线程不安全</li>
-<li>写法复杂</li>
-</ul>
+<h2 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h2><p>线程不安全，不可用</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton instance<span class="token punctuation">;</span>
 
@@ -722,7 +539,8 @@
         <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="懒汉式（线程安全，效率低）"><a href="#懒汉式（线程安全，效率低）" class="headerlink" title="懒汉式（线程安全，效率低）"></a>懒汉式（线程安全，效率低）</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+<h2 id="懒汉式（线程安全）"><a href="#懒汉式（线程安全）" class="headerlink" title="懒汉式（线程安全）"></a>懒汉式（线程安全）</h2><p>线程安全，效率低</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton instance<span class="token punctuation">;</span>
 
     <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -736,7 +554,7 @@
         <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="DCL（Double-Check-Lock）"><a href="#DCL（Double-Check-Lock）" class="headerlink" title="DCL（Double Check Lock）"></a>DCL（Double Check Lock）</h2><p>DCL本质上也就是减少了锁粒度，如果第一次检查instance不为null，那么就不需要执行下面的加锁和初始化操作。因此，可以大幅降低synchronized带来的性能开销。</p>
+<h2 id="Double-Check-Lock"><a href="#Double-Check-Lock" class="headerlink" title="Double Check Lock"></a>Double Check Lock</h2><p>DCL本质上也就是减少了锁粒度，如果第一次检查instance不为null，那么就不需要执行下面的加锁和初始化操作。因此，可以大幅降低synchronized带来的性能开销。</p>
 <p>双重校验锁第二次进行判空原因：假设有两个线程A和B，都进行完第一次判空了，A和B都进入到synchronized</p>
 <p>这个时候A线程获取了类锁，然后B线程被阻塞，A线程新建了一个实例后释放了锁，B线程获取锁，又新建了一个实例，这破坏了单例设计模式的初衷。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
@@ -765,7 +583,8 @@
 <p>但是他们不存在数据依赖关系，在单线程下执行结果不变。所以有可能发生指令重排序</p>
 <p>由于 JVM 具有指令重排的特性，执行顺序有可能变成 1&gt;3&gt;2。指令重排在单线程环境下不会出现问题，但是在多线程环境下会导致一个线程获得还没有初始化的实例。例如，线程 T1 执行了 1 和 3，此时 T2 在最外层的 if (instance == null) 时，由于指令重排序，他看到的instance!=null。但是instance实际上尚未初始化完成，让其他的线程拿到了一个空引用，之后就出现NPE，所以出现了线程安全问题</p>
 <p>使用 volatile 可以禁止 JVM 的指令重排，保证在多线程环境下也能正常运行。</p>
-<h2 id="静态内部类方式（可用）"><a href="#静态内部类方式（可用）" class="headerlink" title="静态内部类方式（可用）"></a>静态内部类方式（可用）</h2><p>这种方式不仅具有延迟初始化的好处，而且由 JVM 提供了对线程安全的支持。</p>
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><p>可用</p>
+<p>这种方式不仅具有延迟初始化的好处，而且由 JVM 提供了对线程安全的支持。</p>
 <ul>
 <li>外部类加载时并不需要立即加载内部类，内部类不被加载则不去初始化INSTANCE，故而不占内存。只有当getInstance()方法第一次被调用时，才会去初始化INSTANCE，延迟了单例的实例化。</li>
 <li>由JVM来保证线程安全，即保证单例的唯一性，JVM 能确保 INSTANCE 只被实例化一次。</li>
@@ -790,7 +609,8 @@
         <span class="token keyword">return</span> SingletonInstance<span class="token punctuation">.</span>instance<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="枚举（实践中最佳使用）"><a href="#枚举（实践中最佳使用）" class="headerlink" title="枚举（实践中最佳使用）"></a>枚举（实践中最佳使用）</h2><p>《effective java》：单元素的枚举类型已经成为实现Singleton的最佳方法</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>枚举实现单例模式是实践中最佳使用</p>
+<p>《effective java》：单元素的枚举类型已经成为实现Singleton的最佳方法</p>
 <p>由于反射可以获取到类的构造函数，包括私有构造函数，因此反射可以生成新的对象。</p>
 <p><strong>Java虚拟机会保证枚举类型不能被反射并且构造函数只被执行一次</strong>。</p>
 <p>该实现可以防止反射攻击。在其它实现中，通过 setAccessible() 方法可以将私有构造函数的访问级别设置为 public，然后调用构造函数从而实例化对象，如果要防止这种攻击，需要在构造函数中添加防止多次实例化的代码。该实现是由 JVM 保证只会实例化一次，因此不会出现上述的反射攻击。</p>
@@ -802,7 +622,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <h1 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h1><p>装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者的功能。装饰者的方法有一部分是自己的，这属于它的功能，然后调用被装饰者的方法实现，从而也保留了被装饰者的功能。可以看到，具体组件应当是装饰层次的最低层，因为只有具体组件的方法实现不需要依赖于其它对象。</p>
-<h2 id="类图-1"><a href="#类图-1" class="headerlink" title="类图"></a>类图</h2><p>动态地将责任附加到对象上。若要扩展功能，装饰者提供比继承更有弹性的替代方案</p>
+<p>动态地将责任附加到对象上。若要扩展功能，装饰者提供比继承更有弹性的替代方案</p>
 <p>开闭原则的应用：类应该对扩展开放,对修改关闭；允许类很容易的进行扩展，在不修改代码的情况下就可以搭配新的行为</p>
 <p><img src="https://tongji4m3.oss-cn-beijing.aliyuncs.com/image-20200926170529749.png" alt="image-20200926170529749"></p>
 <ul>
@@ -828,7 +648,8 @@
         <span class="token keyword">return</span> <span class="token number">1</span> <span class="token operator">+</span> beverage<span class="token punctuation">.</span><span class="token function">cost</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="IO流应用"><a href="#IO流应用" class="headerlink" title="IO流应用"></a>IO流应用</h2><ul>
+<p><strong>IO流应用</strong></p>
+<ul>
 <li>I/O库需要很多性能的各种组合，如果这些性能都是用继承的方法实现的，那么每一种组合都需要一个类，这样就会造成大量性能重复的类出现。</li>
 <li>如果采用装饰者模式，那么类的数目就会大大减少，性能的重复也可以减至最少。</li>
 <li>设计既避免了类爆炸，又可以让用户自己去搭配核心类和装饰类。</li>
@@ -1033,8 +854,10 @@ ProducerImpl proxyProducerImpl <span class="token operator">=</span> <span class
     <span class="token punctuation">}</span></code></pre>
 <h1 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h1><p>定义算法框架，并将一些步骤的实现延迟到子类。</p>
 <p>通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。</p>
-<h2 id="类图-2"><a href="#类图-2" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/ac6a794b-68c0-486c-902f-8d988eee5766.png" alt="img"></p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>冲咖啡和冲茶都有类似的流程，但是某些步骤会有点不一样，要求复用那些相同步骤的代码。</p>
+<p><strong>类图</strong></p>
+<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/ac6a794b-68c0-486c-902f-8d988eee5766.png" alt="img"></p>
+<p><strong>实现</strong></p>
+<p>冲咖啡和冲茶都有类似的流程，但是某些步骤会有点不一样，要求复用那些相同步骤的代码。</p>
 <p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/11236498-1417-46ce-a1b0-e10054256955.png" alt="img"></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">CaffeineBeverage</span> <span class="token punctuation">{</span>
 
@@ -1098,10 +921,12 @@ Tea<span class="token punctuation">.</span>brew
 pourInCup
 Tea<span class="token punctuation">.</span>addCondiments</code></pre>
 <h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><h2 id="简单工厂（Simple-Factory）"><a href="#简单工厂（Simple-Factory）" class="headerlink" title="简单工厂（Simple Factory）"></a>简单工厂（Simple Factory）</h2><p>在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。</p>
-<h3 id="类图-3"><a href="#类图-3" class="headerlink" title="类图"></a>类图</h3><p>简单工厂把实例化的操作单独放到一个类中，这个类就成为简单工厂类，让简单工厂类来决定应该用哪个具体子类来实例化。</p>
+<p><strong>类图</strong></p>
+<p>简单工厂把实例化的操作单独放到一个类中，这个类就成为简单工厂类，让简单工厂类来决定应该用哪个具体子类来实例化。</p>
 <p>这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。</p>
 <p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/40c0c17e-bba6-4493-9857-147c0044a018.png" alt="img"></p>
-<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
+<p><strong>实现</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteProduct</span> <span class="token keyword">implements</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
@@ -1146,10 +971,12 @@ Tea<span class="token punctuation">.</span>addCondiments</code></pre>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="工厂方法（Factory-Method）"><a href="#工厂方法（Factory-Method）" class="headerlink" title="工厂方法（Factory Method）"></a>工厂方法（Factory Method）</h2><p>定义了一个创建对象的接口，但由子类决定要实例化哪个类。工厂方法把实例化操作推迟到子类。</p>
-<h3 id="类图-4"><a href="#类图-4" class="headerlink" title="类图"></a>类图</h3><p>在简单工厂中，创建对象的是另一个类，而在工厂方法中，是由子类来创建对象。</p>
+<p><strong>类图</strong></p>
+<p>在简单工厂中，创建对象的是另一个类，而在工厂方法中，是由子类来创建对象。</p>
 <p>下图中，Factory 有一个 doSomething() 方法，这个方法需要用到一个产品对象，这个产品对象由 factoryMethod() 方法创建。该方法是抽象的，需要由子类去实现。</p>
 <p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/f4d0afd0-8e78-4914-9e60-4366eaf065b5.png" alt="img"></p>
-<h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Factory</span> <span class="token punctuation">{</span>
+<p><strong>实现</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Factory</span> <span class="token punctuation">{</span>
     <span class="token keyword">abstract</span> <span class="token keyword">public</span> Product <span class="token function">factoryMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         Product product <span class="token operator">=</span> <span class="token function">factoryMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1172,12 +999,14 @@ Tea<span class="token punctuation">.</span>addCondiments</code></pre>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="抽象工厂（Abstract-Factory）"><a href="#抽象工厂（Abstract-Factory）" class="headerlink" title="抽象工厂（Abstract Factory）"></a>抽象工厂（Abstract Factory）</h2><p>提供一个接口，用于创建 <strong>相关的对象家族</strong> 。</p>
-<h3 id="类图-5"><a href="#类图-5" class="headerlink" title="类图"></a>类图</h3><p>抽象工厂模式创建的是对象家族，也就是很多对象而不是一个对象，并且这些对象是相关的，也就是说必须一起创建出来。而工厂方法模式只是用于创建一个对象，这和抽象工厂模式有很大不同。</p>
+<p><strong>类图</strong></p>
+<p>抽象工厂模式创建的是对象家族，也就是很多对象而不是一个对象，并且这些对象是相关的，也就是说必须一起创建出来。而工厂方法模式只是用于创建一个对象，这和抽象工厂模式有很大不同。</p>
 <p>抽象工厂模式用到了工厂方法模式来创建单一对象，AbstractFactory 中的 createProductA() 和 createProductB() 方法都是让子类来实现，这两个方法单独来看就是在创建一个对象，这符合工厂方法模式的定义。</p>
 <p>至于创建对象的家族这一概念是在 Client 体现，Client 要通过 AbstractFactory 同时调用两个方法来创建出两个对象，在这里这两个对象就有很大的相关性，Client 需要同时创建出这两个对象。</p>
 <p>从高层次来看，抽象工厂使用了组合，即 Cilent 组合了 AbstractFactory，而工厂方法模式使用了继承。</p>
 <p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/e2190c36-8b27-4690-bde5-9911020a1294.png" alt="img"></p>
-<h3 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AbstractProductA</span> <span class="token punctuation">{</span>
+<p><strong>实现</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AbstractProductA</span> <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AbstractProductB</span> <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
@@ -1219,7 +1048,7 @@ Tea<span class="token punctuation">.</span>addCondiments</code></pre>
         <span class="token comment" spellcheck="true">// do something with productA and productB</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h1 id="职责链模式"><a href="#职责链模式" class="headerlink" title="职责链模式"></a>职责链模式</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>一个事件需要经过多个对象处理是一个挺常见的场景，譬如采购审批流程，请假流程，软件开发中的异常处理流程，web请求处理流程等各种各样的流程，可以考虑使用责任链模式来实现。</p>
+<h1 id="职责链模式"><a href="#职责链模式" class="headerlink" title="职责链模式"></a>职责链模式</h1><p>一个事件需要经过多个对象处理是一个挺常见的场景，譬如采购审批流程，请假流程，软件开发中的异常处理流程，web请求处理流程等各种各样的流程，可以考虑使用责任链模式来实现。</p>
 <p>以请假流程为例，一般公司普通员工的请假流程简化如下：</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210722195125704.png" alt="image-20210722195125704"></p>
 <p>普通员工发起一个请假申请，当请假天数小于3天时只需要得到主管批准即可；当请假天数大于3天时，主管批准后还需要提交给经理审批，经理审批通过，若请假天数大于7天还需要进一步提交给总经理审批。</p>
@@ -1266,12 +1095,13 @@ Tea<span class="token punctuation">.</span>addCondiments</code></pre>
 <li>该流程缺乏灵活性，流程确定后不可再修改（除非修改源代码），客户端无法定制流程</li>
 </ol>
 <p>使用责任链模式可以解决上述问题。</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>**责任链模式(Chain of Responsibility Pattern)**：避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。职责链模式是一种对象行为型模式。</p>
+<p><strong>定义</strong></p>
+<p>**责任链模式(Chain of Responsibility Pattern)**：避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。职责链模式是一种对象行为型模式。</p>
 <p><strong>Handler（抽象处理者）</strong>：它定义了一个处理请求的接口，一般设计为抽象类，由于不同的具体处理者处理请求的方式不同，因此在其中定义了抽象请求处理方法。因为每一个处理者的下家还是一个处理者，因此在抽象处理者中定义了一个抽象处理者类型的对象，作为其对下家的引用。通过该引用，处理者可以连成一条链。</p>
 <p><strong>ConcreteHandler（具体处理者）</strong>：它是抽象处理者的子类，可以处理用户请求，在具体处理者类中实现了抽象处理者中定义的抽象请求处理方法，在处理请求之前需要进行判断，看是否有相应的处理权限，如果可以处理请求就处理它，否则将请求转发给后继者；在具体处理者中可以访问链中下一个对象，以便请求的转发。</p>
 <p>类图如下所示：</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210722195405202.png" alt="image-20210722195405202"></p>
-<h2 id="责任链模式变体"><a href="#责任链模式变体" class="headerlink" title="责任链模式变体"></a>责任链模式变体</h2><p><strong>纯的责任链模式</strong>：</p>
+<p><strong>纯的责任链模式</strong>：</p>
 <ul>
 <li>一个具体处理者对象只能在两个行为中选择一个：要么承担全部责任，要么将责任推给下家，不允许出现某一个具体处理者对象在承担了一部分或全部责任后 又将责任向下传递的情况</li>
 <li>一个请求必须被某一个处理者对象所接收，不能出现某个请求未被任何一个处理者对象处理的情况</li>
@@ -1282,7 +1112,8 @@ Tea<span class="token punctuation">.</span>addCondiments</code></pre>
 <li>或者一个具体处理者处理完某请求后其后继处理者可以继续处理该请求</li>
 <li>而且一个请求可以最终不被任何处理者对象所接收</li>
 </ul>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>使用责任链模式（不纯）重构请假流程</p>
+<p><strong>示例</strong></p>
+<p>使用责任链模式（不纯）重构请假流程</p>
 <p>请假信息类，包含请假人姓名和请假天数</p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
 <span class="token annotation punctuation">@AllArgsConstructor</span>
@@ -1396,23 +1227,27 @@ Tea<span class="token punctuation">.</span>addCondiments</code></pre>
 经理&lt;李四&gt; 审批 &lt;小旋锋&gt; 的请假申请，请假天数： &lt;8&gt; ，审批结果：&lt;批准&gt; 
 总经理&lt;王五&gt; 审批 &lt;小旋锋&gt; 的请假申请，请假天数： &lt;8&gt; ，审批结果：&lt;批准&gt; 
 最终结果：true</code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<p><strong>优点</strong></p>
+<ul>
 <li>对象仅需知道该请求会被处理即可，且链中的对象不需要知道链的结构，由客户端负责链的创建，<strong>降低了系统的耦合度</strong></li>
 <li>请求处理对象仅需维持一个指向其后继者的引用，而不需要维持它对所有的候选处理者的引用，<strong>可简化对象的相互连接</strong></li>
 <li>在给对象分派职责时，职责链可以给我们更多的<strong>灵活性</strong>，可以在运行时对该链进行动态的增删改，改变处理一个请求的职责</li>
 <li>新增一个新的具体请求处理者时无须修改原有代码，只需要在客户端重新建链即可，<strong>符合 “开闭原则”</strong></li>
 </ul>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<p><strong>缺点</strong></p>
+<ul>
 <li>一个请求可能因职责链没有被正确配置而<strong>得不到处理</strong></li>
 <li>对于比较长的职责链，请求的处理可能涉及到多个处理对象，<strong>系统性能将受到一定影响</strong>，且不方便调试</li>
 <li>可能因为职责链创建不当，造成循环调用，导致系统陷入<strong>死循环</strong></li>
 </ul>
-<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<p><strong>适用场景</strong></p>
+<ul>
 <li>有多个对象可以处理同一个请求，具体哪个对象处理该请求待运行时刻再确定，客户端只需将请求提交到链上，而无须关心请求的处理对象是谁以及它是如何处理的</li>
 <li>在不明确指定接收者的情况下，向多个对象中的一个提交一个请求</li>
 <li>可动态指定一组对象处理请求，客户端可以动态创建职责链来处理请求，还可以改变链中处理者之间的先后次序</li>
 </ul>
-<h2 id="典型应用"><a href="#典型应用" class="headerlink" title="典型应用"></a>典型应用</h2><ol>
+<p><strong>典型应用</strong></p>
+<ol>
 <li>Netty 中的 <code>Pipeline</code> 和 <code>ChannelHandler</code> 通过责任链设计模式来组织代码逻辑</li>
 <li>Spring Security 使用责任链模式，可以动态地添加或删除责任（处理 request 请求）</li>
 <li>Spring AOP 通过责任链模式来管理 Advisor</li>
@@ -2176,7 +2011,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">251.9k</span>&nbsp;字
+                class="white-color">200.5k</span>&nbsp;字
             
             
             

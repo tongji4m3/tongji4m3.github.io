@@ -31,8 +31,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -475,14 +475,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    37.1k
+                    30.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    129 分
+                    107 分
                 </div>
                 
 
@@ -497,231 +497,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="MySQL基础知识"><a href="#MySQL基础知识" class="headerlink" title="MySQL基础知识"></a>MySQL基础知识</h1><h2 id="MySQL服务器"><a href="#MySQL服务器" class="headerlink" title="MySQL服务器"></a>MySQL服务器</h2><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210621102944896.png" alt="image-20210621102944896"></p>
-<h3 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h3><ul>
-<li>连接器负责跟客户端建立连接、获取权限、维持和管理连接。</li>
-<li>经过TCP握⼿，然后身份验证</li>
-<li>长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。</li>
-<li>短连接则是指每次执行完很少的几次查询就断开连接，下次查询再重新建立一个。</li>
-<li>建立连接的过程通常是比较复杂的，尽量使用长连接。</li>
-<li>通过执行mysql_reset_connection来重新初始化连接资源。将连接恢复到刚刚创建完时的状态。避免长连接累积导致内存占用太大</li>
-</ul>
-<h3 id="查询缓存（通常不用）"><a href="#查询缓存（通常不用）" class="headerlink" title="查询缓存（通常不用）"></a>查询缓存（通常不用）</h3><ul>
-<li>如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中。</li>
-<li>如果查询 请求中包含某些系统函数、用户自定义变量和函数、一些系统表，如 mysql、information_schema、 performance_schema 数据库中的表，那这个请求就不会被缓存。</li>
-<li>MySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了INSERT、 UPDATE、DELETE、TRUNCATE TABLE、ALTER TABLE、DROP TABLE或 DROP DATABASE语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除！</li>
-<li>所以查询缓存的命中率会非常低。因维护这块缓存而造成一些开销，比如每次都要去查询缓存中检索，查询请求 处理完需要更新查询缓存，维护该查询缓存对应的内存区域。从MySQL 5.7.20开始，不推荐使用查询缓存，并在MySQL 8.0中删除。</li>
-</ul>
-<h3 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h3><p>包括词法分析、语法分析</p>
-<h3 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h3><p>优化的结果就是生成一个执行计划，这个执行计划表明了应该使用哪些索引进行查询，表之间的连接顺序是啥样的。我们可以使用EXPLAIN语句来查看某个语句的执行计划</p>
-<h3 id="存储引擎层"><a href="#存储引擎层" class="headerlink" title="存储引擎层"></a>存储引擎层</h3><ul>
-<li>InnoDB：具备外键支持功能的事务存储引擎，默认的存储引擎</li>
-<li>Memory：置于内存的表</li>
-<li>MyISAM：主要的非事务处理存储引擎</li>
-</ul>
-<p>把连接管理、查询缓存、语法解析、查询优化这些并不涉及真实数据存储的功能划分为MySQL server的功能，把真实存取数据的功能划分为存储引擎的功能。各种不同的存储引擎向上边的MySQL server层提供统一的调用接口（也就是存储引擎API）</p>
-<p> 截止到服务器程序完成了查询优化为止，还没有真正的去访问真实的数据表，MySQL服务器把数据的存储和提取操作都封装到了一个叫存储引擎的模块里。我们知道表是由一行一行的记录组成的，但这只是一个逻辑上的概念，物理上如何表示记录，怎么从表中读取数据，怎么把数据写入具体的物理存储器上，这都是存储引擎负责的事情。为了实现不同的功能，MySQL提供了各式各样的存储引擎，不同存储引擎管理的表具体的存储结构可能不同，采用的存取算法也可能不同。</p>
-<h2 id="MySQL引擎"><a href="#MySQL引擎" class="headerlink" title="MySQL引擎"></a>MySQL引擎</h2><h3 id="MyISAM存储引擎"><a href="#MyISAM存储引擎" class="headerlink" title="MyISAM存储引擎"></a>MyISAM存储引擎</h3><p>插入数据快，空间和内存使用比较低。如果表主要是用于插入新记录和读出记录，那么选择MyISAM能实现处理高效率。如果应用的完整性、并发性要求比较低，也可以使用。如果数据表主要用来插入和查询记录，则MyISAM引擎能提供较高的处理效率</p>
-<ul>
-<li>适用频繁执行全表count语句，因为InnoDB没有存储count字段</li>
-<li>对数据进行增删改的频率不高，查询非常频繁</li>
-<li>没有事务</li>
-</ul>
-<h3 id="InnoDB存储引擎"><a href="#InnoDB存储引擎" class="headerlink" title="InnoDB存储引擎"></a>InnoDB存储引擎</h3><p>支持事务处理，支持外键，支持崩溃修复能力和并发控制。如果需要对事务的完整性要求比较高（比如银行），要求实现并发控制（比如售票），那选择InnoDB有很大的优势。如果需要频繁的更新、删除操作的数据库，也可以选择InnoDB，因为支持事务的提交（commit）和回滚（rollback）。</p>
-<ul>
-<li>增删改查都相当频繁</li>
-<li>对可靠性要求高</li>
-</ul>
-<p><strong>与MyISAM的区别：</strong></p>
-<ol>
-<li><p>InnoDB 支持事务，MyISAM 不支持事务。这是 MySQL 将默认存储引擎从 MyISAM 变成 InnoDB 的重要原因之一；</p>
-</li>
-<li><p>InnoDB 支持外键，而 MyISAM 不支持。对一个包含外键的 InnoDB 表转为 MYISAM 会失败；  </p>
-</li>
-<li><p>InnoDB 是聚集索引，MyISAM 是非聚集索引。聚簇索引的文件存放在主键索引的叶子节点上，因此 InnoDB 必须要有主键，通过主键索引效率很高。但是辅助索引需要两次查询，先查询到主键，然后再通过主键查询到数据。因此，主键不应该过大，因为主键太大，其他索引也都会很大。而 MyISAM 是非聚集索引，数据文件是分离的，索引保存的是数据文件的指针。主键索引和辅助索引是独立的。 </p>
-</li>
-<li><p>InnoDB 不保存表的具体行数，执行 select count(*) from table 时需要全表扫描。而MyISAM 用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快；    </p>
-</li>
-<li><p>InnoDB 最小的锁粒度是行锁，MyISAM 最小的锁粒度是表锁。一个更新语句会锁住整张表，导致其他查询和更新都会被阻塞，因此并发访问受限。这也是 MySQL 将默认存储引擎从 MyISAM 变成 InnoDB 的重要原因之一；</p>
-</li>
-</ol>
-<p><strong>如何选择：</strong></p>
-<ol>
-<li><p>是否要支持事务，如果要请选择 InnoDB，如果不需要可以考虑 MyISAM；</p>
-</li>
-<li><p>如果表中绝大多数都只是读查询，可以考虑 MyISAM，如果既有读写也挺频繁，请使用InnoDB。</p>
-</li>
-<li><p>系统崩溃后，MyISAM恢复起来更困难，能否接受，不能接受就选 InnoDB；</p>
-</li>
-<li><p>MySQL5.5版本开始Innodb已经成为Mysql的默认引擎(之前是MyISAM)，说明其优势是有目共睹的。如果你不知道用什么存储引擎，那就用InnoDB，至少不会差。</p>
-</li>
-</ol>
-<h3 id="MEMORY存储引擎"><a href="#MEMORY存储引擎" class="headerlink" title="MEMORY存储引擎"></a>MEMORY存储引擎</h3><p>所有的数据都在内存中，数据的处理速度快，但是安全性不高。如果需要很快的读写速度，对数据的安全性要求较低，可以选择MEMOEY。它对表的大小有要求，不能建立太大的表。所以，这类数据库只使用在相对较小的数据库表。如果只是临时存放数据，数据量不大，并且不需要较高的数据安全性，可以选择将数据保存在内存中的Memory引擎，MySQL中使用该引擎作为临时表，存放查询的中间结果</p>
-<p>默认情况下，MEMORY数据表使用散列索引，利用这种索引进行“相等比较”非常快，但是对“范围比较”的速度就慢多了。因此，散列索引值适合使用在”=”和”&lt;=&gt;”的操作符中，不适合使用在”&lt;”或”&gt;”操作符中，也同样不适合用在order by字句里。如果确实要使用”&lt;”或”&gt;”或betwen操作符，可以使用btree索引来加快速度。</p>
-<h2 id="MySQL语法"><a href="#MySQL语法" class="headerlink" title="MySQL语法"></a>MySQL语法</h2><h3 id="查询总分排名3-5的学生"><a href="#查询总分排名3-5的学生" class="headerlink" title="查询总分排名3-5的学生"></a>查询总分排名3-5的学生</h3><pre class=" language-mysql"><code class="language-mysql">limit offset, rows
-
-#第一个参数“位置偏移量”指示 MySQL 从哪一行开始显示，是一个可选参数，如果不指定“位置偏移量”，将会从表中的第一条记录开始（第一条记录的位置偏移量是 0，第二条记录的位置偏移量是 1，以此类推）
-#第二个参数“行数”指示返回的记录条数。
-
-SELECT * FROM tb_students_info LIMIT 4; #显示表查询结果的前 4 行
-
-SELECT * FROM tb_students_info LIMIT 3,5;#从第 4 条记录行开始的之后的 5 条记录
-
-SELECT * FROM table LIMIT 5,10; # 检索记录行 6-15</code></pre>
-<pre class=" language-mysql"><code class="language-mysql">#表t_score，字段 stu_id、sub_id、score 分别代表学生ID、课程ID、得分
-#请查询总分排名3-5的学生
-
-select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</code></pre>
-<h2 id="三大范式"><a href="#三大范式" class="headerlink" title="三大范式"></a>三大范式</h2><h3 id="第一范式（1NF"><a href="#第一范式（1NF" class="headerlink" title="第一范式（1NF)"></a>第一范式（1NF)</h3><p>一个关系模式R中的所有属性的域都是原子的（该域的元素是不可再分单元）</p>
-<ul>
-<li>第一范式是对关系模式的最起码的要求，不满足第一范式的数据库模式不能称为关系数据库</li>
-<li>强调的是<strong>列的原子性</strong>，即列不能够再分成其他几列。 </li>
-</ul>
-<p>考虑这样一个表：【联系人】（姓名，性别，电话） </p>
-<p>如果在实际场景中，一个联系人有家庭电话和公司电话，那么这种表结构设计就没有达到 1NF。要符合 1NF 我们只需把列（电话）拆分，即：【联系人】（姓名，性别，家庭电话，公司电话）</p>
-<h3 id="第二范式（2NF"><a href="#第二范式（2NF" class="headerlink" title="第二范式（2NF)"></a>第二范式（2NF)</h3><p>若关系模式R∈1NF，并且每一个非主属性都完全依赖于R的主码，则R∈2NF。</p>
-<p>所谓完全依赖是指不能存在仅依赖主关键字一部分的属性</p>
-<ul>
-<li>满足1NF</li>
-<li>表必须有主键</li>
-<li>没有包含在主键中的列必须完全依赖于主键，而不能只依赖于主键的一部分。 </li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>学号</th>
-<th>课程</th>
-<th>成绩</th>
-<th>课程学分</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>10001</td>
-<td>数学</td>
-<td>100</td>
-<td>6</td>
-</tr>
-<tr>
-<td>10001</td>
-<td>语文</td>
-<td>90</td>
-<td>2</td>
-</tr>
-<tr>
-<td>10001</td>
-<td>英语</td>
-<td>85</td>
-<td>3</td>
-</tr>
-<tr>
-<td>10002</td>
-<td>数学</td>
-<td>90</td>
-<td>6</td>
-</tr>
-<tr>
-<td>10003</td>
-<td>数学</td>
-<td>99</td>
-<td>6</td>
-</tr>
-<tr>
-<td>10004</td>
-<td>语文</td>
-<td>89</td>
-<td>2</td>
-</tr>
-</tbody></table>
-<p>表中主键为 （学号，课程），我们可以表示为 (学号，课程) -&gt; (成绩，课程学分)， 表示所有非主键列 (成绩，课程学分)都依赖于主键 (学号，课程)。 但是，表中还存在另外一个依赖：（课程）-&gt;(课程学分）。这样非主键列 ‘课程学分‘ 依赖于部分主键列 ’课程‘， 所以上表是不满足第二范式的。</p>
-<p>拆分为<strong>学生选课表</strong>、 <strong>课程信息表</strong></p>
-<h3 id="第三范式（3NF"><a href="#第三范式（3NF" class="headerlink" title="第三范式（3NF)"></a>第三范式（3NF)</h3><p>满足第二范式，并且表中的列不存在对非主键列的传递依赖。</p>
-<table>
-<thead>
-<tr>
-<th align="left">学号</th>
-<th align="left">姓名</th>
-<th align="left">性别</th>
-<th align="left">班级</th>
-<th align="left">班主任</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">10001</td>
-<td align="left">张三</td>
-<td align="left">男</td>
-<td align="left">一班</td>
-<td align="left">小王</td>
-</tr>
-<tr>
-<td align="left">10002</td>
-<td align="left">李四</td>
-<td align="left">男</td>
-<td align="left">一班</td>
-<td align="left">小王</td>
-</tr>
-<tr>
-<td align="left">10003</td>
-<td align="left">王五</td>
-<td align="left">男</td>
-<td align="left">二班</td>
-<td align="left">小李</td>
-</tr>
-<tr>
-<td align="left">10004</td>
-<td align="left">张小三</td>
-<td align="left">男</td>
-<td align="left">二班</td>
-<td align="left">小李</td>
-</tr>
-</tbody></table>
-<p>主键为：（学号），所有字段 （姓名，性别，班级，班主任）都依赖与主键（学号），不存在对主键的部分依赖。所以是满足第二范式。</p>
-<p>虽然满足第二范式，所有字段都依赖主键（学号），但是，表中存在一个传递依赖，(学号）-&gt;(班级）-&gt;（班主任）。也就是说，（班主任）这个非主键列依赖与另外一个非主键列 （班级）。所以不符合第三范式。</p>
-<p>拆分为：<strong>学生信息表</strong>、<strong>班级信息表</strong></p>
-<h2 id="MySQL的数据目录"><a href="#MySQL的数据目录" class="headerlink" title="MySQL的数据目录"></a>MySQL的数据目录</h2><p>在/usr/local/mysql/data目录下，存放着MySQL的数据：</p>
-<pre><code>├── boying
-    ├── db.opt
-  ├── test.frm
-  ├── test.ibd
-  ├── user.frm
-  └── user.ibd
-├── ibdata1
-├── mysql
-├── performance_schema
-└── sys</code></pre>
-<ul>
-<li>ibdata1文件是<code>系统表空间</code>，大小12M、自扩展文件。在一个MySQL服务器中，系统表空间只有一份。MySQL 5.5-6.6之间的版本中，我们表中的数据都会被默认存储到这个**<em>系统表空间**</em>。</li>
-<li>每当创建一个数据库时，都会在data下新建一个和数据库名同名的子目录，包含如下文件：<ul>
-<li><code>db.opt</code>。这个文件中包含了该数据库的各种属性，比方说该数据库的字符集和比较规则</li>
-<li>描述表结构的文件（列，数据结构，约束条件，字符集等），<code>表名.frm</code></li>
-<li>独立表空间。MySQL5.7中，<code>InnoDB</code>并不会默认的把各个表的数据存储到系统表空间中，而是为每一个表建立一个独立表空间，也就是说我们创建了多少个表，就有多少个独立表空间。使用<code>独立表空间</code>来存储表数据，<code>表名.ibd</code>，用来存储<code>test</code>表中的数据和索引。InnoDB是以页为单位管理存储空间的，我们的聚簇索引（也就是完整的表数据）和其他的二级索引都是以<code>B+</code>树的形式保存到表空间的，而<code>B+</code>树的节点就是数据页。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h2><p><code>InnoDB</code>存储引擎在处理客户端的请求时，当需要访问某个页的数据时，就会把完整的页的数据全部加载到内存中，也就是说即使我们只需要访问一个页的一条记录，那也需要先把整个页的数据加载到内存中。将整个页加载到内存中后就可以进行读写访问了，在进行完读写访问之后并不着急把该页对应的内存空间释放掉，而是将其<code>缓存</code>起来，这样将来有请求再次访问该页面时，就可以省去磁盘<code>IO</code>的开销了。</p>
-<p>每个缓存页对应的控制信息占用的内存大小是相同的，我们就把每个页对应的控制信息占用的一块内存称为一个<code>控制块</code>吧，控制块和缓存页是一一对应的，它们都被存放到 Buffer Pool 中，其中控制块被存放到 Buffer Pool 的前边，缓存页被存放到 Buffer Pool 后边，所以整个<code>Buffer Pool</code>对应的内存空间看起来就是这样的：</p>
-<p><img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210712095027380.png" alt="image-20210712095027380"></p>
-<h3 id="free链表的管理"><a href="#free链表的管理" class="headerlink" title="free链表的管理"></a>free链表的管理</h3><p>当我们最初启动<code>MySQL</code>服务器的时候，需要完成对<code>Buffer Pool</code>的初始化过程，就是先向操作系统申请<code>Buffer Pool</code>的内存空间，然后把它划分成若干对控制块和缓存页。但是此时并没有真实的磁盘页被缓存到<code>Buffer Pool</code>中（因为还没有用到），之后随着程序的运行，会不断的有磁盘上的页被缓存到<code>Buffer Pool</code>中。那么问题来了，从磁盘上读取一个页到<code>Buffer Pool</code>中的时候该放到哪个缓存页的位置呢？或者说怎么区分<code>Buffer Pool</code>中哪些缓存页是空闲的，哪些已经被使用了呢？</p>
-<p>我们最好在某个地方记录一下Buffer Pool中哪些缓存页是可用的，这个时候缓存页对应的<code>控制块</code>就派上大用场了，我们可以把所有空闲的缓存页对应的控制块作为一个节点放到一个链表中，这个链表也可以被称作<code>free链表</code>（或者说空闲链表）。刚刚完成初始化的<code>Buffer Pool</code>中所有的缓存页都是空闲的，所以每一个缓存页对应的控制块都会被加入到<code>free链表</code>中</p>
-<h3 id="缓存页的哈希处理"><a href="#缓存页的哈希处理" class="headerlink" title="缓存页的哈希处理"></a>缓存页的哈希处理</h3><p>我们前边说过，当我们需要访问某个页中的数据时，就会把该页从磁盘加载到<code>Buffer Pool</code>中，如果该页已经在<code>Buffer Pool</code>中的话直接使用就可以了。</p>
-<p>我们可以用<code>表空间号 + 页号</code>作为<code>key</code>，<code>缓存页</code>作为<code>value</code>创建一个哈希表，在需要访问某个页的数据时，先从哈希表中根据<code>表空间号 + 页号</code>看看有没有对应的缓存页，如果有，直接使用该缓存页就好，如果没有，那就从<code>free链表</code>中选一个空闲的缓存页，然后把磁盘中对应的页加载到该缓存页的位置。</p>
-<h3 id="flush链表的管理"><a href="#flush链表的管理" class="headerlink" title="flush链表的管理"></a>flush链表的管理</h3><p>如果我们修改了<code>Buffer Pool</code>中某个缓存页的数据，那它就和磁盘上的页不一致了，这样的缓存页也被称为<code>脏页</code>（英文名：<code>dirty page</code>）。当然，最简单的做法就是每发生一次修改就立即同步到磁盘上对应的页上，但是频繁的往磁盘中写数据会严重的影响程序的性能。所以每次修改缓存页后，我们并不着急立即把修改同步到磁盘上，而是在未来的某个时间点进行同步</p>
-<p>但是如果不立即同步到磁盘的话，那之后再同步的时候我们怎么知道<code>Buffer Pool</code>中哪些页是<code>脏页</code>，哪些页从来没被修改过呢？所以，我们不得不再创建一个存储脏页的链表，凡是修改过的缓存页对应的控制块都会作为一个节点加入到一个链表中，因为这个链表节点对应的缓存页都是需要被刷新到磁盘上的，所以也叫<code>flush链表</code>。</p>
-<h3 id="LRU链表的管理"><a href="#LRU链表的管理" class="headerlink" title="LRU链表的管理"></a>LRU链表的管理</h3><p><code>Buffer Pool</code>对应的内存大小毕竟是有限的，如果需要缓存的页占用的内存大小超过了<code>Buffer Pool</code>大小，也就是<code>free链表</code>中已经没有多余的空闲缓存页的时候，需要某些旧的缓存页从<code>Buffer Pool</code>中移除，然后再把新的页放进来</p>
-<p>当<code>Buffer Pool</code>中不再有空闲的缓存页时，就需要淘汰掉部分最近很少使用的缓存页。不过，我们怎么知道哪些缓存页最近频繁使用，哪些最近很少使用呢？呵呵，神奇的链表再一次派上了用场，我们可以再创建一个链表，由于这个链表是为了<code>按照最近最少使用</code>的原则去淘汰缓存页的，所以这个链表可以被称为<code>LRU链表</code>（LRU的英文全称：Least Recently Used）。当我们需要访问某个页时，可以这样处理<code>LRU链表</code>：</p>
-<ul>
-<li>如果该页不在<code>Buffer Pool</code>中，在把该页从磁盘加载到<code>Buffer Pool</code>中的缓存页时，就把该缓存页对应的<code>控制块</code>作为节点塞到链表的头部。</li>
-<li>如果该页已经缓存在<code>Buffer Pool</code>中，则直接把该页对应的<code>控制块</code>移动到<code>LRU链表</code>的头部。</li>
-</ul>
-<p>也就是说：只要我们使用到某个缓存页，就把该缓存页调整到<code>LRU链表</code>的头部，这样<code>LRU链表</code>尾部就是最近最少使用的缓存页</p>
-<h1 id="MySQL索引"><a href="#MySQL索引" class="headerlink" title="MySQL索引"></a>MySQL索引</h1><h2 id="底层结构"><a href="#底层结构" class="headerlink" title="底层结构"></a>底层结构</h2><h3 id="行格式"><a href="#行格式" class="headerlink" title="行格式"></a>行格式</h3><p>我们平时是以记录为单位来向表中插入数据的，这些记录在磁盘上的存放方式也被称为行格式或者记录格式。</p>
+                <h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><h2 id="底层结构"><a href="#底层结构" class="headerlink" title="底层结构"></a>底层结构</h2><h3 id="行格式"><a href="#行格式" class="headerlink" title="行格式"></a>行格式</h3><p>我们平时是以记录为单位来向表中插入数据的，这些记录在磁盘上的存放方式也被称为行格式或者记录格式。</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210621110346914.png" alt="image-20210621110346914"></p>
 <h4 id="记录头信息"><a href="#记录头信息" class="headerlink" title="记录头信息"></a>记录头信息</h4><ul>
-<li><strong>delete_mask</strong> 标记该记录是否被删除 。这些被删除的记录之所以不立即从磁盘上移除，是因为移除它们之后把其他的记录在磁盘上重新排列需要性能消耗，所以只是打一个删除标记而已，所有被删除掉的记录都会组成一个所谓的垃圾链表，在这个链表中的记录占用的空间称之为 所谓的可重用空间，之后如果有新记录插入到表中的话，可能把这些被删除的记录占用的存储空间覆盖掉。</li>
+<li><strong>delete_mask</strong> 标记该记录是否被删除 。这些被删除的记录之所以不立即从磁盘上移除，是因为移除它们之后把其他的记录在磁盘上重新排列需要性能消耗，所以只是打一个删除标记而已，所有被删除掉的记录都会组成一个所谓的垃圾链表，在这个链表中的记录占用的空间称之为所谓的可重用空间，之后如果有新记录插入到表中的话，可能把这些被删除的记录占用的存储空间覆盖掉。</li>
 <li>min_rec_mask B+树的每层非叶子节点中的最小记录都会添加该标记 </li>
 <li>n_owned 表示当前记录拥有的记录数 </li>
 <li><strong>heap_no</strong> 这个属性表示当前记录在本页中的位置。最小记录和最大记录的heap_no值分别是0和1</li>
 <li><strong>record_type</strong> 当前记录的类型，0普通记录，1表示B+树非叶子节点记录，2表示最小记录，3表示最大记录 </li>
-<li><strong>next_record</strong> 表示从当前记录的真实数据到下一条记录的真实数据的地址偏移量。下一条记录指得并不是按照我们插入顺序的下一条记录，而是按照主键值由小到大的顺序的下一条记录。而且规定 Infimum记录（也就是最小记录） 的下一条记录就是本页中主键值最小的用户记录，而本页中主键值最大的用户记 录的下一条记录就是 Supremum记录（也就是最大记录）。<strong>每个记录的头信息中都有一个next_record属性，从而使页中的所有记录串联成一个单链表。</strong></li>
+<li><strong>next_record</strong> 表示从当前记录的真实数据到下一条记录的真实数据的地址偏移量。下一条记录指得并不是按照我们插入顺序的下一条记录，而是按照主键值由小到大的顺序的下一条记录。而且规定 Infimum记录（也就是最小记录） 的下一条记录就是本页中主键值最小的用户记录，而本页中主键值最大的用户记录的下一条记录就是 Supremum记录（也就是最大记录）。<strong>每个记录的头信息中都有一个next_record属性，从而使页中的所有记录串联成一个单链表。</strong></li>
 </ul>
 <h4 id="记录的真实数据"><a href="#记录的真实数据" class="headerlink" title="记录的真实数据"></a>记录的真实数据</h4><p>记录的真实数据除了我们自己定义的列的数据以外，MySQL会为每个记录默认的添加一些列（也称为隐藏列）</p>
 <ul>
@@ -785,7 +569,8 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 </ol>
 <p>以其他列作为搜索条件 </p>
 <p>对非主键列的查找的过程可就不这么幸运了，因为在数据页中并没有对非主键列建立所谓的页目录，所以我们无法通过二分法快速定位相应的槽。这种情况下只能<strong>从最小记录开始依次遍历单链表中的每条记录</strong>，然后对比每条记录是不是符合搜索条件。很显然，这种查找的效率是非常低的。</p>
-<h2 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h2><h3 id="无索引查找"><a href="#无索引查找" class="headerlink" title="无索引查找"></a>无索引查找</h3><p><strong>单个页面中查找</strong></p>
+<h2 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h2><p><strong>无索引查找</strong></p>
+<p><strong>单个页面中查找</strong></p>
 <ul>
 <li>各个数据页可以组成⼀个双向链表</li>
 <li>⽽每个数据页中的记录又可以组成⼀个单向链表</li>
@@ -798,7 +583,8 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 <li>从所在的页内中查找相应的记录。</li>
 </ol>
 <p>在没有索引的情况下，不论是根据主键列或者其他列的值进行查找，由于我们并不能快速的定位到记录所在的页，所以只能从第一个页沿着双向链表一直往下找，在每一个页中根据我们刚刚唠叨过的查找方式去查找指定的记录。因为要遍历所有的数据页，所以这种方式显然是超级耗时的</p>
-<h3 id="索引原理"><a href="#索引原理" class="headerlink" title="索引原理"></a>索引原理</h3><p>在对页中的记录进行增删改操作的过程中，我们必须通过一些诸如记录移动的操作来始终保证这个状态一直成立：<strong>下一个数据页中用户记录的主键值必须大于上一个页中用户记录的主键值</strong>。这个过程我们也可以称为页分裂。</p>
+<p><strong>索引原理</strong></p>
+<p>在对页中的记录进行增删改操作的过程中，我们必须通过一些诸如记录移动的操作来始终保证这个状态一直成立：<strong>下一个数据页中用户记录的主键值必须大于上一个页中用户记录的主键值</strong>。这个过程我们也可以称为页分裂。</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210621115150755.png" alt="image-20210621115150755"></p>
 <p>因为这些16KB的页在物理存储上可能并不挨着，所以如果想从这么多页中根据主键值快速定位某些记录所在的页，我们需要给它们做个目录，每个页对应一个目录项， 每个目录项包括下边两个部分： <strong>页的用户记录中最小的主键值、页号</strong>（为了在根据主键值进行查找时使用二分法快速定位具体的目录项而假设所有目录项都可以在物理存储器上连续存储）</p>
 <img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210621115328368.png" alt="image-20210621115328368" style="zoom:50%;" />
@@ -823,7 +609,8 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 <p>如果B+树有3层，最多能存放1000×1000×100=100000000条记录。 </p>
 <p>如果B+树有4层，最多能存放1000×1000×1000×100=100000000000条记录。</p>
 <p>所以一般情况下，我们用到的B+树都不会超过4层，那我们<strong>通过主键值去查找某条记录最多只需要做4个页面内的查找（查找3个目录项页和一个用户记录页），又因为在每个页面内有所谓的Page Directory（页目录），所以在页面内也可以通过二分法实现快速定位记录</strong></p>
-<h3 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h3><ul>
+<p><strong>理解</strong></p>
+<ul>
 <li>索引是存储引擎用于快速找到记录的一种数据结构，索引优化是对查询性能优化最有效的手段</li>
 <li>索引代价：空间代价、时间代价（对数据增删改查要修改B+树的索引）</li>
 <li>每个索引都对应一棵B+树，B+树分为好多层，最下边一层是叶子节点，其余的是内节点。所有用户记录都存储在B+树的叶子节点，所有目录项记录都存储在内节点。</li>
@@ -833,7 +620,7 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 <li>通过索引查找记录是从B+树的根节点开始，一层一层向下搜索。由于每个页面都按照索引列的值建立了Page Directory（页目录），所以在这些页面中的查找非常快。</li>
 </ul>
 <h2 id="索引模型"><a href="#索引模型" class="headerlink" title="索引模型"></a>索引模型</h2><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><ul>
-<li><p>只有Memory引擎显示支持，且是Memory引擎的默认索引类型，支持非唯一哈希索引(即冲突的以链表存储).只适用特定场合，但是性能显著</p>
+<li><p>只有Memory引擎显示支持，且是Memory引擎的默认索引类型，支持非唯一哈希索引(即冲突的以链表存储)。只适用特定场合，但是性能显著</p>
 </li>
 <li><p>因为不是有序的，所以哈希索引做区间查询很慢，不支持排序</p>
 </li>
@@ -871,62 +658,19 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 <li>需要遵循一些约束，目的是尽可能存储更多的信息</li>
 </ul>
 <h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><ul>
-<li>B+树很好地配合磁盘的读写特性，减少单次查询的磁盘访问次数，磁盘读写代价更低</li>
-<li>B+树的查询效率更加稳定</li>
-<li>B+树更有利于对数据库的扫描（范围查询）</li>
+<li><p>B+树很好地配合磁盘的读写特性，减少单次查询的磁盘访问次数，磁盘读写代价更低</p>
+</li>
+<li><p>B+树的查询效率更加稳定</p>
+</li>
+<li><p>B+树更有利于对数据库的扫描（范围查询）</p>
+</li>
+<li><p>有n棵子树的结点中含有n个关键字，每个关键字不保存数据，只用来索引，所有数据都保存在叶子节点。</p>
+</li>
+<li><p>所有的叶子结点中包含了全部关键字的信息，及指向含这些关键字记录的指针，且叶子结点本身依关键字的大小自小而大顺序链接。</p>
+</li>
+<li><p>所有的中间节点元素都同时存在于子节点，在子节点元素中是最大（或最小）元素。</p>
+</li>
 </ul>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/5824016-540158230f76f9cc.png"></p>
-<ul>
-<li>根节点至少一个元素</li>
-<li>非根节点元素范围：m/2 &lt;= k &lt;= m-1。除根结点外，每个结点至少有[m/2]个子女，根结点至少有两个子女</li>
-<li>父节点存有右孩子的第一个元素的索引。</li>
-<li>B+ 树是一种树数据结构，是一个n叉树，每个节点通常有多个孩子，一棵B+树包含根节点、内部节点和叶子节点。根节点可能是一个叶子节点，也可能是一个包含两个或两个以上孩子节点的节点。</li>
-<li>有n棵子树的结点中含有n个关键字，每个关键字不保存数据，只用来索引，所有数据都保存在叶子节点。</li>
-<li>所有的叶子结点中包含了全部关键字的信息，及指向含这些关键字记录的指针，且叶子结点本身依关键字的大小自小而大顺序链接。</li>
-<li>所有的中间节点元素都同时存在于子节点，在子节点元素中是最大（或最小）元素。</li>
-</ul>
-<p><strong>区别</strong></p>
-<ul>
-<li>B+树中间节点没有存储数据，只有叶节点存放数据，其余节点用来索引，所以同样大小的磁盘页可以容纳更多的节点元素，而B-树是每个索引节点都会有Data域。这就意味着，数据量相同的情况下，B+树的结构比B-树更加“矮胖”，因此查询是IO次数也更少。这就决定了B+树更适合用来存储外部数据，也就是所谓的磁盘数据。</li>
-<li>其次，B+树的查询必须最终查询到叶子节点，而B-树只要找到匹配元素即可，无论匹配元素处于中间节点还是叶子节点。因此，B-树的查询性能并不稳定（最好情况是只查根节点，最坏情况是查到叶子节点）。而B+树每一次查找都是稳定的。</li>
-<li>B+树只要遍历叶子节点就可以实现整棵树的遍历。而且在数据库中基于范围的查询是非常频繁的，而B树不支持这样的操作（或者说效率太低）。对于<strong>范围查询</strong>，比如查询范围为3~11的元素，B-树只能依靠繁琐的中序遍历，首先自顶向下查找范围的下限，然后中序遍历找到上限。B+树的范围查询则要简单的多，首先自顶向下查找范围的下限，然后只需要在叶子节点所在的链表上做遍历即可。</li>
-</ul>
-<p><strong>优势</strong></p>
-<p>1.单一节点存储更多的元素，使得查询的IO次数更少。</p>
-<p>2.所有查询都要查找到叶子节点，查询性能稳定。</p>
-<p>3.所有叶子节点形成有序链表，便于范围查询。</p>
-<h4 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h4><p>对于插入操作很简单，只需要记住一个技巧即可：<strong>当节点元素数量大于m-1的时候，按中间元素分裂成左右两部分，中间元素分裂到父节点当做索引存储，但是，本身中间元素还是分裂右边这一部分的</strong>。</p>
-<p>下面以一颗5阶B+树的插入过程为例，5阶B+树的节点最少2个元素，最多4个元素。</p>
-<ul>
-<li>插入5，10，15，20</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5824016-d382af5adae64c9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/352/format/webp" alt="img"></p>
-<ul>
-<li>插入25，此时元素数量大于4个了，分裂</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5824016-0fdf67534b398b14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/542/format/webp" alt="img"></p>
-<ul>
-<li>接着插入26，30，继续分裂</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5824016-5c335f386d0d7518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/602/format/webp" alt="img"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5824016-0f74727e08f5a45d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/687/format/webp" alt="img"></p>
-<h4 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h4><p><strong>叶子节点有指针的存在，向兄弟节点借元素时，不需要通过父节点了，而是可以直接通过兄弟节移动即可（前提是兄弟节点的元素大于m/2），然后更新父节点的索引；如果兄弟节点的元素不大于m/2（兄弟节点也没有多余的元素），则将当前节点和兄弟节点合并，并且删除父节点中的key</strong>，下面我们看看具体的实例。</p>
-<ul>
-<li>初始状态</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5824016-8b1c2a995b8da6b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/963/format/webp" alt="img"></p>
-<ul>
-<li>删除10，删除后，不满足要求，发现左边兄弟节点有多余的元素，所以去借元素，最后，修改父节点索引</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5824016-3363541b1c6a0765.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/995/format/webp" alt="img"></p>
-<ul>
-<li>删除元素5，发现不满足要求，并且发现左右兄弟节点都没有多余的元素，所以，可以选择和兄弟节点合并，最后修改父节点索引</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5824016-4ea5c178a3435518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/944/format/webp" alt="img"></p>
-<ul>
-<li>发现父节点索引也不满足条件，所以，需要做跟上面一步一样的操作</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5824016-091103cefce92d4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/919/format/webp" alt="img"></p>
 <h2 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h2><h3 id="主键索引"><a href="#主键索引" class="headerlink" title="主键索引"></a>主键索引</h3><ul>
 <li>也称为聚簇索引，主键索引的叶子节点存的是整行数据。</li>
 <li>所有完整的用户记录都存放在这个聚簇索引的叶子节点处</li>
@@ -942,11 +686,12 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 <li>没有唯一性约束，所以索引列值为4的记录可能分布在多个数据页中</li>
 <li>对于普通索引来说，查找到满足条件的第一个记录(5，500)后，需要查找下一个记录，直到碰到第一个不满足k=5条件的记录。</li>
 </ul>
+<p><strong>不存储地址</strong></p>
 <p>二级索引为什么不存储主键索引的物理地址？直接根据物理地址定位不就能节省回表的定位成本了吗？</p>
 <p>回表之所以成本高，原因就在于每次从二级索引定位到记录以后（假如没有索引覆盖/索引下推），都要重新到聚簇索引根据主键去查找完整记录。</p>
-<p>对于一条批量查询的sql而言，如果每一次查询都涉及回表，那么【二级索引定位】-&gt;【二级获取的主键id进行聚簇索引定位】-&gt;【下一条二级索引定位】-&gt;【下一条二级获取的主键id进行聚簇索引定位】-&gt; …这个一来一回的过程其实就是随机I/O，效率低下。</p>
+<p>对于一条批量查询的sql而言，如果每一次查询都涉及回表，那么【二级索引定位】-&gt;【二级获取的主键id进行聚簇索引定位】-&gt;【下一条二级索引定位】-&gt;【下一条二级获取的主键id进行聚簇索引定位】这个一来一回的过程其实就是随机I/O，效率低下。</p>
 <p>而如果按照二级索引存储的是聚簇索引记录的物理地址，那就不会产生回表操作了，也就是不用每次获取到主键id之后都要回聚簇索引重新定位完整记录的具体位置；取而代之的是，直接根据物理地址就能定位到记录的具体位置。</p>
-<p><strong>问题</strong></p>
+<p><strong>物理地址会变化</strong></p>
 <p>数据迁移角度：线上数据库是肯定要备份，如果二级索引存储的是物理地址，那么当数据发生迁移的时候，原来的物理地址变了</p>
 <p>页变化角度：当插入一定数据以后，会产生页分裂，页分裂同样会导致物理地址产生变化。</p>
 <h3 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h3><ul>
@@ -986,9 +731,11 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 </ul>
 <h3 id="普通索引与唯一索引"><a href="#普通索引与唯一索引" class="headerlink" title="普通索引与唯一索引"></a>普通索引与唯一索引</h3><p>尽量选择普通索引：这两类索引在查询能力上是没差别的，主要考虑的是对更新性能的影响</p>
 <p>普通索引和change buffer的配合使用，对于数据量大的表的更新优化还是很明显的。</p>
-<h4 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h4><p>查询性能差距微乎其微：InnoDB的数据是按数据页为单位来读写的。也就是说，当需要读一条记录的时候，并不是将这个记录本身从磁盘读出来，而是以页为单位，将其整体读入内存。数据页的大小默认是16KB。因为引擎是按页读写的，所以说，当找到k=5的记录的时候，它所在的数据页就都在内存里了。那么，对于普通索引来说，要多做的那一次“查找和判断下一条记录”的操作，就只需要一次指针寻找和一次计算。</p>
+<p><strong>查询操作</strong></p>
+<p>查询性能差距微乎其微：InnoDB的数据是按数据页为单位来读写的。也就是说，当需要读一条记录的时候，并不是将这个记录本身从磁盘读出来，而是以页为单位，将其整体读入内存。数据页的大小默认是16KB。因为引擎是按页读写的，所以说，当找到k=5的记录的时候，它所在的数据页就都在内存里了。那么，对于普通索引来说，要多做的那一次“查找和判断下一条记录”的操作，就只需要一次指针寻找和一次计算。</p>
 <p>流程：对于普通索引来说，查找到满足条件的第一个记录(5，500)后，需要查找下一个记录，直到碰到第一个不满足k=5条件的记录。对于唯一索引来说，由于索引定义了唯一性，查找到第一个满足条件的记录后，就会停止继续检索。</p>
-<h4 id="更新操作"><a href="#更新操作" class="headerlink" title="更新操作"></a>更新操作</h4><p>当需要更新一个数据页时，如果数据页在内存中就直接更新，而如果这个数据页还没有在内存中的话，在不影响数据一致性的前提下，InooDB会将这些更新操作缓存在change buffer中，这样就不需要从磁盘中读入这个数据了。在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行change buffer中与这个页有关的操作。通过这种方式就能保证这个数据逻辑的正确性。需要说明的是，虽然名字叫作change buffer，实际上它是可以持久化的数据。也就是说，change buffer在内存中有拷贝，也会被写入到磁盘上。如果能够将更新操作先记录在change buffer，减少读磁盘，语句的执行速度会得到明显的提升。而且，数据读入内存是需要占用buffer pool的，所以这种方式还能够避免占用内存，提高内存利用率。</p>
+<p><strong>更新操作</strong></p>
+<p>当需要更新一个数据页时，如果数据页在内存中就直接更新，而如果这个数据页还没有在内存中的话，在不影响数据一致性的前提下，InooDB会将这些更新操作缓存在change buffer中，这样就不需要从磁盘中读入这个数据了。在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行change buffer中与这个页有关的操作。通过这种方式就能保证这个数据逻辑的正确性。需要说明的是，虽然名字叫作change buffer，实际上它是可以持久化的数据。也就是说，change buffer在内存中有拷贝，也会被写入到磁盘上。如果能够将更新操作先记录在change buffer，减少读磁盘，语句的执行速度会得到明显的提升。而且，数据读入内存是需要占用buffer pool的，所以这种方式还能够避免占用内存，提高内存利用率。</p>
 <p>对于唯一索引来说，所有的更新操作都要先判断这个操作是否违反唯一性约束。比如，要插入(4，400)这个记录，就要先判断现在表中是否已经存在k=4的记录，而这必须要将数据页读入内存才能判断。如果都已经读入到内存了，那直接更新内存会更快，就没必要使用change buffer了。</p>
 <p>因此，唯一索引的更新就不能使用change buffer，实际上也只有普通索引可以使用。</p>
 <h3 id="自增主键"><a href="#自增主键" class="headerlink" title="自增主键"></a>自增主键</h3><ul>
@@ -1009,38 +756,23 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 <li>MySQL会⼀直向右匹配直到遇到范围查询 （&gt;，&lt;，BETWEEN，LIKE）就停⽌匹配。</li>
 </ul>
 <h3 id="索引下推优化"><a href="#索引下推优化" class="headerlink" title="索引下推优化"></a>索引下推优化</h3><p>可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数。</p>
-<h3 id="只为用于搜索、排序或分组的列创建索引"><a href="#只为用于搜索、排序或分组的列创建索引" class="headerlink" title="只为用于搜索、排序或分组的列创建索引"></a>只为用于搜索、排序或分组的列创建索引</h3><p>只为出现在WHERE子句中的列、连接子句中的连接列，或者出现在ORDER BY或GROUP BY子句中的列创建索引</p>
-<h3 id="考虑列的基数"><a href="#考虑列的基数" class="headerlink" title="考虑列的基数"></a>考虑列的基数</h3><ul>
-<li>指的是某一列中不重复数据的个数</li>
-<li>且如果某个建立了二级索引的列的重复值特别多，那么使用这个二级索引查出的记录还可能要做回表操作，这样性能损耗就更大了</li>
-</ul>
 <h3 id="索引列的类型尽量小"><a href="#索引列的类型尽量小" class="headerlink" title="索引列的类型尽量小"></a>索引列的类型尽量小</h3><ul>
 <li>在表示的整数范围允许的情况下，尽量让索引列使用较小的类型</li>
 <li>对于表的主键来说更加适用，因为不仅是聚簇索引中会存储主键值，其他所有的二级索引的节点处都会存储一份记录的主键值，如果主键适用更小的数据类型，也就意味着节省更多的存储空间和更高效的I/O</li>
 </ul>
-<h3 id="索引字符串值的前缀"><a href="#索引字符串值的前缀" class="headerlink" title="索引字符串值的前缀"></a>索引字符串值的前缀</h3><p>只对字符串的前几个字符进行索引    </p>
-<h3 id="让索引列在比较表达式中单独出现"><a href="#让索引列在比较表达式中单独出现" class="headerlink" title="让索引列在比较表达式中单独出现"></a>让索引列在比较表达式中单独出现</h3><p>如果索引列在比较表达式中不是以单独列的形式出现，而是以某个表达式，或者函数调用形式出现的话，是用不到索引的。</p>
-<h3 id="避免冗余和重复索引"><a href="#避免冗余和重复索引" class="headerlink" title="避免冗余和重复索引"></a>避免冗余和重复索引</h3><p>重复索引是指在相同的列上按照相同的顺序创建的相同类型的索引，应该避免这样创建重复索引，发现后也应该立即移除</p>
-<h3 id="选择合适的索引列顺序"><a href="#选择合适的索引列顺序" class="headerlink" title="选择合适的索引列顺序"></a>选择合适的索引列顺序</h3><p>正确的顺序依赖于使用该索引的查询，同时需要考虑如何更好地满足排序和分组的需求将选择性最高的列放到索引的最前列</p>
-<h1 id="MySQL事务"><a href="#MySQL事务" class="headerlink" title="MySQL事务"></a>MySQL事务</h1><p>事务所有操作必须成功完成，否则在每个操作中所作的所有更改都会被撤消。也就是事务具有原子性，一个事务中的一系列的操作要么全部成功，要么一个都不做。<br>事务的结束有两种，当事务中的所有步骤全部成功执行时，事务提交。如果其中一个步骤失败，将发生回滚操作，撤消之前到事务开始时的所有操作。</p>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务所有操作必须成功完成，否则在每个操作中所作的所有更改都会被撤消。也就是事务具有原子性，一个事务中的一系列的操作要么全部成功，要么一个都不做。<br>事务的结束有两种，当事务中的所有步骤全部成功执行时，事务提交。如果其中一个步骤失败，将发生回滚操作，撤消之前到事务开始时的所有操作。</p>
 <p>把需要保证<code>原子性</code>、<code>隔离性</code>、<code>一致性</code>和<code>持久性</code>的一个或多个数据库操作称之为一个<code>事务</code>（英文名是：<code>transaction</code>）。</p>
 <p><strong>状态</strong></p>
 <img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210712100609465.png" alt="image-20210712100609465" style="zoom:35%;" />
 
 <ul>
-<li>活动的（active）：事务对应的数据库操作正在执行过程中时，我们就说该事务处在<code>活动的</code>状态。</li>
-<li>部分提交的（partially committed）：当事务中的最后一个操作执行完成，但由于操作都在内存中执行，所造成的影响并没有刷新到磁盘时，我们就说该事务处在<code>部分提交的</code>状态。</li>
-<li>失败的（failed）：当事务处在<code>活动的</code>或者<code>部分提交的</code>状态时，可能遇到了某些错误（数据库自身的错误、操作系统错误或者直接断电等）而无法继续执行，或者人为的停止当前事务的执行，我们就说该事务处在<code>失败的</code>状态。</li>
-<li>中止的（aborted）：如果事务执行了半截而变为<code>失败的</code>状态。要撤销失败事务对当前数据库造成的影响。<code>回滚</code>操作执行完毕时，也就是数据库恢复到了执行事务之前的状态，我们就说该事务处在了<code>中止的</code>状态。</li>
-<li>提交的（committed）当一个处在<code>部分提交的</code>状态的事务将修改过的数据都同步到磁盘上之后，我们就可以说该事务处在了<code>提交的</code>状态。</li>
+<li>活动的（active）：事务对应的数据库操作正在执行过程中时，我们就说该事务处在活动的状态。</li>
+<li>部分提交的（partially committed）：当事务中的最后一个操作执行完成，但由于操作都在内存中执行，所造成的影响并没有刷新到磁盘时，我们就说该事务处在部分提交的状态。</li>
+<li>失败的（failed）：当事务处在活动的或者部分提交的状态时，可能遇到了某些错误（数据库自身的错误、操作系统错误或者直接断电等）而无法继续执行，或者人为的停止当前事务的执行，我们就说该事务处在失败的状态。</li>
+<li>中止的（aborted）：如果事务执行了半截而变为失败的状态。要撤销失败事务对当前数据库造成的影响。回滚操作执行完毕时，也就是数据库恢复到了执行事务之前的状态，我们就说该事务处在了中止的状态。</li>
+<li>提交的（committed）当一个处在部分提交的状态的事务将修改过的数据都同步到磁盘上之后，我们就可以说该事务处在了提交的状态。</li>
 </ul>
 <p>只有当事务处于提交的或者中止的状态时，一个事务的生命周期才算是结束了。对于已经提交的事务来说，该事务对数据库所做的修改将永久生效，对于处于中止状态的事务，该事务对数据库所做的所有修改都会被回滚到没执行该事务之前的状态。</p>
-<p><strong>事务操作</strong></p>
-<p><code>START TRANSACTION</code>语句标志着开启一个事务</p>
-<p><code>COMMIT</code>语句就代表提交一个事务</p>
-<p><code>ROLLBACK</code>语句就代表中止并回滚一个事务</p>
-<p><strong>自动提交</strong></p>
-<p>MySQL<code>中有一个系统变量</code>autocommit，默认值为<code>ON</code>，也就是说默认情况下，如果我们不显式的使用<code>START TRANSACTION</code>或者<code>BEGIN</code>语句开启一个事务，那么每一条语句都算是一个独立的事务，这种特性称之为事务的<code>自动提交</code>。</p>
 <h2 id="四大特性（ACID）"><a href="#四大特性（ACID）" class="headerlink" title="四大特性（ACID）"></a>四大特性（ACID）</h2><h3 id="原子性（Atomicity）"><a href="#原子性（Atomicity）" class="headerlink" title="原子性（Atomicity）"></a>原子性（Atomicity）</h3><p>事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么全部失败；</p>
 <p>现实世界中转账操作是一个不可分割的操作，也就是说要么压根儿就没转，要么转账成功，不能存在中间的状态，也就是转了一半的这种情况。数据库把这种要么全做，要么全不做的规则称之为原子性</p>
 <h3 id="一致性（Consistency）"><a href="#一致性（Consistency）" class="headerlink" title="一致性（Consistency）"></a>一致性（Consistency）</h3><p>事务执行的结果必须是使数据库从一个一致性状态变到另一个一致性状态。</p>
@@ -1079,7 +811,7 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 <li>幻读是说数据的条数发生了变化，原本不存在的数据存在了。不可重复读是说数据的内容发生了变化，原本存在的数据的内容发生了改变</li>
 </ul>
 <p>例1（同样的条件， 你读取过的数据， 再次读取出来发现值不一样了 ）：事务1中的A先生读取自己的工资为 1000的操作还没完成，事务2中的B先生就修改了A的工资为2000，导 致A再读自己的工资时工资变为 2000；这就是不可重复读。</p>
-<p>例2（同样的条件， 第1次和第2次读出来的记录数不一样 ）：假某工资单表中工资大于3000的有4人，事务1读取了所有工资大于3000的人，共查到4条记录，这时事务2 又插入了一条工资大于3000的记录，事务1再次读取时查到的记录就变为了5条，这样就导致了幻读。</p>
+<p>例2（同样的条件， 第1次和第2次读出来的记录数不一样 ）：假某工资单表中工资大于3000的有4人，事务1读取了所有工资大于3000的人，共查到4条记录，这时事务2又插入了一条工资大于3000的记录，事务1再次读取时查到的记录就变为了5条，这样就导致了幻读。</p>
 <h2 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h2><p>脏写这个问题太严重了，不论是哪种隔离级别，都不允许脏写的情况发生。</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210206101335402.png" alt="image-20210206101335402"></p>
 <h3 id="READ-UNCOMMITTED-读取未提交"><a href="#READ-UNCOMMITTED-读取未提交" class="headerlink" title="READ-UNCOMMITTED(读取未提交)"></a>READ-UNCOMMITTED(读取未提交)</h3><ul>
@@ -1123,13 +855,14 @@ select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</
 </ul>
 </li>
 </ul>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>对于使用READ COMMITTED和REPEATABLE READ隔离级别的事务来说，都必 须保证读到已经提交了的事务修改过的记录，也就是说假如另一个事务已经修改了记录但是尚未提交，是不能直接读取最新版本的记录的，核心问题就是：需要判断一 下版本链中的哪个版本是当前事务可见的</p>
+<p><strong>原理</strong></p>
+<p>对于使用READ COMMITTED和REPEATABLE READ隔离级别的事务来说，都必 须保证读到已经提交了的事务修改过的记录，也就是说假如另一个事务已经修改了记录但是尚未提交，是不能直接读取最新版本的记录的，核心问题就是：需要判断一 下版本链中的哪个版本是当前事务可见的</p>
 <ul>
 <li><p>m_ids：表示在生成ReadView时当前系统中活跃的读写事务的事务id列表。</p>
 </li>
 <li><p>min_trx_id：表示在生成ReadView时当前系统中活跃的读写事务中最小的事务id，也就是m_ids中的最小值。</p>
 </li>
-<li><p>max_trx_id：表示生成ReadView时系统中应该分配给下一个事务的id值。： 注意max_trx_id并不是m_ids中的最大值，事务id是递增分配的。比方说现在有id为1，2，3这三个事务，之后id为3的事务提交了。那么一个新的 读事务在生成ReadView时，m_ids就包括1和2，min_trx_id的值就是1，max_trx_id的值就是4。</p>
+<li><p>max_trx_id：表示生成ReadView时系统中应该分配给下一个事务的id值。： 注意max_trx_id并不是m_ids中的最大值，事务id是递增分配的。比方说现在有id为1，2，3这三个事务，之后id为3的事务提交了。那么一个新的读事务在生成ReadView时，m_ids就包括1和2，min_trx_id的值就是1，max_trx_id的值就是4。</p>
 </li>
 <li><p>creator_trx_id：表示生成该ReadView的事务的事务id。我们前边说过，只有在对表中的记录做改动时（执行INSERT、DELETE、UPDATE这些语句时）才会为事务分配事务id，否则在一个只读事务 中的事务id值都默认为0。</p>
 </li>
@@ -1216,85 +949,68 @@ UPDATE hero SET name = &#39;诸葛亮&#39; WHERE number = 1;</code></pre>
 <li>下一个版本的列name的内容是’刘备’，该版本的trx_id值为80，小于ReadView中的min_trx_id值100，所以这个版本是符合要求的，最后返回给用户的版本就是这条 列c为’刘备’的记录。</li>
 </ul>
 <p>也就是说两次SELECT查询得到的结果是重复的，记录的列c值都是’刘备’，这就是可重复读的含义。如果我们之后再把事务id为200的记录提交了，然后再到刚才使 用REPEATABLE READ隔离级别的事务中继续查找这个number为1的记录，得到的结果还是’刘备’</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>MVCC（Multi-VersionConcurrencyControl，多版本并发控制）指的就是在使用READ COMMITTD、REPEATABLE READ这两种隔离级别的 事务在执行普通的SEELCT操作时访问记录的版本链的过程，这样子可以使不同事务的读-写、写-读操作并发执行，从而提升系统性能。</p>
+<p><strong>总结</strong></p>
+<p>MVCC（Multi-VersionConcurrencyControl，多版本并发控制）指的就是在使用READ COMMITTD、REPEATABLE READ这两种隔离级别的 事务在执行普通的SEELCT操作时访问记录的版本链的过程，这样子可以使不同事务的读-写、写-读操作并发执行，从而提升系统性能。</p>
 <p>READ COMMITTD、REPEATABLE READ这两个隔离级别的一个很大不同就是：生成ReadView的时机不同，READCOMMITTD在每一次进行普通SELECT操作前都会生成一个ReadView，而REPEATABLE READ只在第一次进行普通SELECT操作前生成一个ReadView，之后的查询操作都重复使用这个ReadView就好了。</p>
-<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>并发事务访问相同记录的情况大致可以划分为3种：</p>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><p>并发事务访问相同记录的情况大致可以划分为3种：</p>
 <ul>
 <li>读-读情况：即并发事务相继读取相同的记录。 读取操作本身不会对记录有影响，并不会引起什么问题，所以允许这种情况的发生。</li>
 <li>写-写情况：即并发事务相继对相同的记录做出改动。会发生<code>脏写</code>的问题，任何一种隔离级别都不允许这种问题的发生。采用锁实现排队执行</li>
 <li>读-写或写-读情况：也就是一个事务进行读取操作，另一个进行改动操作。这种情况下可能发生脏读、不可重复读、幻读的问题。<ul>
 <li>读操作利用多版本并发控制（MVCC），写操作进行加锁。</li>
-<li>：读、写操作都采用加锁的方式。</li>
+<li>读、写操作都采用加锁的方式。</li>
 </ul>
 </li>
 </ul>
-<h4 id="写-写"><a href="#写-写" class="headerlink" title="写-写"></a>写-写</h4><p>在多个未提交事务相继对一条记录做改动时，需要让它们排队执行，这个排队的过程其实是通过<code>锁</code>来实现的。这个所谓的<code>锁</code>其实是一个内存中的结构，在事务执行前本来是没有锁的，也就是说一开始是没有<code>锁结构</code>和记录进行关联的</p>
-<p>当一个事务想对这条记录做改动时，首先会看看内存中有没有与这条记录关联的<code>锁结构</code>，当没有的时候就会在内存中生成一个<code>锁结构</code>与之关联。比方说事务<code>T1</code>要对这条记录做改动，就需要生成一个<code>锁结构</code>与之关联：</p>
+<h4 id="写-写"><a href="#写-写" class="headerlink" title="写-写"></a>写-写</h4><p>在多个未提交事务相继对一条记录做改动时，需要让它们排队执行，这个排队的过程其实是通过锁来实现的。这个所谓的锁其实是一个内存中的结构，在事务执行前本来是没有锁的，也就是说一开始是没有锁结构和记录进行关联的</p>
+<p>当一个事务想对这条记录做改动时，首先会看看内存中有没有与这条记录关联的锁结构，当没有的时候就会在内存中生成一个锁结构与之关联。比方说事务T1要对这条记录做改动，就需要生成一个锁结构与之关联：</p>
 <img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723093048158.png" alt="image-20210723093048158" style="zoom:50%;" />
 
 <ul>
-<li><code>trx信息</code>：代表这个锁结构是哪个事务生成的。</li>
-<li><code>is_waiting</code>：代表当前事务是否在等待。</li>
+<li>trx信息：代表这个锁结构是哪个事务生成的。</li>
+<li>is_waiting：代表当前事务是否在等待。</li>
 </ul>
 <p>当事务<code>T1</code>改动了这条记录后，就生成了一个<code>锁结构</code>与该记录关联，因为之前没有别的事务为这条记录加锁，所以<code>is_waiting</code>属性就是<code>false</code>，我们把这个场景就称之为<span style="color:red">获取锁成功，或者加锁成功</span>，然后就可以继续执行操作了。</p>
 <p>在事务<code>T1</code>提交之前，另一个事务<code>T2</code>也想对该记录做改动，那么先去看看有没有<code>锁结构</code>与这条记录关联，发现有一个<code>锁结构</code>与之关联后，然后也生成了一个<code>锁结构</code>与这条记录关联，不过<code>锁结构</code>的<code>is_waiting</code>属性值为<code>true</code>，表示当前事务需要等待，我们把这个场景就称之为<span style="color:red">获取锁失败，或者加锁失败，或者没有成功的获取到锁</span></p>
 <img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723093139882.png" alt="image-20210723093139882" style="zoom:50%;" />
 
 <p>在事务<code>T1</code>提交之后，就会把该事务生成的<code>锁结构</code>释放掉，然后看看还有没有别的事务在等待获取锁，发现了事务<code>T2</code>还在等待获取锁，所以把事务<code>T2</code>对应的锁结构的<code>is_waiting</code>属性设置为<code>false</code>，然后把该事务对应的线程唤醒，让它继续执行，此时事务<code>T2</code>就算获取到锁了。</p>
-<p><strong>写操作</strong></p>
-<p>平常所用到的<code>写操作</code>无非是<code>DELETE</code>、<code>UPDATE</code>、<code>INSERT</code>这三种：</p>
-<ul>
-<li><p><code>DELETE</code>：</p>
-<p>  对一条记录做<code>DELETE</code>操作的过程其实是先在<code>B+</code>树中定位到这条记录的位置，然后获取一下这条记录的<code>X锁</code>，然后再执行<code>delete mark</code>操作。我们也可以把这个定位待删除记录在<code>B+</code>树中位置的过程看成是一个获取<code>X锁</code>的<code>锁定读</code>。</p>
-</li>
-<li><p><code>UPDATE</code>：</p>
-<p>  在对一条记录做<code>UPDATE</code>操作时分为三种情况：</p>
-<ul>
-<li><p>如果未修改该记录的键值并且被更新的列占用的存储空间在修改前后未发生变化，则先在<code>B+</code>树中定位到这条记录的位置，然后再获取一下记录的<code>X锁</code>，最后在原记录的位置进行修改操作。其实我们也可以把这个定位待修改记录在<code>B+</code>树中位置的过程看成是一个获取<code>X锁</code>的<code>锁定读</code>。</p>
-</li>
-<li><p>如果未修改该记录的键值并且至少有一个被更新的列占用的存储空间在修改前后发生变化，则先在<code>B+</code>树中定位到这条记录的位置，然后获取一下记录的<code>X锁</code>，将该记录彻底删除掉（就是把记录彻底移入垃圾链表），最后再插入一条新记录。这个定位待修改记录在<code>B+</code>树中位置的过程看成是一个获取<code>X锁</code>的<code>锁定读</code>，新插入的记录由<code>INSERT</code>操作提供的<code>隐式锁</code>进行保护。</p>
-</li>
-<li><p>如果修改了该记录的键值，则相当于在原记录上做<code>DELETE</code>操作之后再来一次<code>INSERT</code>操作，加锁操作就需要按照<code>DELETE</code>和<code>INSERT</code>的规则进行了。</p>
-</li>
-</ul>
-</li>
-<li><p><code>INSERT</code>：</p>
-<p>  一般情况下，新插入一条记录的操作并不加锁，设计<code>InnoDB</code>的大叔通过一种称之为<code>隐式锁</code>的东东来保护这条新插入的记录在本事务提交前不被别的事务访问</p>
-</li>
-</ul>
+<p>一般情况下，新插入一条记录的操作并不加锁，通过<code>隐式锁</code>来保护这条新插入的记录在本事务提交前不被别的事务访问</p>
 <h4 id="读-写"><a href="#读-写" class="headerlink" title="读-写"></a>读-写</h4><blockquote>
 <p> 幻读问题的产生是因为某个事务读了一个范围的记录，之后别的事务在该范围内插入了新记录，该事务再次读取该范围的记录时，可以读到新插入的记录，所以幻读问题并不是因为读取和写入一条相同记录而产生的</p>
 </blockquote>
-<h5 id="方案一：MVCC"><a href="#方案一：MVCC" class="headerlink" title="方案一：MVCC"></a>方案一：MVCC</h5><p>读操作利用多版本并发控制（MVCC），写操作进行加锁。</p>
+<p><strong>MVCC</strong></p>
+<p>读操作利用多版本并发控制（MVCC），写操作进行加锁。</p>
 <p>通过生成一个ReadView，然后通过ReadView找到符合条件的记录版本（历史版本是由undo日志构建的），其实就像是在生成ReadView的那个时刻拍了一个快照，查询语句只能读到在生成ReadView之前已提交事务所做的更改，在生成ReadView之前未提交的事务或者之后才开启的事务所做的更改是看不到的。</p>
 <p>而写操作肯定针对的是最新版本的记录，读记录的历史版本和改动记录的最新版本本身并不冲突，也就是采用MVCC时，读-写操作并不冲突。</p>
 <p>普通的SELECT语句在READCOMMITTED和REPEATABLEREAD隔离级别下会使用到MVCC读取记录。在READCOMMITTED隔离级别下，一个事务在执行过程中每次执行SELECT操作时都会生成一个ReadView，ReadView的存在本身就保证了事务不可以读取到未提交的事务所做的更改，也就是避免了脏读现象；</p>
 <p>REPEATABLEREAD隔离级别下，一个事务在执行过程中只有第一次执行SELECT操作才会生成一个ReadView，之后的SELECT操作都复用这个ReadView，这样也就避免了不可重复读和幻读的问题。</p>
 <p><strong>一致性读</strong></p>
-<p>事务利用<code>MVCC</code>进行的读取操作称之为<code>一致性读</code>，或者<code>一致性无锁读</code>，有的地方也称之为<code>快照读</code>。所有普通的<code>SELECT</code>语句（<code>plain SELECT</code>）在<code>READ COMMITTED</code>、<code>REPEATABLE READ</code>隔离级别下都算是<code>一致性读</code>：</p>
+<p>事务利用MVCC进行的读取操作称之为一致性读，或者一致性无锁读，有的地方也称之为快照读。所有普通的SELECT语句（plain SELECT）在READ COMMITTED、REPEATABLE READ隔离级别下都算是一致性读：</p>
 <pre><code>SELECT * FROM t;
 SELECT * FROM t1 INNER JOIN t2 ON t1.col1 = t2.col2</code></pre>
-<p><code>一致性读</code>并不会对表中的任何记录做<code>加锁</code>操作，其他事务可以自由的对表中的记录做改动。</p>
-<h5 id="方案二：加锁"><a href="#方案二：加锁" class="headerlink" title="方案二：加锁"></a>方案二：加锁</h5><p>解决<code>脏读</code>、<code>不可重复读</code>、<code>幻读</code>这些问题除了MVCC，还可以读、写操作都采用<code>加锁</code>的方式。</p>
-<p>如果我们的一些业务场景不允许读取记录的旧版本，而是每次都必须去读取记录的最新版本，比方在银行存款的事务中，你需要先把账户的余额读出来，然后将其加上本次存款的数额，最后再写到数据库中。在将账户余额读取出来后，就不想让别的事务再访问该余额，直到本次存款事务执行完成，其他事务才可以访问账户的余额。这样在读取记录的时候也就需要对其进行<code>加锁</code>操作，这样也就意味着<code>读</code>操作和<code>写</code>操作也像<code>写-写</code>操作那样排队执行。</p>
+<p>一致性读并不会对表中的任何记录做加锁操作，其他事务可以自由的对表中的记录做改动。</p>
+<p><strong>加锁</strong></p>
+<p>解决脏读、不可重复读、幻读这些问题除了MVCC，还可以读、写操作都采用加锁的方式。</p>
+<p>如果我们的一些业务场景不允许读取记录的旧版本，而是每次都必须去读取记录的最新版本，比方在银行存款的事务中，你需要先把账户的余额读出来，然后将其加上本次存款的数额，最后再写到数据库中。在将账户余额读取出来后，就不想让别的事务再访问该余额，直到本次存款事务执行完成，其他事务才可以访问账户的余额。这样在读取记录的时候也就需要对其进行加锁操作，这样也就意味着读操作和写操作也像写-写操作那样排队执行。</p>
 <p>脏读的产生是因为当前事务读取了另一个未提交事务写的一条记录，如果另一个事务在写记录的时候就给这条记录加锁，那么当前事务就无法继续读取该记录了，所以也就不会有脏读问题的产生了。</p>
 <p>不可重复读的产生是因为当前事务先读取一条记录，另外一个事务对该记录做了改动之后并提交之后，当前事务再次读取时会获得不同的值，如果在当前事务读取记录时就给该记录加锁，那么另一个事务就无法修改该记录，自然也不会发生不可重复读了。</p>
 <p>我们说幻读问题的产生是因为当前事务读取了一个范围的记录，然后另外的事务向该范围内插入了新记录，当前事务再次读取该范围的记录时发现了新插入的新记录，我们把新插入的那些记录称之为幻影记录。采用加间隙锁的方式解决幻读问题</p>
-<p>很明显，采用<code>MVCC</code>方式的话，<code>读-写</code>操作彼此并不冲突，性能更高，采用<code>加锁</code>方式的话，<code>读-写</code>操作彼此需要排队执行，影响性能。一般情况下我们当然愿意采用<code>MVCC</code>来解决<code>读-写</code>操作并发执行的问题，但是业务在某些特殊情况下，要求必须采用<code>加锁</code>的方式执行，那也是没有办法的事。</p>
+<p>很明显，采用MVCC方式的话，读-写操作彼此并不冲突，性能更高，采用加锁方式的话，读-写操作彼此需要排队执行，影响性能。一般情况下我们当然愿意采用MVCC来解决读-写操作并发执行的问题，但是业务在某些特殊情况下，要求必须采用加锁的方式执行，那也是没有办法的事。</p>
 <p><strong>锁定读</strong></p>
-<p>我们前边说在采用<code>加锁</code>方式解决<code>脏读</code>、<code>不可重复读</code>、<code>幻读</code>这些问题时，读取一条记录时需要获取一下该记录的<code>S锁</code>，其实这是不严谨的，有时候想在读取记录时就获取记录的<code>X锁</code>，来禁止别的事务读写该记录，为此设计<code>MySQL</code>的大叔提出了两种比较特殊的<code>SELECT</code>语句格式：</p>
+<p>我们前边说在采用加锁方式解决脏读、不可重复读、幻读这些问题时，读取一条记录时需要获取一下该记录的S锁，其实这是不严谨的，有时候想在读取记录时就获取记录的X锁，来禁止别的事务读写该记录，为此设计MySQL的大叔提出了两种比较特殊的SELECT语句格式：</p>
 <ul>
-<li><p>对读取的记录加<code>S锁</code>：</p>
+<li><p>对读取的记录加S锁：</p>
 <pre><code>SELECT ... LOCK IN SHARE MODE;</code></pre>
-<p>  也就是在普通的<code>SELECT</code>语句后边加<code>LOCK IN SHARE MODE</code>，如果当前事务执行了该语句，那么它会为读取到的记录加<code>S锁</code>，这样允许别的事务继续获取这些记录的<code>S锁</code>（比方说别的事务也使用<code>SELECT ... LOCK IN SHARE MODE</code>语句来读取这些记录），但是不能获取这些记录的<code>X锁</code>（比方说使用<code>SELECT ... FOR UPDATE</code>语句来读取这些记录，或者直接修改这些记录）。如果别的事务想要获取这些记录的<code>X锁</code>，那么它们会阻塞，<strong>直到当前事务提交之后将这些记录上的<code>S锁</code>释放掉。</strong></p>
+<p>  也就是在普通的SELECT语句后边加LOCK IN SHARE MODE，如果当前事务执行了该语句，那么它会为读取到的记录加S锁，这样允许别的事务继续获取这些记录的S锁（比方说别的事务也使用SELECT … LOCK IN SHARE MODE语句来读取这些记录），但是不能获取这些记录的X锁（比方说使用SELECT … FOR UPDATE语句来读取这些记录，或者直接修改这些记录）。如果别的事务想要获取这些记录的X锁，那么它们会阻塞，<strong>直到当前事务提交之后将这些记录上的S锁释放掉。</strong></p>
 </li>
-<li><p>对读取的记录加<code>X锁</code>：</p>
+<li><p>对读取的记录加X锁：</p>
 <pre><code>SELECT ... FOR UPDATE;</code></pre>
-<p>  也就是在普通的<code>SELECT</code>语句后边加<code>FOR UPDATE</code>，如果当前事务执行了该语句，那么它会为读取到的记录加<code>X锁</code>，这样既不允许别的事务获取这些记录的<code>S锁</code>（比方说别的事务使用<code>SELECT ... LOCK IN SHARE MODE</code>语句来读取这些记录），也不允许获取这些记录的<code>X锁</code>（比方也说使用<code>SELECT ... FOR UPDATE</code>语句来读取这些记录，或者直接修改这些记录）。如果别的事务想要获取这些记录的<code>S锁</code>或者<code>X锁</code>，那么它们会阻塞，<strong>直到当前事务提交之后将这些记录上的<code>X锁</code>释放掉。</strong></p>
+<p>  也就是在普通的SELECT语句后边加FOR UPDATE，如果当前事务执行了该语句，那么它会为读取到的记录加X锁，这样既不允许别的事务获取这些记录的S锁（比方说别的事务使用SELECT … LOCK IN SHARE MODE语句来读取这些记录），也不允许获取这些记录的X锁（比方也说使用SELECT … FOR UPDATE语句来读取这些记录，或者直接修改这些记录）。如果别的事务想要获取这些记录的S锁或者X锁，那么它们会阻塞，<strong>直到当前事务提交之后将这些记录上的X锁释放掉。</strong></p>
 </li>
 </ul>
-<h3 id="锁分类"><a href="#锁分类" class="headerlink" title="锁分类"></a>锁分类</h3><h4 id="表锁和行锁"><a href="#表锁和行锁" class="headerlink" title="表锁和行锁"></a>表锁和行锁</h4><p><code>InnoDB</code>存储引擎既支持表锁，也支持行锁。表锁实现简单，占用资源较少，不过粒度很粗，有时候你仅仅需要锁住几条记录，但使用表锁的话相当于为表中的所有记录都加锁，所以性能比较差。行锁粒度更细，可以实现更精准的并发控制。</p>
-<p>我们前边提到的<code>锁</code>都是针对记录的，也可以被称之为<code>行级锁</code>或者<code>行锁</code>，对一条记录加锁影响的也只是这条记录而已，我们就说这个锁的粒度比较细；其实一个事务也可以在<code>表</code>级别进行加锁，自然就被称之为<code>表级锁</code>或者<code>表锁</code>，对一个表加锁影响整个表中的记录，我们就说这个锁的粒度比较粗。</p>
+<h3 id="锁分类"><a href="#锁分类" class="headerlink" title="锁分类"></a>锁分类</h3><h4 id="表锁和行锁"><a href="#表锁和行锁" class="headerlink" title="表锁和行锁"></a>表锁和行锁</h4><p>InnoDB存储引擎既支持表锁，也支持行锁。表锁实现简单，占用资源较少，不过粒度很粗，有时候你仅仅需要锁住几条记录，但使用表锁的话相当于为表中的所有记录都加锁，所以性能比较差。行锁粒度更细，可以实现更精准的并发控制。</p>
+<p>我们前边提到的锁都是针对记录的，也可以被称之为行级锁或者行锁，对一条记录加锁影响的也只是这条记录而已，我们就说这个锁的粒度比较细；其实一个事务也可以在表级别进行加锁，自然就被称之为表级锁或者表锁，对一个表加锁影响整个表中的记录，我们就说这个锁的粒度比较粗。</p>
 <p>默认情况下，表锁和行锁都是自动获得的， 不需要额外的命令。</p>
 <p>但是在有的情况下， 用户需要明确地进行锁表或者进行事务的控制， 以便确保整个事务的完整性，这样就需要使用事务控制和锁定语句来完成。</p>
 <ul>
@@ -1313,59 +1029,59 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.col1 = t2.col2</code></pre>
 </li>
 <li>页面锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</li>
 </ul>
-<h4 id="共享锁和独占锁"><a href="#共享锁和独占锁" class="headerlink" title="共享锁和独占锁"></a>共享锁和独占锁</h4><p>我们前边说过，并发事务的<code>读-读</code>情况并不会引起什么问题，不过对于<code>写-写</code>、<code>读-写</code>或<code>写-读</code>这些情况可能会引起一些问题，需要使用<code>MVCC</code>或者<code>加锁</code>的方式来解决它们。在使用<code>加锁</code>的方式解决问题时，由于既要允许<code>读-读</code>情况不受影响，又要使<code>写-写</code>、<code>读-写</code>或<code>写-读</code>情况中的操作相互阻塞，所以设计<code>MySQL</code>的大叔给锁分了个类：</p>
+<h4 id="共享锁和独占锁"><a href="#共享锁和独占锁" class="headerlink" title="共享锁和独占锁"></a>共享锁和独占锁</h4><p>我们前边说过，并发事务的读-读情况并不会引起什么问题，不过对于写-写、读-写或写-读这些情况可能会引起一些问题，需要使用MVCC或者加锁的方式来解决它们。在使用加锁的方式解决问题时，由于既要允许读-读情况不受影响，又要使写-写、读-写或写-读情况中的操作相互阻塞，所以设计MySQL的大叔给锁分了个类：</p>
 <ul>
-<li><p><code>共享锁</code>，英文名：<code>Shared  Locks</code>，简称<code>S锁</code>。在事务要读取一条记录时，需要先获取该记录的<code>S锁</code>。</p>
+<li><p>共享锁，英文名：Shared  Locks，简称S锁。在事务要读取一条记录时，需要先获取该记录的S锁。</p>
 </li>
-<li><p><code>独占锁</code>，也常称<code>排他锁</code>，英文名：<code>Exclusive Locks</code>，简称<code>X锁</code>。在事务要改动一条记录时，需要先获取该记录的<code>X锁</code>。</p>
+<li><p>独占锁，也常称排他锁，英文名：Exclusive Locks，简称X锁。在事务要改动一条记录时，需要先获取该记录的X锁。</p>
 </li>
 </ul>
-<p>假如事务<code>T1</code>首先获取了一条记录的<code>S锁</code>之后，事务<code>T2</code>接着也要访问这条记录：</p>
+<p>假如事务T1首先获取了一条记录的S锁之后，事务T2接着也要访问这条记录：</p>
 <ul>
-<li><p>如果事务<code>T2</code>想要再获取一个记录的<code>S锁</code>，那么事务<code>T2</code>也会获得该锁，也就意味着事务<code>T1</code>和<code>T2</code>在该记录上同时持有<code>S锁</code>。</p>
+<li><p>如果事务T2想要再获取一个记录的S锁，那么事务T2也会获得该锁，也就意味着事务T1和T2在该记录上同时持有S锁。</p>
 </li>
-<li><p>如果事务<code>T2</code>想要再获取一个记录的<code>X锁</code>，那么此操作会被阻塞，直到事务<code>T1</code>提交之后将<code>S锁</code>释放掉。</p>
+<li><p>如果事务T2想要再获取一个记录的X锁，那么此操作会被阻塞，直到事务T1提交之后将S锁释放掉。</p>
 </li>
 </ul>
-<p>如果事务<code>T1</code>首先获取了一条记录的<code>X锁</code>之后，那么不管事务<code>T2</code>接着想获取该记录的<code>S锁</code>还是<code>X锁</code>都会被阻塞，直到事务<code>T1</code>提交。</p>
-<p>所以我们说<code>S锁</code>和<code>S锁</code>是兼容的，<code>S锁</code>和<code>X锁</code>是不兼容的，<code>X锁</code>和<code>X锁</code>也是不兼容的</p>
+<p>如果事务T1首先获取了一条记录的X锁之后，那么不管事务T2接着想获取该记录的S锁还是X锁都会被阻塞，直到事务T1提交。</p>
+<p>所以我们说S锁和S锁是兼容的，S锁和X锁是不兼容的，X锁和X锁也是不兼容的</p>
 <table>
 <thead>
 <tr>
 <th align="center">兼容性</th>
-<th align="center"><code>X</code></th>
-<th align="center"><code>S</code></th>
+<th align="center">X</th>
+<th align="center">S</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><code>X</code></td>
+<td align="center">X</td>
 <td align="center">不兼容</td>
 <td align="center">不兼容</td>
 </tr>
 <tr>
-<td align="center"><code>S</code></td>
+<td align="center">S</td>
 <td align="center">不兼容</td>
 <td align="center">兼容</td>
 </tr>
 </tbody></table>
-<h4 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h4><p>给表加的锁也可以分为<code>共享锁</code>（<code>S锁</code>）和<code>独占锁</code>（<code>X锁</code>）：</p>
+<h4 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h4><p>给表加的锁也可以分为共享锁（S锁）和独占锁（X锁）：</p>
 <ul>
-<li><p>给表加<code>S锁</code>：</p>
-<p>  如果一个事务给表加了<code>S锁</code>，那么：</p>
+<li><p>给表加S锁：</p>
+<p>  如果一个事务给表加了S锁，那么：</p>
 <ul>
-<li>别的事务可以继续获得该表的<code>S锁</code></li>
-<li>别的事务可以继续获得该表中的某些记录的<code>S锁</code></li>
-<li>别的事务不可以继续获得该表的<code>X锁</code></li>
-<li>别的事务不可以继续获得该表中的某些记录的<code>X锁</code></li>
+<li>别的事务可以继续获得该表的S锁</li>
+<li>别的事务可以继续获得该表中的某些记录的S锁</li>
+<li>别的事务不可以继续获得该表的X锁</li>
+<li>别的事务不可以继续获得该表中的某些记录的X锁</li>
 </ul>
 </li>
-<li><p>给表加<code>X锁</code>：</p>
-<p>  如果一个事务给表加了<code>X锁</code>（意味着该事务要独占这个表），那么：</p>
+<li><p>给表加X锁：</p>
+<p>  如果一个事务给表加了X锁（意味着该事务要独占这个表），那么：</p>
 <ul>
-<li>别的事务不可以继续获得该表的<code>S锁</code></li>
-<li>别的事务不可以继续获得该表中的某些记录的<code>S锁</code></li>
-<li>别的事务不可以继续获得该表的<code>X锁</code></li>
-<li>别的事务不可以继续获得该表中的某些记录的<code>X锁</code></li>
+<li>别的事务不可以继续获得该表的S锁</li>
+<li>别的事务不可以继续获得该表中的某些记录的S锁</li>
+<li>别的事务不可以继续获得该表的X锁</li>
+<li>别的事务不可以继续获得该表中的某些记录的X锁</li>
 </ul>
 </li>
 </ul>
@@ -1374,11 +1090,11 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.col1 = t2.col2</code></pre>
 <li>想对表上S锁，需要该表里面没有X锁</li>
 <li>想对表上X锁，需要该表里面没有S锁、X锁</li>
 </ul>
-<p>我们上表锁时，如何知道每一行中有没有行锁？依次检查每一行有没有上锁？效率太慢。于是乎设计<code>InnoDB</code>提出了一种称之为<code>意向锁</code>：</p>
+<p>我们上表锁时，如何知道每一行中有没有行锁？依次检查每一行有没有上锁？效率太慢。于是乎设计InnoDB提出了一种称之为意向锁：</p>
 <ul>
-<li><p>意向共享锁，英文名：<code>Intention Shared Lock</code>，简称<code>IS锁</code>。当事务准备在某条记录上加<code>S锁</code>时，需要先在表级别加一个<code>IS锁</code>。</p>
+<li><p>意向共享锁，英文名：Intention Shared Lock，简称IS锁。当事务准备在某条记录上加S锁时，需要先在表级别加一个IS锁。</p>
 </li>
-<li><p>意向独占锁，英文名：<code>Intention Exclusive Lock</code>，简称<code>IX锁</code>。当事务准备在某条记录上加<code>X锁</code>时，需要先在表级别加一个<code>IX锁</code>。</p>
+<li><p>意向独占锁，英文名：Intention Exclusive Lock，简称IX锁。当事务准备在某条记录上加X锁时，需要先在表级别加一个IX锁。</p>
 </li>
 </ul>
 <p>之后：</p>
@@ -1391,35 +1107,35 @@ SELECT * FROM t1 INNER JOIN t2 ON t1.col1 = t2.col2</code></pre>
 <thead>
 <tr>
 <th align="center">兼容性</th>
-<th align="center"><code>X</code></th>
-<th align="center"><code>IX</code></th>
-<th align="center"><code>S</code></th>
-<th align="center"><code>IS</code></th>
+<th align="center">X</th>
+<th align="center">IX</th>
+<th align="center">S</th>
+<th align="center">IS</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><code>X</code></td>
+<td align="center">X</td>
 <td align="center">不兼容</td>
 <td align="center">不兼容</td>
 <td align="center">不兼容</td>
 <td align="center">不兼容</td>
 </tr>
 <tr>
-<td align="center"><code>IX</code></td>
+<td align="center">IX</td>
 <td align="center">不兼容</td>
 <td align="center">兼容</td>
 <td align="center">不兼容</td>
 <td align="center">兼容</td>
 </tr>
 <tr>
-<td align="center"><code>S</code></td>
+<td align="center">S</td>
 <td align="center">不兼容</td>
 <td align="center">不兼容</td>
 <td align="center">兼容</td>
 <td align="center">兼容</td>
 </tr>
 <tr>
-<td align="center"><code>IS</code></td>
+<td align="center">IS</td>
 <td align="center">不兼容</td>
 <td align="center">兼容</td>
 <td align="center">兼容</td>
@@ -1575,7 +1291,7 @@ select * from table where ? for update;</code></pre>
 <p>先在主键索引上找到值为10的节点，加锁(5,10]，但由于优化1，间隙锁会去掉，留下行锁，然后遍历下一个值，找到15，访问到的节点都需要加锁，于是加next-key lock，所以整个sql加锁是id=10的行锁和(10,15]间隙锁</p>
 <h5 id="非唯一索引范围锁"><a href="#非唯一索引范围锁" class="headerlink" title="非唯一索引范围锁"></a>非唯一索引范围锁</h5><pre><code>select * from t where c &gt;= 10 and c &lt; 15  in lock share mode;</code></pre>
 <p>过程和上面的例子类似，先访问c索引值为10的节点，加锁(5,10]，而由于c是非唯一索引，所以不会退化成行锁，再访问15，加锁(10, 15]，因为这个查询不是等值查询，所以锁不会退化成间隙锁。</p>
-<h1 id="MySQL优化"><a href="#MySQL优化" class="headerlink" title="MySQL优化"></a>MySQL优化</h1><h2 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h2><pre class=" language-mysql"><code class="language-mysql">SHOW VARIABLES LIKE 'slow_query_log'; //查看慢查询日志是否打开
+<h1 id="查询优化"><a href="#查询优化" class="headerlink" title="查询优化"></a>查询优化</h1><h2 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h2><pre class=" language-mysql"><code class="language-mysql">SHOW VARIABLES LIKE 'slow_query_log'; //查看慢查询日志是否打开
 SHOW VARIABLES LIKE 'slow_query_log_file';//查看慢查询日志位置
 SHOW VARIABLES LIKE 'long_query_time';//多慢会记录到慢查询日志
 show status like '%slow_queries%';//有多少条慢查询日志 只是本次连接的
@@ -1656,14 +1372,16 @@ set global long_query_time = 1;</code></pre>
 <h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><p>当使用索引列等值查询时，与索引列进行等值匹配的对象信息 </p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210218173701880.png" alt="image-20210218173701880"></p>
 <h3 id="rows"><a href="#rows" class="headerlink" title="rows"></a>rows</h3><p>如果查询优化器决定使用全表扫描的方式对某个表执行查询时，执行计划的rows列就代表预计需要扫描的行数，如果使用索引来执行查询时，执行计划的rows列就代表预计扫描的索引记录行数。</p>
-<h3 id="filtered-某个表经过搜索条件过滤后剩余记录条数的百分比"><a href="#filtered-某个表经过搜索条件过滤后剩余记录条数的百分比" class="headerlink" title="filtered 某个表经过搜索条件过滤后剩余记录条数的百分比"></a>filtered 某个表经过搜索条件过滤后剩余记录条数的百分比</h3><p>如果使用的是全表扫描的方式执行的单表查询，那么计算驱动表扇出时需要估计出满足搜索条件的记录到底有多少条。 </p>
+<h3 id="filtered"><a href="#filtered" class="headerlink" title="filtered"></a>filtered</h3><p>某个表经过搜索条件过滤后剩余记录条数的百分比</p>
+<p>如果使用的是全表扫描的方式执行的单表查询，那么计算驱动表扇出时需要估计出满足搜索条件的记录到底有多少条。 </p>
 <p>如果使用的是索引执行的单表扫描，那么计算驱动表扇出的时候需要估计出满足除使用到对应索引的搜索条件外的其他搜索条件的记录有多少条。 </p>
-<h3 id="Extra-一些额外的信息"><a href="#Extra-一些额外的信息" class="headerlink" title="Extra 一些额外的信息"></a>Extra 一些额外的信息</h3><p>我们可以通过这些额外信息来更准确的理解MySQL到底将如何执行给定的查询语句。</p>
+<h3 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h3><p>一些额外的信息</p>
+<p>我们可以通过这些额外信息来更准确的理解MySQL到底将如何执行给定的查询语句。</p>
 <h4 id="Using-index"><a href="#Using-index" class="headerlink" title="Using index"></a>Using index</h4><p>当我们的查询列表以及搜索条件中只包含属于某个索引的列，也就是在可以使用索引覆盖的情况下，在Extra列将会提示该额外信息。比方说下边这个查询中只需要用到idx_key1而不需要回表操作：</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210218180232658.png" alt="image-20210218180232658"></p>
 <h4 id="Using-where"><a href="#Using-where" class="headerlink" title="Using where"></a>Using where</h4><p>当我们使用全表扫描来执行对某个表的查询，并且该语句的WHERE子句中有针对该表的搜索条件时，在Extra列中会提示上述额外信息。</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210218180202646.png" alt="image-20210218180202646"></p>
-<h1 id="MySQL日志"><a href="#MySQL日志" class="headerlink" title="MySQL日志"></a>MySQL日志</h1><h2 id="redo日志"><a href="#redo日志" class="headerlink" title="redo日志"></a>redo日志</h2><p>InnoDB存储引擎是以页为单位来管理存储空间的，我们进行的增删改查操作其实本质上都是在访问页面（包括读页面、写页面、创建新页面等操作）。</p>
+<h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><h2 id="redo日志"><a href="#redo日志" class="headerlink" title="redo日志"></a>redo日志</h2><p>InnoDB存储引擎是以页为单位来管理存储空间的，我们进行的增删改查操作其实本质上都是在访问页面（包括读页面、写页面、创建新页面等操作）。</p>
 <p>在真正访问页面之前，需要把在磁盘上的页缓存到内存中的Buffer Pool之后才可以访问。而对于一个已经提交的事务，在事务提交后即使系统发生了崩溃，这个事务对数据库中所做的更改也不能丢失。</p>
 <p>但是如果我们只在内存 的Buffer Pool中修改了页面，假设在事务提交后突然发生了某个故障，导致内存中的数据都失效了，那么这个已经提交了的事务对数据库中所做的更改也就跟着丢失了，这是我们所不能忍受的</p>
 <p>那么如何保证这个持久性呢？一个很简单的做法就是在事务提交完成之前把该事务所修改的所有页面都刷新到磁盘。问题是：</p>
@@ -1690,7 +1408,8 @@ set global long_query_time = 1;</code></pre>
 <li>redo日志是顺序写入磁盘的。在执行事务的过程中，每执行一条语句，就可能产生若干条redo日志，这些日志是按照产生的顺序写入磁盘的，也就是使用顺序IO。</li>
 </ul>
 <p><strong>格式</strong></p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723130902201.png" alt="image-20210723130902201"></p>
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723130902201.png" alt="image-20210723130902201" style="zoom:50%;" />
+
 <p>redo日志本质上只是记录了一下事务对数据库做了哪些修改。redo日志会把事务在执行过程中对数据库所做的所有修改都记录下来，在之后系统奔溃重启后可以把事务所做的任何修改都恢复出来。</p>
 <ul>
 <li>type：该条redo日志的类型。</li>
@@ -1730,18 +1449,18 @@ set global long_query_time = 1;</code></pre>
 </ul>
 <p>如果某个事务执行过程中对某个表执行了增、删、改操作，那么InnoDB存储引擎就会给它分配一个独一无二的事务id，分配方式如下： </p>
 <ul>
-<li>对于只读事务来说，只有在它第一次对某个用户创建的临时表执行增、删、改操作时才会为这个事务分配一个事务id，否则的话是不分配事务id的。 小</li>
+<li>对于只读事务来说，只有在它第一次对某个用户创建的临时表执行增、删、改操作时才会为这个事务分配一个事务id，否则的话是不分配事务id的。 </li>
 <li>对于读写事务来说，只有在它第一次对某个表（包括用户创建的临时表）执行增、删、改操作时才会为这个事务分配一个事务id，否则的话也是不分配事务id的。 有的时候虽然我们开启了一个读写事务，但是在这个事务中全是查询语句，并没有执行增、删、改的语句，那也就意味着这个事务并不会被分配一个事务 id</li>
 </ul>
 <p>聚簇索引的记录除了会保存完整的用户数据以外，而且还会自动添加名为trx_id、roll_pointer的隐藏列，如果 用户没有在表中定义主键以及UNIQUE键，还会自动添加一个名为row_id的隐藏列。</p>
 <p><strong>格式</strong></p>
 <p>为了实现事务的原子性，InnoDB存储引擎在实际进行增、删、改一条记录时，都需要先把对应的undo日志记下来。一般每对一条记录做一次改动，就对应着一 条undo日志</p>
 <p>roll_pointer本质就是一个指针，指向记录对应的undo日志</p>
-<h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>MySQL 的 Binlog 日志是一种二进制格式的日志，Binlog 记录所有的 DDL 和 DML 语句(除了数据查询语句SELECT、SHOW等)，以 Event 的形式记录，同时记录语句执行时间。 </p>
+<h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>MySQL 的binlog日志是一种二进制格式的日志，binlog记录所有的 DDL 和 DML 语句(除了数据查询语句SELECT、SHOW等)，以 Event 的形式记录，同时记录语句执行时间。 </p>
 <p>MySQL什么时候会记录binlog呢？是在事务提交的时候，并不是按照语句的执行顺序来记录，当记录完binlog之后，就会通知底层的存储引擎提交事务，所以有可能因为语句顺序错误导致语句出错。</p>
 <ol>
-<li>数据恢复。因为 Binlog 详细记录了所有修改数据的 SQL，当某一时刻的数据误操作而导致出问题，或者数据库宕机数据丢失，那么可以根据 Binlog 来回放历史数据。</li>
-<li>主从复制。想要做多机备份的业务，可以去监听当前写库的 Binlog 日志，同步写库的所有更改。</li>
+<li>数据恢复。因为binlog详细记录了所有修改数据的 SQL，当某一时刻的数据误操作而导致出问题，或者数据库宕机数据丢失，那么可以根据binlog来回放历史数据。</li>
+<li>主从复制。想要做多机备份的业务，可以去监听当前写库的binlog日志，同步写库的所有更改。</li>
 </ol>
 <p>显然，我们执行SELECT等不涉及数据更新的语句是不会记binlog的，而涉及到数据更新则会记录。要注意的是，对支持事务的引擎如innodb而言，必须要提交了事务才会记录binlog。</p>
 <p>binlog刷新到磁盘的时机跟sync_binlog参数相关，如果设置为0，则表示MySQL不控制binlog的刷新，由文件系统去控制它缓存的刷新，而如果设置为不为0的值则表示每sync_binlog次事务，MySQL调用文件系统的刷新操作刷新binlog到磁盘中。设为1是最安全的，在系统故障时最多丢失一个事务的更新，但是会对性能有所影响，一般情况下会设置为100或者0，牺牲一定的一致性来获取更好的性能。</p>
@@ -1764,11 +1483,12 @@ set global long_query_time = 1;</code></pre>
 <p>master主节点的binlog传到slave从节点后，被写入relay log里，从节点的slave sql线程从relaylog里读取日志然后应用到slave从节点本地。从服务器I/O线程将主服务器的二进制日志读取过来记录到从服务器本地文件，然后SQL线程会读取relay-log日志的内容并应用到从服务器，从而使从服务器和主服务器的数据保持一致。</p>
 <p>它是一个中介临时的日志文件，用于存储从master节点同步过来的binlog日志内容，它里面的内容和master节点的binlog日志里面的内容是一致的。然后slave从节点从这个relaylog日志文件中读取数据应用到数据库中，来实现数据的主从复制。</p>
 <p>relaylog的删除，一般情况下不需要我们手动的去做。因为在MySQL的slave从节点上，当SQL集成读取完对应的relaylog日志之后，这个relaylog就被删除了，不需要我们手动去删除。</p>
-<h1 id="MySQL主从复制"><a href="#MySQL主从复制" class="headerlink" title="MySQL主从复制"></a>MySQL主从复制</h1><p>简单来说是让一台MySQL服务器去复制另一台MySQL的数据，使两个服务器的数据保持一致。</p>
+<h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><p>简单来说是让一台MySQL服务器去复制另一台MySQL的数据，使两个服务器的数据保持一致。</p>
 <p>通过复制功能，构建一个或者多个从库，可以提高数据库的<strong>高可用性</strong>、<strong>可扩展性</strong>，同时实现<strong>负载均衡</strong>。当主库发生故障时，可以快速的切到其某一个从库，并将该从库提升为主库，因为数据都一样，所以不会影响系统的运行；</p>
 <p>当MySQL服务器需要扛住更多的读请求时，可以把读请求的流量分流到各个从库上去，写请求则转发给主库，形成读写分离的架构，来提供更好的读扩展和请求的负载均衡。</p>
 <p>主从复制是指将主数据库的DDL和DML操作通过二进制日志传到从数据库上，然后在从数据库上对这些日志进行重新执行，从而使从数据库和主数据库的数据保持一致。</p>
-<h2 id="主从复制原理"><a href="#主从复制原理" class="headerlink" title="主从复制原理"></a>主从复制原理</h2><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/1460000038967223.jpeg" alt="1460000038967223"></p>
+<p><strong>主从复制原理</strong></p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/1460000038967223.jpeg" alt="1460000038967223"></p>
 <p>binlog: binary log，主库中保存更新事件日志的二进制文件。</p>
 <p>主从复制的基础是主库记录数据库的所有变更记录到binlog。binlog是数据库中保存配置中过期时间内所有修改数据库结构或内容的一个文件。如果过期时间是10d的话，那么就是最近10d的数据库修改记录。</p>
 <p>mysql主从复制是一个异步的复制过程，主库发送更新事件到从库，从库读取更新记录，并执行更新记录，使得从库的内容与主库保持一致。</p>
@@ -1780,7 +1500,7 @@ set global long_query_time = 1;</code></pre>
 <p><strong>从库的SQL线程。</strong>从库创建一个SQL线程，这个线程读取从库I/O线程写到relay log的更新事件并执行。</p>
 <p>可以知道，对于每一个主从复制的连接，都有三个线程。拥有多个从库的主库为每一个连接到主库的从库创建一个binlog输出线程，每一个从库都有它自己的I/O线程和SQL线程。</p>
 <p>从库通过创建两个独立的线程，使得在进行复制时，从库的读和写进行了分离。因此，即使负责执行的线程运行较慢，负责读取更新语句的线程并不会因此变得缓慢。比如说，如果从库有一段时间没运行了，当它在此启动的时候，尽管它的SQL线程执行比较慢，它的I/O线程可以快速地从主库里读取所有的binlog内容。这样一来，即使从库在SQL线程执行完所有读取到的语句前停止运行了，I/O线程也至少完全读取了所有的内容，并将其安全地备份在从库本地的relay log，随时准备在从库下一次启动的时候执行语句。</p>
-<h1 id="SQL查询语句"><a href="#SQL查询语句" class="headerlink" title="SQL查询语句"></a>SQL查询语句</h1><p><strong>选出在语文、数学、英语、政治四门科目中其中两门科目满分的同学</strong></p>
+<h1 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询"></a>SQL查询</h1><p><strong>选出在语文、数学、英语、政治四门科目中其中两门科目满分的同学</strong></p>
 <blockquote>
 <p> select student_id </p>
 <p>from course</p>
@@ -1788,6 +1508,21 @@ set global long_query_time = 1;</code></pre>
 <p>group by student_id</p>
 <p>Having count(student_id) = 2</p>
 </blockquote>
+<p><strong>查询总分排名3-5的学生</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">limit offset, rows
+
+#第一个参数“位置偏移量”指示 MySQL 从哪一行开始显示，是一个可选参数，如果不指定“位置偏移量”，将会从表中的第一条记录开始（第一条记录的位置偏移量是 0，第二条记录的位置偏移量是 1，以此类推）
+#第二个参数“行数”指示返回的记录条数。
+
+SELECT * FROM tb_students_info LIMIT 4; #显示表查询结果的前 4 行
+
+SELECT * FROM tb_students_info LIMIT 3,5;#从第 4 条记录行开始的之后的 5 条记录
+
+SELECT * FROM table LIMIT 5,10; # 检索记录行 6-15</code></pre>
+<pre class=" language-mysql"><code class="language-mysql">#表t_score，字段 stu_id、sub_id、score 分别代表学生ID、课程ID、得分
+#请查询总分排名3-5的学生
+
+select stu_id from t_score group by stu_id order by sum(score) desc limit 2,3;</code></pre>
 
             </div>
             <hr/>
@@ -2315,8 +2050,8 @@ set global long_query_time = 1;</code></pre>
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    计算机基础
+                            <a href="/categories/Java%E7%9B%B8%E5%85%B3/" class="post-category">
+                                    Java相关
                                 </a>
                             
                             
@@ -2545,7 +2280,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">251.9k</span>&nbsp;字
+                class="white-color">200.5k</span>&nbsp;字
             
             
             

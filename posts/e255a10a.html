@@ -31,8 +31,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/tongji4m3/tongji4m3.github.io/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tongji4m3's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -475,14 +475,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    20.1k
+                    27k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    70 分
+                    93 分
                 </div>
                 
 
@@ -497,50 +497,24 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h2><p>OSI定义了网络互联的七层框架分别是物理层，数据链路层，网络层，传输层，会话层，表示层，应用层。</p>
-<p>两台主机如果要实现通信，要经过很多的中间系统，也就是OSI七层的参考模型，每一层都需要用到。而中间系统只需要经过网络层，数据链路层和物理层。</p>
-<p>每个对等层次之间都会有一个协议来规定两台主机都需要在这个层次实现一些相同的功能。</p>
-<p>应用层是<strong>用户和网络的界面</strong>，是所有能和用户交互产生网络流量的程序。</p>
-<p>表示层是用于处理在两个通信系统中交换信息的表示方式，通常是对语法和语义的处理</p>
-<p>第一个功能是<strong>数据格式的变换</strong>，原因是不同主机之间的数据编码方式可能不太一样，所以为了使不同的主机能够进行数据的交换，所以需要表示层做一个翻译官的功能。比如说数据传过来的是一个比特流的形式，而我们需要看到的是一个图片，这时候就需要表示层发挥作用把比特流的格式转换为图片格式。</p>
-<p>第二个功能是<strong>数据的加密和解密</strong>，这时候就需要表示层先对数据进行一个加密之后在放到链路上传输，在接收端进行解密。</p>
-<p>第三个功能是<strong>数据的压缩和恢复</strong>，比如视频聊天的时候，视频聊天的图像非常大，我们需要对图像进行一个压缩然后再传输到链路上面，最后在接收端再把文件解压缩，呈现在屏幕上。</p>
-<p>会话层是位于表示层下面的一个层次，表示层需要使用会话层的服务，会话层主要是先<strong>建立起一个连接</strong>，然后数据才能传过去。所以它的功能就是向表示层实体或者用户进行提供建立连接，并且在连接上与有序的传输数据。假如说我要访问两个网页，一个是百度，一个是看视频的，那我这个主机和这两个网络之间就建立起了一个同步，但是还没有进行数据的传输，假如我现在给视频点个快进，它应该马上就有个回应也就是画面往后几秒，而百度不会收到影响，这就是因为我这个主机和服务器建立的一个会话，是不会影响到会话的。会话层还有一个功能，就是<strong>使用校验点，使得会话在通信失效的时候从校验点继续恢复通信，实现数据同步。</strong>适用于传输大文件。</p>
-<p>传输层是作为第一个面向端<strong>到端通信</strong>的层次，同时也是上面三层资源子网和下面三层通信子网之间的接口，传输层主要负责主机中两个进程的通信，即端到端的通信，传输单位是报文段或者是用户数据报。</p>
-<p>第一个功能是提供<strong>可靠传输，不可靠传输</strong>，可靠传输就是先将文件切成一个个报文段然后一个个的放在链路上传输，传输到接收端之后，接收端对于每一个报文段都会返回一个ACK，然后发送端收到确认信息之后再继续发送，如果没收到就重传。不可靠传输就是不需要建立连接，直接发送。</p>
-<p>第二个功能是<strong>差错控制</strong>，比如说报文段顺序错了之类的</p>
-<p>第三个功能是<strong>流量控制</strong>，让发送端的发送能力和接收端的接收速度匹配</p>
-<p>第四个功能是<strong>复用和分用</strong>，复用指的是多个应用层进程可以同时使用下面传输层的服务，分用指的是传输层把收到的信息分别交付给上面应用层相应的进程。</p>
-<p>网络层主要任务是把分组从源端传到目的端，为分组交换网上的不同主机之间提供通信服务。传输单位是数据报，第一个功能是<strong>路由选择</strong>，就是选择合适的路由，通过相应的路由算法计算，选出最佳路径。</p>
-<p>第二个功能是<strong>流量控制</strong>，就是协调发送端和接收端的速度</p>
-<p>第三个功能是<strong>差错控制</strong>，就是发送端和接收端约定的一个规则，比如奇偶校验码之类的，接收端就需要检查我收到的分组是不是有错，如果有错就扔掉</p>
-<p>第四个功能是拥塞控制，如果所有节点都来不及接受分组，而要丢弃大量分组的话，网络就处于拥塞状态，因此要采取一定措施，缓解这种拥塞</p>
-<p>数据链路层主要任务是把网络层传下来的数据<strong>组装成帧</strong>，帧是数据链路层的传输单位，第一个功能是组装帧，定义帧的开始和结束。第二个功能是<strong>差错控制</strong>，包括帧错和位错，如果发现差错可能就会简单丢弃差错的帧。第三个功能是流量控制，第四个功能是<strong>介质访问控制</strong>，控制对信道的访问，如果在广播式网络中同一时间只能有一个人在发送信息，其他人都是处于监听状态，数据链路层就可以控制哪台主机可以占用信道。</p>
-<p>物理层的任务就是在物理媒体上<strong>实现比特流的透明传输</strong>，传输单位是比特。透明传输指的是不管所传的数据是什么样的比特组合，都应当能在链路上传输。第一个功能是定义接口特性，比如引脚怎么接。第二个功能是定义传输模式，单工，半双工，双工。第三个功能是定义传输速率，我们说的百兆网啊啥的就是物理层定义的传输速率，第四个功能就是比特同步，我发了一个1，你就要收到一个1，第五个功能是比特编码，什么样的电压表示0什么样的电压表示1。</p>
-<h2 id="五层参考模型"><a href="#五层参考模型" class="headerlink" title="五层参考模型"></a>五层参考模型</h2><p>网络五层协议包括物理层，数据链路层，网络层，传输层，应用层</p>
-<p>物理层的作用是透明的传输比特流，物理层不对传输的比特流做任何处理，只是单纯的讲比特流从一个节点传到下一个节点。</p>
-<p>数据链路层的作用是，在两个相邻节点之间传输数据的时候，数据链路层将网络层交下来的IP数据报组装成帧，在两个相邻节点之间的链路上透明的传送帧中的数据。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）在数据链路层透明的传输数据表示无论什么样的比特组合的数据都能够通过这个数据链路层</p>
-<p>网络层的作用是，负责为分组交换网络上的不同主机提供通信服务，在发送数据时，网络层把传输层产生的报文段或用户数据封装成分组或者包进行传输。选中合适的路由，使得源主机传输层所传下来的分组，能够通过网络中的路由器找到目的主机。路由选择和分组转发。</p>
-<p>传输层的作用是负责向两个主机进程之间的通信提供服务。</p>
-<p>应用层的作用是直接向用户的应用进程提供服务</p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/2019020810542267.png"></p>
-<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>应用层的任务是通过应用进程间的交互来完成特定网络应用。在互联网中应用层协议很多，如域名系统DNS，⽀持万维网应用的 HTTP协议，⽀持电子邮件的 SMTP协议等等。我们把应用层交互的数据单元称为报文。 </p>
-<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p>他将网络层的两个端系统之间的交付服务扩展到运行在两个不同端系统上的应用层进程之间的交付服务，称为运输层的多路复用与多路分解</p>
-<p>运输层为运行在不同主机上的应用进程提供直接的通信服务</p>
-<p>运输层的分组叫做报文段（传输单位是报文段或用户数据报）</p>
-<p>UDP提供无连接服务，不提供不必要的服务，没有可靠性、流量控制、拥塞控制、重传机制</p>
-<p>TCP提供可靠的、面向连接的服务</p>
-<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>把分组从源端传到目的端，为分组交换网上的不同主机提供通信服务，传输单位是数据报</p>
-<p>路由选择与分组转发 最佳路径</p>
+                <h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="五层参考模型"><a href="#五层参考模型" class="headerlink" title="五层参考模型"></a>五层参考模型</h2><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/2019020810542267.png"></p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>一个端系统中的应用程序使用协议与另一个端系统中的应用程序交换信息分组。应用层交互的数据单元称为<strong>报文</strong>。 </p>
+<p>协议：域名系统DNS，HTTP协议，电子邮件SMTP协议</p>
+<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p>传输层主要负责主机中两个进程的通信，即端到端的通信，传输单位是<strong>报文段</strong>。他将网络层的两个端系统之间的交付服务扩展到运行在两个不同端系统上的应用层进程之间的交付服务，称为运输层的多路复用与多路分解。协议为TCP、UDP</p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>把分组从源端传到目的端，为分组交换网上的不同主机提供通信服务，传输单位是<strong>数据报</strong></p>
 <p>实现路由选择、流量控制、差错控制、拥塞控制</p>
-<p>根据特定的路由选择协议构造出路由表</p>
-<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>链路层任务是将整个帧从一个网络元素移动到邻近的网络元素</p>
-<p>数据链路层从网络层获得数据包，然后将这些数据包封装成帧，每个帧包含一个帧头部，一个有效载荷（用来存放数据包），以及一个帧尾。</p>
-<p>为网络层提供服务、链路管理、成帧、差错控制、流量控制</p>
-<p>在两个相邻节点之间传送数据时，数据链路层将网络层交下来的 IP 数据报组装成帧，在两个相邻节点间的链路上传送帧。</p>
-<p>如果发现差错，数据链路层就简单地丢弃这个出了差错的帧，以避免继续在网络中传送下去浪费网络资源。</p>
-<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>任务是实现相邻计算机节点之间透明的传输比特流（指不管所传数据是什么样的比特组合，都能传送），尽可能屏蔽掉具体传输介质和物理设备的差异。 </p>
-<p>负责将帧中的一个个比特从一个节点移动到下一个节点，传输单位是比特</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>在两个相邻节点之间传送数据时，数据链路层将网络层交下来的 IP 数据报组装成<strong>帧</strong>，在两个相邻节点间的链路上传送帧。</p>
+<ul>
+<li><p><strong>组装成帧</strong>。每个帧包含一个帧头部，一个有效载荷（用来存放数据包），以及一个帧尾。</p>
+</li>
+<li><p><strong>差错控制</strong>，如果发现差错，数据链路层就简单地丢弃这个出了差错的帧，以避免继续在网络中传送下去浪费网络资源。</p>
+</li>
+<li><p><strong>流量控制</strong>。</p>
+</li>
+<li><p><strong>介质访问控制</strong>，控制对信道的访问。</p>
+</li>
+</ul>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>在物理媒体上<strong>实现比特流的透明传输</strong>，透明传输指的是不管所传的数据是什么样的比特组合，都应当能在链路上传输。</p>
 <h2 id="请求流程"><a href="#请求流程" class="headerlink" title="请求流程"></a>请求流程</h2><ul>
 <li>第一阶段浏览器预处理，在我们输入URL的过程中，浏览器可能会进行一些预处理，比如根据用户输入的字符判断想要输入的网站，当按下回车键之后，浏览器会对URL进行检查，判断是否合法，如果不合法就会将输入的内容传给默认的搜索引擎</li>
 <li>第二阶段DNS查询，浏览器会根据URL找到相应IP地址，进行DNS查询，其查询过程分为几个步骤</li>
@@ -553,24 +527,68 @@
 <li>本地域名服务器向顶级域名服务器发出解析请求报文，然后依次类推直到查询到该域名的IP地址</li>
 <li>本地域名服务器将查询结果保存到本地缓存，同时返回给客户机</li>
 <li>第三阶段建立TCP连接，浏览器得到IP地址后使用TCP协议，HTTP请求会被封装，加入本地端口，目标端口等信息。然后进行TCP三次握手，目前HTTP协议大多都是1.1，在1.1的协议里，默认开启了keep-alive，这样建立的TCP连接，可以在多次请求中复用，不需要重新连接</li>
-<li>TCP的数据包然后会发送给网络层，用到IP协议。IP通过路由选路，通过OSPF协议得到下一跳路由器的IP地址，一跳一跳发送到目的地址。当然在一个网段内的寻址是通过以太网协议实现，同时以太网协议需要知道目的IP地址的MAC地址，就需要通过ARP协议将IP地址转为MAC地址，将其放在MAC帧首部，然后根据该MAC地址找到下一跳路由器。</li>
 <li>第四阶段是浏览器发送HTTP请求，浏览器和服务器建立连接后，浏览器就给这个IP地址的服务器发送一个http请求，方式为get，就是去服务器获取一些资源，对于访问页面来说，要获取的资源往往是一个页面，发送完请求之后就是等待回应了</li>
+<li>TCP将报文拆分为若干个报文段，加上TCP首部，然后交给网络层传输。IP通过路由选路，通过OSPF协议得到下一跳路由器的IP地址，一跳一跳发送到目的地址。当然在一个网段内的寻址是通过以太网协议实现，同时以太网协议需要知道目的IP地址的MAC地址，就需要通过ARP协议将IP地址转为MAC地址，将其放在MAC帧首部，然后根据该MAC地址找到下一跳路由器。</li>
 <li>第五阶段是服务器处理请求：服务器接收到浏览器的请求之后会解析这个请求头，然后生成一个响应头和具体响应内容，接着服务器会穿回来一个响应头和响应内容，响应头告诉了浏览器一些必要的信息，响应体中就是浏览器请求的页面内容</li>
 <li>第六阶段是浏览器解析渲染页面</li>
 <li>第七阶段就是关闭TCP连接，当数据请求到返回的过程之后根据连接的keep-alive属性可以选择是否断开TCP连接。</li>
 </ul>
-<h1 id="应用层-1"><a href="#应用层-1" class="headerlink" title="应用层"></a>应用层</h1><h2 id="HTTP基础"><a href="#HTTP基础" class="headerlink" title="HTTP基础"></a>HTTP基础</h2><h3 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h3><h4 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h4><ul>
-<li><p>HTTP 1.0需要使用keep-alive参数来建立一个长连接，而HTTP1.1默认支持长连接，只要客户端服务端任意一端没有明确提出断开TCP连接，就一直保持连接，可以发送多次HTTP请求</p>
-</li>
-<li><p>长连接的好处：一个网页上可能有多个资源对象，长连接可以通过一个连接传输网页上的所有对象，而短连接每次连接只能传输一个对象，也就是一个网页的内容需要传输多次</p>
-</li>
-<li><p>在HTTP/1.0中默认使用短连接。也就是说，客户端和服务器每进行一次HTTP操作，就建立一次连接，任务结束就中断连接。当客户端浏览器访问的某个HTML或其他类型的Web页中包含有其他的Web资源（如JavaScript文件、图像文件、CSS文件等），每遇到这样一个Web资源，浏览器就会重新建立一个HTTP会话。</p>
-<p>  而从HTTP/1.1起，默认使用长连接，用以保持连接特性。使用长连接的HTTP协议，会在响应头加入这行代码：</p>
-<pre><code>Connection:keep-alive</code></pre>
-<p>  在使用长连接的情况下，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，客户端再次访问这个服务器时，会继续使用这一条已经建立的连接。Keep-Alive不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如Apache）中设定这个时间。实现长连接需要客户端和服务端都支持长连接。</p>
-<p>  HTTP协议的长连接和短连接，实质上是TCP协议的长连接和短连接。</p>
-</li>
+<h2 id="时延"><a href="#时延" class="headerlink" title="时延"></a>时延</h2><p>路由器A具有通往路由器B的出链路。该链路前面有一个队列（缓存）。当分组从上游节点到达路由器A时，路由器A检查该分组的首部以决定它的适当的出链路，并将该分组导向该链路。在此例中，出链路是通向路由器B的链路。</p>
+<p>仅当该链路没有其他分组正在传输并且没有其他分组排在该队列前面时，才能在这条链路上传输该分组。如果该链路当前正繁忙或其他分组已经在该链路上排队，则新到达的分组将加入排队</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210813105823687.png" alt="image-20210813105823687" style="zoom:50%;" />
+
+<h3 id="处理时延"><a href="#处理时延" class="headerlink" title="处理时延"></a>处理时延</h3><p>检查分组首部和决定将该分组导向何处所需要的时间。在处理后，路由器将该分组引向通往路由器B链路之前的队列</p>
+<h3 id="排队时延"><a href="#排队时延" class="headerlink" title="排队时延"></a>排队时延</h3><p>在队列中，当分组在链路上等待传输时，它经历排队时延。</p>
+<p>排队时延取决于先前到达的正在排队等待向链路传输的分组数量。如果该队列为空，并且当前没有其他分组正在传输，则该分组的排队时延为0。</p>
+<p>假设队列能够容纳无穷多的分组，则如果比特到达队列的平均速率超过该队列传输出去的速率，则队列趋向于无限增加，排队时延也趋向于无穷大。</p>
+<p>现实中队列有限，所以如果到达的分组发现一个满的队列。由于没有地方存储这个分组，路由器将丢弃该分组。即<strong>丢包</strong></p>
+<h3 id="传输时延"><a href="#传输时延" class="headerlink" title="传输时延"></a>传输时延</h3><p>仅当所有已到达的分组被传输后，才能传输刚到达的分组。</p>
+<p>用L代表分组长度，R表示从路由器A到路由器B的链路传输速率，则【传输时延=L/R】，这是将所有分组的比特推向链路所需要的时间，与分组长度有关</p>
+<h3 id="传播时延"><a href="#传播时延" class="headerlink" title="传播时延"></a>传播时延</h3><p>从该链路的起点到路由器B传播所需要的时间，是一个比特从一台路由器传播到另一台路由器所需要的时间，与路由器之间的距离有关</p>
+<h1 id="应用层-1"><a href="#应用层-1" class="headerlink" title="应用层"></a>应用层</h1><h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>HTTP使用TCP作为它的支撑运输协议。HTTP客户首先发起一个与服务器的TCP连接。一旦连接建立，该浏览器和服务器进程就可以通过套接字接口访问TCP。客户端向它的套接字接口发送HTTP请求报文并从它的套接字接口接收HTTP响应报文。一旦客户向它的套接字接口发送了一个请求报文，该报文就进入了TCP的控制。</p>
+<p>TCP为HTTP提供了<strong>可靠数据传输服务</strong>，一个客户进程发出的每个HTTP请求报文最终都能完整到达服务器，类似地，服务器进程发出的每个HTTP响应报文最终能完整地到达客户。</p>
+<p>服务器向客户发送被请求的文件，而不存储任何关于该客户的状态信息。是一个<strong>无状态协议</strong></p>
+<h3 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h3><p>客户和服务器在一个相当长的时间范围内通信。可以选择每个请求/响应对是通过一个单独的TCP连接发送，还是所有的请求和响应都通过相同的TCP连接发送。后者叫做<strong>持续连接</strong></p>
+<h4 id="短连接"><a href="#短连接" class="headerlink" title="短连接"></a>短连接</h4><p>假设服务器要向客户传送一个Web页面，其中有一个HTML基础文件和10个JPEG图片</p>
+<ol>
+<li>HTTP客户进程在端口80发起一个到服务器<a href="http://www.someschool.edu的tcp连接,在客户和服务器上分别有一个套接字与此连接关联/" target="_blank" rel="noopener">www.someSchool.edu的TCP连接，在客户和服务器上分别有一个套接字与此连接关联</a></li>
+<li>客户端通过它的套接字向服务器发起一个HTTP请求报文。请求报文中包含了路径/someDepartment/home.index</li>
+<li>服务器进程通过它的套接字接收到请求报文。从磁盘找到文件，在一个HTTP响应报文中封装对象，并通过其套接字向客户端发送响应报文</li>
+<li>HTTP服务器进程通知TCP断开该TCP连接</li>
+<li>客户端进程接收响应报文，TCP连接关闭。报文指出封装到对象上一个HTML文件，客户从响应报文中提取并检查该HTML文件，得到对10个JPEG图片的引用</li>
+<li>对每个引用的JPEG图片重复前4个步骤</li>
+</ol>
+<p>每个TCP连接在服务器发送一个对象后关闭，只传输一个请求报文和响应报文。该连接并不为其他的对象而持续下来。</p>
+<p><strong>往返时间RTT</strong>：一个短分组从客户到服务器然后再返回客户所花费的时间</p>
+<p>点击一个超链接，会引起浏览器和Web服务器之间发起一个TCP连接，会引发三次握手。三次握手前两个部分所耗费的时间占用一个RTT，客户端结合三次握手的第三部分向该TCP连接发送一个HTTP请求报文。一旦该请求报文到达服务器，服务器就在该TCP连接上发送HTML文件。该HTTP请求/响应用去了另一个RTT。总的响应时间大概是两个RTT加上服务器传输HTML文件的时间</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210812192859803.png" alt="image-20210812192859803" style="zoom:50%;" />
+
+<p><strong>缺点</strong></p>
+<ol>
+<li>必须为每一个请求的对象建立和维护一个全新的连接。每个连接在客户端和服务器都要分配TCP的缓冲区和保持TCP变量</li>
+<li>每一个对象传输都需要2倍RTT的交付时延，即一个RTT用于创建TCP，另一个RTT用于请求和接收一个对象</li>
+</ol>
+<h4 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h4><p>HTTP1.1持续连接的情况下，服务器在发送响应后保持该TCP连接打开，在相同的客户与服务器之间，后续的请求和响应报文能够通过相同的连接进行传送。</p>
+<p>例如上述一个完整的Web页面（HTML基本文件加上10个图片）可以用单个持续TCP连接进行传送</p>
+<p>对对象的这些请求可以一个接一个地发出，而不必等待对未决请求对回答</p>
+<p>如果一个连接经过一段时间间隔仍未被使用（超时时间），HTTP服务器就关闭该连接</p>
+<h3 id="Web缓存"><a href="#Web缓存" class="headerlink" title="Web缓存"></a>Web缓存</h3><p>Web缓存器也叫做<strong>代理服务器</strong>，它是能够代表初始Web服务器来满足HTTP请求的网络实体，它会保存最近请求过的对象的副本。</p>
+<p>可以配置用户的浏览器，使得用户的所有HTTP请求首先指向代理服务器，浏览器被配置后访问流程：</p>
+<ol>
+<li>浏览器创建一个到代理服务器的TCP连接，并向代理服务器中的对象发送一个HTTP请求</li>
+<li>代理服务器进行检查，看看本地是否存储了该对象副本，如果有，则代理服务器向客户浏览器用HTTP响应报文返回该对象</li>
+<li>如果代理服务器没有该对象，它就打开一个与该对象的初始服务器的TCP连接。代理服务器则在这个TCP连接上发送一个对该对象的HTTP请求。初始服务器收到该请求后会向代理服务器发送具有该对象的HTTP响应</li>
+<li>当代理服务器收到该对象后，在本地存储空间存储一份副本，并向客户浏览器用HTTP响应报文发送此副本（通过他们现有的TCP连接）。</li>
+</ol>
+<p>代理服务器通常由ISP购买并安装，例如一所大学可能在它的校园网上安装一台代理服务器，并且将所有校园网上的用户浏览器配置为指向它。好处是：</p>
+<ul>
+<li>代理服务器可以大大减少对客户请求的响应时间。如果客户与代理服务器有高速连接，并用户所请求的数据在代理服务器上，则可以快速交付</li>
+<li>代理服务器减少一个机构的接入链路到因特网的通信量，不用急于增加带宽，降低了成本。</li>
+<li>从整体上降低因特网上的Web流量，改善所有应用的性能</li>
 </ul>
+<p>通过使用<strong>内容分发网络CDN</strong>，代理服务器在因特网上发挥越来越重要的作用，CDN公司在因特网上安装了许多地理上分散的缓冲器，使大量流量实现了本地化。CDN管理分布在多个地理位置上的服务器，在它的服务器中存储视频、文档等等副本。并且所有试图将每个用户请求定向到一个将提供最好的用户体验的CDN位置。</p>
+<h3 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h3><h4 id="长连接-1"><a href="#长连接-1" class="headerlink" title="长连接"></a>长连接</h4><p>在HTTP 1.0中默认使用短连接，需要使用keep-alive参数来建立一个长连接。而从HTTP/1.1起，默认使用长连接。使用长连接的HTTP协议，会在响应头加入这行代码：</p>
+<pre><code>Connection:keep-alive</code></pre>
 <h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><ul>
 <li>HTTP1.0缓存的资源对象到了一定时间之后会失效，不能再次使用；而HTTP1.1缓存的资源对象失效后还能与源服务器进行重新激活。</li>
 <li>HTTP1.1在1.0的基础上加入了一些cache的新特性，当缓存对象的Age超过Expire时变为stale对象，cache不需要直接抛弃stale对象，而是与源服务器进行重新激活（revalidation）。</li>
@@ -585,7 +603,7 @@
 <ul>
 <li>请求方法</li>
 <li>请求URI</li>
-<li>协议版本</li>
+<li>HTTP协议版本</li>
 </ul>
 <p><strong>请求方法</strong></p>
 <table>
@@ -613,37 +631,35 @@
 </tr>
 </tbody></table>
 <ul>
-<li>GET请求一般用去请求获取数据，POST一般作为发送数据到后台时使用</li>
-<li>GET请求也可传参到后台，但是其参数在浏览器的地址栏的url中可见，所以隐私性安全性较差，且参数长度也是有限制的；POST请求传递参数放在Request body中，不会在url中显示，比GET要安全，且参数长度无限制</li>
-<li>GET请求比较常见的方式是通过url地址栏请求；POST最常见是通过form表单发送数据请求</li>
+<li><strong>用途</strong>：GET一般用去请求获取数据，POST一般作为发送数据到后台时使用</li>
+<li><strong>刷新</strong>：GET对于刷新无害，POST刷新要重新提交数据</li>
+<li><strong>缓存</strong>：GET会被浏览器主动缓存下来，留下历史记录，而POST默认不会。</li>
+<li><strong>参数</strong>：GET是通过url地址栏请求其参数在浏览器的地址栏的url中可见，所以隐私性安全性较差，且参数长度也是有限制的。POST是通过form表单发送数据请求，不会在url中显示，比GET要安全，且参数长度无限制</li>
+<li><strong>幂等</strong>：GET是幂等的，而POST不是。(幂等表示执行相同的操作，结果也是相同的)</li>
 </ul>
-<p>GET请求对于刷新无害，POST请求刷新要重新提交数据</p>
-<p>GET能被缓存，POST请求不能被缓存</p>
-<p>GET请求对数据长度是有限制的，URL最大长度是2048个字符，POST请求无限制</p>
-<p>GET请求安全性较差，因为所发送的数据是URL的一部分，POST请求更安全一些</p>
-<p>首先最直观的是语义上的区别。</p>
-<p>而后又有这样一些具体的差别:</p>
-<ul>
-<li>从<strong>缓存</strong>的角度，GET 请求会被浏览器主动缓存下来，留下历史记录，而 POST 默认不会。</li>
-<li>从<strong>编码</strong>的角度，GET 只能进行 URL 编码，只能接收 ASCII 字符，而 POST 没有限制。</li>
-<li>从<strong>参数</strong>的角度，GET 一般放在 URL 中，因此不安全，POST 放在请求体中，更适合传输敏感信息。</li>
-<li>从<strong>幂等性</strong>的角度，<code>GET</code>是<strong>幂等</strong>的，而<code>POST</code>不是。(<code>幂等</code>表示执行相同的操作，结果也是相同的)</li>
-<li>从<strong>TCP</strong>的角度，GET 请求会把请求报文一次性发出去，而 POST 会分为两个 TCP 数据包，首先发 header 部分，如果服务器响应 100(continue)， 然后发 body 部分。(<strong>火狐</strong>浏览器除外，它的 POST 请求只发一个 TCP 包)</li>
-</ul>
-<ul>
-<li>GET 用来请求访问已被 URI 识别的资源，指定的资源经服务器端解析后返回响应内容。</li>
-<li>POST 方法用来传输实体的主体，主要目的并不是获取响应的主体内容</li>
-<li>PUT 要求在请求报文的主体中包含文件内容，然后保存到请求 URI 指定的位置。</li>
-<li>DELETE DELETE 方法按请求 URI 删除指定的资源</li>
-<li>可以指定请求的资源按期望产生某种行为</li>
-</ul>
-<h4 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h4><h4 id="请求空行"><a href="#请求空行" class="headerlink" title="请求空行"></a>请求空行</h4><p>通过一个空行，告诉服务器请求头部到此为止</p>
+<h4 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h4><h5 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h5><blockquote>
+<p>host: <a href="http://www.someshool.edu/" target="_blank" rel="noopener">www.someshool.edu</a></p>
+</blockquote>
+<p>指明了对象所在的主机。该信息是Web代理高速缓存所要求的</p>
+<h5 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a>Connection</h5><blockquote>
+<p>connection: close</p>
+</blockquote>
+<p>告诉服务器不用长连接，要求服务器在发送完被请求的对象后就关闭这条连接</p>
+<h5 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h5><blockquote>
+<p>Content-Type: application/json</p>
+</blockquote>
+<p> Content-Type表示报文中主体的内容类型，而GET请求没有报文主体，所以GET请求不需要指定Content-Type</p>
+<h5 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h5><blockquote>
+<p>cookie:  1678</p>
+</blockquote>
+<p>当浏览器收到HTTP响应报文时，从中提取set-cookie并存储。下次再访问那个网站时，浏览器会查询该cookie并放入请求头的cookie中</p>
+<h4 id="请求空行"><a href="#请求空行" class="headerlink" title="请求空行"></a>请求空行</h4><p>通过一个空行，告诉服务器请求头部到此为止</p>
 <h4 id="请求体"><a href="#请求体" class="headerlink" title="请求体"></a>请求体</h4><ul>
 <li>若方法字段是GET，则此项为空，没有数据</li>
 <li>若方法字段是POST，则通常来说此处放置的就是要提交的数据</li>
 </ul>
 <h3 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h3><h4 id="响应行"><a href="#响应行" class="headerlink" title="响应行"></a>响应行</h4><ul>
-<li>协议版本、状态码及其描述</li>
+<li>协议版本、状态码、状态描述</li>
 <li>HTTP/1.1 200 OK</li>
 </ul>
 <p><strong>状态码</strong></p>
@@ -674,111 +690,18 @@
 </ul>
 </li>
 </ul>
-<h4 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h4><h4 id="响应体"><a href="#响应体" class="headerlink" title="响应体"></a>响应体</h4><p>响应体就是响应的消息体，如果是纯数据就是返回纯数据，如果请求的是HTML页面，那么返回的就是HTML代码，如果是JS就是JS代码</p>
-<h2 id="HTTP-Header"><a href="#HTTP-Header" class="headerlink" title="HTTP Header"></a>HTTP Header</h2><h3 id="通用Header"><a href="#通用Header" class="headerlink" title="通用Header"></a>通用Header</h3><h3 id="Request-Header"><a href="#Request-Header" class="headerlink" title="Request Header"></a>Request Header</h3><h3 id="Response-Header"><a href="#Response-Header" class="headerlink" title="Response Header"></a>Response Header</h3><h5 id="Host：请求资源所在服务器"><a href="#Host：请求资源所在服务器" class="headerlink" title="Host：请求资源所在服务器"></a>Host：请求资源所在服务器</h5><ul>
-<li>主机和端口号，它通常从HTTP URL中提取出来的</li>
-<li>首部字段 Host 会告知服务器，请求的资源所处的互联网主机名和端口号。Host 首部字段在 HTTP/1.1 规范内是唯一一个必须被包含在请求内的首部字段。</li>
-<li>请求被发送至服务器时，请求中的主机名会用 IP 地址直接替换解决。但如果这时，相同的 IP 地址下部署运行着多个域名，那么服务器就会无法理解究竟是哪个域名对应的请求。因此，就需要使用首部字段 Host 来明确指出请求的主机名。若服务器未设定主机名，那直接发送一个空值即可。</li>
-</ul>
-<h5 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h5><ul>
-<li>服务器接收到的Cookie信息</li>
-<li>Cookie: status=enable</li>
-<li>首部字段 Cookie 会告知服务器，当客户端想获得 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie。接收到多个Cookie 时，同样可以以多个 Cookie 形式发送。</li>
-</ul>
-<h5 id="Connection：连接的管理"><a href="#Connection：连接的管理" class="headerlink" title="Connection：连接的管理"></a>Connection：连接的管理</h5><ul>
-<li>控制不再转发给代理的首部字段</li>
-<li>管理持久连接<ul>
-<li>HTTP/1.1 版本的默认连接都是持久连接。为此，客户端会在持久连接上连续发送请求。当服务器端想明确断开连接时，则指定Connection 首部字段的值为 Close。</li>
-<li>Connection: Keep-Alive/close表示建立长连接还是短连接，是否关闭连接</li>
-</ul>
-</li>
-</ul>
-<h5 id="Cache-Control：缓存的控制"><a href="#Cache-Control：缓存的控制" class="headerlink" title="Cache-Control：缓存的控制"></a>Cache-Control：缓存的控制</h5><ul>
-<li>Cache-Control: no-cache</li>
-<li>是为了防止从缓存中返回过期的资源</li>
-<li>客户端发送的请求中如果包含 no-cache 指令，则表示客户端将不会接收缓存过的响应。于是，“中间”的缓存服务器必须把客户端请求转发给源服务器。</li>
-<li>如果服务器返回的响应中包含 no-cache 指令，那么缓存服务器不能对资源进行缓存。源服务器以后也将不再对缓存服务器请求中提出的资源有效性进行确认，且禁止其对响应资源进行缓存操作。</li>
-</ul>
-<h5 id="Range-客户端发请求"><a href="#Range-客户端发请求" class="headerlink" title="Range 客户端发请求"></a>Range 客户端发请求</h5><p>为并行下载以及断点续传提供了技术支持。</p>
-<p>客户端发请求时对应的是<code>Range</code>，服务器端响应时对应的是<code>Content-Range</code></p>
-<p>用于请求头中，指定第一个字节的位置和最后一个字节的位置，一般格式：</p>
-<blockquote>
-<p>Range:(unit=first byte pos)-[last byte pos]</p>
+<h4 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h4><h5 id="Connection-1"><a href="#Connection-1" class="headerlink" title="Connection"></a>Connection</h5><blockquote>
+<p>connection: close</p>
 </blockquote>
-<p>Range: bytes=0-499 表示第 0-499 字节范围的内容<br>Range: bytes=500-999 表示第 500-999 字节范围的内容<br>Range: bytes=-500 表示最后 500 字节的内容<br>Range: bytes=500- 表示从第 500 字节开始到文件结束部分的内容 </p>
-<h5 id="Content-Range：服务器响应"><a href="#Content-Range：服务器响应" class="headerlink" title="Content-Range：服务器响应"></a>Content-Range：服务器响应</h5><p>Content-Range: bytes 5001-10000/10000</p>
-<p>针对范围请求，返回响应时使用的首部字段 Content-Range，能告知客户端作为响应返回的实体的哪个部分符合范围请求。字段值以字节为单位，表示当前发送部分及整个实体大小。</p>
-<h5 id="Location：令客户端重新定向到的URI"><a href="#Location：令客户端重新定向到的URI" class="headerlink" title="Location：令客户端重新定向到的URI"></a>Location：令客户端重新定向到的URI</h5><ul>
-<li>Location: <a href="http://www.usagidesign.jp/sample.html" target="_blank" rel="noopener">http://www.usagidesign.jp/sample.html</a></li>
-<li>使用首部字段 Location 可以将响应接收方引导至某个与请求 URI 位置不同的资源。</li>
-<li>基本上，该字段会配合 3xx ：Redirection 的响应，提供重定向的URI。</li>
-<li>几乎所有的浏览器在接收到包含首部字段 Location 的响应后，都会强制性地尝试对已提示的重定向资源的访问。</li>
-</ul>
-<h5 id="Set-Cookie"><a href="#Set-Cookie" class="headerlink" title="Set-Cookie"></a>Set-Cookie</h5><ul>
-<li>Set-Cookie: status=enable; expires=Tue， 05 Jul 2011 07:26:31</li>
-<li>开始状态管理所使用的Cookie信息</li>
-<li>当服务器准备开始管理客户端的状态时，会事先告知各种信息。</li>
-<li>expires 属性指定浏览器可发送 Cookie 的有效期<ul>
-<li>当省略 expires 属性时，其有效期仅限于维持浏览器会话（Session）时间段内。这通常限于浏览器应用程序被关闭之前。</li>
-<li>另外，一旦 Cookie 从服务器端发送至客户端，服务器端就不存在可以显式删除 Cookie 的方法。但可通过覆盖已过期的 Cookie，实现对客户端 Cookie 的实质性删除操作。</li>
-</ul>
-</li>
-</ul>
-<h4 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h4><h5 id="multipart-form-data"><a href="#multipart-form-data" class="headerlink" title="multipart/form-data"></a>multipart/form-data</h5><p>multipart/form-data是HTTP POST请求提交数据时所用到的主要数据类型之一，主要用于HTML表单像服务器发送信息。和其他数据类型相比，multipart/form-data最大的特点就是可以用作文件上传的请求格式。</p>
-<p>在一个multipart/form-data类型数据传输的HTTP POST报文中，HTTP请求首部的Content-Type字段必须满足如下格式：</p>
-<pre><code>Content-Type: multipart/form-data; boundary=${boundstr}</code></pre>
-<p>其中boundary的值boundstr是一个以”–-“为开头的字符串，这个字符串是multipart/form-data请求体中不同数据块之间的分隔符。</p>
-<p>multipart/form-data请求体由多个相互独立的数据块组成，整个请求体以boundary字符串开头，每块数据之间用HTTP头部Content-Type中定义的boundary作为分隔符。在最后一个数据块之后以boundary字符串加上”–”结尾</p>
-<pre><code>定义：
-BatchUpdateIndustry2Response BatchUpdateIndustry2(1: BatchUpdateIndustry2Request req)(api.POST=&quot;/fiji/v2/operate/batch_update_industry2/&quot;, api.serializer=&quot;form&quot;)
-
-
-请求头：
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryBnZoKUnJKLRy2X8r
-
-
-
-请求体：
-------WebKitFormBoundary7rrk87BDmrA6HRct
-Content-Disposition: form-data; name=&quot;operate_info_list&quot;
-
-[{&quot;id&quot;:2748641,&quot;level&quot;:1},{&quot;id&quot;:2748640,&quot;level&quot;:1},{&quot;id&quot;:1111141159,&quot;level&quot;:4},{&quot;id&quot;:1111141157,&quot;level&quot;:4},{&quot;id&quot;:2748639,&quot;level&quot;:1},{&quot;id&quot;:2748638,&quot;level&quot;:1},{&quot;id&quot;:1111141154,&quot;level&quot;:4},{&quot;id&quot;:1111141155,&quot;level&quot;:5},{&quot;id&quot;:1111141152,&quot;level&quot;:4},{&quot;id&quot;:2748637,&quot;level&quot;:1},{&quot;id&quot;:2748636,&quot;level&quot;:1},{&quot;id&quot;:1111141148,&quot;level&quot;:4},{&quot;id&quot;:1111141149,&quot;level&quot;:5},{&quot;id&quot;:2748635,&quot;level&quot;:1},{&quot;id&quot;:1111141146,&quot;level&quot;:5},{&quot;id&quot;:2748634,&quot;level&quot;:1},{&quot;id&quot;:1111141142,&quot;level&quot;:4},{&quot;id&quot;:1111141140,&quot;level&quot;:4},{&quot;id&quot;:1111141138,&quot;level&quot;:4},{&quot;id&quot;:1111141136,&quot;level&quot;:4},{&quot;id&quot;:1111141133,&quot;level&quot;:4},{&quot;id&quot;:1111141131,&quot;level&quot;:4}]
-------WebKitFormBoundary7rrk87BDmrA6HRct
-Content-Disposition: form-data; name=&quot;industry_id&quot;
-
-190302
-------WebKitFormBoundary7rrk87BDmrA6HRct--</code></pre>
-<h5 id="json"><a href="#json" class="headerlink" title="json"></a>json</h5><pre><code>定义：
-BaseResponse UpdateProduct() (api.POST=&quot;/turbine/ops/task_center/product/update/&quot;, api.serializer=&quot;json&quot;)
-
-获取：
-body := ajson.Get(c.Request.Body())
-productInfo := body.Get(&quot;product_info&quot;)
-
-请求头：
-Content-Type: application/json</code></pre>
-<p> Content-Type表示报文中主体的内容类型，而 GET 请求没有报文主体，所以 <strong>GET 请求不需要指定 Content-Type，指定Content-Type是没有任何意义的。</strong></p>
-<pre><code>代码：
-resultMap := map[string]interface{}{
-        &quot;status_code&quot;: 0,
-        &quot;status_msg&quot;:  &quot;success&quot;,
-        &quot;total&quot;:       count,
-        &quot;data_list&quot;:   vo.BatchConvertToolsRecord2Vo(list),
-    }
-    c.JSON(200, resultMap)
-
-响应头：
-Content-Type: application/json
-
-返回的状态为200
-返回的body大概是：
-{
-    &quot;data&quot;:{
-        &quot;success&quot;:10
-    },
-    &quot;status_code&quot;:0,
-    &quot;status_msg&quot;:&quot;success&quot;
-}</code></pre>
+<p>告诉客户端发送完报文后将关闭该TCP连接</p>
+<h5 id="Content-Type-1"><a href="#Content-Type-1" class="headerlink" title="Content-Type"></a>Content-Type</h5><blockquote>
+<p>Content-Type: text/html</p>
+</blockquote>
+<p>指示了响应体的对象类型</p>
+<h5 id="Set-Cookie"><a href="#Set-Cookie" class="headerlink" title="Set-Cookie"></a>Set-Cookie</h5><blockquote>
+<p>Set-Cookie: 1678</p>
+</blockquote>
+<h4 id="响应体"><a href="#响应体" class="headerlink" title="响应体"></a>响应体</h4><p>响应体就是响应的消息体，如果是纯数据就是返回纯数据，如果请求的是HTML页面，那么返回的就是HTML代码，如果是JS就是JS代码</p>
 <h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><h3 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h3><p><strong>本地缓存-本地服务器-根服务器-顶级域名服务器</strong></p>
 <ul>
 <li>首先主机会查询DNS的本地缓存，如果没有则向其本地域名服务器发出DNS请求报文，这是<strong>递归查询</strong>。</li>
@@ -790,15 +713,28 @@ Content-Type: application/json
 <p><strong>递归查询与迭代查询</strong></p>
 <img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/858807-20170820124445615-743355102.png" style="zoom:50%;" />
 
-<p> 一、主机向本地域名服务器的查询一般都是采用递归查询。</p>
-<p>​    所谓递归查询就是：如果主机所询问的本地域名服务器不知道被查询的域名的IP地址，那么本地域名服务器就以DNS客户的身份，向其它根域名服务器继续发出查询请求报文(即替主机继续查询)，而不是让主机自己进行下一步查询。因此，递归查询返回的查询结果或者是所要查询的IP地址，或者是报错，表示无法查询到所需的IP地址。</p>
-<p>二、本地域名服务器向根域名服务器的查询的迭代查询。</p>
-<p>​    迭代查询的特点：当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的IP地址，要么告诉本地服务器：“你下一步应当向哪一个域名服务器进行查询”。</p>
-<p>​    然后让本地服务器进行后续的查询。根域名服务器通常是把自己知道的顶级域名服务器的IP地址告诉本地域名服务器，让本地域名服务器再向顶级域名服务器查询。</p>
-<p>​    顶级域名服务器在收到本地域名服务器的查询请求后，要么给出所要查询的IP地址，要么告诉本地服务器下一步应当向哪一个权限域名服务器进行查询。</p>
-<p>​    最后，知道了所要解析的IP地址或报错，然后把这个结果返回给发起查询的主机</p>
-<h3 id="DNS劫持（域名劫持）"><a href="#DNS劫持（域名劫持）" class="headerlink" title="DNS劫持（域名劫持）"></a>DNS劫持（域名劫持）</h3><p>DNS劫持是互联网攻击的一种方式，通过攻击域名解析服务器也就是DNS或者伪造域名解析服务器的方法，把目标网站域名解析到错误的IP地址从而实现用户无法访问目标网站的目的或者恶意要求用户访问指定IP地址的目的。</p>
-<h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><h2 id="TCP与UDP概述"><a href="#TCP与UDP概述" class="headerlink" title="TCP与UDP概述"></a>TCP与UDP概述</h2><ul>
+<ul>
+<li>主机向本地域名服务器的查询一般都是采用递归查询。</li>
+</ul>
+<blockquote>
+<p> 所谓递归查询就是：如果主机所询问的本地域名服务器不知道被查询的域名的IP地址，那么本地域名服务器就以DNS客户的身份，向其它根域名服务器继续发出查询请求报文(即替主机继续查询)，而不是让主机自己进行下一步查询。因此，递归查询返回的查询结果或者是所要查询的IP地址，或者是报错，表示无法查询到所需的IP地址。</p>
+</blockquote>
+<ul>
+<li>本地域名服务器向根域名服务器的查询的迭代查询。</li>
+</ul>
+<blockquote>
+<p>迭代查询的特点：当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的IP地址，要么告诉本地服务器：“你下一步应当向哪一个域名服务器进行查询”。</p>
+<p>然后让本地服务器进行后续的查询。根域名服务器通常是把自己知道的顶级域名服务器的IP地址告诉本地域名服务器，让本地域名服务器再向顶级域名服务器查询。</p>
+<p> 顶级域名服务器在收到本地域名服务器的查询请求后，要么给出所要查询的IP地址，要么告诉本地服务器下一步应当向哪一个权限域名服务器进行查询。</p>
+<p>最后，知道了所要解析的IP地址或报错，然后把这个结果返回给发起查询的主机</p>
+</blockquote>
+<h3 id="DNS劫持"><a href="#DNS劫持" class="headerlink" title="DNS劫持"></a>DNS劫持</h3><p>DNS劫持是互联网攻击的一种方式，通过攻击域名解析服务器也就是DNS或者伪造域名解析服务器的方法，把目标网站域名解析到错误的IP地址从而实现用户无法访问目标网站的目的或者恶意要求用户访问指定IP地址的目的。</p>
+<h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><p>在发送端，运输层将从发送应用程序进程接收到的报文划分为较小的块，每一块加上一个运输层首部以形成运输层<strong>报文段</strong>，然后传递给网络层，网络层将其封装成数据报并向目的的传输</p>
+<p>TCP和UDP最基本的职责：多路复用与多路分解、差错检查</p>
+<p>TCP额外提供<strong>可靠数据传输</strong>，通过使用流量控制、序号、确认、定时器，TCP确保能正确地、按序地将数据从发送进程交付给接收进程。TCP将两个端系统之间不可靠的IP服务转换成了一种进程间的可靠数据传输服务</p>
+<p>TCP额外提供<strong>拥塞控制</strong></p>
+<p><strong>TCP和UDP的区别</strong></p>
+<ul>
 <li>TCP面向连接，在通信双方进行通信之前，必须先建立连接、通信结束后必须释放这个连接；UDP采用无连接服务，通信前不需要连接。</li>
 <li>TCP通过三次握手、确认、重传、拥塞控制等机制提供可靠传输服务。通过TCP连接传送的数据，无差错，不丢失，不重复，且按序到达（可靠有序、不丢不重）；UDP尽最大努力交付，即不保证可靠交付</li>
 <li>TCP面向字节流，实际上是TCP把数据看成一连串无结构的字节流；UDP是面向报文的，即一次发送一个完整的报文，适合一次性传输少量数据的网络应用</li>
@@ -806,45 +742,124 @@ Content-Type: application/json
 <li>TCP首部开销20字节；UDP的首部开销小，只有8个字节</li>
 <li>TCP 一般用于文件传输、发送和接收邮件、远程登录等场景。UDP一般用于即时通信（无拥塞控制），如QQ 语⾳、 QQ 视频 、直播、实时视频会议等</li>
 </ul>
-<h2 id="连接建立与断开"><a href="#连接建立与断开" class="headerlink" title="连接建立与断开"></a>连接建立与断开</h2><h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1609468903_7.png" alt="img"></p>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><p>应用程序差不多是直接跟IP打交道。UDP从应用程序得到数据，附加上用于多路复用/分解服务的源和目的端口号字段，然后将形成的报文段交给网络层。网络层将该运输层报文段封装到一个IP数据报中，然后尽力而为地尝试将此报文段交付给接收主机，如果该报文段到达接收主机，UDP使用目的端口号将此报文段的数据交付给正确的应用进程。</p>
+<p>使用UDP时，在发送报文段之前，发送方和接收方之间没有握手。所以是<strong>无连接</strong>的</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210811085701122.png" alt="image-20210811085701122" style="zoom:50%;" />
+
 <ul>
-<li><p>序列号seq：占4个字节，用来标记数据段的顺序，TCP把连接中发送的所有数据字节都编上一个序号，第一个字节的编号由本地随机产生；给字节编上序号后，就给每一个报文段指派一个序号；序列号seq就是这个报文段中的第一个字节的数据编号。</p>
-</li>
-<li><p>确认号ack：占4个字节，期待收到对方下一个报文段的第一个数据字节的序号；序列号表示报文段携带数据的第一个字节的编号；而确认号指的是期望接收到下一个字节的编号；因此当前报文段最后一个字节的编号+1即为确认号。</p>
-</li>
-<li><p>确认标志位ACK：占1位，仅当ACK=1时，确认号字段才有效。ACK=0时，确认号无效</p>
-</li>
-<li><p>同步标志位SYN：连接建立时用于同步序号。当SYN=1，ACK=0时表示：这是一个连接请求报文段。若同意连接，则在响应报文段中使得SYN=1，ACK=1。因此，SYN=1表示这是一个连接请求，或连接接受报文。SYN这个标志位只有在TCP建产连接时才会被置1，握手完成后SYN标志位被置0。</p>
-</li>
-<li><p>终止标志位FIN：用来释放一个连接。FIN=1表示：此报文段的发送方的数据已经发送完毕，并要求释放运输连接</p>
-</li>
-<li><p>三次握手是客户端和服务器连接建立的一种机制</p>
-</li>
-<li><p>三次握手主要目的是为客户端和服务端之间建立可靠的通信信道，即让通信双方确认自己与对方的发送与接收是正常的。</p>
-</li>
+<li>源端口号：发送方的端口号。</li>
+<li>目的端口号：接收方端口号。</li>
+<li>长度：UDP报文段的字节数（首部+数据）</li>
+<li>检验和：用来差错检验。只发现错误不纠正，错了就扔。然后重发</li>
+</ul>
+<p><strong>优点</strong></p>
+<ol>
+<li><strong>何时发送控制精确</strong>。采用UDP时，只要应用进程将数据传递给UDP，UDP就会将此数据打包进UDP报文段并立即传递给网络层。而TCP有拥塞控制，它不管可靠交付需要多少时间。因为实时应用通常要求最小的发送速率，不希望过分地延迟报文段的传送，并能容忍一些数据丢失，TCP模型就不是很适合</li>
+<li><strong>无须建立连接</strong>。不会引入建立连接的时延</li>
+<li><strong>无连接状态</strong>。TCP需要在端系统中维护连接状态。包括接收缓存、发送缓存、拥塞控制参数、序号、确认号等</li>
+<li><strong>分组开销小</strong>。TCP报文段有20字节的首部开销，而UDP只有8字节首部开销</li>
+</ol>
+<p><strong>缺点</strong></p>
+<ol>
+<li>不提供流量控制，报文段由于缓存溢出可能在接收方丢失。进程每次从缓存中读取一个完整的报文段。如果进程从缓存读取报文段的速度不够快，那么缓存将会溢出，并且将丢失报文段。</li>
+</ol>
+<h3 id="UDP原理"><a href="#UDP原理" class="headerlink" title="UDP原理"></a>UDP原理</h3><img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810191941790.png" alt="image-20210810191941790" style="zoom:50%;" />
+
+<p>UDP是一个简单的传输层协议，应用进程往一个UDP套接字写入一个消息，随后该消息被封装到一个UDP数据报，该UDP数据报又会被封装到一个IP数据报，然后发送到目的地。UDP不保证UDP数据报会到达其最终目的地，不保证各个数据报的先后顺序跨网络后保持不变，也不保证每个数据报只到达一次。</p>
+<p>它缺乏可靠性。如果一个数据报到达了其最终目的的，但是校验和检测发现有错误，或者在网络传输过程中被丢弃了，则无法被投递给UDP套接字，也不会被源端自动重传。如果想要确保一个数据报到达其目的地，可以添加一些特性：来自对端的确认、本端的超时与重传等</p>
+<p>UDP是提供无连接的服务，一个UDP客户可以创建一个套接字并发送一个数据报给一个给定的服务器，然后立即用另一个套接字发送另一个数据报给另一个服务器。同样地，一个UDP服务器可以用同一个UDP套接字从若干个不同的客户接收数据报，每个客户一个数据报。</p>
+<p><strong>缓冲区</strong></p>
+<p>套接字缓冲区并不存在，如果一个应用进程写一个大于套接字发送缓冲区大小的数据报，内核将返回给进程一个EMSGSIZE错误。</p>
+<p>既然UDP是不可靠的，它不必保存应用进程数据的一个副本，因此无需一个真正的发送缓冲区</p>
+<p>这一端端UDP简单的给来自用户的数据报安上它的8字节首部以构成UDP数据报</p>
+<h3 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h3><p>将由网络层提供的主机到主机的交付服务延伸到运行在主机上的应用程序提供进程到进程的交付服务</p>
+<p><strong>多路复用</strong>：在源主机上从不同套接字中收集数据块，并为每个数据块封装上首部信息从而生成报文段，然后将报文段传递到网络层</p>
+<p><strong>多路分解</strong>：将运输层报文段中的数据交付给正确的套接字</p>
+<p><strong>无连接的多路复用与多路分解</strong>：一个UDP套接字是由一个二元组标识的，即如果两个UDP报文段有不同的源IP地址/源端口号，但是有相同的目的IP地址和目的端口号，那么这两个报文段将通过相同的目的套接字被定向到相同的目的进程</p>
+<p><strong>面向连接的多路复用与多路分解</strong>：TCP套接字是一个四元组，当一个TCP报文段从网络中到达时，该主机使用全部4个值将报文段定向到相应套接字。两个具有不同源IP地址/源端口号的到达TCP报文段将被定向到两个不同的套接字</p>
+<p>新创建的连接套接字通过四元组标识。服务器主机可以支持多个并行的TCP套接字，由四元组标识每个套接字，当一个TCP报文段到达主机时，使用四元组来将报文段定向到相应的套接字</p>
+<h3 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h3><p>首部字段的校验和用于确定当UDP报文段从源到达目的地时，其中比特是否发生改变。发送方的UDP对报文段运算并把结果放入校验和字段中。</p>
+<p>UDP提供差错检测，但是只是简单的丢弃该报文段</p>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><p>TCP提供客户与服务器之间的连接，TCP客户先与给定的服务器建立一个连接，再通过该连接与那个服务器交换数据，然后终止这个连接。</p>
+<p>提供可靠性。当TCP向另一端发送数据时，它要求对端返回一个确认。如果没有收到确认，TCP就自动重传数据并等待更长时间。在数次重传失败后，TCP才放弃</p>
+<p>TCP含有用于动态估算客户和服务器之间的往返时间RTT算法，以便它知道等待一个确认需要多长时间。RTT受网络流通各种变化因素影响，TCP持续估算一个给定连接的RTT</p>
+<p>TCP通过给其中每字节关联一个序列号对所发送的数据进行排序。</p>
+<p>TCP提供流量控制，TCP总是告诉对端在任何时刻它一次能从对端接收多少字节的数据。在任何时刻， 该窗口指出接收缓冲区中当前可用的空间量，从而确保发送端发送的数据不会使接收缓冲区溢出。该窗口时刻动态变化：当接收到来自发送端的数据时，窗口大小就减少，但是当接收端应用从缓冲区中读取数据时，窗口大小就增大。窗口为0也是有可能的：当TCP对应某个套接字的接收缓冲区已满，导致它必须等待应用从该缓冲区中读取数据时，方能从对端再接收数据。</p>
+<p>TCP时全双工的。在一个给定的连接上，应用可用在任意时刻在进出两个方向上既发送数据又接收数据。</p>
+<p><strong>套接字对</strong>是一个四元组：本地IP地址、本地TCP端口号、外地IP地址、外地TCP端口号。套接字对唯一标识一个网络上的每个TCP连接。标识每个端点的两个值（IP地址和端口号）通常称为一个套接字</p>
+<h3 id="TCP状态转换图"><a href="#TCP状态转换图" class="headerlink" title="TCP状态转换图"></a>TCP状态转换图</h3><p>用粗实线表示客户状态转换，粗虚线表示服务器状态转换。</p>
+<p>接收表示该状态转换在接受到什么分节时发生，发送表示该状态转换会发送什么分节</p>
+<p>例子1 <strong>客户端建立连接</strong>：</p>
+<p>当某个应用程序在CLOSED状态下执行主动打开时，TCP将发送一个SYN，且新的状态是SYN_SENT。如果这个TCP接着接收到一个带ACK的SYN，它将发送一个ACK，且新的状态是ESTABLISHED，这个状态通常是数据传送发生时的状态</p>
+<p>例子2 <strong>客户端、服务器断开连接</strong>：</p>
+<p>如果某个应用进程在接收到一个FIN之前调用close（主动关闭），则转换到FIN_WAIT_1状态</p>
+<p>但如果某个应用进程在ESTABLISHED状态期间接收到一个FIN（被动关闭），那就转换到CLOSE_WAIT状态</p>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603170310342.png" alt="image-20210603170310342"></p>
+<h3 id="完整流程"><a href="#完整流程" class="headerlink" title="完整流程"></a>完整流程</h3><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603171012559.png" alt="image-20210603171012559"></p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810192104292.png" alt="image-20210810192104292" style="zoom:50%;" />
+
+<h3 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h3><img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210810191908124.png" alt="image-20210810191908124" style="zoom:50%;" />
+
+<p>每一个TCP套接字都有一个发送缓冲区，当某个应用程序调用write时，内核从该应用进程的缓冲区中复制所有数据到所写套接字的发送缓冲区。如果该套接字的发送缓冲区容不下该应用进程的所有数据，则应用进程被置于休眠状态。内核将不从write系统调用中返回，直到应用进程缓冲区中的所有数据都复制到套接字的发送缓冲区。因此，从写一个TCP套接字的write调用成功返回仅仅表示我们可以重新使用原来的应用进程缓冲区，并不表明对端的TCP或应用进程已接收到数据</p>
+<p>这一端TCP提取套接字发送缓冲区中的数据并把它发送给对端TCP，其规则基于TCP数据传送的所有规则。对端TCP必须确认收到的数据，伴随着来自对端的ACK不断到达，本端TCP至此才能从套接字发送缓冲区中丢弃已确认的数据。TCP必须为已发送数据保留一个副本，直到它被对端确认为止</p>
+<p>本端TCP以MSS大小或更小的块把数据传递给IP，同时给每个数据块安上一个TCP首部以构成TCP分节。IP给每个TCP分节安上一个IP首部以构成IP数据报，并按照其目的IP地址查找路由表项以确定其外出接口，然后把数据报传递给相应的数据链路。</p>
+<h3 id="TCP结构"><a href="#TCP结构" class="headerlink" title="TCP结构"></a>TCP结构</h3><p>首部字段、数据字段（MSS限制了最大长度）</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210812205515976.png" alt="image-20210812205515976" style="zoom: 33%;" />
+
+<ul>
+<li>序列seq：占4个字节，用来标记数据段的顺序，TCP把连接中发送的所有数据字节都编上一个序号，第一个字节的编号由本地随机产生；给字节编上序号后，就给每一个报文段指派一个序号；序列号seq就是这个报文段中的第一个字节的数据编号。</li>
+<li>确认号ack：占4个字节，期待收到对方下一个报文段的第一个数据字节的序号；序列号表示报文段携带数据的第一个字节的编号；而确认号指的是期望接收到下一个字节的编号；因此当前报文段最后一个字节的编号+1即为确认号。</li>
+<li>确认标志位ACK：占1位，仅当ACK=1时，确认号字段才有效。ACK=0时，确认号无效</li>
+<li>同步标志位SYN：连接建立时用于同步序号。当SYN=1，ACK=0时表示：这是一个连接请求报文段。若同意连接，则在响应报文段中使得SYN=1，ACK=1。因此，SYN=1表示这是一个连接请求，或连接接受报文。SYN这个标志位只有在TCP建产连接时才会被置1，握手完成后SYN标志位被置0。</li>
+<li>终止标志位FIN：用来释放一个连接。FIN=1表示：此报文段的发送方的数据已经发送完毕，并要求释放运输连接</li>
+</ul>
+<h2 id="连接管理-1"><a href="#连接管理-1" class="headerlink" title="连接管理"></a>连接管理</h2><p>TCP是<strong>面向连接的</strong>，在一个应用进程可以开始向另一个应用进程发送数据之前，这两个进程必须先握手，即他们必须互相发送某些预备报文段，以建立确保数据传输的参数。作为TCP连接建立的一部分，连接的双方都将初始化与TCP连接相关的许多TCP状态变量</p>
+<p>这种TCP连接是一条逻辑连接，其共同状态仅保留在两个通信端系统的TCP程序中。由于TCP协议只在端系统中运行，而不在路由器中运行，所以中间的网络元素不会维持TCP连接状态。事实上，中间路由器对TCP连接完全视而不见，它们看到的是数据报，不是连接。</p>
+<p>TCP连接提供<strong>全双工服务</strong>，应用层数据可以双向流动</p>
+<p>TCP连接总是<strong>点对点</strong>的，即在单个发送方和单个接收方之间的连接</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210812204606227.png" alt="image-20210812204606227" style="zoom:50%;" />
+
+<p>客户端进程通过套接字传输数据，通过套接字后，就由客户端的TCP控制了。TCP会将这些数据放入该连接的<strong>发送缓存</strong>，接下来TCP就会不时地从发送缓存中取出一块数据，并传递给网络层。TCP可从缓存中取出并放入报文段中的数据数量受限于<strong>最大报文段长度MSS</strong>，这又是由最大链路层帧长度的<strong>最大传输单元MTU</strong>决定的</p>
+<p>TCP为每块数据配上TCP首部，形成多个<strong>TCP报文段</strong>，下传到网络层，网络层为其封装在网络层IP数据报中。然后发送到网络。</p>
+<p>当TCP在另一端收到一个报文段后，该报文段数据就被放入该TCP连接的<strong>接收缓存</strong>中，应用进程从此缓存中读取数据流。</p>
+<p>TCP连接的组成包括：一台主机上的缓存、变量和与进程连接的套接字以及另一台主机上的另一组缓存、变量和与进程连接的套接字</p>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><ol>
+<li>服务器必须准备好接受外来的连接。通常是通过调用socket、bind和listen三个函数完成，此时为<strong>被动打开</strong></li>
+<li>客户通过调用connect发起<strong>主动打开</strong>，这导致客户端TCP发送一个SYN，告诉服务器自己的初始序列号（不带数据）。</li>
+<li>服务器必须确认（ACK）客户的SYN，同时自己也要发送一个SYN，含有服务器将在同一连接中发送数据的初始序列号。</li>
+<li>客户必须发送ACK确认。ACK确认号是发送这个ACK的一端所期待的下一个序列号。因为SYN占据1字节的序列号空间，所以每一个SYN的ACK中的确认号就是该SYN的初始序列号加一。</li>
+</ol>
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603165512924.png" alt="image-20210603165512924" style="zoom: 50%;" />
+
+<ul>
+<li>三次握手是客户端和服务器连接建立的一种机制</li>
+<li>三次握手主要目的是为客户端和服务端之间建立可靠的通信信道，即让通信双方确认自己与对方的发送与接收是正常的。</li>
+<li>前两个报文段不包含有效载荷，而第三个报文段可以包含有效载荷</li>
+<li>连接握手，握手的是<strong>通信双方数据原点的序列号</strong></li>
 </ul>
 <p><strong>流程</strong></p>
 <ul>
-<li>首先客户端向服务器端发送连接请求报文段<ul>
-<li>标记位为SYN，表示“请求建立新连接”；</li>
-<li>序号为seq=x（随机产生，x一般为1）；</li>
+<li>首先客户端向服务器端发送连接请求报文段，该报文段中不包含应用层数据。<ul>
+<li>标记位SYN=1，表示“请求建立新连接”；</li>
+<li>随机选择一个初始序号client_isn，并放置于该报文段的序号字段中</li>
 </ul>
 </li>
-<li>服务器端接收到来自客户端的TCP报文之后，服务器端为该TCP连接分配缓存和变量（发送缓存、接收缓存等），并向客户端返回确认报文段<ul>
-<li>标志位为SYN=1，同意创建新连接</li>
-<li>ACK=1，表示正确接收到客户端发送的信息，并让确认号ack有效</li>
-<li>序号为seq=y(随机）</li>
-<li>确认号为ack=x+1，表示确认收到客户端的序号seq，期望收到对方下一个报文段的第一个数据字节的序号x+1</li>
+<li>服务器端接收到来自客户端的TCP报文之后，服务器端为该TCP连接分配缓存和变量（发送缓存、接收缓存等），并向客户端返回确认报文段。该报文也不包含应用层数据。报文段实际表明了：我收到了你发起建立连接的SYN分组，该分组带有初始序号client_isn，我同意建立该连接，我自己的初始序号是server_isn<ul>
+<li>标志位SYN=1，同意创建新连接</li>
+<li>ACK=1，表示正确接收到客户端发送的信息</li>
+<li>初始序号为seq=server_isn(随机）</li>
+<li>确认号ack=client_isn+1，表示确认收到客户端的序号seq，期望收到对方下一个报文段的第一个数据字节的序号client_isn+1</li>
 </ul>
 </li>
-<li>客户端接收到来自服务器端的确认收到数据的TCP报文之后，客户端为该TCP连接分配缓存和变量（发送缓存、接收缓存等），并向服务器端返回确认的确认，可以携带数据<ul>
-<li>SYN=0</li>
+<li>客户端接收到来自服务器端的确认收到数据的TCP报文之后，客户端为该TCP连接分配缓存和变量（发送缓存、接收缓存等），向服务器发送另一个报文段来对服务器的允许连接的报文段进行了确认，可以携带数据<ul>
+<li>SYN=0。</li>
 <li>ACK=1</li>
-<li>序号为seq=x+1</li>
-<li>确认号为ack=y+1，表示收到服务器端序号seq，期望收到对方下一个报文段的第一个数据字节的序号为y+1</li>
+<li>序号seq=client_isn+1</li>
+<li>确认号ack=server_isn+1，表示收到服务器端序号seq，期望收到对方下一个报文段的第一个数据字节的序号为server_isn+1</li>
 </ul>
 </li>
 </ul>
+<p>三次握手完毕，它们就可以互相发送包括数据的报文段了，并且在以后的每一个报文段中，SYN置为0。</p>
 <h4 id="三次握手必要性"><a href="#三次握手必要性" class="headerlink" title="三次握手必要性"></a>三次握手必要性</h4><p><strong>第一次握手</strong></p>
 <p>客户端发送网络包，服务端收到了。这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。</p>
 <p><strong>第二次握手</strong></p>
@@ -855,19 +870,23 @@ Content-Type: application/json
 <li>第一、二次握手后，服务端并不知道客户端的接收能力以及自己的发送能力是否正常。</li>
 <li>而在第三次握手时，服务端收到了客户端对第二次握手作的回应。从服务端的角度，我在第二次握手时的响应数据发送出去了，客户端接收到了。所以，我的发送能力是正常的。而客户端的接收能力也是正常的。</li>
 </ul>
-<p>连接握手，握手的是<strong>通信双方数据原点的序列号</strong></p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/IAJB9TI6CQ~SC%7BP80$SSGH0.png" alt="IAJB9TI6CQ~SC{P80$SSGH0"></p>
-<h4 id="SYN洪泛攻击"><a href="#SYN洪泛攻击" class="headerlink" title="SYN洪泛攻击"></a>SYN洪泛攻击</h4><p>攻击者发送TCP SYN，SYN是TCP三次握手的第一个数据包，而当服务器返回ACK后，该攻击者不对其进行确认，那这个TCP就处于挂起状态，也就是半连接状态，服务器收不到再确认的话，还会重复的发送ACK给攻击者。这样更加浪费服务器的资源。攻击者就对服务器发送非常大量的这种TCP连接，由于每一个都无法完成三次握手，所以在服务器上，这些TCP连接会因为挂起状态而消耗CPU和内存，最后服务器可能死机，就无法为正常用户提供服务了。</p>
-<p>SYN洪泛利用TCP协议缺陷，发送大量伪造的TCP连接请求，常用假冒的IP或IP号段发送海量的请求连接的第一个握手包，被攻击服务器返回第二个握手包，因为对方是假冒IP，对方永远收不到包，并且不会回应第三个握手包。导致被攻击服务器保持大量SYN_RECV状态的半连接，并且会重试默认5次回应第二个握手包，大量的随机的恶意的SYN占满了未完成连接队列，导致正常合法的SYN排不上队列，让正常的业务请求连接不进来</p>
-<p><strong>如何检测洪泛攻击？</strong></p>
-<p>当你在服务器上看到大量的半连接状态的时候，特别是源IP地址是随机的，基本上可以断定这是一次SYN攻击，可以使用netstats命令来检测</p>
-<p><strong>如何解决SYN攻击？</strong></p>
-<p>缩短超时时间</p>
-<p>增加最大半连接数</p>
-<p>SYN cookies技术：</p>
-<p>当服务器接受到SYN报文段的时候，不直接为该TCP分配资源，接着会使用SYN报文段的源IP，目的IP，端口号以及只有服务器自己知道的一个秘密函数生成一个cookie，并把cookie作为序列号响应给客户端</p>
-<p>如果客户端是正常连接，将会返回一个确认字段为cookie+1的报文段，接下来服务器会根据确认报文的源id，目的id，端口号以及秘密函数计算出一个结果，如果结果的值+1等于确认字段的值，就证明是刚刚请求连接的客户端，这时候才会为该TCP分配资源</p>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1609469181_9.png" alt="img"></p>
+<h4 id="SYN洪泛攻击"><a href="#SYN洪泛攻击" class="headerlink" title="SYN洪泛攻击"></a>SYN洪泛攻击</h4><p>服务器为了响应一个收到的SYN，分配并初始化连接变量和缓存。然后服务器发送一个SYNACK进行响应，并等待来自客户的ACK报文段。如果某客户不发送ACK来完成该三次握手的第三步，最终（通常在1分钟之后）服务器将终止该半开连接并回收资源</p>
+<p>攻击者发送大量的TCP SYN报文段，而不完成第三次握手。随着不断发送SYN，服务器不断为这些半开连接分配资源，导致服务器的连接资源消耗殆尽。</p>
+<p><strong>SYN cookie技术</strong></p>
+<p>当服务器接收到一个SYN报文段时，它并不知道该报文段是来自一个合法的用户，还是一个SYN洪范攻击的一部分。因此服务器不会为该报文段生成一个半开连接。而是生成一个初始TCP序列号，该序列号是通过密钥计算【SYN报文段的源和目的IP地址与端口号】的散列函数。服务器就发送这种具有特殊初始序列号（cookie）的SYNACK分组。<strong>服务器并不记忆cookie或其他SYN状态信息</strong></p>
+<p>如果客户合法，则它将返回一个ACK报文段。服务器收到该ACK，需要验证该ACK是与前面发送的SYN对应。因为合法的ACK在确认字段中的值等于cookie+1。服务器将使用在客户端返回的SYNACK报文段的源和目的IP地址与端口号以及密钥重新生成一个值，如果该值+1与客户端的确认值相同，则认为该ACK对应于较早的SYN报文段，因此它是合法的。服务器则生成一个具有套接字的全开的连接。</p>
+<p>如果客户没有返回一个ACK报文段，则初始的SYN并没有对服务器产生危害，因为服务器没有为它分配任何资源</p>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><ol>
+<li>某个应用进程（假设是客户端）首先调用close，执行<strong>主动关闭</strong>，于是发送一个FIN，表示数据发送完毕</li>
+<li>接收到这个FIN的对端（假设是服务器）执行<strong>被动关闭</strong>，给客户发送回ACK。它的接收也作为一个文件结束符传递给接收端应用进程，因为FIN的接收意味着服务器端在相应连接上再无额外数据可接收</li>
+<li>一段时间后（这段时间内，服务器端仍然可以向客户端发送数据，称为半关闭状态），服务器端也将调用close关闭他的套接字，它会像客户端也发送一个FIN。在步骤2、3之间从执行被动关闭的一端到执行主动关闭一端流动数据是可能的，这称为<strong>半关闭状态</strong></li>
+<li>执行主动关闭的那端会发送ACK确认这个FIN。类似SYN，一个FIN也占据一字节的序列号空间。因此每个FIN的ACK确认号就是这个FIN的序列号加一</li>
+</ol>
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210603165546769.png" alt="image-20210603165546769" style="zoom:50%;" />
+
+
+
+<p>参与一条TCP连接的两个进程中的任何一个都能终止该连接。当连接结束后，主机中的资源（缓存和变量）将被释放。</p>
 <p><strong>第一步</strong></p>
 <ul>
 <li>客户端打算关闭连接时，向服务器端发送一个连接释放报文段，并停止发送数据，主动关闭TCP连接</li>
@@ -909,7 +928,92 @@ Content-Type: application/json
 <li>如果直到2MSL，客户端都没有再次收到FIN，那么客户端推断ACK已经被成功接收，则结束TCP连接。</li>
 <li>2MSL是两倍的MSL(Maximum Segment Lifetime)。MSL指一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所需的最大时间。</li>
 </ul>
-<h2 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h2><h3 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h3><p>TCP校验和覆盖TCP首部和TCP数据，是一个端到端的校验和，由发送端计算，然后由接收端验证。其目的是为了发现TCP首部和数据在发送端到接收端之间发生的任何改动。如果接收方检测到校验和有差错，则TCP段会被直接丢弃。</p>
+<p><strong>TIME_WAIT状态</strong></p>
+<p>执行主动关闭的那端会经历该状态，持续时间是2MSL（两倍的最长分节生命期，MSL是任何IP数据报能够在因特网中存活的最长时间）</p>
+<p>TIME_WAIT状态存在原因：</p>
+<ol>
+<li><strong>可靠地实现TCP全双工连接的终止。</strong>假设最终的ACK丢失，服务器将重新发送它的最终FIN，所以客户端必须维护状态信息，以允许它重新发送最终的那个ACK</li>
+<li><strong>允许老的重复分节在网络中消逝。</strong>假设关闭了一个TCP连接，过一段时间又在相同的IP地址和端口号之间建立另一个连接（称为前一个连接的化身，因为IP、端口号一样）。TCP必须防止来自某个连接的老的重复分组在该连接已终止后再次出现。为做到这一点，TCP就不给处于TIME_WAIT状态的连接发起新的化身。既然TIME_WAIT的持续时间的2MSL，就足以让某个方向上的分组最多存活MSL即被丢弃。通过该规则，就能保证每成功建立一个TCP连接，来自该连接先前化身的老的重复分组都已经在网络中消逝了。</li>
+</ol>
+<h2 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h2><h3 id="自动重传请求协议ARQ"><a href="#自动重传请求协议ARQ" class="headerlink" title="自动重传请求协议ARQ"></a>自动重传请求协议ARQ</h3><p>基于重传机制的可靠数据传输协议，它还需要另外三种协议功能来处理比特差错的情况：</p>
+<ol>
+<li>差错检测。需要一种机制使接收方检测到何时出现了比特差错，例如前面UDP的校验和字段。这种技术可以检测并可能纠正分组中的比特差错。这些技术要求有额外的比特（除了待发送的初始数据比特外的比特）从发送方发送到接收方。这些比特放在分组校验和字段中。</li>
+<li>接收方反馈。发送方要了解接收方情况（即分组是否被正确接收）的唯一途径就是让接收方提供明确的反馈信息到发送方。</li>
+<li>重传。当接收方收到有差错的分组时，发送方将重传该分组。</li>
+</ol>
+<h3 id="停等协议"><a href="#停等协议" class="headerlink" title="停等协议"></a>停等协议</h3><p>发送方在确认接收方已正确接收当前分组前，将不会发送一块新数据。</p>
+<p>效率低，于是考虑不用停等协议，允许发送方发送多个分组而无须等待确认。使用<strong>流水线技术</strong>，例如允许发送方可以在等待确认之前发送三个报文。</p>
+<ol>
+<li>必须增加序号范围，因为每个传输中的分组都必须有一个唯一的序号，而且也许有多个在传输中的未确认报文</li>
+<li>协议的发送方和接收方两端不得不缓存多个分组。发送方最少也要能缓存那些已发送但没有确认的分组。而接收方或许也需要缓存已正确接收的分组</li>
+</ol>
+<h3 id="回退N步GBN协议"><a href="#回退N步GBN协议" class="headerlink" title="回退N步GBN协议"></a>回退N步GBN协议</h3><p>也称为滑动窗口协议</p>
+<p>允许发送方发送多个分组而不需要等待确认</p>
+<ul>
+<li><p>基序号为最早未确认分组的序号</p>
+</li>
+<li><p>下一个序号为最小的未使用序号（即下一个待发送分组的序号）</p>
+</li>
+</ul>
+<p>则将序号范围分为四段：</p>
+<ol>
+<li>[0, base - 1]对应于已发送并被确认的分组</li>
+<li>[base, nextseqnum - 1]对应于已发送但未被确认的分组</li>
+<li>[nextseqnum, base + N - 1]对应于能立即发送的分组</li>
+<li>[base + N, len]的分组直到当前流水线中未被确认的分组得到确认后才能发送</li>
+</ol>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210813201055372.png" alt="image-20210813201055372" style="zoom:50%;" />
+
+<p>那些已被发送但还未被确认的分组在一个窗口内，N为窗口长度，N被限制于流量控制、拥塞控制</p>
+<p>GBN的发送方响应三种类型事件：</p>
+<ol>
+<li>上层的调用。如果上层调用rdt_send()，发送方检查发送窗口是否满了，即是否已有了N个已发送但未被确认的分组，如果没满，则产生一个分组并发送。如果满了，则将数据返回给上层，上层可能之后再重试。</li>
+<li>收到一个ACK。GBN采用的是<strong>累积确认</strong>，表明接收方已正确接收到序号为n的以前包括n在内的所有分组。</li>
+<li>超时事件。如果出现超时，发送方重传所有已发送但未被确认过的分组。发送方仅使用一个定时器，它可以被当作是最早的已发送但未被确认的分组所使用的定时器。如果收到一个ACK，但仍有已发送但未被确认的分组，则定时器重新启动。如果没有已发送但未被确认的分组，则停止定时器</li>
+</ol>
+<p>对于接收方：如果一个序号为n的分组被正确接收到，并且按序（即上次交付到上层的数据是序号为n-1的分组），则接收方为分组n发送一个ACK，并将该分组数据交付到上层。在其他所有的情况下，接收方丢弃该分组，并为最近按序接收到的分组重新发送ACK。注意到因为一次交付给上层一个分组，如果分组k已接收并交付，则所有序号比k小的分组也已经交付。因此使用累计确认是GBN的一个自然选择</p>
+<p>在GBN协议中，接收方丢弃所有失序分组，有点浪费。但是是有原因的：接收方必须按序将数据交付给上层。假设现在期望接收分组n，但是收到n+1，因为必须按序交付，接收方可能缓存n+1，然后在它收到n时，再将n+1也交付到上层。然而如果n丢失，则n和n+1分组在发送方根据GBN重传规则中，都会被重传，所以接收方只需要丢弃分组n+1即可。</p>
+<p>好处是接收缓存简单，接收方不需要缓存任何失序数组。因此虽然发送方需要维护窗口的上下边界和nextseqnum在该窗口的位置，但是接收方只需要维护下一个按序到达分组的序号并保存在expectedseqnum变量。</p>
+<p><strong>例子</strong></p>
+<p>在接收方分组2丢失，因此分组3、4、5被发现是失序分组因此被丢弃</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210813213713087.png" alt="image-20210813213713087" style="zoom:50%;" />
+
+
+
+<h3 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h3><p>单个分组的差错就能引起GBN重传大量分组，许多分组根本没有必要重传</p>
+<p>选择重传协议通过让发送方仅重传那些它怀疑在接收方出错的分组而避免不必要的重传。这种按需的重传要求接收方逐个地确认正确接收的分组。</p>
+<p>再次用窗口长度N来限制流水线中未完成、未被确认的分组数，但是与GBN不同，发送方已经收到了对窗口中某些分组的ACK</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210814075357496.png" alt="image-20210814075357496" style="zoom:50%;" />
+
+<p>SR接收方将确认一个正确接收的分组而不管其是否按序。失序的分组将被缓存直到所有丢失的分组（即序号更小的分组）皆被收到为止，这时才可以将一批分组按序交付给上层</p>
+<p><strong>SR发送方的事件与动作</strong></p>
+<ol>
+<li>从上层收到数据。当从上层接收到数据后，SR发送方检查下一个可用于该分组的序号。如果序号位于发送方的窗口内，则将数据打包并发送；否则就像GBN中一样，要么将数据缓存，要么返回给上层以便以后传输</li>
+<li>超时。定时器再次被用来防止丢失分组。然而，现在每个分组必须拥有自己的逻辑定时器，因为超时发生后只能发送一个分组。可以用单个硬件计时器来模拟多个逻辑定时器的操作</li>
+<li>收到ACK。如果收到ACK，倘若该分组序号在窗口中，则SR发送方将那个被确认的分组标记为已接收。如果该分组的序号等于send_base，则窗口基序号向前移动到具有最小序号到未确认分组处。如果窗口移动了并且有序号落在窗口内的未发送分组，则发送这些分组。</li>
+</ol>
+<p><strong>SR接收方的事件与动作</strong></p>
+<ol>
+<li>序号在[rcv_base, rcv_base + N - 1]内的分组被正确接收。在此情况下，收到的分组落在接收方的窗口内，一个选择ACK被回送给发送方。如果该分组以前没收到过，则缓存该分组。如果该分组的序号等于接收窗口的基序号rcv_base，则该分组以及以前缓存的序号连续的分组交付给上层。然后接收窗口向前移动分组的编号向上交付这些分组。</li>
+<li>序号在[rcv_base - N, rcv_base - 1]内的分组被正确收到。在此情况下，必须产生一个ACK，即使该分组是接收方以前已确认过的分组。非常有必要，因为如果分组send_base的ACK没有从接收方传播回接收方，则发送方最终将重传分组send_base，即使接收方已收到了该分组。如果接收方步确认该分组，则发送方窗口将永远不能向前滑动。</li>
+<li>其他情况。忽略该分组</li>
+</ol>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210814080432551.png" alt="image-20210814080432551" style="zoom:50%;" />
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>发送方等待多久能确定丢包：发送方至少要等待往返时延+接收方处理一个分组所需的时间。理想的协议应尽可能从丢包中恢复过来，因为等待一个最坏情况的时延可能意味着要等待一段较长的时间，直到启动差错恢复为止。</p>
+<p>实践中采取的方法是发送方明智地选择一个时间值，以判定可能丢包。如果这个时间内没有收到ACK，则重传该分组。注意如果一个分组经历了一个特别大的时延但并没有丢失的情况下，发送方仍可能会重传该分组，即引入了冗余分组。</p>
+<p>实现基于时间的重传：需要一个倒计数计时器，每次发送一个分组时，就启动一个定时器，并能响应定时器中断，以及终止定时器</p>
+<h3 id="序号和确认号"><a href="#序号和确认号" class="headerlink" title="序号和确认号"></a>序号和确认号</h3><p>TCP把数据看成一个无结构、有序的字节流。一个报文段的序号就是该报文段首字节的字节流编号。</p>
+<p>确认号是主机A期望从主机B收到的下一字节的序号。</p>
+<p><strong>累计确认</strong>：TCP只确认该流中至第一个丢失字节为止的字节</p>
+<p>例如主机A收到主机B发送的包含字节[0,535]的报文段，以及另一个包含字节[900,1000]的报文段。但是一直没收到字节[536,899]的报文段，主机A为了重新构建主机B的数据流，仍在等待字节536，因此，在A到B的下一个报文段将在确认号中包含536</p>
+<p><strong>捎带确认</strong>：对客户到服务器的数据的确认被装载在一个承载服务器到客户到数据的报文段中</p>
+<p>超时间隔必须大于该连接的往返时间RTT，即从一个报文段发出到它被确认的时间。否则会造成不必要的重传。</p>
+<p>超时重传：当报文段传给IP时，TCP就启动该定时器，当超时事件发生时，就重传该报文段，并重启定时器。超时周期可能相对较长，当一个报文段丢失时，这种长超时周期迫使发送方延迟重传丢失的分组。增加了端到端时延。</p>
+<p>冗余ACK：对已经接收到的最后一个按序字节数据进行重复确认</p>
+<p>快速重传：如果TCP发送方接收到对相同数据的三个冗余ACK，说明这个已被确认过三次的报文段之后的报文段已经丢失，则在该报文段的定时器过期之前重传丢失的报文段。</p>
+<p>接收到乱序报文段时，可以由接收方保留时序到字节，并等待缺少的字节以填补该间隔</p>
+<h3 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h3><p>TCP校验和覆盖TCP首部和TCP数据，是一个端到端的校验和，由发送端计算，然后由接收端验证。其目的是为了发现TCP首部和数据在发送端到接收端之间发生的任何改动。如果接收方检测到校验和有差错，则TCP段会被直接丢弃。</p>
 <h3 id="确认应答-序列号"><a href="#确认应答-序列号" class="headerlink" title="确认应答+序列号"></a>确认应答+序列号</h3><p><strong>序号</strong></p>
 <p>序列号是按顺序给发送数据的每一个字节都标上号码的编号，接收端查询接收数据TCP首部中的序列号和数据的长度，将自己下一步应该接收的序号作为确认应答返送回去。使用序号字段保证数据能有序提交给应用层</p>
 <p>排序技术：接收端保存当前按顺序收到的最后一个分组的序号，同时保存一个乱序到达的分组列表。当有分组到达时，如果是期待的下一个分组就递交给上一层，并检查列表看是否有其他分组也可以递交，乱序到达就加入列表中。</p>
@@ -935,65 +1039,169 @@ Content-Type: application/json
 </ul>
 <p><strong>快速重传技术</strong></p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1609472361_39.png" alt="img"></p>
-<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><p>接收端处理数据的速度是有限的，如果发送方的速度太快会把缓冲区挤满，这个时候如果继续发送数据，就会导致丢包等一系列连锁反应，所以TCP支持<strong>根据接收端的能力来决定发送端的发送速度</strong>，这个机制就叫做流量控制。</p>
-<p>流量控制的原理是，接收端将自己可以接受的缓冲区大小放入TCP首部中的窗口大小字段，通过ACK通知发送端，窗口大小字段越大说明网络的吞吐量越高。接收端一旦发现自己的缓冲区快满了，就会将窗口大小设定为一个更小的值通知给发送端；发送端接收到这个窗口后就会减慢自己的发送速度。如果接收端的缓冲区满了，就会将窗口设置为0，这时发送端不再发送数据，但是需要定期发送一个窗口探测数据段，使得接收端把窗口大小告诉发送端</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>校验和。用于检测在一个传输分组中的比特错误</li>
+<li>定时器。用于超时/重传一个分组，可能是因为该分组（或其ACK）在信道中丢失了。由于当一个分组延时但未丢失（过早超时），或当一个分组已被接收方接收但ACK丢失时，可能产生超时事件，所以接收方可能会收到一个分组的多个冗余副本。</li>
+<li>序号。用于为从发送方流向接收方的数据分组按顺序编号。所接受分组的序号间的间隙可使接收方检测出丢失的分组。具有相同序号的分组可使接收方检测出重复的分组</li>
+<li>确认。接收方用于告诉发送方一个分组或一组分组已被正确接收了。确认报文通常携带着被确认的分组或多个分组的序号。确认可以时逐个或累计的，这取决于协议</li>
+<li>窗口、流水线。发送方也许被限制仅发送那些序号落在一个指定范围内的分组。通过允许一次发送多个分组但未被确认，发送方的利用率可以在停等协议上得到增强。窗口长度可以根据接收方接收和缓存报文的能力、网络中的拥塞程度来进行设置</li>
+</ol>
+<h3 id="TCP是GBN还是选择重传协议"><a href="#TCP是GBN还是选择重传协议" class="headerlink" title="TCP是GBN还是选择重传协议"></a>TCP是GBN还是选择重传协议</h3><p>TCP确认是累积式的，累积地确认最后一个正确接收的有序报文段，正确接收但失序的报文段是不会被接收方逐个确认的。因此，TCP发送方仅需要维持已发送过但未被确认的字节的最小序号(SendBase)和下一个要发送的字节的序号(NextSeqNum)。在这种意义上，TCP更像是一个GBN风格的协议。</p>
+<p>但是TCP和GBN有显著区别，许多TCP实现会将正确接收但失序的报文段缓存起来。</p>
+<p>并且假如发送方发送一组分组1，2，3…，N，其中对n的确认报文丢失。如果是GBN协议，它不仅会重传报文n，还会重传n + 1、n + 2、N。而TCP将重传至多一个报文(n)。此外，如果对报文段n + 1的确认报文在报文段n超时之前到达，TCP甚至不会重传报文段n</p>
+<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><p>一条TCP连接的每一侧主机都为该连接设置了接收缓存。当该TCP连接接收到正确、按序的字节后，就将数据放入接收缓存。相关联的应用程序会从缓存中读取数据，但不必数据一到达就读取。如果某应用程序读取数据比较缓慢，而发送方又发送得太快太多，发送的数据就会很容易使得该连接的接收缓存溢出</p>
+<p>TCP提供流量控制服务，以消除发送方使接收方缓存溢出的可能性。流量控制因此是一个速度匹配服务，即发送方的发送速率与接收方应用程序的读取速率相匹配</p>
+<p>TCP让发送方维护一个<strong>接收窗口</strong>的变量，给发送方一个提示，该接收方还有多少可用的缓存空间。因为TCP是全双工的，所以在连接两端端发送方都各自维护一个接收窗口</p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210813101709998.png" alt="image-20210813101709998" style="zoom: 50%;" />
+
+<p><strong>例子</strong></p>
+<p>假设主机A通过一条TCP连接向主机B发送一个大文件。主机B为该连接分配了一个接收缓存，并用RcvBuffer表示它大小，主机B上的应用程序不时地从该缓存中读取数据</p>
+<ul>
+<li>LastByteRead：主机B上的应用进程从缓存读出的数据流的最后一个字节的编号</li>
+<li>LastByteRcvd：从网络中到达并已放入主机B接收缓存中的数据流的最后一个字节的编号</li>
+</ul>
+<blockquote>
+<p>LastByteRcvd - LastByteRead &lt;= RcvBuffer</p>
+<p>接收窗口rwnd = RcvBuffer - [LastByteRcvd - LastByteRead]</p>
+</blockquote>
+<p>主机B通过把当前的rwnd值放入它发给主机A的报文段接收窗口字段中，通知主机A它在该连接的缓存还有多少空间。</p>
+<p>开始时，主机B设定rwnd = RcvBuffer，并且主机B必须跟踪几个与连接相关的变量</p>
+<p>而发送方主机A则跟踪自己的两个变量：LastByteSent和LastByteAcked，第一个变量代表发送方发送的最后一个字节的序号，第二个变量代表发送方发送最后一个已被确认的字节的序号。注意到这两个变量之间的差：LastByteSent-LastByteAcked表示的是发送方发送到连接但是未被确认的量。</p>
+<p>通过将未确认的数据量控制在值rwnd之内，就可以保证主机A不会使主机B的接收缓存溢出，所以发送方在连接的整个生命周期必须保证：</p>
+<blockquote>
+<p> LastByteSent-LastByteAcked&lt;=rwnd</p>
+</blockquote>
+<p>考虑以下情景。主机B的接收缓存已满，并且B没有什么数据要发给主机A，那么，主机B在给主机A发送了一个rwnd=0后，就不会再发送其他数据了。这时，主机A知道B的接收缓存已经满了，它就不能再发数据。但是过了一阵，主机B的应用进程从接收缓存中读走了数据，B的接收缓存又有了新的空间，但是没有人能通知A！因为他们之间没有交流。为了解决这个问题，我们规定，当接收方的rwnd为0时，发送方继续发送只有一个字节数据的报文段，这些报文段会被接收方确认。最终缓存将开始清空，并且确认报文里将包含一个非0的rwnd值，以便发送发能够知道rwnd什么时候会有新的空间。</p>
+<p><strong>通俗理解</strong></p>
+<p>接收端处理数据的速度是有限的，如果发送方的速度太快会把缓冲区挤满，这个时候如果继续发送数据，就会导致丢包等一系列连锁反应，所以TCP支持<strong>根据接收端的能力来决定发送端的发送速度</strong>，这个机制就叫做流量控制。</p>
+<p>流量控制的原理是，接收端将自己可以接收的缓冲区大小放入TCP首部中的窗口大小字段，通过ACK通知发送端，窗口大小字段越大说明网络的吞吐量越高。接收端一旦发现自己的缓冲区快满了，就会将窗口大小设定为一个更小的值通知给发送端；发送端接收到这个窗口后就会减慢自己的发送速度。如果接收端的缓冲区满了，就会将窗口设置为0，这时发送端不再发送数据，但是需要定期发送一个窗口探测数据段，使得接收端把窗口大小告诉发送端</p>
 <p>TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的数据。当接收方来不及处理发送方的数据，就根据自己接收缓存的大小，动态调整窗口字段rwnd给发送方，提示发送方降低发送的速率，防止包丢失。TCP使用的流量控制协议是可变大小的滑动窗口协议。</p>
 <p>发送方的发送窗口取决于窗口字段rwnd和拥塞窗口cwnd的最小值</p>
-<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1612221473_1.png" alt="img"></p>
+<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><p>一般路由器缓存的容量是有限的，当分组到达一个已满的缓存时会被丢弃。</p>
+<p>丢包一般是当网络变得拥塞时由于路由器缓存溢出引起的，分组重传因此作为网络拥塞的征兆。</p>
+<p><strong>网络拥塞代价</strong></p>
+<ol>
+<li><p>当分组的到达速率接近链路容量时，分组经历巨大的排队时延</p>
+</li>
+<li><p>发送方必须重传以补偿因为缓存溢出而丢弃的分组</p>
+<blockquote>
+<p>发送方仅当确定了一个分组已经丢失时才重传，例如将超时时间设置得足够长，以无形中确信一个还没有被确认的分组已经丢失</p>
+</blockquote>
+</li>
+<li><p>发送方在遇到大时延时所进行的不必要重传会引起路由器利用其链路带宽来转发不必要的分组副本</p>
+<blockquote>
+<p>发送方也许会提前发生超时并重传在队列中已被推迟但还未丢失的分组。这种情况下，初始数据分组和重传分组都有可能到接收方，但接收方只需要一份就够了，重传分组将被丢弃</p>
+</blockquote>
+</li>
+</ol>
+<p>TCP让每一个发送方根据所感知到的网络拥塞程度来限制其能向连接发送流量的速率</p>
 <ul>
-<li>如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。拥塞控制是为了降低整个网络的拥塞程度。</li>
-<li>发送方需要维护一个叫做拥塞窗口（cwnd）的状态变量，注意拥塞窗口与发送方窗口的区别：拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口。</li>
-<li>接收方有足够大的接收缓存，因此不会发生流量控制；</li>
-<li>虽然 TCP 的窗口基于字节，但是这里设窗口的大小单位为报文段。</li>
+<li>如果一个TCP发送方感知到从它到目的地之间的路径没什么拥塞，则TCP发送方增加其发送速率</li>
+<li>如果发送方感知沿着该路径有拥塞，则发送方就会降低其发送速率</li>
 </ul>
+<p><strong>问题：</strong></p>
+<ol>
+<li><p>一个TCP发送方如何限制它向其连接发送流量的速率</p>
+<blockquote>
+<p>TCP连接到每一端都是由一个接收缓存、一个发送缓存、几个变量（LastByteRead、rwnd等）组成。</p>
+<p>运行在发送方的TCP拥塞控制机制跟踪一个额外的变量，<strong>拥塞窗口</strong>cwnd，它对一个TCP发送方能向网络中发送流量的速率进行了限制。在一个发送方中未被确认的数据量不会超过cwnd、rwnd中的最小值</p>
+<p> LastByteSent-LastByteAcked&lt;=min{cwnd，rwnd}</p>
+<p>上述约束限制了发送方中未被确认的数据量，因此间接的限制了发送方的发送速率。上述限制了发送方向上该连接最多发送cwnd个字节的数量。往返时间为RTT，则发送方的发送速率大概是cwnd/RTT 字节/秒。通过调节cwnd的值，发送方因此能调整它向连接发送数据的速度</p>
+</blockquote>
+</li>
+<li><p>一个TCP发送方如何感知从它到目的地之间的路径存在拥塞</p>
+<blockquote>
+<p>一个TCP发送方的丢包事件：要么出现超时，要么收到三个冗余ACK</p>
+<p>拥塞情况：当出现过度的拥塞时，路由器缓存会溢出，引起数据报被丢弃，引起发送方的丢包事件，发送方就认为路径上出现拥塞</p>
+<p>没有拥塞情况：即没有丢包，则TCP的发送方将收到对于先前未确认报文段的确认。TCP将这种确认的到达作为一切正常的指示，认为在网络上传输的报文段正被成功交付给目的地，并使用确认来增加拥塞窗口的长度。</p>
+</blockquote>
+</li>
+<li><p>当发送方感知到端到端到拥塞时，采用何种算法来改变其发送速率</p>
+<blockquote>
+<p>1.一个丢失的报文段意味着拥塞，因此当丢失报文段时应降低TCP发送方的速率</p>
+<p>2.确认到达时，说明成功交付，网络不拥塞，能够增加发送方的速率</p>
+<p>3.带宽检测：调节传输速率的策略是增加其速率以响应到达的ACK，除非出现丢包事件，才减少传输速率。因此，为探测拥塞开始出现的速率，TCP发送方增加它的传输速率，从该速率后退，进而再次开始探测，看看拥塞开始速率是否发生了变化</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h3><p>当一条TCP连接开始时，cwnd的值通常初始为一个MSS，初始速率即MSS/RTT。例如MSS=500字节，RTT=200ms，则初始发送速率只有20kbps。对于TCP发送方而言，可用带宽可能比MSS/RTT大很多，TCP发送方希望迅速找到可用带宽的数量。</p>
+<p>因此当确认到达时，TCP将拥塞窗口cwnd的值翻倍，即TCP发送速率起始慢，但在慢启动阶段以指数增长</p>
+<p>结束指数增长：</p>
+<ol>
+<li>存在由于超时导致的丢包事件。TCP发送方将cwnd置为1并重新开始慢启动过程。并将慢启动阈值ssthresh设置为cwnd/2，即检测到拥塞时将ssthresh设置为拥塞窗口值的一半</li>
+<li>当拥塞窗口达到ssthresh时，继续让cwnd翻倍有点鲁莽，因此此时结束慢启动，并进入拥塞避免模式</li>
+<li>如果检测到三个冗余ACK，则TCP执行快速重传，并进行快速恢复状态</li>
+</ol>
+<h3 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><p>一旦进入拥塞避免，cwnd的值大约是上次遇到拥塞时的值的一半，即距离拥塞可能并不遥远。因此TCP无法每过一个RTT再将cwnd的值翻倍，TCP采用一种较为保守的方法，发送方无论何时到达一个新的确认，就将cwnd增加一个MSS，即线性增长</p>
+<p>结束拥塞避免的线性增长：</p>
+<p>当出现超时时，与慢启动的行为相同：cwnd的值设置为1个MSS，ssthresh设置为cwnd的一半</p>
+<p>如果丢包事件是由于三个冗余ACK事件触发，说明网络继续从发送方向接收方交付报文段，因此相比于超时指示的丢包，TCP反应没这么强烈：它将cwnd值减半，并且当收到三个冗余ACK时，将ssthresh值设置为cwnd的一半，进入快速恢复状态</p>
+<h3 id="快速恢复"><a href="#快速恢复" class="headerlink" title="快速恢复"></a>快速恢复</h3><p>对于引起TCP进入快速恢复状态的缺失报文段，对收到的每个冗余ACK，cwnd的值增加一个MSS，最终，当对丢失报文段的一个ACK到达时，TCP在降低cwnd后进入拥塞避免状态。</p>
+<p>如果出现超时事件，快速恢复迁移到慢启动状态：cwnd设置为1个MSS，并且将ssthresh值设置为cwnd的一半</p>
+<p><strong>例子</strong></p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210813193141394.png" alt="image-20210813193141394" style="zoom:50%;" />
+
+<p>TCP早期版本Tahoe：不管是发生超时指示的丢包事件，还是发生三个冗余ACK指示的丢包事件，都无条件地将其拥塞窗口减至1个MSS，并进入慢启动阶段</p>
+<p>TCP较新版本Reno：综合了快速恢复</p>
+<p>假设初始阈值未8个MSS，拥塞窗口在慢启动阶段以指数速度快速爬升，在第四轮传输时到达了阈值。然后拥塞窗口以线性速度爬升，直到第8轮出现了三个冗余ACK。注意当丢包事件发生时，拥塞窗口值为12MSS，所以ssthresh的值被设置为0.5*cwnd = 6MSS。在Reno下，拥塞窗口被设置为cwnd = 9MSS，然后线性增长。而在Tahoe下，拥塞窗口被设置为1MSS，然后呈指数增长，直到到达ssthresh值为止，在这个点开始线性增长</p>
+<p><strong>回顾</strong></p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210813193642175.png" alt="image-20210813193642175" style="zoom:50%;" />
+
+<p>忽略一条连接开始时初始的慢启动阶段，假设丢包由三个冗余ACK而不是超时来指示，TCP的拥塞控制是：每个RTT内cwnd线性增加1个MSS，然后出现3个冗余ACK事件时cwnd减半（乘性减）。因此TCP拥塞控制经常被称为<strong>加性增，乘性减</strong>拥塞控制方式。</p>
+<p>呈现锯齿行为，符合我们前面TCP检测带宽的直觉，即TCP线性地增加它的拥塞窗口长度（因此增加了传输速率），直到出现了三个冗余ACK事件，然后以2个因子来减少它的拥塞窗口长度，然后又开始线性增加，探测是否还有另外的可用带宽。</p>
+<p><strong>总结</strong></p>
 <p>在某段时间内，若对网络中某一资源的需求超过了该资源所能提供的可用部分，网络性能就要变坏，这种情况叫做网络拥塞，对于拥塞的控制就叫做拥塞控制。TCP的拥塞控制算法包括慢启动，拥塞避免，快速重传，快速恢复。发送方维持一个叫做拥塞窗口的状态变量，它的值取决于网络的拥塞程度并且动态变化。在TCP双方建立连接的时候，拥塞窗口的值就被设置为1，还需要设置慢启动的阀值，在执行慢启动算法的时候，发送方每收到一个对新报文短的确认时，就把拥塞窗口的值增加，然后开始下一轮的传输，当拥塞窗口增长到慢启动阀值的时候，就使用拥塞避免算法</p>
 <p>慢启动：刚开始的时候拥塞窗口数量是指数增长，当拥塞窗口的值超过慢启动阀值之后改用拥塞避免算法。也就是每个传输轮次，拥塞窗口只能线程加一。当发生超时重传，判断网络可能出现拥塞，将慢启动阀值更新为发生拥塞的拥塞窗口的一半，将拥塞窗口的值减少为1，并重新开始执行慢启动算法</p>
 <p>快速重传：所谓快速重传，就是使发送方尽快进行重传，而不是等超时重传计时器超时再重传</p>
 <p>要求接收方不要等待自己发送数据时才进行捎带确认，而是要立即发送确认，即使收到了失序的报文段也要立即发出对已收到的报文段的重复确认。发送方一旦收到3个连续的重复确认，就将报文段立即重传，而不是等该报文段的超时重传计时器超时再重传。对于个别丢失的报文段，发送方不会超时重传，也就不会误以为出现了拥塞，进而降低拥塞窗口。发送方一旦收到3个重复确认，就知道现在只是丢失了个别的报文段，于是不启动慢启动算法，而执行快恢复算法。快恢复实现是把开始的拥塞窗口值再增大一些，即等于新的慢开始的阀值</p>
-<h3 id="慢开始与拥塞避免"><a href="#慢开始与拥塞避免" class="headerlink" title="慢开始与拥塞避免"></a>慢开始与拥塞避免</h3><ul>
+<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/_CopyPix_1612221473_1.png" alt="img"></p>
+<p><strong>慢开始与拥塞避免</strong></p>
+<ul>
 <li>发送的最初执行慢开始，令 cwnd = 1，发送方只能发送 1 个报文段；当收到确认后，将 cwnd 加倍，因此之后发送方能够发送的报文段数量为：2、4、8 …</li>
 <li>注意到慢开始每个轮次都将 cwnd 加倍，这样会让 cwnd 增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能性也就更高。设置一个慢开始门限 ssthresh，当 cwnd &gt;= ssthresh 时，进入拥塞避免，每个轮次只将 cwnd 加 1。</li>
 <li>如果出现了超时（拥塞），则令 ssthresh = cwnd / 2，然后重新执行慢开始。</li>
 </ul>
-<h3 id="快重传与快恢复"><a href="#快重传与快恢复" class="headerlink" title="快重传与快恢复"></a>快重传与快恢复</h3><ul>
+<p><strong>快重传与快恢复</strong></p>
+<ul>
 <li>在接收方，要求每次接收到报文段都应该对最后一个已收到的有序报文段进行确认。例如已经接收到 M1 和 M2，此时收到 M4，应当发送对 M2 的确认。</li>
 <li>在发送方，如果收到三个重复确认，那么可以知道下一个报文段丢失，此时执行快重传，立即重传下一个报文段。例如收到三个 M2，则 M3 丢失，立即重传 M3。</li>
 <li>在这种情况下，只是丢失个别报文段，而不是网络拥塞。因此执行快恢复，令 ssthresh = cwnd / 2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。</li>
 <li>慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。</li>
 </ul>
-<h1 id="网络层-1"><a href="#网络层-1" class="headerlink" title="网络层"></a>网络层</h1><h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><h3 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h3><p>全世界唯一的32位/4字节标识符：网络号、主机号</p>
-<p>主机号全0，只有主机号。则可以标识某个网络</p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153915119.png" alt="image-20210723153915119"></p>
-<h4 id="A类地址（1-126）"><a href="#A类地址（1-126）" class="headerlink" title="A类地址（1-126）"></a>A类地址（1-126）</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153337346.png" alt="image-20210723153337346"></p>
-<h4 id="B类地址（128-191）"><a href="#B类地址（128-191）" class="headerlink" title="B类地址（128-191）"></a>B类地址（128-191）</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153446549.png" alt="image-20210723153446549"></p>
-<h4 id="C类地址（192-223）"><a href="#C类地址（192-223）" class="headerlink" title="C类地址（192-223）"></a>C类地址（192-223）</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153459332.png" alt="image-20210723153459332"></p>
-<h4 id="D类地址（224-239）"><a href="#D类地址（224-239）" class="headerlink" title="D类地址（224-239）"></a>D类地址（224-239）</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153511916.png" alt="image-20210723153511916"></p>
-<h4 id="E类地址（240-255）"><a href="#E类地址（240-255）" class="headerlink" title="E类地址（240-255）"></a>E类地址（240-255）</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153527728.png" alt="image-20210723153527728"></p>
-<h4 id="特殊IP地址"><a href="#特殊IP地址" class="headerlink" title="特殊IP地址"></a>特殊IP地址</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153628963.png" alt="image-20210723153628963"></p>
-<h4 id="私有IP地址"><a href="#私有IP地址" class="headerlink" title="私有IP地址"></a>私有IP地址</h4><p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153740583.png" alt="image-20210723153740583"></p>
+<h1 id="网络层-1"><a href="#网络层-1" class="headerlink" title="网络层"></a>网络层</h1><p>端系统彼此交换报文，为了从源端系统向目的端系统发送一个报文，源将报文划分为较小的数据块，称之为<strong>分组</strong>。每个分组都通过通信链路和分组交换机（<strong>路由器</strong>、链路层交换机）传送</p>
+<p>多数分组交换机在链路的输入端使用<strong>存储转发传输</strong>，是指在交换机能开始向输出链路传输该分组的第一个比特之前，必须接收到整个分组。</p>
+<p>每台分组交换机有多条链路与之相连。对于每条相连的链路，该分组交换机具有一个<strong>输出缓存</strong>，用于存储路由器准备发送那条链路的分组。如果到达的分组需要传输到某条链路，但发现该链路正忙于传输其他分组，该到达分组必须在输出缓存中等待。因为缓存空间大小有限，一个到达的分组可能发现缓存已经被其他等待传输的分组完全充满了，就出现<strong>丢包</strong>，到达的分组将被丢弃。</p>
+<p>路由器从与它相连的一条通信链路得到分组，然后向与它相连的另一条通信链路转发该分组。如何决定向哪条链路转发呢？每个端系统都有IP地址，分组首部包含IP地址，当一个分组到达网络中的路由器时，路由器检查该分组的目的地址的一部分，并向一台相邻路由器转发该分组。每台路由器都有一个<strong>转发表</strong>，用于将目的地址映射成为输出链路。</p>
+<p>路由器使用分组的目的地址来索引转发表并决定适当的出链路，但是转发表如何设置的？有<strong>路由选择协议</strong>用于自动设置这些转发表，例如可以决定从每台路由器到每个目的地的最短路径</p>
+<h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><h3 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h3><p>全世界唯一的32位/4字节标识符：网络号、主机号</p>
+<p>主机号全0，只有网络号。则可以标识某个网络</p>
+<img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153915119.png" alt="image-20210723153915119" style="zoom: 50%;" />
+
+<h4 id="特殊IP地址"><a href="#特殊IP地址" class="headerlink" title="特殊IP地址"></a>特殊IP地址</h4><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153628963.png" alt="image-20210723153628963" style="zoom:50%;" />
+
+<h4 id="私有IP地址"><a href="#私有IP地址" class="headerlink" title="私有IP地址"></a>私有IP地址</h4><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723153740583.png" alt="image-20210723153740583" style="zoom:50%;" />
+
 <h3 id="子网划分和子网掩码"><a href="#子网划分和子网掩码" class="headerlink" title="子网划分和子网掩码"></a>子网划分和子网掩码</h3><p>主机号全0代表本网络，主机号全1代表广播分组，不能指派。</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723154208764.png" alt="image-20210723154208764"></p>
 <h4 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h4><p>网络号有多少位，1就有多少位</p>
 <p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723154619111.png" alt="image-20210723154619111"></p>
-<p><strong>习题</strong></p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723154816209.png" alt="image-20210723154816209"></p>
 <h4 id="无分类编址CIDR"><a href="#无分类编址CIDR" class="headerlink" title="无分类编址CIDR"></a>无分类编址CIDR</h4><p>之前是定长子网掩码，现在可以是变长子网掩码。可以让主机个数随情况不同</p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723155233228.png" alt="image-20210723155233228"></p>
+<img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210814210736074.png" alt="image-20210814210736074" style="zoom:50%;" />
+
 <p>CIDR记法：IP地址后加上/，然后写上任意长度的网络前缀位数：</p>
-<p>128.14.32.0/20</p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723155508487.png" alt="image-20210723155508487"></p>
-<p><strong>例子</strong></p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723155620496.png" alt="image-20210723155620496"></p>
-<h4 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h4><p>前24位为网络号，后八位取出一部分为子网号，最后部分为主机号</p>
-<p>子网掩码255.255.255.248，248为11111000说明前五位为子网号，后三位为主机号</p>
-<p>CIDR技术中，子网可以全0、全1</p>
-<p>主机号不能全0、全1</p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/image-20210723160122177.png" alt="image-20210723160122177"></p>
+<blockquote>
+<p>128.14.32.0/20，它的子网掩码为:</p>
+<p>11111111 11111111 11110000 00000000</p>
+</blockquote>
+<p><strong>习题</strong></p>
+<blockquote>
+<p>某网络的IP地址空间为192.168.5.0/24，采用定长子网划分，子网掩码为255.255.255.248，则该网络中的最大子网个数、每个子网内的最大可分配地址个数分别是：（32，6）</p>
+</blockquote>
+<p>前24位为网络号，后八位取出一部分为子网号，最后部分为主机号</p>
+<p>子网掩码255.255.255.248，11111111 11111111 11111111 11111000，说明前五位为子网号，后三位为主机号</p>
+<p>CIDR技术中，子网可以全0、全1。主机号不能全0、全1</p>
 <h1 id="网络安全"><a href="#网络安全" class="headerlink" title="网络安全"></a>网络安全</h1><h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>HTTPS协议经过SSL/TLS加密后传输，成为HTTPS协议。</p>
-<p><strong>利用非对称加密实现身份认证和密钥协商</strong></p>
-<p><strong>利用对称加密算法采用协商的密钥对数据加密</strong></p>
-<p><strong>基于散列函数验证信息的完整性</strong></p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/1634e5e77c014d22" alt="img"></p>
+<p>利用非对称加密实现身份认证和密钥协商、利用对称加密算法采用协商的密钥对数据加密、基于散列函数验证信息的完整性</p>
 <p><strong>HTTPS 和 HTTP 的区别：</strong></p>
 <ul>
 <li>最最重要的区别就是安全性，HTTP 明文传输，不对数据进行加密安全性较差。HTTPS (HTTP + SSL / TLS)的数据传输过程是加密的，安全性较好。</li>
@@ -1003,26 +1211,36 @@ Content-Type: application/json
 <li>HTTPS 和 HTTP 使用的是完全不同的连接方式，用的端口也不一样，前者是 443，后者是 80。</li>
 </ul>
 <p><strong>流程</strong></p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/bVbClUl" alt="HTTPS 加密、解密、验证及数据传输过程.png"></p>
-<p>1.客户端请求 HTTPS 网址，然后连接到 server 的 443 端口 (HTTPS 默认端口，类似于 HTTP 的80端口)。</p>
-<p>2.采用 HTTPS 协议的服务器必须要有一套数字 CA (Certification Authority)证书，证书是需要申请的，并由专门的数字证书认证机构(CA)通过非常严格的审核之后颁发的电子证书。颁发证书的同时会产生一个<strong>服务器的私钥和公钥</strong>。私钥由服务端自己保存，不可泄漏。公钥则是附带在证书的信息中，可以公开的。证书本身也附带一个<strong>证书电子签名</strong>，这个签名用来验证证书的完整性和真实性，可以防止证书被篡改。</p>
-<p>3.服务器响应客户端请求，将证书传递给客户端，证书包含公钥和大量其他信息，比如证书颁发机构信息，公司信息和证书有效期等。Chrome 浏览器点击地址栏的锁标志再点击证书就可以看到证书详细信息。</p>
-<p>4.客户端解析证书并对其进行验证。如果证书不是可信机构颁布，或者证书中的域名与实际域名不一致，或者证书已经过期，就会向访问者显示一个警告，由其选择是否还要继续通信。如果证书没有问题，客户端就会从服务器证书中取出服务器的公钥A。然后客户端还会生成一个随机码 KEY，并使用公钥A将其加密。</p>
-<p>5.客户端把<strong>加密后的随机码 KEY</strong> 发送给服务器，作为后面对称加密的密钥。</p>
-<p>6.服务器在收到随机码 KEY 之后会使用私钥B将其解密。经过以上这些步骤，客户端和服务器终于建立了安全连接，完美解决了对称加密的密钥泄露问题，接下来就可以用对称加密愉快地进行通信了。</p>
-<p>7.服务器使用密钥 (随机码 KEY)对数据进行对称加密并发送给客户端，客户端使用相同的密钥 (随机码 KEY)解密数据。</p>
-<p>8.双方使用对称加密愉快地传输所有数据。</p>
+<p><img src="https://tongji20210701.oss-cn-shanghai.aliyuncs.com/image-20210814211542048.png" alt="image-20210814211542048"></p>
+<ol>
+<li><p>客户端请求 HTTPS 网址，然后连接到 server 的 443 端口 (HTTPS 默认端口，类似于 HTTP 的80端口)。</p>
+</li>
+<li><p>采用 HTTPS 协议的服务器必须要有一套数字 CA (Certification Authority)证书，证书是需要申请的，并由专门的数字证书认证机构(CA)通过非常严格的审核之后颁发的电子证书。颁发证书的同时会产生一个<strong>服务器的私钥和公钥</strong>。私钥由服务端自己保存，不可泄漏。公钥则是附带在证书的信息中，可以公开的。证书本身也附带一个<strong>证书电子签名</strong>，这个签名用来验证证书的完整性和真实性，可以防止证书被篡改。</p>
+</li>
+<li><p>服务器响应客户端请求，将证书传递给客户端，证书包含公钥和大量其他信息，比如证书颁发机构信息，公司信息和证书有效期等。Chrome 浏览器点击地址栏的锁标志再点击证书就可以看到证书详细信息。</p>
+</li>
+<li><p>客户端解析证书并对其进行验证。如果证书不是可信机构颁布，或者证书中的域名与实际域名不一致，或者证书已经过期，就会向访问者显示一个警告，由其选择是否还要继续通信。如果证书没有问题，客户端就会从服务器证书中取出服务器的公钥A。然后客户端还会生成一个随机码 KEY，并使用公钥A将其加密。</p>
+</li>
+<li><p>客户端把<strong>加密后的随机码 KEY</strong> 发送给服务器，作为后面对称加密的密钥。</p>
+</li>
+<li><p>服务器在收到随机码 KEY 之后会使用私钥B将其解密。经过以上这些步骤，客户端和服务器终于建立了安全连接，完美解决了对称加密的密钥泄露问题，接下来就可以用对称加密愉快地进行通信了。</p>
+</li>
+<li><p>服务器使用密钥 (随机码 KEY)对数据进行对称加密并发送给客户端，客户端使用相同的密钥 (随机码 KEY)解密数据。</p>
+</li>
+<li><p>双方使用对称加密愉快地传输所有数据。</p>
+</li>
+</ol>
 <h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><p><strong>RSA身份验证的隐患</strong></p>
 <p>身份验证和密钥协商是TLS的基础功能，要求的前提是<strong>合法的服务器掌握着对应的私钥</strong>。但RSA算法无法确保服务器身份的合法性，因为公钥并不包含服务器的信息，存在安全隐患:</p>
 <ul>
-<li>客户端C和服务器S进行通信，中间节点M截获了二者的通信;</li>
-<li>节点M自己计算产生一对公钥pub_M和私钥pri_M;</li>
-<li>C向S请求公钥时，M把自己的公钥pub_M发给了C;</li>
-<li>C使用公钥 pub_M加密的数据能够被M解密，因为M掌握对应的私钥pri_M，而 C无法根据公钥信息判断服务器的身份，从而 C和 M之间建立了”可信”加密连接;</li>
-<li>中间节点 M和服务器S之间再建立合法的连接，因此 C和 S之间通信被M完全掌握，M可以进行信息的窃听、篡改等操作。</li>
-<li>另外，服务器也可以对自己的发出的信息进行否认，不承认相关信息是自己发出。</li>
+<li>客户端C和服务器S进行通信，中间节点M截获了二者的通信</li>
+<li>节点M自己计算产生一对公钥pub_M和私钥pri_M</li>
+<li>C向S请求公钥时，M把自己的公钥pub_M发给了C</li>
+<li>C使用公钥 pub_M加密的数据能够被M解密，因为M掌握对应的私钥pri_M，而 C无法根据公钥信息判断服务器的身份，从而 C和 M之间建立了”可信”加密连接</li>
+<li>中间节点 M和服务器S之间再建立合法的连接，因此 C和 S之间通信被M完全掌握，M可以进行信息的窃听、篡改等操作</li>
+<li>另外，服务器也可以对自己的发出的信息进行否认，不承认相关信息是自己发出</li>
 </ul>
-<p>因此该方案下至少存在两类问题：中间人攻击和信息抵赖。</p>
+<p>因此该方案下至少存在两类问题：中间人攻击和信息抵赖</p>
 <img src="https://user-gold-cdn.xitu.io/2018/5/11/1634e5e77bf0d89c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img" style="zoom:50%;" />
 
 <p><strong>身份验证CA和证书</strong></p>
@@ -1036,7 +1254,7 @@ Content-Type: application/json
 </li>
 <li><p>如信息审核通过，CA会向申请者签发认证文件-证书。证书包含以下信息：申请者公钥、申请者的组织信息和个人信息、签发机构CA的信息、有效时间、证书序列号等信息的明文，同时包含一个签名；签名的产生算法：首先，<strong>使用散列函数计算公开的明文信息的信息摘要，采用CA的私钥对信息摘要进行加密</strong>，密文即签名;<strong>证书=服务器公钥+申请者与颁发者信息+签名</strong></p>
 </li>
-<li><p>客户端 C 向服务器 S 发出请求时，S 返回证书文件;</p>
+<li><p>客户端 C 向服务器 S 发出请求时，S 返回证书文件</p>
 </li>
 <li><p>客户端 C读取证书中的相关的明文信息，<strong>采用相同的散列函数计算明文信息得到信息摘要，利用对应CA的公钥解密签名数据，对比证书的信息摘要</strong>，如果一致，则可以确认证书的合法性，即公钥合法;</p>
 </li>
@@ -1045,8 +1263,7 @@ Content-Type: application/json
 <li><p>客户端会<strong>内置信任CA的证书信息(包含公钥)，内置 CA 对应的证书称为根证书</strong>，如果CA不被信任，则找不到对应 CA的证书，证书也会被判定非法。</p>
 </li>
 </ol>
-<h2 id="SSO"><a href="#SSO" class="headerlink" title="SSO"></a>SSO</h2><p>单点登录（Single Sign On 简称SSO）</p>
-<p><strong>在多个应用系统中，只需要登录一次，就可以访问其他相互信任的应用系统。</strong></p>
+<h2 id="SSO"><a href="#SSO" class="headerlink" title="SSO"></a>SSO</h2><p>单点登录（Single Sign On 简称SSO）<strong>在多个应用系统中，只需要登录一次，就可以访问其他相互信任的应用系统。</strong></p>
 <p>SSO 仅仅是一种架构，一种设计，而 CAS 则是实现 SSO 的一种手段。两者是抽象与具体的关系。</p>
 <p><strong>CAS</strong></p>
 <p>CAS （Central Authentication Service）中心授权服务，本身是一个开源协议</p>
@@ -1071,16 +1288,13 @@ Content-Type: application/json
 </ol>
 <p>这样，app2系统不需要走登录流程，就已经是登录了。SSO，app和app2在不同的域，它们之间的session不共享也是没问题的。</p>
 <h2 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h2><p>HTTPS 解决数据传输安全问题的方案就是使用加密算法，具体来说是混合加密算法，也就是<strong>对称加密和非对称加密的混合使用</strong>，这里有必要先了解一下这两种加密算法的区别和优缺点。</p>
-<h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>加密和解密都是使用同一个密钥</p>
-<ul>
-<li>优点：算法公开、计算量小、加密速度快、加密效率高，适合加密比较大的数据。</li>
-<li>缺点：<ol>
-<li>交易双方需要使用相同的密钥，也就<strong>无法避免密钥的传输</strong>，而密钥在传输过程中无法保证不被截获，因此对称加密的安全性得不到保证。</li>
+<h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>加密和解密都是使用同一个密钥。数据发信方将<strong>明文和加密密钥</strong>一起经过特殊加密算法处理后，使其变成复杂的加密密文发送出去。收信方收到密文后，若想解读原文，则需要使用加密用过的<strong>密钥及相同算法的逆算法对密文进行解密</strong>，才能使其恢复成可读明文。在对称加密算法中，使用的密钥只有一个，发收信双方都使用这个密钥对数据进行加密和解密，这就要求解密方事先必须知道加密密钥。</p>
+<p>优点：算法公开、计算量小、加密速度快、加密效率高，适合加密比较大的数据。</p>
+<p>缺点：</p>
+<ol>
+<li>交易双方需要使用相同的密钥，也就<strong>无法避免密钥的传输</strong>，而密钥在传输过程中无法保证不被截获，对称加密的安全性得不到保证。</li>
 <li>每对用户每次使用对称加密算法时，都需要使用其他人不知道的惟一密钥，这会使得发收信双方所拥有的钥匙数量急剧增长，<strong>密钥管理</strong>成为双方的负担。对称加密算法在分布式网络系统上使用较为困难，主要是因为密钥管理困难，使用成本较高。</li>
 </ol>
-</li>
-</ul>
-<p>数据发信方将<strong>明文和加密密钥</strong>一起经过特殊加密算法处理后，使其变成复杂的加密密文发送出去。收信方收到密文后，若想解读原文，则需要使用加密用过的<strong>密钥及相同算法的逆算法对密文进行解密</strong>，才能使其恢复成可读明文。在对称加密算法中，使用的密钥只有一个，发收信双方都使用这个密钥对数据进行加密和解密，这就要求解密方事先必须知道加密密钥。</p>
 <h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>加密和解密需要使用两个不同的密钥：公钥（public key）和私钥（private key）。公钥与私钥是一对，<strong>如果用公钥对数据进行加密，只有用对应的私钥才能解密；如果用私钥对数据进行加密，那么只有用对应的公钥才能解密。</strong></p>
 <p>非对称加密算法实现机密信息交换的基本过程是：</p>
 <ul>
@@ -1094,16 +1308,15 @@ Content-Type: application/json
 <li>缺点：<strong>计算量比较大</strong>，加密和解密速度相比对称加密慢很多。</li>
 </ul>
 <p><strong>如果n可以被因数分解，就意味着私钥被破解。</strong>可是，大整数的因数分解，是一件非常困难的事情。目前，除了暴力破解，还没有发现别的有效方法。</p>
-<h3 id="HASH算法"><a href="#HASH算法" class="headerlink" title="HASH算法"></a>HASH算法</h3><p>有MD5，SHA1，SHA256。用来确认信息没有被篡改。主要用来生成签名，签名是加在信息后面的，可以证明信息没有被修改过。一般对信息先做hash计算得到一个hash值，然后用私钥加密（这个加密一般是非对称加密）作为一个签名和信息一起发送。接收方收到信息后重新计算信息的hash值，且和信息所附带的hash值解密后进行对比。如果一样则认为没有被修改，反之则认为修改过，不做处理。可能有一种情况，黑客修改了信息并把hash值也改了，从而让他们相匹配。所以hash值一般都是加密后（生成签名）再和信息一起发送，确保hash值不会被修改。</p>
-<p>常见的有 MD5、SHA1、SHA256，该类函数特点是函数单向不可逆、对输入非常敏感、输出长度固定，针对数据的任何修改都会改变散列函数的结果，用于防止信息篡改并验证数据的完整性;<br>　　在信息传输过程中，散列函数不能单独实现信息防篡改，因为明文传输，中间人可以修改信息之后重新计算信息摘要，因此需要对传输的信息以及信息摘要进行加密;</p>
-<ul>
-<li>Hash存储的意思是：对用户输入的密码按照Hash算法得到Hash值，然后将Hash值存到数据库中。<br> 为什么说是 “Hash存储”，而不是 “加密存储”？因为这本来就不算是加密解密的过程，而且很容易对人造成误解。Hash算法是将目标文本转换成具有相同长度的、不可逆的杂凑字符串（或叫做消息摘要），而加密（Encrypt）是将目标文本转换成具有不同长度的、可逆的密文。</li>
-</ul>
-<p>有些系统安全意识不够，直接存储明文，这是绝对不可取的，就算不考虑因为系统异常等因素导致的密码泄露，拥有数据库最高权限的人，就一定能看到所有用户的密码，这显然是不可取的。所以，主要考虑的是Hash存储。</p>
-<p>转换算法目前主流的就是哈希算法，也叫译摘要算法，是一种散列算法。哈希算法是不可逆的，这里的不可逆有两层含义，一是“给定一个哈希结果R，没有方法将R转换成原目标文本S”，二是“给定哈希结果R，即使知道一段文本S的哈希结果为R，也不能断言当初的目标文本就是S”(这里涉及到Hash碰撞)。</p>
-<p>为什么需要单向的算法？回到之前的那句话：“最完美的方法就是确保该密码只有用户自己知道”。单向的，就意味着对于每一个固定的明文，经过Hash算法转换后可以得到固定的Hash值，但是根据Hash值，却无法得到明文。数据库最高管理员可以看到不同用户密码对应的Hash值，但因为Hash算法是不可逆的，所以，他也无法知道用户的文明，没有明文，就无法登录系统进行危险操作。</p>
-<p>散列函数主要用于验证数据的完整性。</p>
-<p>MD5算法是典型的消息摘要算法。其原理都是接受一个任意长度的消息并产生一个128位的消息摘要。如果把得到的消息摘要转换成十六进制字符串，则会得到一个32字节长度的字符串，我们平常见到的大部分MD数字指纹就是一个长度为32的十六进制字符串。</p>
+<h3 id="HASH算法"><a href="#HASH算法" class="headerlink" title="HASH算法"></a>HASH算法</h3><p>任何消息经过散列函数处理后，都会产生一个唯一的散列值，这个散列值可以用来验证消息的完整性。计算消息散列值的过程被称为“消息摘要”，计算消息散列值的算法被称为消息摘要算法。</p>
+<p><strong>防止信息篡改</strong></p>
+<p>有MD5，SHA1，SHA256。用来确认信息没有被篡改。主要用来生成签名，签名是加在信息后面的，可以证明信息没有被修改过。一般对信息先做hash计算得到一个hash值，然后用私钥加密（这个加密一般是非对称加密）作为一个签名和信息一起发送。接收方收到信息后重新计算信息的hash值，且和信息所附带的hash值解密后进行对比。如果一样则认为没有被修改，反之则认为修改过，不做处理。</p>
+<p>可能有一种情况，黑客修改了信息并把hash值也改了，从而让他们相匹配。所以hash值一般都是加密后（生成签名）再和信息一起发送，确保hash值不会被修改。</p>
+<p>常见的有 MD5、SHA1、SHA256，该类函数特点是函数单向不可逆、对输入非常敏感、输出长度固定，针对数据的任何修改都会改变散列函数的结果，用于防止信息篡改并验证数据的完整性</p>
+<p>在信息传输过程中，散列函数不能单独实现信息防篡改，因为明文传输，中间人可以修改信息之后重新计算信息摘要，因此需要对传输的信息以及信息摘要进行加密</p>
+<p><strong>防止看到明文</strong></p>
+<p>有些系统安全意识不够，直接存储明文，这是绝对不可取的，就算不考虑因为系统异常等因素导致的密码泄露，拥有数据库最高权限的人，就一定能看到所有用户的密码，这显然是不可取的。所以，主要考虑的是Hash存储。为什么需要单向的算法？回到之前的那句话：“最完美的方法就是确保该密码只有用户自己知道”。单向的，就意味着对于每一个固定的明文，经过Hash算法转换后可以得到固定的Hash值，但是根据Hash值，却无法得到明文。数据库最高管理员可以看到不同用户密码对应的Hash值，但因为Hash算法是不可逆的，所以，他也无法知道用户的文明，没有明文，就无法登录系统进行危险操作。</p>
+<p><strong>Hash算法特点</strong></p>
 <p>散列函数具有以下特性：</p>
 <ol>
 <li>散列函数的运算过程是不可逆的，这个称为散列函数的单向性。</li>
@@ -1111,44 +1324,13 @@ Content-Type: application/json
 <li>任意两个不同消息的散列值一定不同。</li>
 <li>对原始消息长度没有限制。</li>
 </ol>
-<p>任何消息经过散列函数处理后，都会产生一个唯一的散列值，这个散列值可以用来验证消息的完整性。计算消息散列值的过程被称为“消息摘要”，计算消息散列值的算法被称为消息摘要算法。</p>
-<p><strong>MD5功能</strong></p>
-<p>输入任意长度的信息，经过处理，输出为128位的信息（数字指纹）；<br>不同的输入得到的不同的结果（唯一性）；</p>
-<p><strong>MD5不属于加密算法</strong></p>
-<p>不能从密文（散列值）反过来得到原文，即没有解密算法，所以这部分人认为MD5只能属于算法，不能称为加密算法；</p>
-<p><strong>MD5算法不可逆</strong></p>
-<p>MD5不可逆的原因是其是一种散列函数，使用的是hash算法，在计算过程中原文的部分信息是丢失了的。</p>
-<p>MD5相当于超损压缩。</p>
-<p><strong>MD5用途</strong></p>
-<p>1.防止被篡改：<br>1）比如发送一个电子文档，发送前，我先得到MD5的输出结果a。然后在对方收到电子文档后，对方也得到一个MD5的输出结果b。如果a与b一样就代表中途未被篡改。<br>2）比如我提供文件下载，为了防止不法分子在安装程序中添加木马，我可以在网站上公布由安装文件得到的MD5输出结果。<br>3）SVN在检测文件是否在CheckOut后被修改过，也是用到了MD5.</p>
-<p>2.防止直接看到明文：<br>现在很多网站在数据库存储用户的密码的时候都是存储用户密码的MD5值。这样就算不法分子得到数据库的用户密码的MD5值，也无法知道用户的密码。（比如在UNIX系统中用户的密码就是以MD5（或其它类似的算法）经加密后存储在文件系统中。当用户登录的时候，系统把用户输入的密码计算成MD5值，然后再去和保存在文件系统中的MD5值进行比较，进而确定输入的密码是否正确。通过这样的步骤，系统在并不知道用户密码的明码的情况下就可以确定用户登录系统的合法性。这不但可以避免用户的密码被具有系统管理员权限的用户知道，而且还在一定程度上增加了密码被破解的难度。）</p>
-<p>3.防止抵赖（数字签名）：<br>这需要一个第三方认证机构。例如A写了一个文件，认证机构对此文件用MD5算法产生摘要信息并做好记录。若以后A说这文件不是他写的，权威机构只需对此文件重新产生摘要信息，然后跟记录在册的摘要信息进行比对，相同的话，就证明是A写的了。这就是所谓的“数字签名”。</p>
-<p><strong>MD5安全性</strong></p>
-<p>普遍认为MD5是很安全，因为暴力破解的时间是一般人无法接受的。实际上如果把用户的密码MD5处理后再存储到数据库，其实是很不安全的。因为用户的密码是比较短的，而且很多用户的密码都使用生日，手机号码，身份证号码，电话号码等等。或者使用常用的一些吉利的数字，或者某个英文单词。如果我把常用的密码先MD5处理，把数据存储起来，然后再跟你的MD5结果匹配，这时我就有可能得到明文。所以现在大多数网站密码的策略是强制要求用户使用数字大小写字母的组合的方式提高用户密码的安全度。</p>
+<p><strong>MD5算法</strong></p>
+<p>MD5算法是典型的消息摘要算法。其原理都是接受一个任意长度的消息并产生一个128位的消息摘要。而且不同的输入得到的不同的结果（唯一性）</p>
+<p>MD5算法不可逆（在计算过程中原文的部分信息丢失），所以它不能从散列值反过来得到原文，即没有解密算法，所以认为MD5不能称为加密算法</p>
 <p><strong>加盐</strong></p>
-<p>我们要保存用户名密码的时候，显然明文保存是不太可取的，万一你的数据库的账号密码都被泄露了，那那些在你数据库中的密码不是都没泄露出去了吗？</p>
-<p>所以我们要对密码进行加密。</p>
-<p>我们知道，如果直接对密码进行散列，那么黑客可以对通过获得这个密码散列值，然后通过查散列值字典（例如MD5密码破解网站），得到某用户的密码。</p>
-<p>加Salt可以一定程度上解决这一问题。所谓加Salt方法，就是加点“佐料”。其基本想法是这样的：当用户首次提供密码时（通常是注册时），由系统自动往这个密码里撒一些“佐料”，然后再散列。而当用户登录时，系统为用户提供的代码撒上同样的“佐料”，然后散列，再比较散列值，已确定密码是否正确。</p>
+<p>如果直接对密码进行散列，那么黑客可以对通过获得这个密码散列值，然后通过查散列值字典（例如MD5密码破解网站），得到某用户的密码。</p>
 <p>一般加密算法固定，很容易破解，安全系数低，有很多网站可以直接破解密文。为了提高安全性，可以采取加盐的方式。生成一组随机串，保存在数据库中，然后混杂在原来的密码中，再通过加密算法加密，存进数据库中</p>
-<p>合适的加盐以后可以解决大多数彩虹表带来的危险。</p>
-<p>每次哈希计算时生成一个随机数，加入计算，并将随机数一并发送，所以相同的明文每次加盐后得到的摘要都不同，有效防止反向查询</p>
-<p><strong>破解</strong></p>
-<p>这里所谓的破解，并非把摘要还原成原文。为什么呢？因为固定128位的摘要是有穷的，而原文数量是无穷的，每一个摘要都可以由若干个原文通过Hash得到。</p>
-<p>对于MD5的破解，实际上都属于【碰撞】。比如原文A通过MD5可以生成摘要M，我们并不需要把X还原成A，只需要找到原文B，生成同样的摘要M即可。</p>
-<p>设MD5的哈希函数是H（X），那么：</p>
-<p>H(A) = M</p>
-<p>H(B) = M</p>
-<p>任意一个B即为破解结果。</p>
-<p>B有可能等于A，也可能不等于A。</p>
-<p>MD5碰撞通常用于登陆密码的破解。应用系统的数据库中存储的用户密码通常都是原密码的MD5哈希值，每当用户登录时，验签过程如下：</p>
-<p><img src="https://tongji2021.oss-cn-shanghai.aliyuncs.com/img/20180402205353564" alt="img"></p>
-<p>如果我们得到了用户ABC的密码哈希值E10ADC3949BA59ABBE56E057F20F883E，并不需要还原出原密码123456，只需要“碰撞”出另一个原文654321（只是举例）即可。登录时，完全可以使用654321作为登陆密码，欺骗过应用系统的验签。</p>
-<p><strong>暴力枚举法</strong></p>
-<p>简单粗暴地枚举出所有原文，并计算出它们的哈希值，看看哪个哈希值和给定的信息摘要一致。这种方法虽然简单，但是时间复杂度极高。</p>
-<p><strong>字典法</strong></p>
-<p>字典法则是用空间换时间。黑客利用一个巨大的字典，存储尽可能多的原文和对应的哈希值。每次用给定的信息摘要查找字典，即可快速找到碰撞的结果。</p>
-<p><strong>彩虹表法</strong></p>
+<p>每次哈希计算时生成一个随机数，加入计算，并将随机数一并发送，所以相同的明文每次加盐后得到的摘要都不同，有效防止反向查询。合适的加盐以后可以解决大多数彩虹表带来的危险。</p>
 
             </div>
             <hr/>
@@ -1906,7 +2088,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">251.9k</span>&nbsp;字
+                class="white-color">200.5k</span>&nbsp;字
             
             
             
