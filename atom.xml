@@ -39,9 +39,9 @@
     
     <category term="数据结构" scheme="https://tongji4m3.club/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-    <category term="数据库" scheme="https://tongji4m3.club/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
     <category term="Redis" scheme="https://tongji4m3.club/tags/Redis/"/>
+    
+    <category term="数据库" scheme="https://tongji4m3.club/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
@@ -211,9 +211,9 @@
     <category term="计算机基础" scheme="https://tongji4m3.club/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="索引" scheme="https://tongji4m3.club/tags/%E7%B4%A2%E5%BC%95/"/>
-    
     <category term="数据库" scheme="https://tongji4m3.club/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    <category term="索引" scheme="https://tongji4m3.club/tags/%E7%B4%A2%E5%BC%95/"/>
     
     <category term="事务" scheme="https://tongji4m3.club/tags/%E4%BA%8B%E5%8A%A1/"/>
     
